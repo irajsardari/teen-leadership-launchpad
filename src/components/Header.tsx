@@ -25,8 +25,8 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/lovable-uploads/9e242dfa-376c-460c-b893-1f58e332a128.png" 
-              alt="TMA - Teenagers Management and Leadership Academy" 
+              src="/lovable-uploads/e97b61c3-e7e0-48e7-95a6-ad9037c6ed7f.png" 
+              alt="Teenagers Management and Leadership Academy - Future Ready Leaders" 
               className="h-12 w-auto"
             />
             <span className="text-lg font-bold text-[#012D5A] font-inter hidden sm:block">
