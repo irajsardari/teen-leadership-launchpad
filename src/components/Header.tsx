@@ -25,7 +25,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/src/assets/tma-official-logo.png" 
+              src="/lovable-uploads/180fdff9-f676-4c90-846f-ee188ca50bb2.png" 
               alt="TMA - Teenagers Management and Leadership Academy - Future Ready Leaders" 
               className="h-12 w-auto"
             />
