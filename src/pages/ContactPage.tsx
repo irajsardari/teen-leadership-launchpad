@@ -17,10 +17,10 @@ const ContactPage = () => {
     },
     {
       icon: Phone,
-      title: "Call Us",
-      description: "Speak with our team",
-      details: "+1 (555) 123-4567",
-      action: "tel:+15551234567"
+      title: "📞 Phone / WhatsApp",
+      description: "Available on WhatsApp",
+      details: "+968 9966 8948",
+      action: "tel:+96899668948"
     },
     {
       icon: MessageCircle,
