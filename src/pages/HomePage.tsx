@@ -40,7 +40,7 @@ const HomePage = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-tma-blue via-tma-blue-light to-tma-teal">
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-[#012D5A]/80"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{ backgroundImage: `url(${heroImage})` }}
@@ -48,24 +48,25 @@ const HomePage = () => {
         
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Developing Future Ready
-              <span className="block bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                Challengers
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight font-inter">
+              Teenagers Management
+              <br />
+              <span className="text-white">
+                Academy
               </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-              TMA empowers Challengers aged 12-19 with leadership, management, psychology, 
-              and essential life skills through our comprehensive 7-year curriculum.
+            <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto font-inter">
+              Empowering the next generation of 
+              <span className="text-[#FF715B] font-semibold"> Challengers</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button variant="hero" size="lg" className="text-lg px-8 py-4" asChild>
+              <Button size="lg" className="bg-[#FF715B] hover:bg-[#FF715B]/90 text-white font-inter text-lg px-8 py-4" asChild>
                 <Link to="/apply">
                   Start Your Journey
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button variant="outline-hero" size="lg" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-tma-blue" asChild>
+              <Button size="lg" className="bg-transparent border-2 border-[#012D5A] text-[#012D5A] hover:bg-[#F8F4EE] font-inter text-lg px-8 py-4" variant="outline" asChild>
                 <Link to="/curriculum">
                   Explore Curriculum
                 </Link>

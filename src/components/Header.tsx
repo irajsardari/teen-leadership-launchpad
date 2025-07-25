@@ -19,7 +19,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -27,7 +27,7 @@ const Header = () => {
             <div className="h-8 w-8 bg-gradient-to-br from-tma-blue to-tma-teal rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">TMA</span>
             </div>
-            <span className="text-xl font-bold text-primary">
+            <span className="text-xl font-bold text-[#012D5A] font-inter">
               Teenagers Management Academy
             </span>
           </Link>
@@ -38,16 +38,16 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-tma-teal ${
+                className={`text-sm font-medium transition-colors hover:text-[#008B8B] font-inter ${
                   isActive(item.href)
-                    ? "text-tma-blue border-b-2 border-tma-blue"
-                    : "text-foreground"
+                    ? "text-[#008B8B] border-b-2 border-[#008B8B]"
+                    : "text-[#012D5A]"
                 }`}
               >
                 {item.name}
               </Link>
             ))}
-            <Button variant="hero" size="sm" asChild>
+            <Button className="bg-[#008B8B] hover:bg-[#008B8B]/90 text-white font-inter" size="sm" asChild>
               <a
                 href="https://tma.academy/portal"
                 target="_blank"
@@ -78,10 +78,10 @@ const Header = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors font-inter ${
                     isActive(item.href)
-                      ? "text-tma-blue bg-tma-beige"
-                      : "text-foreground hover:text-tma-teal hover:bg-tma-beige"
+                      ? "text-[#008B8B] bg-[#F8F4EE]"
+                      : "text-[#012D5A] hover:text-[#008B8B] hover:bg-[#F8F4EE]"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -89,7 +89,7 @@ const Header = () => {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button variant="hero" size="sm" className="w-full" asChild>
+                <Button className="bg-[#008B8B] hover:bg-[#008B8B]/90 text-white font-inter w-full" size="sm" asChild>
                   <a
                     href="https://tma.academy/portal"
                     target="_blank"
