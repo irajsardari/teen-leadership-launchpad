@@ -9,10 +9,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 bg-gradient-to-br from-tma-blue to-tma-teal rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">TMA</span>
-              </div>
+            <div className="flex items-center space-x-3">
+              <img 
+                src="/lovable-uploads/9e242dfa-376c-460c-b893-1f58e332a128.png" 
+                alt="TMA - Teenagers Management and Leadership Academy" 
+                className="h-10 w-auto"
+              />
               <span className="text-lg font-bold">TMA</span>
             </div>
             <p className="text-gray-300 text-sm">

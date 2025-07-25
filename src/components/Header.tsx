@@ -23,12 +23,14 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 bg-gradient-to-br from-tma-blue to-tma-teal rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">TMA</span>
-            </div>
-            <span className="text-xl font-bold text-[#012D5A] font-inter">
-              Teenagers Management Academy
+          <Link to="/" className="flex items-center space-x-3">
+            <img 
+              src="/lovable-uploads/9e242dfa-376c-460c-b893-1f58e332a128.png" 
+              alt="TMA - Teenagers Management and Leadership Academy" 
+              className="h-12 w-auto"
+            />
+            <span className="text-lg font-bold text-[#012D5A] font-inter hidden sm:block">
+              Teenagers Management and Leadership Academy
             </span>
           </Link>
 
