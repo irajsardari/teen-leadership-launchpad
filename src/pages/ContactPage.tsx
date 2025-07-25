@@ -33,25 +33,11 @@ const ContactPage = () => {
 
   const offices = [
     {
-      location: "Global Headquarters",
-      address: "123 Education Drive, Suite 100",
-      city: "New York, NY 10001",
-      phone: "+1 (555) 123-4567",
-      email: "headquarters@tma.academy"
-    },
-    {
-      location: "European Office",
-      address: "45 Academic Street",
-      city: "London, UK EC1A 1BB",
-      phone: "+44 20 1234 5678",
-      email: "europe@tma.academy"
-    },
-    {
-      location: "Asia Pacific Office",
-      address: "78 Learning Lane",
-      city: "Singapore 018909",
-      phone: "+65 1234 5678",
-      email: "apac@tma.academy"
+      location: "Headquarters",
+      address: "P.O. Box 2643 Ruwi",
+      city: "Sultanate of Oman",
+      phone: "+968 9966 8948",
+      email: "info@tma.academy"
     }
   ];
 
