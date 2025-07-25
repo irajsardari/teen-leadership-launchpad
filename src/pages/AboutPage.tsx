@@ -154,62 +154,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Leadership Team */}
-      <section className="py-20 bg-gradient-to-b from-background to-background/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 font-inter">
-              👤 Meet the Founder
-            </h2>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <Card className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
-              <CardContent className="p-8 md:p-12">
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-                  <div className="flex-shrink-0">
-                    <Avatar className="w-32 h-32 md:w-40 md:h-40">
-                      <AvatarImage src="/lovable-uploads/5e280412-042c-48a8-b542-ef7929e003f9.png" alt="Dr. Iraj Sardari Baf" />
-                      <AvatarFallback className="text-2xl font-bold">IS</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  
-                  <div className="flex-1 text-center md:text-left">
-                    <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2 font-inter">
-                      Dr. Iraj Sardari Baf
-                    </h3>
-                    <p className="text-lg text-tma-coral mb-6 font-inter">
-                      Founder of Teenagers Management Academy (TMA)
-                    </p>
-                    
-                    <div className="space-y-4 text-foreground/80 font-inter">
-                      <p className="leading-relaxed">
-                        Dr. Iraj Sardari Baf is a visionary educator, strategist, and leadership expert with over two decades of senior executive experience in banking and management. Holding a PhD in Business Management and Organizational Behavior, alongside degrees in English and Linguistics, Dr. Sardari brings a rare blend of academic depth, human insight, and real-world leadership to his work.
-                      </p>
-                      
-                      <p className="leading-relaxed">
-                        Driven by a bold question — "Why do we wait until adulthood to teach people how to lead their lives?" — he created TMA, the world's first full-scale leadership and life-skills academy for teenagers.
-                      </p>
-                      
-                      <p className="leading-relaxed">
-                        Under his guidance, TMA is not just a curriculum — it's a transformative movement. One that empowers youth with the tools of emotional intelligence, strategic thinking, financial literacy, and character-based leadership — starting at the most critical age: adolescence.
-                      </p>
-                      
-                      <blockquote className="text-lg md:text-xl font-semibold text-primary italic border-l-4 border-tma-coral pl-4 my-6">
-                        "Teenagers are not too young to lead — they're just too often overlooked. My mission is to give them what school never taught: the power to lead themselves and others with purpose."
-                      </blockquote>
-                      
-                      <p className="leading-relaxed">
-                        Dr. Sardari's work bridges education, psychology, and management — and reflects his deep belief that real leadership starts with self-awareness, guided by values, and shaped through mentorship.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
 
       {/* Impact Statistics */}
       <section className="py-20 bg-gradient-to-r from-tma-blue to-tma-teal">
