@@ -16,21 +16,20 @@ const Footer = () => {
               <span className="text-lg font-bold">TMA</span>
             </div>
             <p className="text-gray-300 text-sm">
-              Empowering teenagers with leadership, management, and life skills
-              for a successful future.
+              The world's first academy fully dedicated to teenage leadership and life readiness.
             </p>
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-tma-gold" />
-                <span>info@tma.academy</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-tma-gold" />
-                <span>+1 (555) 123-4567</span>
+                <span>info@teenmanagement.com</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-tma-gold" />
-                <span>Global Online Academy</span>
+                <span>P.O. Box 2643 Ruwi, Sultanate of Oman</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-tma-gold">📱</span>
+                <span>Instagram: @teenagers.management.academy</span>
               </div>
             </div>
           </div>
