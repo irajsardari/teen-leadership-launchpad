@@ -27,7 +27,7 @@ const Header = () => {
             <div className="h-8 w-8 bg-gradient-to-br from-tma-blue to-tma-teal rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">TMA</span>
             </div>
-            <span className="text-xl font-bold text-tma-navy">
+            <span className="text-xl font-bold text-primary">
               Teenagers Management Academy
             </span>
           </Link>
@@ -38,10 +38,10 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-tma-blue ${
+                className={`text-sm font-medium transition-colors hover:text-tma-teal ${
                   isActive(item.href)
                     ? "text-tma-blue border-b-2 border-tma-blue"
-                    : "text-tma-gray"
+                    : "text-foreground"
                 }`}
               >
                 {item.name}
@@ -80,8 +80,8 @@ const Header = () => {
                   to={item.href}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     isActive(item.href)
-                      ? "text-tma-blue bg-tma-light"
-                      : "text-tma-gray hover:text-tma-blue hover:bg-tma-light"
+                      ? "text-tma-blue bg-tma-beige"
+                      : "text-foreground hover:text-tma-teal hover:bg-tma-beige"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >

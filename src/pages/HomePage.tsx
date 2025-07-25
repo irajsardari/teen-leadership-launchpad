@@ -25,7 +25,7 @@ const HomePage = () => {
       ageRange: "17-19 years", 
       description: "Professional leadership and advanced life skills mastery",
       features: ["Strategic Thinking", "Advanced Psychology", "Business Skills", "Mentorship"],
-      color: "from-orange-500 to-orange-600"
+      color: "from-tma-coral to-tma-coral/80"
     }
   ];
 
@@ -76,7 +76,7 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-tma-light">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -84,8 +84,8 @@ const HomePage = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-tma-blue to-tma-teal rounded-full mb-4">
                   <stat.icon className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-tma-navy mb-2">{stat.value}</div>
-                <div className="text-tma-gray">{stat.label}</div>
+                <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-foreground/70">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -96,7 +96,7 @@ const HomePage = () => {
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
               Our Mission & Vision
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
@@ -108,7 +108,7 @@ const HomePage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-tma-gray">
+                  <p className="text-foreground/70">
                     To empower teenagers worldwide with essential leadership, management, 
                     and life skills that will serve them throughout their personal and 
                     professional journeys.
@@ -123,7 +123,7 @@ const HomePage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-tma-gray">
+                  <p className="text-foreground/70">
                     A world where every teenager is equipped with the confidence, 
                     skills, and mindset to become effective leaders and contribute 
                     positively to society.
@@ -136,13 +136,13 @@ const HomePage = () => {
       </section>
 
       {/* Age Groups Section */}
-      <section className="py-20 bg-gradient-to-b from-background to-tma-light">
+      <section className="py-20 bg-gradient-to-b from-background to-background/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
               Challenger Learning Paths
             </h2>
-            <p className="text-xl text-tma-gray max-w-3xl mx-auto">
+            <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
               Our curriculum develops Challengers through three progressive levels, 
               each designed to match their developmental stage and learning capacity.
             </p>
@@ -153,16 +153,16 @@ const HomePage = () => {
               <Card key={index} className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300 transform hover:-translate-y-2">
                 <CardHeader>
                   <div className={`w-full h-2 bg-gradient-to-r ${group.color} rounded-full mb-4`}></div>
-                  <CardTitle className="text-tma-navy">{group.title}</CardTitle>
+                  <CardTitle className="text-primary">{group.title}</CardTitle>
                   <CardDescription className="text-lg font-semibold text-tma-blue">
                     {group.ageRange}
                   </CardDescription>
-                  <p className="text-tma-gray">{group.description}</p>
+                  <p className="text-foreground/70">{group.description}</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2 mb-6">
                     {group.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm text-tma-gray">
+                      <li key={featureIndex} className="flex items-center text-sm text-foreground/70">
                         <div className="w-2 h-2 bg-tma-teal rounded-full mr-3"></div>
                         {feature}
                       </li>
@@ -185,7 +185,7 @@ const HomePage = () => {
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
               Why Choose TMA?
             </h2>
           </div>
@@ -228,10 +228,10 @@ const HomePage = () => {
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-tma-blue to-tma-teal rounded-full mb-4">
                     <benefit.icon className="h-6 w-6 text-white" />
                   </div>
-                  <CardTitle className="text-tma-navy">{benefit.title}</CardTitle>
+                  <CardTitle className="text-primary">{benefit.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-tma-gray">{benefit.description}</p>
+                  <p className="text-foreground/70">{benefit.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -251,7 +251,7 @@ const HomePage = () => {
               they need for a successful future.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="accent" size="lg" className="bg-white text-tma-blue hover:bg-gray-100" asChild>
+              <Button variant="hero" size="lg" className="bg-white text-tma-blue hover:bg-gray-100" asChild>
                 <Link to="/apply">
                   Apply Now
                   <ArrowRight className="ml-2 h-5 w-5" />
