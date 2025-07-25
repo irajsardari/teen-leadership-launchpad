@@ -7,30 +7,30 @@ import heroImage from "@/assets/hero-academy.jpg";
 const HomePage = () => {
   const ageGroups = [
     {
-      title: "Foundation Level",
+      title: "Junior Challengers",
       ageRange: "12-15 years",
       description: "Building essential life skills and leadership foundations",
       features: ["Basic Leadership", "Communication Skills", "Time Management", "Goal Setting"],
-      color: "from-blue-500 to-teal-500"
+      color: "from-tma-teal to-tma-blue"
     },
     {
-      title: "Development Level", 
+      title: "Prime Challengers", 
       ageRange: "15-17 years",
       description: "Advanced management principles and emotional intelligence",
       features: ["Team Leadership", "Emotional Intelligence", "Project Management", "Public Speaking"],
-      color: "from-teal-500 to-blue-600"
+      color: "from-tma-navy to-tma-blue"
     },
     {
-      title: "Mastery Level",
+      title: "Leader Challengers",
       ageRange: "17-19 years", 
       description: "Professional leadership and advanced life skills mastery",
       features: ["Strategic Thinking", "Advanced Psychology", "Business Skills", "Mentorship"],
-      color: "from-blue-600 to-indigo-600"
+      color: "from-orange-500 to-orange-600"
     }
   ];
 
   const stats = [
-    { icon: Users, value: "1000+", label: "Students Empowered" },
+    { icon: Users, value: "1000+", label: "Challengers Empowered" },
     { icon: Globe, value: "25+", label: "Countries Reached" },
     { icon: Award, value: "7", label: "Year Curriculum" },
     { icon: Star, value: "4.9", label: "Parent Rating" }
@@ -49,14 +49,14 @@ const HomePage = () => {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Empowering Tomorrow's
+              Developing Future Ready
               <span className="block bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                Leaders Today
+                Challengers
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-              TMA teaches leadership, management, psychology, and essential life skills 
-              to teenagers aged 12-19 through our comprehensive 7-year curriculum.
+              TMA empowers Challengers aged 12-19 with leadership, management, psychology, 
+              and essential life skills through our comprehensive 7-year curriculum.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button variant="hero" size="lg" className="text-lg px-8 py-4" asChild>
@@ -140,11 +140,11 @@ const HomePage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
-              Learning Paths by Age Group
+              Challenger Learning Paths
             </h2>
             <p className="text-xl text-tma-gray max-w-3xl mx-auto">
-              Our curriculum is carefully designed to match the developmental stage 
-              and learning capacity of each age group.
+              Our curriculum develops Challengers through three progressive levels, 
+              each designed to match their developmental stage and learning capacity.
             </p>
           </div>
           
@@ -247,7 +247,7 @@ const HomePage = () => {
               Ready to Unlock Your Leadership Potential?
             </h2>
             <p className="text-xl text-blue-100 mb-8">
-              Join thousands of teenagers worldwide who are building the skills 
+              Join thousands of Challengers worldwide who are building the skills 
               they need for a successful future.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
