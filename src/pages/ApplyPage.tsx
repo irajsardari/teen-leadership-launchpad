@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Users, Clock, Award, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import ChallengerForm from "@/components/ChallengerForm";
 
 const ApplyPage = () => {
   const [step, setStep] = useState(1);
@@ -383,8 +384,23 @@ const ApplyPage = () => {
         </div>
       </section>
 
+      {/* Quick Registration Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
+              Quick Registration
+            </h2>
+            <p className="text-xl text-foreground/70">
+              Already know which program you want? Register directly below
+            </p>
+          </div>
+          <ChallengerForm />
+        </div>
+      </section>
+
       {/* Benefits Section */}
-      <section className="py-20 bg-tma-light">
+      <section className="py-20 bg-background/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
