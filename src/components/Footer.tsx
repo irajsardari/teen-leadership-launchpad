@@ -10,11 +10,11 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <img 
-                src="/lovable-uploads/180fdff9-f676-4c90-846f-ee188ca50bb2.png" 
-                alt="TMA - Teenagers Management and Leadership Academy - Future Ready Leaders" 
-                className="h-10 w-auto"
-              />
+            <img 
+              src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
+              alt="TMA - Teenagers Management and Leadership Academy - Future Ready Leaders" 
+              className="h-12 w-auto"
+            />
               <span className="text-lg font-bold">TMA</span>
             </div>
             <p className="text-gray-300 text-sm">
