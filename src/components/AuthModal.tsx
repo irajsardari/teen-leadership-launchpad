@@ -108,13 +108,6 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md border-0 shadow-2xl">
         <DialogHeader className="text-center space-y-4">
-          <div className="mx-auto">
-            <img 
-              src="/lovable-uploads/180fdff9-f676-4c90-846f-ee188ca50bb2.png" 
-              alt="TMA Logo" 
-              className="h-14 w-auto mx-auto"
-            />
-          </div>
           <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-tma-blue to-tma-teal bg-clip-text text-transparent">
             Welcome to TMA
           </DialogTitle>
