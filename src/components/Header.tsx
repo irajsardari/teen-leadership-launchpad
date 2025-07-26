@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, isLoading, signOut } = useAuth();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -58,6 +66,34 @@ const Header = () => {
                 Learning Portal
               </a>
             </Button>
+            
+            {/* Auth Section */}
+            {!isLoading && (
+              <>
+                {user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                        <User className="h-4 w-4" />
+                        <span className="hidden lg:inline">
+                          {user.user_metadata?.full_name || user.email}
+                        </span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={signOut}>
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Sign Out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Button className="bg-tma-coral hover:bg-tma-coral/90 text-white font-inter" size="sm" asChild>
+                    <Link to="/auth">Sign In</Link>
+                  </Button>
+                )}
+              </>
+            )}
           </nav>
 
           {/* Mobile menu button */}
@@ -90,7 +126,7 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-              <div className="px-3 py-2">
+              <div className="px-3 py-2 space-y-2">
                 <Button className="bg-[#008B8B] hover:bg-[#008B8B]/90 text-white font-inter w-full" size="sm" asChild>
                   <a
                     href="https://tma.academy/portal"
@@ -100,6 +136,32 @@ const Header = () => {
                     Learning Portal
                   </a>
                 </Button>
+                
+                {/* Mobile Auth */}
+                {!isLoading && (
+                  <>
+                    {user ? (
+                      <div className="space-y-2">
+                        <div className="text-sm text-tma-blue px-3 py-1">
+                          {user.user_metadata?.full_name || user.email}
+                        </div>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="w-full" 
+                          onClick={signOut}
+                        >
+                          <LogOut className="h-4 w-4 mr-2" />
+                          Sign Out
+                        </Button>
+                      </div>
+                    ) : (
+                      <Button className="bg-tma-coral hover:bg-tma-coral/90 text-white font-inter w-full" size="sm" asChild>
+                        <Link to="/auth">Sign In</Link>
+                      </Button>
+                    )}
+                  </>
+                )}
               </div>
             </div>
           </div>
