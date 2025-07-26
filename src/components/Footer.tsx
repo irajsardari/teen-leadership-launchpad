@@ -31,7 +31,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-tma-gold">📱</span>
-                <span>Instagram: @teenagers.management.academy</span>
+                <span>Instagram: @tmaleaders</span>
               </div>
             </div>
           </div>
