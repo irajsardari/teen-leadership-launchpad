@@ -14,7 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      challengers: {
+        Row: {
+          age: number | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: number
+          level: string | null
+          phone_number: string | null
+          user_id: string | null
+        }
+        Insert: {
+          age?: number | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: number
+          level?: string | null
+          phone_number?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          age?: number | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: number
+          level?: string | null
+          phone_number?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          age: number | null
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          role: string | null
+        }
+        Insert: {
+          age?: number | null
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          role?: string | null
+        }
+        Update: {
+          age?: number | null
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          role?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
