@@ -86,13 +86,13 @@ const HomePage = () => {
               TMA – Teenagers Management Academy empowers students aged 12 to 19 with leadership, management, psychology, and essential life skills through a globally pioneering 7-year curriculum.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="bg-[#FF715B] hover:bg-[#FF715B]/90 text-white font-inter text-lg px-8 py-4" asChild>
+              <Button size="lg" className="bg-gradient-to-r from-[#FF715B] to-[#FF715B]/90 hover:from-[#FF715B]/90 hover:to-[#FF715B]/80 text-white font-inter text-lg px-8 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105" asChild>
                 <Link to="/apply">
                   Start Your Journey
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" className="bg-transparent border-2 border-[#012D5A] text-[#012D5A] hover:bg-[#F8F4EE] font-inter text-lg px-8 py-4" variant="outline" asChild>
+              <Button size="lg" className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white/20 font-inter text-lg px-8 py-4 shadow-xl transition-all duration-300" variant="outline" asChild>
                 <Link to="/curriculum">
                   Explore Curriculum
                 </Link>

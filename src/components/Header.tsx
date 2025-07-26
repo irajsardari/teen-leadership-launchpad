@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import AuthModal from "./AuthModal";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,7 @@ import {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const location = useLocation();
   const { user, isLoading, signOut } = useAuth();
 
@@ -88,8 +90,12 @@ const Header = () => {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <Button className="bg-tma-coral hover:bg-tma-coral/90 text-white font-inter" size="sm" asChild>
-                    <Link to="/auth">Sign In</Link>
+                  <Button 
+                    className="bg-gradient-to-r from-tma-coral to-tma-coral/90 hover:from-tma-coral/90 hover:to-tma-coral/80 text-white font-inter shadow-lg hover:shadow-xl transition-all duration-200" 
+                    size="sm" 
+                    onClick={() => setIsAuthModalOpen(true)}
+                  >
+                    Sign In
                   </Button>
                 )}
               </>
@@ -156,8 +162,15 @@ const Header = () => {
                         </Button>
                       </div>
                     ) : (
-                      <Button className="bg-tma-coral hover:bg-tma-coral/90 text-white font-inter w-full" size="sm" asChild>
-                        <Link to="/auth">Sign In</Link>
+                      <Button 
+                        className="bg-gradient-to-r from-tma-coral to-tma-coral/90 hover:from-tma-coral/90 hover:to-tma-coral/80 text-white font-inter w-full shadow-lg" 
+                        size="sm" 
+                        onClick={() => {
+                          setIsAuthModalOpen(true);
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        Sign In
                       </Button>
                     )}
                   </>
@@ -167,6 +180,11 @@ const Header = () => {
           </div>
         )}
       </div>
+      
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </header>
   );
 };
