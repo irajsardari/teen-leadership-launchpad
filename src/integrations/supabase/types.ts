@@ -17,32 +17,47 @@ export type Database = {
       challengers: {
         Row: {
           age: number | null
+          city: string | null
+          country: string | null
           created_at: string
           email: string | null
           full_name: string | null
+          gender: string | null
+          guardian_email: string | null
           id: number
           level: string | null
           phone_number: string | null
+          referral_source: string | null
           user_id: string | null
         }
         Insert: {
           age?: number | null
+          city?: string | null
+          country?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
+          gender?: string | null
+          guardian_email?: string | null
           id?: number
           level?: string | null
           phone_number?: string | null
+          referral_source?: string | null
           user_id?: string | null
         }
         Update: {
           age?: number | null
+          city?: string | null
+          country?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
+          gender?: string | null
+          guardian_email?: string | null
           id?: number
           level?: string | null
           phone_number?: string | null
+          referral_source?: string | null
           user_id?: string | null
         }
         Relationships: []
