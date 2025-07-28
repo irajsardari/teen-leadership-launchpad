@@ -26,6 +26,18 @@ const Footer = () => {
                 <span>info@teenmanagement.com</span>
               </div>
               <div className="flex items-center space-x-2">
+                <Phone className="h-4 w-4 text-tma-gold" />
+                <a 
+                  href="https://wa.me/96899668948" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors flex items-center space-x-1"
+                >
+                  <span>WhatsApp: +968-99668948</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+              <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-tma-gold" />
                 <span>P.O. Box 2643 Ruwi, Sultanate of Oman</span>
               </div>
@@ -38,6 +50,18 @@ const Footer = () => {
                   className="text-primary-foreground/70 hover:text-tma-gold transition-colors flex items-center space-x-1"
                 >
                   <span>Instagram: @tmaleaders</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-tma-gold">📺</span>
+                <a 
+                  href="https://youtube.com/@teenmanagement.academy" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors flex items-center space-x-1"
+                >
+                  <span>YouTube: @teenmanagement.academy</span>
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </div>
