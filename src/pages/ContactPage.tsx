@@ -12,8 +12,8 @@ const ContactPage = () => {
       icon: Mail,
       title: "Email Us",
       description: "Send us a message anytime",
-      details: "info@tma.academy",
-      action: "mailto:info@tma.academy"
+      details: "info@teenmanagement.com",
+      action: "mailto:info@teenmanagement.com"
     },
     {
       icon: Phone,
@@ -37,7 +37,7 @@ const ContactPage = () => {
       address: "P.O. Box 2643 Ruwi",
       city: "Sultanate of Oman",
       phone: "+968 9966 8948",
-      email: "info@tma.academy"
+      email: "info@teenmanagement.com"
     }
   ];
 
