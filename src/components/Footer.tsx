@@ -31,7 +31,15 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-tma-gold">📱</span>
-                <span>Instagram: @tmaleaders</span>
+                <a 
+                  href="https://instagram.com/tmaleaders" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors flex items-center space-x-1"
+                >
+                  <span>Instagram: @tmaleaders</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
               </div>
             </div>
           </div>
