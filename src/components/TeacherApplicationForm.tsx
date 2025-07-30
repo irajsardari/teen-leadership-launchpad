@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,7 +19,7 @@ const teacherApplicationSchema = z.object({
   phoneNumber: z.string().optional(),
   specialization: z.string().min(1, "Please select your specialization"),
   experienceYears: z.number().min(0, "Experience years must be 0 or more"),
-  education: z.string().min(1, "Please enter your education background"),
+  education: z.string().min(1, "Please select your education level"),
   coverLetter: z.string().min(50, "Cover letter must be at least 50 characters"),
   cv: z.instanceof(FileList).optional()
 });
@@ -242,10 +243,20 @@ const TeacherApplicationForm = () => {
                     name="education"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Education Background *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Degree, certifications, etc." {...field} />
-                        </FormControl>
+                        <FormLabel>Education Level *</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select your education level" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="diploma">Diploma</SelectItem>
+                            <SelectItem value="ba">Bachelor's Degree (BA/BS)</SelectItem>
+                            <SelectItem value="ma">Master's Degree (MA/MS)</SelectItem>
+                            <SelectItem value="phd">Doctorate (PhD)</SelectItem>
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
