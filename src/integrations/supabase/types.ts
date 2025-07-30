@@ -89,6 +89,54 @@ export type Database = {
         }
         Relationships: []
       }
+      teacher_applications: {
+        Row: {
+          cover_letter: string | null
+          created_at: string
+          cv_url: string | null
+          education: string | null
+          email: string
+          experience_years: number | null
+          full_name: string
+          id: string
+          phone_number: string | null
+          specialization: string | null
+          status: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          cover_letter?: string | null
+          created_at?: string
+          cv_url?: string | null
+          education?: string | null
+          email: string
+          experience_years?: number | null
+          full_name: string
+          id?: string
+          phone_number?: string | null
+          specialization?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          cover_letter?: string | null
+          created_at?: string
+          cv_url?: string | null
+          education?: string | null
+          email?: string
+          experience_years?: number | null
+          full_name?: string
+          id?: string
+          phone_number?: string | null
+          specialization?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
