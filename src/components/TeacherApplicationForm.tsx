@@ -44,17 +44,30 @@ const TeacherApplicationForm = () => {
   });
 
   const uploadCV = async (file: File): Promise<string | null> => {
-    if (!user) return null;
+    if (!user) {
+      console.error('User not authenticated for file upload');
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to upload your CV.",
+        variant: "destructive",
+      });
+      return null;
+    }
 
     const fileExt = file.name.split('.').pop();
     const fileName = `${user.id}/${Date.now()}.${fileExt}`;
 
-    const { error } = await supabase.storage
+    const { data, error } = await supabase.storage
       .from('teacher-documents')
       .upload(fileName, file);
 
     if (error) {
       console.error('Error uploading CV:', error);
+      toast({
+        title: "Upload Error",
+        description: `Failed to upload CV: ${error.message}`,
+        variant: "destructive",
+      });
       return null;
     }
 
