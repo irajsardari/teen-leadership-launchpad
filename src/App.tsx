@@ -11,6 +11,7 @@ import CurriculumPage from "./pages/CurriculumPage";
 import ContactPage from "./pages/ContactPage";
 import ApplyPage from "./pages/ApplyPage";
 import AuthPage from "./pages/AuthPage";
+import TeachersPage from "./pages/TeachersPage";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./hooks/useAuth";
 
@@ -32,6 +33,7 @@ const App = () => (
                 <Route path="/curriculum" element={<CurriculumPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/apply" element={<ApplyPage />} />
+                <Route path="/teachers" element={<TeachersPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

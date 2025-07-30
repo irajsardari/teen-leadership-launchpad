@@ -25,6 +25,7 @@ const Header = () => {
     { name: "Curriculum", href: "/curriculum" },
     { name: "Age Groups", href: "/age-groups" },
     { name: "Parents & Teachers", href: "/parents-teachers" },
+    { name: "Teachers", href: "/teachers" },
     { name: "Contact", href: "/contact" },
   ];
 
