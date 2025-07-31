@@ -1,33 +1,78 @@
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const teacherApplicationSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
-  phoneNumber: z.string().optional(),
-  specialization: z.string().min(1, "Please select your specialization"),
-  experienceYears: z.number().min(0, "Experience years must be 0 or more"),
+  phoneNumber: z.string().min(1, "Phone number is required"),
+  specialization: z.array(z.string()).min(1, "Please select at least one specialization"),
+  experienceYears: z.string().min(1, "Please select your experience level"),
   education: z.string().min(1, "Please select your education level"),
-  coverLetter: z.string().min(50, "Cover letter must be at least 50 characters"),
-  cv: z.instanceof(FileList).optional()
+  cv: z.instanceof(FileList).refine((files) => files?.length > 0, "CV/Resume is required"),
+  linkedinPortfolio: z.string().optional()
 });
 
 type TeacherApplicationForm = z.infer<typeof teacherApplicationSchema>;
 
+const specializations = [
+  "Leadership Development",
+  "Emotional Intelligence", 
+  "Communication Skills",
+  "Team Building & Conflict Resolution",
+  "Coaching & Mentoring Youth",
+  "Entrepreneurship",
+  "Business Fundamentals",
+  "Time Management & Productivity",
+  "Project Planning & Event Management",
+  "Strategic Thinking",
+  "Adolescent Psychology",
+  "Positive Psychology",
+  "Behavioral Science",
+  "Mental Health in Teens",
+  "Mindfulness & Self-Awareness",
+  "Sociology & Social Responsibility",
+  "Inclusion & Diversity",
+  "Global Citizenship",
+  "Media & Society",
+  "Cultural Studies",
+  "Financial Literacy for Teens",
+  "Youth Budgeting & Saving",
+  "Investing Basics",
+  "Microeconomics",
+  "Business Ethics",
+  "Digital Literacy",
+  "Artificial Intelligence for Teens",
+  "Cybersecurity Basics",
+  "Design Thinking",
+  "Innovation in Education",
+  "Creative Thinking",
+  "Public Speaking",
+  "Writing & Expression",
+  "Design & Branding",
+  "Photography / Media Creation",
+  "Career Readiness & CV Writing",
+  "Sports & Fitness",
+  "Nutrition & Health",
+  "Self-Care & Stress Management",
+  "Yoga & Breathwork",
+  "Academic Tutoring (Math, Science, English)",
+  "Other"
+];
+
 const TeacherApplicationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const { toast } = useToast();
   const { user } = useAuth();
 
@@ -37,10 +82,10 @@ const TeacherApplicationForm = () => {
       fullName: "",
       email: "",
       phoneNumber: "",
-      specialization: "",
-      experienceYears: 0,
+      specialization: [],
+      experienceYears: "",
       education: "",
-      coverLetter: "",
+      linkedinPortfolio: ""
     },
   });
 
@@ -92,6 +137,15 @@ const TeacherApplicationForm = () => {
         }
       }
 
+      // Convert experience years string to number for database
+      const experienceYearsMap: { [key: string]: number } = {
+        "0-1": 1,
+        "2-4": 3,
+        "5-7": 6,
+        "8-10": 9,
+        "10+": 15
+      };
+
       const { error } = await supabase
         .from('teacher_applications')
         .insert({
@@ -99,11 +153,11 @@ const TeacherApplicationForm = () => {
           full_name: values.fullName,
           email: values.email,
           phone_number: values.phoneNumber,
-          specialization: values.specialization,
-          experience_years: values.experienceYears,
+          specialization: values.specialization.join(", "),
+          experience_years: experienceYearsMap[values.experienceYears] || 0,
           education: values.education,
           cv_url: cvUrl,
-          cover_letter: values.coverLetter,
+          cover_letter: values.linkedinPortfolio || null,
         });
 
       if (error) {
@@ -116,11 +170,7 @@ const TeacherApplicationForm = () => {
         return;
       }
 
-      toast({
-        title: "Success!",
-        description: "Your teacher application has been submitted successfully.",
-      });
-
+      setShowSuccessMessage(true);
       form.reset();
     } catch (error) {
       console.error('Error submitting application:', error);
@@ -134,17 +184,70 @@ const TeacherApplicationForm = () => {
     }
   };
 
+  if (showSuccessMessage) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-muted py-12">
+        <div className="container mx-auto px-4">
+          <Card className="max-w-2xl mx-auto text-center">
+            <CardHeader>
+              <CardTitle className="text-3xl font-bold text-primary">Thank you for your application!</CardTitle>
+              <CardDescription className="text-lg">
+                We review each submission carefully and will contact shortlisted instructors within 7–10 business days.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold">💬 Need Help?</h3>
+                <p className="text-muted-foreground">
+                  If you have questions, feel free to reach out at{" "}
+                  <a href="mailto:info@teenmanagement.com" className="text-primary hover:underline">
+                    info@teenmanagement.com
+                  </a>{" "}
+                  or via WhatsApp.
+                </p>
+              </div>
+              <div className="flex justify-center items-center space-x-8 pt-4">
+                <div className="flex items-center space-x-2">
+                  <span className="text-2xl">🧭</span>
+                  <span className="text-sm font-medium">Purpose</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-2xl">🌱</span>
+                  <span className="text-sm font-medium">Growth</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-2xl">💬</span>
+                  <span className="text-sm font-medium">Community</span>
+                </div>
+              </div>
+              <Button onClick={() => setShowSuccessMessage(false)} variant="outline">
+                Submit Another Application
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted py-12">
       <div className="container mx-auto px-4">
         <Card className="max-w-4xl mx-auto">
           <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold">Join Our Teaching Team</CardTitle>
-            <CardDescription className="text-lg">
-              Apply to become an instructor at Teen Management Academy
+            <CardTitle className="text-4xl font-bold">Join Our Teaching Team</CardTitle>
+            <CardDescription className="text-xl mt-2">
+              Inspire the next generation of leaders.
             </CardDescription>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              We're looking for passionate, caring, and qualified individuals who want to help teenagers grow into confident, capable, and conscious leaders.
+              If you're a mentor, coach, teacher, or professional who connects well with youth — this is your opportunity.
+            </p>
           </CardHeader>
           <CardContent>
+            <div className="mb-6">
+              <h3 className="text-xl font-semibold mb-4">✏️ Application Form</h3>
+            </div>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -153,7 +256,7 @@ const TeacherApplicationForm = () => {
                     name="fullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Full Name *</FormLabel>
+                        <FormLabel>🖋️ Full Name (Required)</FormLabel>
                         <FormControl>
                           <Input placeholder="Enter your full name" {...field} />
                         </FormControl>
@@ -167,9 +270,9 @@ const TeacherApplicationForm = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email Address *</FormLabel>
+                        <FormLabel>📧 Email Address (Required)</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="Enter your email" {...field} />
+                          <Input type="email" placeholder="Enter your email address" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -181,72 +284,10 @@ const TeacherApplicationForm = () => {
                     name="phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Phone Number</FormLabel>
+                        <FormLabel>📞 Phone Number (Required)</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your phone number" {...field} />
+                          <Input placeholder="e.g. +968 91234567" {...field} />
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="specialization"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Specialization *</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select your specialization" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="leadership-development">Leadership Development</SelectItem>
-                            <SelectItem value="emotional-intelligence">Emotional Intelligence</SelectItem>
-                            <SelectItem value="communication-skills">Communication Skills</SelectItem>
-                            <SelectItem value="team-building-conflict-resolution">Team Building & Conflict Resolution</SelectItem>
-                            <SelectItem value="coaching-mentoring-youth">Coaching & Mentoring Youth</SelectItem>
-                            <SelectItem value="entrepreneurship">Entrepreneurship</SelectItem>
-                            <SelectItem value="business-fundamentals">Business Fundamentals</SelectItem>
-                            <SelectItem value="time-management-productivity">Time Management & Productivity</SelectItem>
-                            <SelectItem value="project-planning-event-management">Project Planning & Event Management</SelectItem>
-                            <SelectItem value="strategic-thinking">Strategic Thinking</SelectItem>
-                            <SelectItem value="adolescent-psychology">Adolescent Psychology</SelectItem>
-                            <SelectItem value="positive-psychology">Positive Psychology</SelectItem>
-                            <SelectItem value="behavioral-science">Behavioral Science</SelectItem>
-                            <SelectItem value="mental-health-teens">Mental Health in Teens</SelectItem>
-                            <SelectItem value="mindfulness-self-awareness">Mindfulness & Self-Awareness</SelectItem>
-                            <SelectItem value="sociology-social-responsibility">Sociology & Social Responsibility</SelectItem>
-                            <SelectItem value="inclusion-diversity">Inclusion & Diversity</SelectItem>
-                            <SelectItem value="global-citizenship">Global Citizenship</SelectItem>
-                            <SelectItem value="media-society">Media & Society</SelectItem>
-                            <SelectItem value="cultural-studies">Cultural Studies</SelectItem>
-                            <SelectItem value="financial-literacy-teens">Financial Literacy for Teens</SelectItem>
-                            <SelectItem value="youth-budgeting-saving">Youth Budgeting & Saving</SelectItem>
-                            <SelectItem value="investing-basics">Investing Basics</SelectItem>
-                            <SelectItem value="microeconomics">Microeconomics</SelectItem>
-                            <SelectItem value="business-ethics">Business Ethics</SelectItem>
-                            <SelectItem value="digital-literacy">Digital Literacy</SelectItem>
-                            <SelectItem value="ai-for-teens">Artificial Intelligence for Teens</SelectItem>
-                            <SelectItem value="cybersecurity-basics">Cybersecurity Basics</SelectItem>
-                            <SelectItem value="design-thinking">Design Thinking</SelectItem>
-                            <SelectItem value="innovation-education">Innovation in Education</SelectItem>
-                            <SelectItem value="creative-thinking">Creative Thinking</SelectItem>
-                            <SelectItem value="public-speaking">Public Speaking</SelectItem>
-                            <SelectItem value="writing-expression">Writing & Expression</SelectItem>
-                            <SelectItem value="design-branding">Design & Branding</SelectItem>
-                            <SelectItem value="photography-media-creation">Photography / Media Creation</SelectItem>
-                            <SelectItem value="career-readiness-cv-writing">Career Readiness & CV Writing</SelectItem>
-                            <SelectItem value="sports-fitness">Sports & Fitness</SelectItem>
-                            <SelectItem value="nutrition-health">Nutrition & Health</SelectItem>
-                            <SelectItem value="self-care-stress-management">Self-Care & Stress Management</SelectItem>
-                            <SelectItem value="yoga-breathwork">Yoga & Breathwork</SelectItem>
-                            <SelectItem value="academic-tutoring">Academic Tutoring (Math, Science, English)</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -257,15 +298,21 @@ const TeacherApplicationForm = () => {
                     name="experienceYears"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Years of Experience *</FormLabel>
-                        <FormControl>
-                          <Input 
-                            type="number" 
-                            placeholder="0" 
-                            {...field}
-                            onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
-                          />
-                        </FormControl>
+                        <FormLabel>📅 Years of Experience (Required)</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select your experience level" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="0-1">0–1 years</SelectItem>
+                            <SelectItem value="2-4">2–4 years</SelectItem>
+                            <SelectItem value="5-7">5–7 years</SelectItem>
+                            <SelectItem value="8-10">8–10 years</SelectItem>
+                            <SelectItem value="10+">10+ years</SelectItem>
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -276,7 +323,7 @@ const TeacherApplicationForm = () => {
                     name="education"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Education Level *</FormLabel>
+                        <FormLabel>🎓 Education Level (Required)</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger>
@@ -284,10 +331,10 @@ const TeacherApplicationForm = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="diploma">Diploma</SelectItem>
-                            <SelectItem value="ba">Bachelor's Degree (BA/BS)</SelectItem>
-                            <SelectItem value="ma">Master's Degree (MA/MS)</SelectItem>
-                            <SelectItem value="phd">Doctorate (PhD)</SelectItem>
+                            <SelectItem value="bachelor">Bachelor's Degree</SelectItem>
+                            <SelectItem value="master">Master's Degree</SelectItem>
+                            <SelectItem value="phd">PhD</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -298,10 +345,51 @@ const TeacherApplicationForm = () => {
 
                 <FormField
                   control={form.control}
+                  name="specialization"
+                  render={() => (
+                    <FormItem>
+                      <FormLabel>🎓 Specialization (Required) - Select your main area(s) of expertise</FormLabel>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto border rounded-md p-4">
+                        {specializations.map((spec) => (
+                          <FormField
+                            key={spec}
+                            control={form.control}
+                            name="specialization"
+                            render={({ field }) => {
+                              return (
+                                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={field.value?.includes(spec)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...field.value, spec])
+                                          : field.onChange(
+                                              field.value?.filter((value) => value !== spec)
+                                            );
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="text-sm font-normal">
+                                    {spec}
+                                  </FormLabel>
+                                </FormItem>
+                              );
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
                   name="cv"
                   render={({ field: { onChange, value, ...field } }) => (
                     <FormItem>
-                      <FormLabel>Upload CV/Resume</FormLabel>
+                      <FormLabel>📄 Upload CV / Resume (Required)</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
@@ -317,16 +405,12 @@ const TeacherApplicationForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="coverLetter"
+                  name="linkedinPortfolio"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Cover Letter *</FormLabel>
+                      <FormLabel>🔗 LinkedIn or Portfolio (Optional)</FormLabel>
                       <FormControl>
-                        <Textarea
-                          placeholder="Tell us why you want to join our teaching team and what makes you a great fit for Teen Management Academy..."
-                          className="min-h-[120px]"
-                          {...field}
-                        />
+                        <Input placeholder="Paste a link (if available)" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
