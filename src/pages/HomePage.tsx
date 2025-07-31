@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Users, BookOpen, Target, Star, Award, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-academy.jpg";
+import heroImage from "@/assets/hero-teenagers.jpg";
 
 const HomePage = () => {
   const levels = [
@@ -66,29 +66,42 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-tma-blue via-tma-blue-light to-tma-teal">
-        <div className="absolute inset-0 bg-[#012D5A]/80"></div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Overlay */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30"
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImage})` }}
         ></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/60"></div>
         
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
+        {/* Content */}
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10">
+          <div className="max-w-5xl mx-auto text-center text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
               Where Future CEOs, Creators & Changemakers Begin
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-blue-100/90 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
+            <h2 className="text-lg sm:text-xl lg:text-2xl mb-10 text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
               TMA — The world's first 7-year academy dedicated to teenage leadership, emotional intelligence, management, and life mastery.
-            </p>
+            </h2>
+            
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="bg-gradient-to-r from-[#FF715B] to-[#FF715B]/90 hover:from-[#FF715B]/90 hover:to-[#FF715B]/80 text-white font-inter text-lg px-8 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105" asChild>
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-inter font-semibold text-lg px-10 py-6 rounded-lg shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1" 
+                asChild
+              >
                 <Link to="/apply">
                   Start Your Journey
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white/20 font-inter text-lg px-8 py-4 shadow-xl transition-all duration-300" variant="outline" asChild>
+              <Button 
+                size="lg" 
+                className="bg-transparent border-2 border-white/80 text-white hover:bg-white hover:text-navy-900 font-inter font-semibold text-lg px-10 py-6 rounded-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl" 
+                variant="outline" 
+                asChild
+              >
                 <Link to="/curriculum">
                   Explore Curriculum
                 </Link>
