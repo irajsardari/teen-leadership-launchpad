@@ -75,15 +75,11 @@ const HomePage = () => {
         
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight font-inter">
-              Developing Future Ready
-              <br />
-              <span className="text-white">
-                Leaders
-              </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
+              Where Future CEOs, Creators & Changemakers Begin
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto font-inter">
-              TMA – Teenagers Management Academy empowers students aged 12 to 19 with leadership, management, psychology, and essential life skills through a globally pioneering 7-year curriculum.
+            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-blue-100/90 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
+              TMA — The world's first 7-year academy dedicated to teenage leadership, emotional intelligence, management, and life mastery.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button size="lg" className="bg-gradient-to-r from-[#FF715B] to-[#FF715B]/90 hover:from-[#FF715B]/90 hover:to-[#FF715B]/80 text-white font-inter text-lg px-8 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105" asChild>
