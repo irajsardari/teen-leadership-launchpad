@@ -15,6 +15,7 @@ export interface BlogPost {
     keywords: string[];
   };
   category: string;
+  tags?: string[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -86,6 +87,7 @@ It might be just in time.
       metaDescription: "Discover why age 13 might be the most powerful year for teenage leadership development and how TMA helps young leaders discover their potential early.",
       keywords: ["teen leadership", "teenage development", "education", "age 13", "leadership development", "TMA Academy"]
     },
-    category: "Teen Leadership"
+    category: "Teen Leadership",
+    tags: ["TeenLeadership", "Age13", "EmotionalIntelligence", "YouthDevelopment"]
   }
 ];

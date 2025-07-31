@@ -2,10 +2,24 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CalendarIcon, UserIcon, ArrowLeft, ArrowRight, Share2 } from "lucide-react";
+import { 
+  CalendarIcon, 
+  UserIcon, 
+  ArrowLeft, 
+  ArrowRight, 
+  Share2, 
+  Clock,
+  Home,
+  ChevronRight,
+  Linkedin,
+  Twitter,
+  MessageCircle,
+  Mail
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -20,6 +34,15 @@ const BlogPostPage = () => {
   const currentIndex = blogPosts.findIndex(p => p.slug === slug);
   const previousPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+
+  // Calculate reading time (average 200 words per minute)
+  const calculateReadingTime = (content: string) => {
+    const words = content.trim().split(/\s+/).length;
+    const minutes = Math.ceil(words / 200);
+    return minutes;
+  };
+
+  const readingTime = calculateReadingTime(post.content);
 
   const handleShare = async () => {
     const url = window.location.href;
@@ -49,6 +72,30 @@ const BlogPostPage = () => {
     }
   };
 
+  const shareToLinkedIn = () => {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(post.title);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+  };
+
+  const shareToTwitter = () => {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(`${post.title} - ${post.excerpt}`);
+    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+  };
+
+  const shareToWhatsApp = () => {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(`${post.title} - ${post.excerpt}`);
+    window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+  };
+
+  const shareToEmail = () => {
+    const subject = encodeURIComponent(post.title);
+    const body = encodeURIComponent(`I thought you'd find this article interesting: ${post.title}\n\n${post.excerpt}\n\nRead more: ${window.location.href}`);
+    window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
+  };
+
   return (
     <>
       <Helmet>
@@ -66,20 +113,80 @@ const BlogPostPage = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
+        {/* Social Sharing Sidebar - Desktop */}
+        <div className="hidden lg:block fixed left-4 top-1/2 transform -translate-y-1/2 z-50">
+          <div className="flex flex-col gap-3 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg border border-border/50">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={shareToLinkedIn}
+              className="h-10 w-10 p-0 hover:bg-blue-50 hover:text-blue-600"
+              title="Share on LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={shareToTwitter}
+              className="h-10 w-10 p-0 hover:bg-slate-50 hover:text-slate-800"
+              title="Share on X (Twitter)"
+            >
+              <Twitter className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={shareToWhatsApp}
+              className="h-10 w-10 p-0 hover:bg-green-50 hover:text-green-600"
+              title="Share on WhatsApp"
+            >
+              <MessageCircle className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={shareToEmail}
+              className="h-10 w-10 p-0 hover:bg-gray-50 hover:text-gray-600"
+              title="Share via Email"
+            >
+              <Mail className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
         {/* Hero Section */}
         <section className="relative py-12 lg:py-20 bg-gradient-to-br from-muted/50 to-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               {/* Breadcrumb */}
-              <nav className="mb-8">
-                <Link 
-                  to="/insights" 
-                  className="inline-flex items-center text-muted-foreground hover:text-tma-blue transition-colors duration-200"
-                >
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Insights
-                </Link>
-              </nav>
+              <div className="mb-8">
+                <Breadcrumb>
+                  <BreadcrumbList>
+                    <BreadcrumbItem>
+                      <BreadcrumbLink asChild>
+                        <Link to="/" className="flex items-center">
+                          <Home className="h-4 w-4" />
+                        </Link>
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator>
+                      <ChevronRight className="h-4 w-4" />
+                    </BreadcrumbSeparator>
+                    <BreadcrumbItem>
+                      <BreadcrumbLink asChild>
+                        <Link to="/insights">TMA Voices</Link>
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator>
+                      <ChevronRight className="h-4 w-4" />
+                    </BreadcrumbSeparator>
+                    <BreadcrumbItem>
+                      <BreadcrumbPage>{post.title}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </BreadcrumbList>
+                </Breadcrumb>
+              </div>
 
               {/* Article Header */}
               <div className="space-y-6">
@@ -91,7 +198,7 @@ const BlogPostPage = () => {
                     variant="ghost"
                     size="sm"
                     onClick={handleShare}
-                    className="text-muted-foreground hover:text-tma-blue"
+                    className="text-muted-foreground hover:text-tma-blue lg:hidden"
                   >
                     <Share2 className="h-4 w-4 mr-2" />
                     Share
@@ -117,6 +224,23 @@ const BlogPostPage = () => {
                       })}
                     </span>
                   </div>
+                  <div className="flex items-center">
+                    <Clock className="h-4 w-4 mr-2" />
+                    <span>🕒 {readingTime} min read</span>
+                  </div>
+                </div>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {post.tags && post.tags.map((tag, index) => (
+                    <Badge 
+                      key={index} 
+                      variant="outline" 
+                      className="text-xs bg-background hover:bg-muted cursor-pointer transition-colors"
+                    >
+                      #{tag}
+                    </Badge>
+                  ))}
                 </div>
               </div>
             </div>
@@ -127,12 +251,20 @@ const BlogPostPage = () => {
         <section className="py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <div className="aspect-video overflow-hidden rounded-xl shadow-2xl">
+              <div className="aspect-video overflow-hidden rounded-xl shadow-2xl relative">
                 <img 
                   src={post.featuredImage} 
                   alt={post.title}
                   className="w-full h-full object-cover"
                 />
+                {/* TMA Logo Watermark */}
+                <div className="absolute bottom-4 right-4 opacity-30">
+                  <img 
+                    src="/src/assets/tma-official-logo.png" 
+                    alt="TMA Academy" 
+                    className="h-8 w-auto filter brightness-0 invert"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -144,6 +276,67 @@ const BlogPostPage = () => {
             <div className="max-w-4xl mx-auto">
               <div className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-tma-blue prose-a:no-underline hover:prose-a:underline prose-li:text-muted-foreground">
                 <ReactMarkdown>{post.content}</ReactMarkdown>
+              </div>
+
+              {/* Author Bio Section */}
+              <div className="mt-12 p-6 bg-muted/30 rounded-xl border border-border/50">
+                <h3 className="text-lg font-semibold mb-3 text-foreground">About the Author</h3>
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 bg-gradient-to-br from-tma-blue to-tma-teal rounded-full flex items-center justify-center text-white font-bold text-xl">
+                      {post.author.split(' ').map(name => name[0]).join('')}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">{post.author}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Dr. Iraj Sardari Baf is the founder of the Teenagers Management Academy (TMA), with over two decades of leadership experience in banking, education, and organizational behavior. A passionate advocate for youth empowerment, he writes about teenage leadership, emotional intelligence, and the future of education.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile Social Sharing */}
+              <div className="lg:hidden mt-8 p-4 bg-muted/20 rounded-xl">
+                <h4 className="text-sm font-medium mb-3 text-center text-muted-foreground">Share this article</h4>
+                <div className="flex justify-center gap-4">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={shareToLinkedIn}
+                    className="hover:bg-blue-50 hover:text-blue-600"
+                  >
+                    <Linkedin className="h-4 w-4 mr-2" />
+                    LinkedIn
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={shareToTwitter}
+                    className="hover:bg-slate-50 hover:text-slate-800"
+                  >
+                    <Twitter className="h-4 w-4 mr-2" />
+                    X
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={shareToWhatsApp}
+                    className="hover:bg-green-50 hover:text-green-600"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    WhatsApp
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={shareToEmail}
+                    className="hover:bg-gray-50 hover:text-gray-600"
+                  >
+                    <Mail className="h-4 w-4 mr-2" />
+                    Email
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
