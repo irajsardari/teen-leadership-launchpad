@@ -35,11 +35,13 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 hover:opacity-90 transition-opacity duration-200">
-            <img 
-              src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
-              alt="TMA Academy - Teenagers Management and Leadership Academy Logo" 
-              className="h-12 w-auto filter drop-shadow-sm"
-            />
+            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-tma-blue/20 overflow-hidden hover:shadow-lg transition-shadow duration-200">
+              <img 
+                src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
+                alt="TMA Academy - Teenagers Management and Leadership Academy Logo" 
+                className="w-10 h-10 object-contain"
+              />
+            </div>
             <span className="text-xl font-semibold text-[#003A5D] font-inter hidden sm:block tracking-wide">
               TMA Academy
             </span>
