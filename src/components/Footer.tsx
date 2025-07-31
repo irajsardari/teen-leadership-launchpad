@@ -9,13 +9,18 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-            <img 
-              src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
-              alt="TMA - Teenagers Management and Leadership Academy - Future Ready Leaders" 
-              className="h-12 w-auto filter brightness-0 invert"
-            />
-              <span className="text-lg font-bold">TMA Academy</span>
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-full p-3 border border-white/20 shadow-lg">
+                <img 
+                  src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
+                  alt="TMA - Teenagers Management and Leadership Academy - Future Ready Leaders" 
+                  className="h-12 w-auto filter brightness-0 invert drop-shadow-sm"
+                />
+              </div>
+              <div>
+                <span className="text-xl font-bold text-white">TMA Academy</span>
+                <p className="text-sm text-gray-300 mt-1">Future Ready Leaders</p>
+              </div>
             </div>
             <p className="text-gray-300 text-sm">
               The world's first academy fully dedicated to teenage leadership and life readiness.

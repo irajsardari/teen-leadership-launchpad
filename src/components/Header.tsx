@@ -36,11 +36,11 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 hover:opacity-90 transition-opacity duration-200">
             <img 
-              src="/lovable-uploads/180fdff9-f676-4c90-846f-ee188ca50bb2.png" 
-              alt="TMA Academy - Future Ready Leaders" 
-              className="h-10 w-auto"
+              src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
+              alt="TMA Academy - Teenagers Management and Leadership Academy Logo" 
+              className="h-12 w-auto filter drop-shadow-sm"
             />
-            <span className="text-lg font-medium text-[#003A5D] font-inter hidden sm:block tracking-wide">
+            <span className="text-xl font-semibold text-[#003A5D] font-inter hidden sm:block tracking-wide">
               TMA Academy
             </span>
           </Link>
