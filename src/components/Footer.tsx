@@ -13,9 +13,9 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
               alt="TMA - Teenagers Management and Leadership Academy - Future Ready Leaders" 
-              className="h-12 w-auto"
+              className="h-12 w-auto filter brightness-0 invert"
             />
-              <span className="text-lg font-bold">TMA</span>
+              <span className="text-lg font-bold">TMA Academy</span>
             </div>
             <p className="text-gray-300 text-sm">
               The world's first academy fully dedicated to teenage leadership and life readiness.

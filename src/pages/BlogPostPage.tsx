@@ -268,11 +268,11 @@ const BlogPostPage = () => {
                   className="w-full h-full object-cover"
                 />
                 {/* TMA Logo Watermark */}
-                <div className="absolute bottom-4 right-4 opacity-30">
+                <div className="absolute bottom-4 right-4 opacity-20">
                   <img 
-                    src="/src/assets/tma-official-logo.png" 
+                    src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
                     alt="TMA Academy" 
-                    className="h-8 w-auto filter brightness-0 invert"
+                    className="h-10 w-auto filter brightness-0 invert"
                   />
                 </div>
               </div>
@@ -293,13 +293,13 @@ const BlogPostPage = () => {
                 <h3 className="text-lg font-semibold mb-3 text-foreground">About the Author</h3>
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-tma-blue/20">
-                      <img 
-                        src={tmaOfficialIcon} 
-                        alt="TMA Academy Official Logo" 
-                        className="w-12 h-12 object-contain"
-                      />
-                    </div>
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-tma-blue/20 overflow-hidden">
+                    <img 
+                      src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
+                      alt="TMA Academy - Teenagers Management Academy Logo" 
+                      className="w-14 h-14 object-contain"
+                    />
+                  </div>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-2">
