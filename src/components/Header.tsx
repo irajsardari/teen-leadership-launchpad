@@ -48,12 +48,12 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
+          <nav className="hidden lg:flex items-center space-x-4">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`relative px-4 py-2 text-base font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group ${
+                className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group whitespace-nowrap ${
                   isActive(item.href)
                     ? "text-[#F28C28] font-semibold"
                     : "text-[#003A5D] hover:text-[#F28C28]"
