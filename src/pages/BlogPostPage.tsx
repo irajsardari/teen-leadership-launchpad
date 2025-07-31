@@ -14,8 +14,10 @@ import {
   Linkedin,
   X,
   MessageCircle,
-  Mail
+  Mail,
+  ExternalLink
 } from "lucide-react";
+import tmaOfficialIcon from "@/assets/tma-official-icon.png";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
@@ -43,6 +45,13 @@ const BlogPostPage = () => {
   };
 
   const readingTime = calculateReadingTime(post.content);
+
+  const handleTagClick = (tag: string) => {
+    toast({
+      title: "Tag Search",
+      description: `Future feature: Browse all articles tagged with #${tag}`,
+    });
+  };
 
   const handleShare = async () => {
     const url = window.location.href;
@@ -236,7 +245,8 @@ const BlogPostPage = () => {
                     <Badge 
                       key={index} 
                       variant="outline" 
-                      className="text-xs bg-background hover:bg-muted cursor-pointer transition-colors"
+                      className="text-xs bg-background hover:bg-tma-blue/10 hover:text-tma-blue cursor-pointer transition-colors"
+                      onClick={() => handleTagClick(tag)}
                     >
                       #{tag}
                     </Badge>
@@ -254,7 +264,7 @@ const BlogPostPage = () => {
               <div className="aspect-video overflow-hidden rounded-xl shadow-2xl relative">
                 <img 
                   src={post.featuredImage} 
-                  alt={post.title}
+                  alt="Multicultural group of teens in discussion, representing teenage leadership development and the critical importance of age 13 in leadership formation"
                   className="w-full h-full object-cover"
                 />
                 {/* TMA Logo Watermark */}
@@ -283,12 +293,30 @@ const BlogPostPage = () => {
                 <h3 className="text-lg font-semibold mb-3 text-foreground">About the Author</h3>
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-gradient-to-br from-tma-blue to-tma-teal rounded-full flex items-center justify-center text-white font-bold text-xl">
-                      {post.author.split(' ').map(name => name[0]).join('')}
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-tma-blue/20">
+                      <img 
+                        src={tmaOfficialIcon} 
+                        alt="TMA Academy Official Logo" 
+                        className="w-12 h-12 object-contain"
+                      />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">{post.author}</h4>
+                    <div className="flex items-center gap-2 mb-2">
+                      <h4 className="font-semibold text-foreground">{post.author}</h4>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 w-6 p-0 hover:bg-blue-50 hover:text-blue-600"
+                        title="Connect on LinkedIn"
+                        onClick={() => toast({
+                          title: "LinkedIn Profile",
+                          description: "Dr. Iraj's LinkedIn profile coming soon!",
+                        })}
+                      >
+                        <Linkedin className="h-3 w-3" />
+                      </Button>
+                    </div>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       Dr. Iraj Sardari Baf is the founder of the Teenagers Management Academy (TMA), with over two decades of leadership experience in banking, education, and organizational behavior. A passionate advocate for youth empowerment, he writes about teenage leadership, emotional intelligence, and the future of education.
                     </p>
@@ -375,6 +403,38 @@ const BlogPostPage = () => {
                     </h3>
                   </Link>
                 )}
+              </div>
+
+              {/* Related Articles Section */}
+              <div className="mt-12 p-6 bg-muted/20 rounded-xl border border-border/50">
+                <h3 className="text-lg font-semibold mb-6 text-foreground">You May Also Like</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {blogPosts.filter(p => p.slug !== slug).slice(0, 2).map((relatedPost) => (
+                    <Link 
+                      key={relatedPost.slug}
+                      to={`/insights/${relatedPost.slug}`}
+                      className="group p-4 bg-background rounded-lg hover:shadow-md transition-all duration-200 border border-border/50"
+                    >
+                      <div className="aspect-video overflow-hidden rounded-lg mb-3">
+                        <img 
+                          src={relatedPost.featuredImage} 
+                          alt={relatedPost.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                        />
+                      </div>
+                      <h4 className="font-medium text-foreground group-hover:text-tma-blue transition-colors text-sm leading-tight">
+                        {relatedPost.title}
+                      </h4>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        {new Date(relatedPost.date).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'short', 
+                          day: 'numeric' 
+                        })}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
               </div>
 
               {/* Call to Action */}
