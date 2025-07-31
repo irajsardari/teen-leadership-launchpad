@@ -1,0 +1,213 @@
+import { useParams, Link, Navigate } from "react-router-dom";
+import { blogPosts } from "@/data/blogPosts";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { CalendarIcon, UserIcon, ArrowLeft, ArrowRight, Share2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { Helmet } from "react-helmet-async";
+import ReactMarkdown from "react-markdown";
+
+const BlogPostPage = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const { toast } = useToast();
+  
+  const post = blogPosts.find(p => p.slug === slug);
+  
+  if (!post) {
+    return <Navigate to="/insights" replace />;
+  }
+
+  const currentIndex = blogPosts.findIndex(p => p.slug === slug);
+  const previousPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const nextPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+
+  const handleShare = async () => {
+    const url = window.location.href;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: post.title,
+          text: post.excerpt,
+          url: url,
+        });
+      } catch (err) {
+        // Fallback to clipboard
+        navigator.clipboard.writeText(url);
+        toast({
+          title: "Link copied!",
+          description: "The article link has been copied to your clipboard.",
+        });
+      }
+    } else {
+      // Fallback to clipboard
+      navigator.clipboard.writeText(url);
+      toast({
+        title: "Link copied!",
+        description: "The article link has been copied to your clipboard.",
+      });
+    }
+  };
+
+  return (
+    <>
+      <Helmet>
+        <title>{post.seo.metaTitle}</title>
+        <meta name="description" content={post.seo.metaDescription} />
+        <meta name="keywords" content={post.seo.keywords.join(', ')} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:image" content={post.featuredImage} />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.excerpt} />
+        <meta name="twitter:image" content={post.featuredImage} />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section className="relative py-12 lg:py-20 bg-gradient-to-br from-muted/50 to-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              {/* Breadcrumb */}
+              <nav className="mb-8">
+                <Link 
+                  to="/insights" 
+                  className="inline-flex items-center text-muted-foreground hover:text-tma-blue transition-colors duration-200"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Insights
+                </Link>
+              </nav>
+
+              {/* Article Header */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <Badge variant="secondary" className="bg-tma-orange/10 text-tma-orange">
+                    {post.category}
+                  </Badge>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleShare}
+                    className="text-muted-foreground hover:text-tma-blue"
+                  >
+                    <Share2 className="h-4 w-4 mr-2" />
+                    Share
+                  </Button>
+                </div>
+
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground">
+                  {post.title}
+                </h1>
+
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-muted-foreground">
+                  <div className="flex items-center">
+                    <UserIcon className="h-4 w-4 mr-2" />
+                    <span className="font-medium">{post.author}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CalendarIcon className="h-4 w-4 mr-2" />
+                    <span>
+                      {new Date(post.date).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Image */}
+        <section className="py-8">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="aspect-video overflow-hidden rounded-xl shadow-2xl">
+                <img 
+                  src={post.featuredImage} 
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Article Content */}
+        <section className="py-8 lg:py-16">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-tma-blue prose-a:no-underline hover:prose-a:underline prose-li:text-muted-foreground">
+                <ReactMarkdown>{post.content}</ReactMarkdown>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Navigation */}
+        <section className="py-12 border-t bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {previousPost && (
+                  <Link 
+                    to={`/insights/${previousPost.slug}`}
+                    className="group p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-border/50"
+                  >
+                    <div className="flex items-center text-sm text-muted-foreground mb-2">
+                      <ArrowLeft className="h-4 w-4 mr-2" />
+                      Previous Article
+                    </div>
+                    <h3 className="font-semibold text-foreground group-hover:text-tma-blue transition-colors duration-200">
+                      {previousPost.title}
+                    </h3>
+                  </Link>
+                )}
+                {nextPost && (
+                  <Link 
+                    to={`/insights/${nextPost.slug}`}
+                    className="group p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-border/50 md:text-right"
+                  >
+                    <div className="flex items-center justify-end text-sm text-muted-foreground mb-2">
+                      Next Article
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </div>
+                    <h3 className="font-semibold text-foreground group-hover:text-tma-blue transition-colors duration-200">
+                      {nextPost.title}
+                    </h3>
+                  </Link>
+                )}
+              </div>
+
+              {/* Call to Action */}
+              <div className="mt-12 p-8 bg-gradient-to-r from-tma-blue/5 to-tma-teal/5 rounded-xl border border-tma-blue/10 text-center">
+                <h3 className="text-xl font-bold mb-4 text-foreground">
+                  Ready to Join the Future of Leadership?
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  Discover how TMA Academy is shaping the next generation of global leaders.
+                </p>
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-tma-blue to-tma-teal hover:from-tma-blue/90 hover:to-tma-teal/90 text-white"
+                  asChild
+                >
+                  <Link to="/apply">
+                    Start Your Journey
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+};
+
+export default BlogPostPage;
