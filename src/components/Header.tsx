@@ -24,12 +24,12 @@ const Header = () => {
     { name: "About", href: "/about" },
     { name: "Curriculum", href: "/curriculum" },
     { name: "Parents", href: "/apply" },
-    { name: "Join as Teacher", href: "/teachers" },
+    { name: "Teach at TMA", href: "/teachers" },
     { name: "Contact", href: "/contact" },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-sm">
+    <header className="sticky top-0 z-[1000] w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -39,33 +39,33 @@ const Header = () => {
               alt="TMA Academy - Future Ready Leaders" 
               className="h-10 w-auto"
             />
-            <span className="text-lg font-semibold text-[#012D5A] font-inter hidden sm:block tracking-tight">
+            <span className="text-lg font-medium text-[#003A5D] font-inter hidden sm:block tracking-wide">
               TMA Academy
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-6">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ease-in-out font-inter rounded-md group ${
+                className={`relative px-4 py-2 text-base font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group ${
                   isActive(item.href)
-                    ? "text-[#008B8B] bg-[#008B8B]/5"
-                    : "text-[#012D5A] hover:text-[#008B8B] hover:bg-[#008B8B]/5"
+                    ? "text-[#F28C28] font-semibold"
+                    : "text-[#003A5D] hover:text-[#F28C28]"
                 }`}
               >
                 {item.name}
-                <span className={`absolute bottom-1 left-1/2 w-0 h-0.5 bg-[#008B8B] transition-all duration-300 ease-out group-hover:w-3/4 group-hover:left-[12.5%] ${
-                  isActive(item.href) ? "w-3/4 left-[12.5%]" : ""
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-[#F28C28] transition-all duration-400 ease-out ${
+                  isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
                 }`} />
               </Link>
             ))}
             
-            <div className="flex items-center space-x-3 ml-6 pl-6 border-l border-gray-200">
+            <div className="flex items-center space-x-4 ml-8 pl-6 border-l border-gray-200">
               <Button 
-                className="bg-[#008B8B] hover:bg-[#008B8B]/90 text-white font-inter transition-all duration-300 hover:scale-105 hover:shadow-md" 
+                className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg hover:shadow-[#006D6C]/25 rounded-lg px-5 py-2" 
                 size="sm" 
                 asChild
               >
@@ -84,7 +84,7 @@ const Header = () => {
                   {user ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-[#008B8B]/5 transition-colors duration-200">
+                        <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-[#006D6C]/5 transition-colors duration-200">
                           <User className="h-4 w-4" />
                           <span className="hidden xl:inline text-sm">
                             {user.user_metadata?.full_name || user.email}
@@ -100,7 +100,8 @@ const Header = () => {
                     </DropdownMenu>
                   ) : (
                     <Button 
-                      className="bg-gradient-to-r from-tma-coral to-tma-coral/90 hover:from-tma-coral/90 hover:to-tma-coral/80 text-white font-inter shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105" 
+                      variant="outline"
+                      className="border-[#F28C28] text-[#F28C28] hover:bg-[#F28C28] hover:text-white font-inter font-medium transition-all duration-300 rounded-lg px-5 py-2" 
                       size="sm" 
                       onClick={() => setIsAuthModalOpen(true)}
                     >
@@ -113,27 +114,28 @@ const Header = () => {
           </nav>
 
           {/* Tablet Navigation */}
-          <nav className="hidden md:flex lg:hidden items-center space-x-1">
+          <nav className="hidden md:flex lg:hidden items-center space-x-4">
             {navigation.slice(0, 4).map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`relative px-3 py-2 text-xs font-medium transition-all duration-300 ease-in-out font-inter rounded-md group ${
+                className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group ${
                   isActive(item.href)
-                    ? "text-[#008B8B] bg-[#008B8B]/5"
-                    : "text-[#012D5A] hover:text-[#008B8B] hover:bg-[#008B8B]/5"
+                    ? "text-[#F28C28] font-semibold"
+                    : "text-[#003A5D] hover:text-[#F28C28]"
                 }`}
               >
-                {item.name === "Join as Teacher" ? "Teachers" : item.name}
-                <span className={`absolute bottom-1 left-1/2 w-0 h-0.5 bg-[#008B8B] transition-all duration-300 ease-out group-hover:w-3/4 group-hover:left-[12.5%] ${
-                  isActive(item.href) ? "w-3/4 left-[12.5%]" : ""
+                {item.name === "Teach at TMA" ? "Teach" : item.name}
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-[#F28C28] transition-all duration-400 ease-out ${
+                  isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
                 }`} />
               </Link>
             ))}
             
             {!isLoading && !user && (
               <Button 
-                className="bg-gradient-to-r from-tma-coral to-tma-coral/90 hover:from-tma-coral/90 hover:to-tma-coral/80 text-white font-inter shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 ml-3" 
+                variant="outline"
+                className="border-[#F28C28] text-[#F28C28] hover:bg-[#F28C28] hover:text-white font-inter font-medium transition-all duration-300 rounded-lg ml-3" 
                 size="sm" 
                 onClick={() => setIsAuthModalOpen(true)}
               >
