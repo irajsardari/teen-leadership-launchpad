@@ -203,14 +203,47 @@ const TeacherApplicationForm = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="leadership">Leadership Development</SelectItem>
-                            <SelectItem value="communication">Communication Skills</SelectItem>
+                            <SelectItem value="leadership-development">Leadership Development</SelectItem>
+                            <SelectItem value="emotional-intelligence">Emotional Intelligence</SelectItem>
+                            <SelectItem value="communication-skills">Communication Skills</SelectItem>
+                            <SelectItem value="team-building-conflict-resolution">Team Building & Conflict Resolution</SelectItem>
+                            <SelectItem value="coaching-mentoring-youth">Coaching & Mentoring Youth</SelectItem>
                             <SelectItem value="entrepreneurship">Entrepreneurship</SelectItem>
-                            <SelectItem value="personal-development">Personal Development</SelectItem>
-                            <SelectItem value="technology">Technology & Innovation</SelectItem>
-                            <SelectItem value="creative-arts">Creative Arts</SelectItem>
+                            <SelectItem value="business-fundamentals">Business Fundamentals</SelectItem>
+                            <SelectItem value="time-management-productivity">Time Management & Productivity</SelectItem>
+                            <SelectItem value="project-planning-event-management">Project Planning & Event Management</SelectItem>
+                            <SelectItem value="strategic-thinking">Strategic Thinking</SelectItem>
+                            <SelectItem value="adolescent-psychology">Adolescent Psychology</SelectItem>
+                            <SelectItem value="positive-psychology">Positive Psychology</SelectItem>
+                            <SelectItem value="behavioral-science">Behavioral Science</SelectItem>
+                            <SelectItem value="mental-health-teens">Mental Health in Teens</SelectItem>
+                            <SelectItem value="mindfulness-self-awareness">Mindfulness & Self-Awareness</SelectItem>
+                            <SelectItem value="sociology-social-responsibility">Sociology & Social Responsibility</SelectItem>
+                            <SelectItem value="inclusion-diversity">Inclusion & Diversity</SelectItem>
+                            <SelectItem value="global-citizenship">Global Citizenship</SelectItem>
+                            <SelectItem value="media-society">Media & Society</SelectItem>
+                            <SelectItem value="cultural-studies">Cultural Studies</SelectItem>
+                            <SelectItem value="financial-literacy-teens">Financial Literacy for Teens</SelectItem>
+                            <SelectItem value="youth-budgeting-saving">Youth Budgeting & Saving</SelectItem>
+                            <SelectItem value="investing-basics">Investing Basics</SelectItem>
+                            <SelectItem value="microeconomics">Microeconomics</SelectItem>
+                            <SelectItem value="business-ethics">Business Ethics</SelectItem>
+                            <SelectItem value="digital-literacy">Digital Literacy</SelectItem>
+                            <SelectItem value="ai-for-teens">Artificial Intelligence for Teens</SelectItem>
+                            <SelectItem value="cybersecurity-basics">Cybersecurity Basics</SelectItem>
+                            <SelectItem value="design-thinking">Design Thinking</SelectItem>
+                            <SelectItem value="innovation-education">Innovation in Education</SelectItem>
+                            <SelectItem value="creative-thinking">Creative Thinking</SelectItem>
+                            <SelectItem value="public-speaking">Public Speaking</SelectItem>
+                            <SelectItem value="writing-expression">Writing & Expression</SelectItem>
+                            <SelectItem value="design-branding">Design & Branding</SelectItem>
+                            <SelectItem value="photography-media-creation">Photography / Media Creation</SelectItem>
+                            <SelectItem value="career-readiness-cv-writing">Career Readiness & CV Writing</SelectItem>
                             <SelectItem value="sports-fitness">Sports & Fitness</SelectItem>
-                            <SelectItem value="academic-tutoring">Academic Tutoring</SelectItem>
+                            <SelectItem value="nutrition-health">Nutrition & Health</SelectItem>
+                            <SelectItem value="self-care-stress-management">Self-Care & Stress Management</SelectItem>
+                            <SelectItem value="yoga-breathwork">Yoga & Breathwork</SelectItem>
+                            <SelectItem value="academic-tutoring">Academic Tutoring (Math, Science, English)</SelectItem>
                             <SelectItem value="other">Other</SelectItem>
                           </SelectContent>
                         </Select>
