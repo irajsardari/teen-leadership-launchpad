@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     id: "4",
     title: "Where Teen Leadership Really Begins",
     author: "Dr. Iraj Sardari Baf",
-    date: "2024-01-20",
+    date: "2025-08-01",
     featuredImage: "/src/assets/teen-leadership-age-13-banner.jpg",
     excerpt: "Why age 13 might be the most powerful year of a teenager's life - exploring the secret beginning of leadership in adolescence.",
     content: `# Where Teen Leadership Really Begins
