@@ -1,3 +1,5 @@
+import teenLeadershipBanner from "@/assets/teen-leadership-age-13-banner.jpg";
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -21,7 +23,7 @@ export const blogPosts: BlogPost[] = [
     title: "Where Teen Leadership Really Begins",
     author: "Dr. Iraj Sardari Baf",
     date: "2025-08-01",
-    featuredImage: "/src/assets/teen-leadership-age-13-banner.jpg",
+    featuredImage: teenLeadershipBanner,
     excerpt: "Why age 13 might be the most powerful year of a teenager's life - exploring the secret beginning of leadership in adolescence.",
     content: `# Where Teen Leadership Really Begins
 ## Why age 13 might be the most powerful year of a teenager's life
