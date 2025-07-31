@@ -23,9 +23,9 @@ const Header = () => {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Curriculum", href: "/curriculum" },
-    { name: "TMA Voices", href: "/insights" },
+    { name: "Voices", href: "/insights" },
     { name: "Parents", href: "/apply" },
-    { name: "Teach at TMA", href: "/teachers" },
+    { name: "Join Us", href: "/teachers" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -128,7 +128,7 @@ const Header = () => {
                     : "text-[#003A5D] hover:text-[#F28C28]"
                 }`}
               >
-                {item.name === "Teach at TMA" ? "Teach" : item.name}
+                {item.name}
                 <span className={`absolute bottom-0 left-0 h-0.5 bg-[#F28C28] transition-all duration-400 ease-out ${
                   isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
                 }`} />
