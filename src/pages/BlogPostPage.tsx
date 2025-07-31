@@ -12,7 +12,7 @@ import {
   Home,
   ChevronRight,
   Linkedin,
-  Twitter,
+  X,
   MessageCircle,
   Mail
 } from "lucide-react";
@@ -78,7 +78,7 @@ const BlogPostPage = () => {
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
   };
 
-  const shareToTwitter = () => {
+  const shareToX = () => {
     const url = encodeURIComponent(window.location.href);
     const text = encodeURIComponent(`${post.title} - ${post.excerpt}`);
     window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
@@ -114,13 +114,13 @@ const BlogPostPage = () => {
 
       <div className="min-h-screen bg-background">
         {/* Social Sharing Sidebar - Desktop */}
-        <div className="hidden lg:block fixed left-4 top-1/2 transform -translate-y-1/2 z-50">
-          <div className="flex flex-col gap-3 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg border border-border/50">
+        <div className="hidden lg:block fixed left-6 top-1/2 transform -translate-y-1/2 z-40">
+          <div className="flex flex-col gap-3 bg-background/95 backdrop-blur-sm p-3 rounded-full shadow-lg border border-border">
             <Button
               variant="ghost"
               size="sm"
               onClick={shareToLinkedIn}
-              className="h-10 w-10 p-0 hover:bg-blue-50 hover:text-blue-600"
+              className="h-10 w-10 p-0 hover:bg-blue-50 hover:text-blue-600 transition-colors"
               title="Share on LinkedIn"
             >
               <Linkedin className="h-4 w-4" />
@@ -128,17 +128,17 @@ const BlogPostPage = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={shareToTwitter}
-              className="h-10 w-10 p-0 hover:bg-slate-50 hover:text-slate-800"
-              title="Share on X (Twitter)"
+              onClick={shareToX}
+              className="h-10 w-10 p-0 hover:bg-slate-50 hover:text-slate-800 transition-colors"
+              title="Share on X"
             >
-              <Twitter className="h-4 w-4" />
+              <X className="h-4 w-4" />
             </Button>
             <Button
               variant="ghost"
               size="sm"
               onClick={shareToWhatsApp}
-              className="h-10 w-10 p-0 hover:bg-green-50 hover:text-green-600"
+              className="h-10 w-10 p-0 hover:bg-green-50 hover:text-green-600 transition-colors"
               title="Share on WhatsApp"
             >
               <MessageCircle className="h-4 w-4" />
@@ -147,7 +147,7 @@ const BlogPostPage = () => {
               variant="ghost"
               size="sm"
               onClick={shareToEmail}
-              className="h-10 w-10 p-0 hover:bg-gray-50 hover:text-gray-600"
+              className="h-10 w-10 p-0 hover:bg-gray-50 hover:text-gray-600 transition-colors"
               title="Share via Email"
             >
               <Mail className="h-4 w-4" />
@@ -312,10 +312,10 @@ const BlogPostPage = () => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={shareToTwitter}
+                    onClick={shareToX}
                     className="hover:bg-slate-50 hover:text-slate-800"
                   >
-                    <Twitter className="h-4 w-4 mr-2" />
+                    <X className="h-4 w-4 mr-2" />
                     X
                   </Button>
                   <Button
