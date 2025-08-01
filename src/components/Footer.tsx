@@ -150,8 +150,10 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm text-primary-foreground/70">
-          <p>&copy; 2024 Teenagers Management Academy. All rights reserved.</p>
+        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-xs sm:text-sm text-primary-foreground/70 space-y-2">
+          <p>&copy; 2025 <span className="font-bold">TMA®</span> – All rights reserved.</p>
+          <p><span className="font-bold">TMA</span> (Teenagers Management Academy) is a registered trademark.</p>
+          <p className="leading-relaxed">No part of this website — including its text, visuals, or curriculum content — may be copied, reproduced, distributed, or used in any form without prior written permission from <span className="font-bold">TMA</span>.</p>
         </div>
       </div>
     </footer>
