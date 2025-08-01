@@ -301,16 +301,16 @@ const HomePage = () => {
 
               {/* Parent Path */}
               <div className="group">
-                <Card className="border-2 border-secondary/20 hover:border-secondary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer bg-gradient-to-br from-secondary/5 to-secondary/10">
+                <Card className="border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer bg-gradient-to-br from-primary/5 to-primary/10">
                   <CardContent className="p-8">
-                    <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary/30 transition-colors duration-300">
-                      <Users className="h-8 w-8 text-secondary" />
+                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/30 transition-colors duration-300">
+                      <Users className="h-8 w-8 text-primary" />
                     </div>
                     <h3 className="text-2xl font-bold text-foreground mb-4 font-inter">I'm a Parent</h3>
                     <p className="text-muted-foreground mb-6 leading-relaxed">
                       Discover how TMA can help your teenager develop essential life skills and prepare for their future success.
                     </p>
-                    <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground font-inter" asChild>
+                    <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-inter" asChild>
                       <Link to="/apply">
                         Learn More & Apply
                         <ArrowRight className="ml-2 h-5 w-5" />
