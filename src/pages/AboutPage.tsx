@@ -232,22 +232,45 @@ const AboutPage = () => {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Meet the Founder */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 font-inter">
+              👤 Meet the Founder
+            </h2>
+          </div>
           
-          {/* Learn More About Founder */}
-          <div className="max-w-2xl mx-auto text-center">
-            <Avatar className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6">
-              <AvatarImage src="/lovable-uploads/3e5fdf0b-b217-4351-89f4-4d4158e63364.png" alt="Dr. Iraj Sardari Baf" />
-              <AvatarFallback className="text-2xl font-bold">IS</AvatarFallback>
-            </Avatar>
-            <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2 font-inter">
-              Dr. Iraj Sardari Baf
-            </h3>
-            <p className="text-lg text-tma-coral font-inter mb-6">
-              Founder of Teenagers Management Academy (TMA)
-            </p>
-            <Button className="bg-[#FF715B] hover:bg-[#FF715B]/90 text-white font-inter" asChild>
-              <Link to="/founder">Learn More About Our Founder</Link>
-            </Button>
+          <div className="max-w-4xl mx-auto">
+            <Card className="border-none shadow-[var(--shadow-card)] bg-gradient-to-br from-background via-background to-muted/20">
+              <CardContent className="p-8 md:p-12">
+                <div className="flex flex-col md:flex-row items-center gap-8">
+                  <div className="flex-shrink-0">
+                    <Avatar className="w-32 h-32 md:w-40 md:h-40">
+                      <AvatarImage src="/lovable-uploads/3e5fdf0b-b217-4351-89f4-4d4158e63364.png" alt="Dr. Iraj Sardari Baf" />
+                      <AvatarFallback className="text-3xl font-bold">IS</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2 font-inter">
+                      Dr. Iraj Sardari Baf
+                    </h3>
+                    <p className="text-lg text-tma-coral font-inter mb-4">
+                      Founder of Teenagers Management Academy (TMA)
+                    </p>
+                    <p className="text-foreground/80 leading-relaxed mb-6">
+                      Founder bio content will be added here soon. This section will feature Dr. Iraj's professional background, vision, and commitment to youth empowerment.
+                    </p>
+                    <Button className="bg-[#FF715B] hover:bg-[#FF715B]/90 text-white font-inter" asChild>
+                      <Link to="/founder">Learn More About Our Founder</Link>
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
