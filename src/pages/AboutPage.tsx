@@ -201,22 +201,21 @@ const AboutPage = () => {
                       <p className="italic text-tma-coral">…to show them that between the stones, they are diamonds.</p>
                     </div>
                     
+                    <div className="my-8 space-y-2 text-lg leading-relaxed">
+                      <p>And I dream of future parents — full of wisdom, love, and emotional maturity.</p>
+                      <p>Parents who know how to raise strong, kind, responsible children.</p>
+                      <p>Parents who understand that leadership begins at home.</p>
+                      <p>Because a better world starts not with governments or institutions — but in the family, the smallest and most sacred organization on Earth.</p>
+                      <p className="italic text-tma-coral">That is where the next generation is truly shaped.</p>
+                    </div>
+                    
                     <p className="text-xl font-semibold text-primary leading-relaxed">
                       TMA is not just a school. It is a movement.
                     </p>
                     
                     <p className="text-lg leading-relaxed">
-                      It's the place where young people will learn to manage their lives, lead with wisdom, care for their mental well-being, and grow into builders of a better world.
+                      It's the place where young people will learn to manage their lives, lead with wisdom, care for their mental well-being, and grow into builders of a better future — for themselves, their communities, and their families.
                     </p>
-                    
-                    <p className="text-lg leading-relaxed">
-                      It doesn't matter to me whether the world remembers my name.<br />
-                      What matters is that one day, a teenager somewhere says:
-                    </p>
-                    
-                    <blockquote className="text-xl md:text-2xl font-bold text-tma-coral italic my-8">
-                      "I found my path… and I wasn't alone."
-                    </blockquote>
                     
                     <p className="text-lg leading-relaxed">
                       And if that happens — even once —<br />
