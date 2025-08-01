@@ -24,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     id: "5",
     title: "Responsibility: The First Step to a Life That Matters",
     author: "Dr. Iraj Sardari Baf",
-    date: "2025-08-01",
+    date: "2025-05-10",
     featuredImage: responsibilityBanner,
     excerpt: "Being responsible is not something you suddenly learn at 25. It's a practice, a skill, a habit that must start young - and it's the foundation of all progress.",
     content: `# Responsibility: The First Step to a Life That Matters
