@@ -2,6 +2,7 @@ import teenLeadershipBanner from "@/assets/teen-leadership-age-13-banner.jpg";
 import responsibilityBanner from "@/assets/responsibility-teen-watering-plant.jpg";
 import knowYourselfBanner from "@/assets/know-yourself-teen-mirror-reflection.jpg";
 import mentalHealthBanner from "@/assets/mental-health-two-wings-connection.jpg";
+import digitalAwarenessBanner from "@/assets/digital-awareness-classroom.jpg";
 
 export interface BlogPost {
   id: string;
@@ -22,6 +23,47 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: "8",
+    title: "Facts & Illusions in the Digital World",
+    author: "Dr. Iraj Sardari Baf",
+    date: "2024-10-03",
+    featuredImage: digitalAwarenessBanner,
+    excerpt: "In today's digital age, teenagers are constantly surrounded by content that often blurs the line between reality and illusion. Learn to distinguish what is real from online performance.",
+    content: `# Facts & Illusions in the Digital World
+
+In today's digital age, teenagers are constantly surrounded by content — posts, likes, shares, comments, and reels — a nonstop flow of noise that often blurs the line between reality and illusion. One of the most important life skills is the ability to distinguish what is real from what is simply online performance.
+
+It's easy to compare the facts of your life — your emotions, your body, your family, your challenges — with the illusions you see online. Beautiful pictures. Perfect vacations. Flawless faces. But most of it is filtered, staged, or fake. Don't compare your true version with a false highlight reel. Your life is real. And it's worth honoring.
+
+Social media and technology are tools. And like any tool, it depends how you use them. You can use them to learn, to grow, and to develop your thinking. Or you can use them to scroll for hours, compare yourself, and lose direction.
+
+Here's the truth: If you are not growing in your life, it's not social media's fault. It's your choice. You're following the wrong people, the wrong pages, the wrong energy.
+
+You are clean — and you should stay clean. Every comment you post, every like or share, leaves a footprint. It becomes part of your digital reputation. Your future will be shaped by these tiny decisions. So don't click on everything. Don't believe everything. Learn to say no. Ask yourself:
+
+**"Does this help me become who I truly want to be?"**
+
+## 3 Habits of Responsible Digital Citizens
+
+1. **Use social media to learn and grow** — Follow people who inspire you, teach you, or help you think.
+2. **Never compare your behind-the-scenes to someone's highlight reel.** You are not less — you are simply different.
+3. **Remember that your future self will thank you** for the clean, thoughtful, and responsible way you interact online.
+
+When you are the best version of yourself, nothing online can shake your worth. Stay rooted in who you are. Be original. The world already has too many copies.
+
+---
+
+**Explore more insights at TMA Voices — where the future of teenage leadership is written.**`,
+    slug: "facts-and-illusions-in-the-digital-world",
+    seo: {
+      metaTitle: "Facts & Illusions in the Digital World | TMA Academy",
+      metaDescription: "Learn to distinguish between reality and online illusions. Discover how teenagers can use social media responsibly and build a positive digital reputation.",
+      keywords: ["digital awareness", "social media", "teenage digital citizenship", "online safety", "digital literacy", "TMA Academy"]
+    },
+    category: "Digital Awareness",
+    tags: ["DigitalAwareness", "SocialMedia", "TeenSafety", "DigitalCitizenship"]
+  },
   {
     id: "7",
     title: "Two Wings to Fly: The Power of Mental Health and Meaningful Connection",
