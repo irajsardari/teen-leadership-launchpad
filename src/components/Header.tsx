@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import AuthModal from "./AuthModal";
 import {
   DropdownMenu,
@@ -16,17 +18,18 @@ const Header = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const location = useLocation();
   const { user, isLoading, signOut } = useAuth();
+  const { t } = useTranslation();
 
   const isActive = (path: string) => location.pathname === path;
 
   const navigation = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Curriculum", href: "/curriculum" },
+    { name: t("nav.home"), href: "/" },
+    { name: t("nav.about"), href: "/about" },
+    { name: t("nav.curriculum"), href: "/curriculum" },
     { name: "Voices", href: "/insights" },
     { name: "Parents", href: "/apply" },
     { name: "Join Us", href: "/teachers" },
-    { name: "Contact", href: "/contact" },
+    { name: t("nav.contact"), href: "/contact" },
   ];
 
   return (
@@ -67,13 +70,15 @@ const Header = () => {
             ))}
             
             <div className="flex items-center space-x-4 ml-8 pl-6 border-l border-gray-200">
+              <LanguageSwitcher />
+              
               <Button 
                 className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg hover:shadow-[#006D6C]/25 rounded-lg px-5 py-2" 
                 size="sm" 
                 asChild
               >
                 <Link to="/portal">
-                  Portal (Coming Soon)
+                  {t("nav.portal")} (Coming Soon)
                 </Link>
               </Button>
               
@@ -93,7 +98,7 @@ const Header = () => {
                       <DropdownMenuContent align="end" className="w-48">
                         <DropdownMenuItem onClick={signOut}>
                           <LogOut className="h-4 w-4 mr-2" />
-                          Sign Out
+                          {t("nav.signOut")}
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -104,7 +109,7 @@ const Header = () => {
                       size="sm" 
                       onClick={() => setIsAuthModalOpen(true)}
                     >
-                      Sign In
+                      {t("nav.signIn")}
                     </Button>
                   )}
                 </>
@@ -138,7 +143,7 @@ const Header = () => {
                 size="sm" 
                 onClick={() => setIsAuthModalOpen(true)}
               >
-                Sign In
+                {t("nav.signIn")}
               </Button>
             )}
           </nav>
@@ -181,7 +186,7 @@ const Header = () => {
                   asChild
                 >
                   <Link to="/portal">
-                    Portal (Coming Soon)
+                    {t("nav.portal")} (Coming Soon)
                   </Link>
                 </Button>
                 
@@ -200,7 +205,7 @@ const Header = () => {
                           onClick={signOut}
                         >
                           <LogOut className="h-4 w-4 mr-2" />
-                          Sign Out
+                          {t("nav.signOut")}
                         </Button>
                       </div>
                     ) : (
@@ -212,7 +217,7 @@ const Header = () => {
                           setIsMenuOpen(false);
                         }}
                       >
-                        Sign In
+                        {t("nav.signIn")}
                       </Button>
                     )}
                   </>

@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -151,9 +153,9 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-xs sm:text-sm text-primary-foreground/70 space-y-2">
-          <p>&copy; 2025 <span className="font-bold">TMA®</span> — All rights reserved.</p>
-          <p><span className="font-bold">TMA</span> (Teenagers Management and Leadership Academy) is an officially registered trademark in the Sultanate of Oman, under Registration Number: 185581.</p>
-          <p className="leading-relaxed">No part of this website — including its text, visuals, curriculum content, or digital materials — may be copied, reproduced, distributed, or used in any form without prior written permission from <span className="font-bold">TMA</span>.</p>
+          <p>&copy; 2025 <span className="font-bold">TMA®</span> — {t("footer.rightsReserved")}</p>
+          <p><span className="font-bold">TMA</span> {t("footer.trademarkText")}</p>
+          <p className="leading-relaxed">{t("footer.copyrightText")}</p>
         </div>
       </div>
     </footer>
