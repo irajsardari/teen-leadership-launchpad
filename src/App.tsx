@@ -3,7 +3,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './i18n';
 import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,16 +19,14 @@ import ChallengerPage from "./pages/ChallengerPage";
 import PortalPage from "./pages/PortalPage";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./hooks/useAuth";
-import { LanguageProvider } from "./hooks/useLanguage";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <AuthProvider>
-        <HelmetProvider>
-          <TooltipProvider>
+    <AuthProvider>
+      <HelmetProvider>
+        <TooltipProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
@@ -56,9 +53,8 @@ const App = () => (
           </div>
           </BrowserRouter>
         </TooltipProvider>
-        </HelmetProvider>
-      </AuthProvider>
-    </LanguageProvider>
+      </HelmetProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
