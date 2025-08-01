@@ -1,5 +1,6 @@
 import teenLeadershipBanner from "@/assets/teen-leadership-age-13-banner.jpg";
 import responsibilityBanner from "@/assets/responsibility-teen-watering-plant.jpg";
+import knowYourselfBanner from "@/assets/know-yourself-teen-mirror-reflection.jpg";
 
 export interface BlogPost {
   id: string;
@@ -20,6 +21,71 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: "6",
+    title: "Know Yourself — The Beginning of Every Journey",
+    author: "Dr. Iraj Sardari Baf",
+    date: "2025-06-03",
+    featuredImage: knowYourselfBanner,
+    excerpt: "In today's fast-moving world, many teenagers feel uncertain about their identity. The most important journey of your life begins with one step — knowing yourself.",
+    content: `# Know Yourself — The Beginning of Every Journey
+
+In today's fast-moving and complicated world, it's easy to lose touch with who we really are. Many teenagers feel uncertain, lost, or confused about their identity. But let me tell you something powerful: the most important journey of your life begins with one step — knowing yourself.
+
+This is not just advice for teenagers. Many adults go through life without truly understanding who they are, what makes them unique, and where their real strengths lie. They try to be everything, and end up feeling like they are nothing. That's why we must begin early.
+
+---
+
+## The Mirror of Self-Discovery
+
+Knowing yourself means looking into the mirror — not just to see your face, but to recognize your values, talents, habits, and hopes. It means becoming aware of your strengths and weaknesses. It's like doing a personal SWOT analysis:
+
+- **S for Strengths**: What am I good at? What comes naturally to me?
+- **W for Weaknesses**: What areas do I struggle in?
+- **O for Opportunities**: What paths are available for someone with my talents?
+- **T for Threats**: What could stop me from growing?
+
+But this isn't just about writing a list. It's about being honest. Sometimes, we waste years trying to fix a weakness instead of developing our true strengths. For example, if I know I'm not gifted in music, but I shine in writing or public speaking, I shouldn't spend my time trying to be an average musician. Instead, I should invest in my natural strengths — because these are the doors through which success enters.
+
+---
+
+## The Power of Authenticity
+
+And here's the truth: you don't have unlimited time. Many people think they do. But real progress comes when you stop pretending and start focusing. Teenagers who begin to know themselves early in life will not only avoid confusion — they will rise above it.
+
+🔥 **One of the biggest mistakes we can make is to imitate others who have succeeded in their own way.**
+
+What works for someone else may not work for you — and that's okay. Be original. Because when you are original, you are already a winner.
+
+Originality begins with self-knowledge. You must understand your unique gifts and talents. Instead of comparing yourself to someone else's story, compare yourself to who you were yesterday. If you want to grow, grow from within. If you want to lead, lead from your own foundation.
+
+---
+
+## Your Journey Starts Now
+
+So how can you start this journey?
+
+1. **Reflection**: Take time every week to write down what you enjoyed, what was difficult, and what made you feel proud.
+2. **Feedback**: Ask a trusted mentor, parent, or teacher: What do you see in me that I may not see in myself?
+3. **Experience**: Try different tasks, clubs, and activities. You won't know who you are unless you explore.
+4. **Acceptance**: Not everyone is good at everything. And that's perfectly okay. You are not meant to be everything — you are meant to be you.
+
+At TMA, we believe identity is not something you "find" once — it's something you build over time. And the earlier you begin this practice, the more powerful your future will be.
+
+Because before you can lead others, you must lead yourself. And before you lead yourself — you must know who you are.
+
+---
+
+**Explore more insights at TMA Voices — where the future of teenage leadership is written.**`,
+    slug: "know-yourself-the-beginning-of-every-journey",
+    seo: {
+      metaTitle: "Know Yourself — The Beginning of Every Journey | TMA Academy",
+      metaDescription: "Discover why self-knowledge is the foundation of all personal growth and leadership. Learn how teenagers can begin their journey of self-discovery early.",
+      keywords: ["self-awareness", "teen identity", "personal development", "self-knowledge", "teen leadership", "TMA Academy"]
+    },
+    category: "Identity & Self-Awareness",
+    tags: ["TeenLeadership", "Identity", "EmotionalIntelligence", "SelfAwareness"]
+  },
   {
     id: "5",
     title: "Responsibility: The First Step to a Life That Matters",
