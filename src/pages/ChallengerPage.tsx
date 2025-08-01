@@ -131,6 +131,14 @@ const ChallengerPage = () => {
             </div>
 
             <ChallengerForm />
+            
+            {/* Trademark Notice */}
+            <div className="mt-8 pt-6 border-t border-border/20 text-center">
+              <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                <span className="font-semibold">TMA®</span> (Teenagers Management and Leadership Academy) is a registered trademark.
+                By registering, you acknowledge that all TMA curriculum content and brand assets are protected under applicable intellectual property laws.
+              </p>
+            </div>
           </div>
         </section>
 
