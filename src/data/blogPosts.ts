@@ -3,6 +3,7 @@ import responsibilityBanner from "@/assets/responsibility-teen-watering-plant.jp
 import knowYourselfBanner from "@/assets/know-yourself-teen-mirror-reflection.jpg";
 import mentalHealthBanner from "@/assets/mental-health-two-wings-connection.jpg";
 import digitalAwarenessBanner from "@/assets/digital-awareness-classroom.jpg";
+import resilienceBanner from "@/assets/resilience-teen-rising-up.jpg";
 
 export interface BlogPost {
   id: string;
@@ -23,6 +24,59 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: "9",
+    title: "We Fall. We Learn. We Rise.",
+    author: "Dr. Iraj Sardari Baf",
+    date: "2025-07-10",
+    featuredImage: resilienceBanner,
+    excerpt: "Failure isn't the end — it's the start of growth. This article explores how consistency, skill-building, and resilience help teenagers turn setbacks into stepping stones.",
+    content: `# We Fall. We Learn. We Rise.
+
+In life, we all experience setbacks — moments when things don't go as planned, when we fail an exam, lose an opportunity, or feel like we've disappointed others or ourselves. But here's the truth: failure is not the end. It's the beginning of growth.
+
+Every mistake you make is teaching you something. Every challenge is shaping you. Every time you fall, you're not moving away from your dreams — you're getting one step closer to them. Why? Because failure is part of the path to mastery. We don't leap into success. We grow into it.
+
+## Consistency Is the Key
+
+Success doesn't come from one lucky break or one perfect move. It comes from consistency — from showing up, learning, adjusting, and trying again.
+
+You don't have to get everything right the first time. What matters most is that you don't give up. You stay in the battle. You take each new challenge as a chance to become stronger, wiser, and more focused.
+
+We cannot change the world's rules — life will always be full of ups and downs. But what we can control is our attitude. We can choose to build strength, resilience, and skill, little by little, day by day.
+
+## Learn New Skills. Gain New Experience.
+
+The journey of life is really a journey of skills and experiences. Every new skill you learn — from communication to leadership, from writing to public speaking, from budgeting to teamwork — makes you more ready to face life.
+
+And the best part? These skills are built through trying, through practice, through patience.
+Not by avoiding failure — but by embracing it.
+
+## What You Can Do
+
+- **Reflect on your failures** — What did they teach you?
+- **Stay consistent** — Even on the hard days, show up.
+- **Be open to new experiences** — The more you try, the more you grow.
+- **Don't aim to be perfect** — Aim to be better than yesterday.
+
+## Remember:
+
+**"We don't move to success — we grow into it. Step by step. Even through our failures."**
+
+Keep walking. Keep learning. Keep rising.
+
+---
+
+**Explore more insights at TMA Voices — where the future of teenage leadership is written.**`,
+    slug: "we-fall-we-learn-we-rise",
+    seo: {
+      metaTitle: "We Fall. We Learn. We Rise. | TMA Academy",
+      metaDescription: "Failure isn't the end — it's the start of growth. Learn how consistency, skill-building, and resilience help teenagers turn setbacks into stepping stones.",
+      keywords: ["resilience", "growth mindset", "teenage development", "overcoming failure", "consistency", "skill building", "TMA Academy"]
+    },
+    category: "Resilience & Growth",
+    tags: ["Resilience", "GrowthMindset", "TeenDevelopment", "LifeSkills"]
+  },
   {
     id: "8",
     title: "Facts & Illusions in the Digital World",
