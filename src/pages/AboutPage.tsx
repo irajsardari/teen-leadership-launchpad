@@ -225,6 +225,22 @@ const AboutPage = () => {
         </div>
       </section>
 
+      {/* Legal Information */}
+      <section className="py-12 bg-muted/20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="p-6 bg-background rounded-xl border border-border/50">
+              <h3 className="text-lg font-semibold text-primary mb-4 font-inter">
+                Trademark Information
+              </h3>
+              <p className="text-sm text-foreground/70 font-inter">
+                TMA® is a registered trademark in Oman – Reg. No. 185581.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
