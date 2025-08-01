@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Users, BookOpen, Target, Star, Award, Globe } from "lucide-react";
+import { ArrowRight, Users, BookOpen, Target, Star, Award, Globe, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-teenagers.jpg";
 
@@ -266,6 +266,64 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Audience-Based Entry Points */}
+      <section className="py-20 bg-gradient-to-br from-background via-primary/5 to-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 font-inter">
+              Start Your Journey
+            </h2>
+            <p className="text-xl text-muted-foreground mb-12 font-inter">
+              Choose your path to join the TMA community
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+              {/* Teenager Path */}
+              <div className="group">
+                <Card className="border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer bg-gradient-to-br from-primary/5 to-primary/10">
+                  <CardContent className="p-8">
+                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/30 transition-colors duration-300">
+                      <GraduationCap className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4 font-inter">I'm a Teenager</h3>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      Ready to transform yourself into a confident leader? Join as a challenger and begin your journey to becoming future-ready.
+                    </p>
+                    <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-inter" asChild>
+                      <Link to="/challenger">
+                        Join as a Challenger
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Parent Path */}
+              <div className="group">
+                <Card className="border-2 border-secondary/20 hover:border-secondary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer bg-gradient-to-br from-secondary/5 to-secondary/10">
+                  <CardContent className="p-8">
+                    <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary/30 transition-colors duration-300">
+                      <Users className="h-8 w-8 text-secondary" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4 font-inter">I'm a Parent</h3>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      Discover how TMA can help your teenager develop essential life skills and prepare for their future success.
+                    </p>
+                    <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground font-inter" asChild>
+                      <Link to="/apply">
+                        Learn More & Apply
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-tma-blue to-tma-teal">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -279,15 +337,15 @@ const HomePage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-white text-[#012D5A] hover:bg-gray-100 font-inter" asChild>
-                <Link to="/apply">
-                  Apply Now
+                <Link to="/challenger">
+                  Join as a Challenger
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button size="lg" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#012D5A] font-inter" variant="outline" asChild>
-                <a href="https://tma.academy/portal" target="_blank" rel="noopener noreferrer">
-                  Access Learning Portal
-                </a>
+                <Link to="/portal">
+                  Learning Portal
+                </Link>
               </Button>
             </div>
           </div>

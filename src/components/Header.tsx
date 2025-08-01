@@ -72,13 +72,9 @@ const Header = () => {
                 size="sm" 
                 asChild
               >
-                <a
-                  href="https://tma.academy/portal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link to="/portal">
                   Learning Portal
-                </a>
+                </Link>
               </Button>
               
               {/* Auth Section */}
@@ -184,13 +180,9 @@ const Header = () => {
                   size="sm" 
                   asChild
                 >
-                  <a
-                    href="https://tma.academy/portal"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <Link to="/portal">
                     Learning Portal
-                  </a>
+                  </Link>
                 </Button>
                 
                 {/* Mobile Auth */}
