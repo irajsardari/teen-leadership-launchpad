@@ -22,6 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { BlogFeedback } from "@/components/BlogFeedback";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -323,6 +324,9 @@ const BlogPostPage = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Article Feedback */}
+              <BlogFeedback postSlug={post.slug} />
 
               {/* Mobile Social Sharing */}
               <div className="lg:hidden mt-8 p-4 bg-muted/20 rounded-xl">
