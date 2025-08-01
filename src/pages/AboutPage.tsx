@@ -163,6 +163,78 @@ const AboutPage = () => {
             </h2>
           </div>
           
+          {/* Founder's Message */}
+          <div className="max-w-5xl mx-auto mb-16">
+            <Card className="border-none shadow-[var(--shadow-elegant)] bg-gradient-to-br from-background via-background to-muted/20">
+              <CardContent className="p-8 md:p-16 text-center">
+                <div className="max-w-4xl mx-auto">
+                  <div className="mb-12 space-y-6 text-foreground/90 font-inter">
+                    <p className="text-lg md:text-xl leading-relaxed italic">
+                      I did not create TMA to build an institution —<br />
+                      I created it to heal a wound I've seen in far too many lives.
+                    </p>
+                    
+                    <p className="text-lg leading-relaxed">
+                      Too many teenagers grow up feeling lost, not because they lack talent or value — but because no one showed them how to find it.<br />
+                      Not because they are bad — but because no one taught them how to be better.
+                    </p>
+                    
+                    <p className="text-lg leading-relaxed">
+                      I've lived a life of responsibility, hardship, leadership, and reflection.<br />
+                      And from all of it, one truth remains clear:
+                    </p>
+                    
+                    <p className="text-xl md:text-2xl font-bold text-primary">
+                      Teenagers are not the problem. They are the solution.
+                    </p>
+                    
+                    <p className="text-lg leading-relaxed">
+                      I don't want the next generations to suffer the way some of us did — unsure, untrained, full of potential but without direction.<br />
+                      I want them to sleep with peace in their hearts and wake up with energy, purpose, and confidence.
+                    </p>
+                    
+                    <div className="my-8 space-y-2 text-lg leading-relaxed">
+                      <p>I dream of future engineers with character,</p>
+                      <p>Doctors who treat not only illness but also the soul,</p>
+                      <p>Nurses who serve with grace,</p>
+                      <p>And teachers who don't just lecture — but climb down the mountain, take their students by the hand, and walk them back up…</p>
+                      <p className="italic text-tma-coral">…to show them that between the stones, they are diamonds.</p>
+                    </div>
+                    
+                    <p className="text-xl font-semibold text-primary leading-relaxed">
+                      TMA is not just a school. It is a movement.
+                    </p>
+                    
+                    <p className="text-lg leading-relaxed">
+                      It's the place where young people will learn to manage their lives, lead with wisdom, care for their mental well-being, and grow into builders of a better world.
+                    </p>
+                    
+                    <p className="text-lg leading-relaxed">
+                      It doesn't matter to me whether the world remembers my name.<br />
+                      What matters is that one day, a teenager somewhere says:
+                    </p>
+                    
+                    <blockquote className="text-xl md:text-2xl font-bold text-tma-coral italic my-8">
+                      "I found my path… and I wasn't alone."
+                    </blockquote>
+                    
+                    <p className="text-lg leading-relaxed">
+                      And if that happens — even once —<br />
+                      Then everything we've done… was worth it.
+                    </p>
+                  </div>
+                  
+                  <div className="pt-8 border-t border-border/30">
+                    <p className="text-base text-foreground/70 mb-2">With all my heart,</p>
+                    <p className="text-xl font-bold text-primary mb-1">Dr. Iraj Sardari Baf</p>
+                    <p className="text-base text-tma-coral italic">A servant of the next generation</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          
+          {/* Leadership Profile */}
           <div className="max-w-4xl mx-auto">
             <Card className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
               <CardContent className="p-8 md:p-12">
