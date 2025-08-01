@@ -152,8 +152,9 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-xs sm:text-sm text-primary-foreground/70 space-y-2">
           <p>&copy; 2025 <span className="font-bold">TMA®</span> – All rights reserved.</p>
-          <p><span className="font-bold">TMA</span> (Teenagers Management and Leadership Academy) is a registered trademark.</p>
-          <p className="leading-relaxed">No part of this website — including its text, visuals, or curriculum content — may be copied, reproduced, distributed, or used in any form without prior written permission from <span className="font-bold">TMA</span>.</p>
+          <p><span className="font-bold">TMA</span> (Teenagers Management and Leadership Academy) is a registered trademark in the Sultanate of Oman — Registration No. 185581.</p>
+          <p className="leading-relaxed">No part of this website — including its text, visuals, curriculum, or course content — may be copied, reproduced, distributed, or used in any form without prior written permission from <span className="font-bold">TMA</span>.</p>
+          <p className="text-tma-gold font-medium">🛡️ Officially Trademarked in Oman – Ministry File No. 185581</p>
         </div>
       </div>
     </footer>
