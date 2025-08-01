@@ -41,13 +41,15 @@ const PortalPage = () => {
                 Coming Soon
               </Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Learning{" "}
+                Learning Portal{" "}
                 <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-                  Portal
+                  (Coming Soon)
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-                Our comprehensive student learning platform is under development and will launch soon with exciting features designed specifically for TMA challengers.
+                Our comprehensive student learning platform is currently under development.
+                Soon, TMA Challengers will have access to Interactive Learning Modules, Peer Collaboration, 
+                Personalized Schedules and Self-Reflection Tools. Stay tuned for launch updates.
               </p>
             </div>
 

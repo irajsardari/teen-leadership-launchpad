@@ -271,10 +271,10 @@ const HomePage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 font-inter">
-              Start Your Journey
+              Ready to Begin Your Journey?
             </h2>
             <p className="text-xl text-muted-foreground mb-12 font-inter">
-              Choose your path to join the TMA community
+              Register as a Challenger or explore our curriculum to take the first step toward leadership.
             </p>
             
             <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
@@ -343,8 +343,8 @@ const HomePage = () => {
                 </Link>
               </Button>
               <Button size="lg" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#012D5A] font-inter" variant="outline" asChild>
-                <Link to="/portal">
-                  Learning Portal
+                <Link to="/curriculum">
+                  Explore Curriculum
                 </Link>
               </Button>
             </div>

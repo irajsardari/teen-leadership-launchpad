@@ -73,7 +73,7 @@ const Header = () => {
                 asChild
               >
                 <Link to="/portal">
-                  Learning Portal
+                  Portal (Coming Soon)
                 </Link>
               </Button>
               
@@ -181,7 +181,7 @@ const Header = () => {
                   asChild
                 >
                   <Link to="/portal">
-                    Learning Portal
+                    Portal (Coming Soon)
                   </Link>
                 </Button>
                 

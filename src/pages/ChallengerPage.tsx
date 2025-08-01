@@ -62,7 +62,7 @@ const ChallengerPage = () => {
                 </span>
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold text-muted-foreground mb-8">
-                Start Your Journey
+                Join TMA and start your leadership journey today.
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
                 Transform yourself into a confident, capable leader ready to take on any challenge. 
@@ -123,7 +123,7 @@ const ChallengerPage = () => {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Ready to Begin Your Journey?
+                Register as a Challenger
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Take the first step towards becoming a Future Ready Leader. Fill out the registration form below and we'll get you started.
