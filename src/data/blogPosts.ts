@@ -1,6 +1,7 @@
 import teenLeadershipBanner from "@/assets/teen-leadership-age-13-banner.jpg";
 import responsibilityBanner from "@/assets/responsibility-teen-watering-plant.jpg";
 import knowYourselfBanner from "@/assets/know-yourself-teen-mirror-reflection.jpg";
+import mentalHealthBanner from "@/assets/mental-health-two-wings-connection.jpg";
 
 export interface BlogPost {
   id: string;
@@ -21,6 +22,76 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: "7",
+    title: "Two Wings to Fly: The Power of Mental Health and Meaningful Connection",
+    author: "Dr. Iraj Sardari Baf",
+    date: "2025-02-04",
+    featuredImage: mentalHealthBanner,
+    excerpt: "A happy heart and a pure soul — these are the two wings that will carry you toward your dreams. Mental health isn't just about avoiding sadness or stress.",
+    content: `# Two Wings to Fly: The Power of Mental Health and Meaningful Connection
+
+A happy heart and a pure soul — these are the two wings that will carry you toward your dreams.
+
+Mental health isn't just about avoiding sadness or stress. It's about learning how to feel, how to talk, and how to connect — deeply and honestly — with yourself and others.
+
+Teenagers are in a unique stage of life. You're growing fast, learning quickly, and trying to make sense of a complex world. But without the tools to manage emotions, express your thoughts, or build the right relationships, it's easy to feel lost. And sadly, some decisions made at this age can shape your life for years.
+
+So what matters most?
+
+Real friendship.
+Honest conversations.
+Safe spaces where you can be your true self.
+
+---
+
+## Don't Be Afraid of Being Alone
+
+Being alone sometimes is not a weakness. In fact, learning to enjoy your own company is one of the strongest things you can do. You don't have to go to every party. You don't have to fit into every group. You just need to belong to yourself first.
+
+Too many teenagers enter relationships or circles just to avoid loneliness. But if those connections are not built on trust, respect, and shared values — they can hurt you more than they help you.
+
+There's a saying: **Show me your friends, and I'll show you your future.**
+Choose wisely.
+
+---
+
+## 5 Signs of Good Mental Health
+
+1. **You feel your emotions instead of hiding them.**
+2. **You have at least one person you can speak to openly.**
+3. **You know how to calm yourself when you're overwhelmed.**
+4. **You don't rely on others to define your worth.**
+5. **You can say no when something doesn't feel right.**
+
+---
+
+## The Right to Be Well
+
+Mental health is not about being perfect. It's about being real.
+
+The world wants you to be fast, popular, productive. But what your soul really needs is depth, connection, and peace.
+
+You have the right to choose your people. You have the right to protect your heart.
+
+And most importantly: **You have the right to be well.**
+
+Don't trade your peace just to avoid silence.
+
+Fly with both wings — a happy heart and a pure soul. That's where your power begins.
+
+---
+
+**Explore more insights at TMA Voices — where the future of teenage leadership is written.**`,
+    slug: "two-wings-to-fly-the-power-of-mental-health-and-meaningful-connection",
+    seo: {
+      metaTitle: "Two Wings to Fly: The Power of Mental Health and Meaningful Connection | TMA Academy",
+      metaDescription: "Discover the importance of mental health and meaningful connections for teenagers. Learn how a happy heart and pure soul create the foundation for success.",
+      keywords: ["mental health", "teenage wellness", "meaningful connections", "emotional intelligence", "teen relationships", "TMA Academy"]
+    },
+    category: "Mental Health & Wellness",
+    tags: ["MentalHealth", "TeenWellness", "Relationships", "EmotionalIntelligence"]
+  },
   {
     id: "6",
     title: "Know Yourself — The Beginning of Every Journey",
