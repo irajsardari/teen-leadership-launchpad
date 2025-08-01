@@ -233,18 +233,21 @@ const AboutPage = () => {
             </Card>
           </div>
           
-          {/* Founder Profile Image */}
+          {/* Learn More About Founder */}
           <div className="max-w-2xl mx-auto text-center">
-            <Avatar className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4">
+            <Avatar className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6">
               <AvatarImage src="/lovable-uploads/3e5fdf0b-b217-4351-89f4-4d4158e63364.png" alt="Dr. Iraj Sardari Baf" />
               <AvatarFallback className="text-2xl font-bold">IS</AvatarFallback>
             </Avatar>
             <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2 font-inter">
               Dr. Iraj Sardari Baf
             </h3>
-            <p className="text-lg text-tma-coral font-inter">
+            <p className="text-lg text-tma-coral font-inter mb-6">
               Founder of Teenagers Management Academy (TMA)
             </p>
+            <Button className="bg-[#FF715B] hover:bg-[#FF715B]/90 text-white font-inter" asChild>
+              <Link to="/founder">Learn More About Our Founder</Link>
+            </Button>
           </div>
         </div>
       </section>

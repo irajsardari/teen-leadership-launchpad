@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
+import FounderPage from "./pages/FounderPage";
 import CurriculumPage from "./pages/CurriculumPage";
 import ContactPage from "./pages/ContactPage";
 import ApplyPage from "./pages/ApplyPage";
@@ -36,6 +37,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/founder" element={<FounderPage />} />
                 <Route path="/curriculum" element={<CurriculumPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/apply" element={<ApplyPage />} />
