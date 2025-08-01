@@ -234,35 +234,18 @@ const AboutPage = () => {
             </Card>
           </div>
           
-          {/* Leadership Profile */}
-          <div className="max-w-4xl mx-auto">
-            <Card className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
-              <CardContent className="p-8 md:p-12">
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-                  <div className="flex-shrink-0">
-                    <Avatar className="w-32 h-32 md:w-40 md:h-40">
-                      <AvatarImage src="/lovable-uploads/3e5fdf0b-b217-4351-89f4-4d4158e63364.png" alt="Dr. Iraj Sardari Baf" />
-                      <AvatarFallback className="text-2xl font-bold">IS</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  
-                  <div className="flex-1 text-center md:text-left">
-                    <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2 font-inter">
-                      Dr. Iraj Sardari Baf
-                    </h3>
-                    <p className="text-lg text-tma-coral mb-6 font-inter">
-                      Founder of Teenagers Management Academy (TMA)
-                    </p>
-                    
-                    <div className="space-y-4 text-foreground/80 font-inter">
-                      <p className="leading-relaxed">
-                        Dr. Iraj Sardari Baf is a visionary educator, strategist, and leadership expert with over two decades of senior executive experience in banking and management. Holding a PhD in Business Management and Organizational Behavior, alongside degrees in English and Linguistics, Dr. Sardari brings a rare blend of academic depth, human insight, and real-world leadership to his work.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          {/* Founder Profile Image */}
+          <div className="max-w-2xl mx-auto text-center">
+            <Avatar className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4">
+              <AvatarImage src="/lovable-uploads/3e5fdf0b-b217-4351-89f4-4d4158e63364.png" alt="Dr. Iraj Sardari Baf" />
+              <AvatarFallback className="text-2xl font-bold">IS</AvatarFallback>
+            </Avatar>
+            <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2 font-inter">
+              Dr. Iraj Sardari Baf
+            </h3>
+            <p className="text-lg text-tma-coral font-inter">
+              Founder of Teenagers Management Academy (TMA)
+            </p>
           </div>
         </div>
       </section>
