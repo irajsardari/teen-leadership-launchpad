@@ -39,36 +39,30 @@ Teenagers are in a unique stage of life. You're growing fast, learning quickly, 
 
 So what matters most?
 
-Real friendship.
-Honest conversations.
+Real friendship.  
+Honest conversations.  
 Safe spaces where you can be your true self.
 
----
-
-## Don't Be Afraid of Being Alone
+**Don't be afraid of being alone.**
 
 Being alone sometimes is not a weakness. In fact, learning to enjoy your own company is one of the strongest things you can do. You don't have to go to every party. You don't have to fit into every group. You just need to belong to yourself first.
 
 Too many teenagers enter relationships or circles just to avoid loneliness. But if those connections are not built on trust, respect, and shared values — they can hurt you more than they help you.
 
-There's a saying: **Show me your friends, and I'll show you your future.**
+There's a saying: **Show me your friends, and I'll show you your future.**  
 Choose wisely.
 
----
+## 5 Signs of Good Mental Health:
 
-## 5 Signs of Good Mental Health
+1. You feel your emotions instead of hiding them.
+2. You have at least one person you can speak to openly.
+3. You know how to calm yourself when you're overwhelmed.
+4. You don't rely on others to define your worth.
+5. You can say no when something doesn't feel right.
 
-1. **You feel your emotions instead of hiding them.**
-2. **You have at least one person you can speak to openly.**
-3. **You know how to calm yourself when you're overwhelmed.**
-4. **You don't rely on others to define your worth.**
-5. **You can say no when something doesn't feel right.**
+**You have the right to be well.**
 
----
-
-## The Right to Be Well
-
-Mental health is not about being perfect. It's about being real.
+Mental health is not about being perfect — it's about being real.
 
 The world wants you to be fast, popular, productive. But what your soul really needs is depth, connection, and peace.
 
