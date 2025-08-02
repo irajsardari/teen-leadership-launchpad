@@ -20,6 +20,8 @@ import ChallengerPage from "./pages/ChallengerPage";
 import PortalPage from "./pages/PortalPage";
 import PortalLoginPage from "./pages/PortalLoginPage";
 import PortalDashboardPage from "./pages/PortalDashboardPage";
+import TeacherDashboardPage from "./pages/TeacherDashboardPage";
+import CourseStructurePage from "./pages/CourseStructurePage";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./hooks/useAuth";
 
@@ -50,6 +52,9 @@ const App = () => (
                 <Route path="/portal-info" element={<PortalPage />} />
                 <Route path="/portal" element={<PortalLoginPage />} />
                 <Route path="/portal/dashboard" element={<PortalDashboardPage />} />
+                <Route path="/portal/teacher" element={<TeacherDashboardPage />} />
+                <Route path="/portal/course/:courseId" element={<CourseStructurePage />} />
+                <Route path="/portal/course/:courseId/session/:sessionId" element={<CourseStructurePage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
