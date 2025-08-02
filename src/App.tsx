@@ -18,6 +18,8 @@ import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import ChallengerPage from "./pages/ChallengerPage";
 import PortalPage from "./pages/PortalPage";
+import PortalLoginPage from "./pages/PortalLoginPage";
+import PortalDashboardPage from "./pages/PortalDashboardPage";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./hooks/useAuth";
 
@@ -45,7 +47,9 @@ const App = () => (
                 <Route path="/insights" element={<BlogPage />} />
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
                 <Route path="/challenger" element={<ChallengerPage />} />
-                <Route path="/portal" element={<PortalPage />} />
+                <Route path="/portal-info" element={<PortalPage />} />
+                <Route path="/portal" element={<PortalLoginPage />} />
+                <Route path="/portal/dashboard" element={<PortalDashboardPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
