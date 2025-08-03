@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, BookOpen, Target, Star, Award, Globe, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-teenagers.jpg";
@@ -7,42 +8,30 @@ import heroImage from "@/assets/hero-teenagers.jpg";
 const HomePage = () => {
   const levels = [
     {
-      title: "Level 1: Ages 12–15",
+      title: "Level 1: Ages 12–14",
       description: "Foundations of Self-Discovery, Discipline, and Emotional Intelligence",
+      badge: "TMA Junior Challenger",
       color: "from-tma-teal to-tma-blue"
     },
     {
       title: "Level 2: Ages 15–17", 
       description: "Confidence Building, Leadership Skills, Financial Literacy, and Public Speaking",
+      badge: "TMA Prime Challenger",
       color: "from-tma-navy to-tma-blue"
     },
     {
-      title: "Level 3: Ages 17–19",
+      title: "Level 3: Ages 18–19",
       description: "Decision-Making, Project Management, Career Planning, and Global Citizenship",
+      badge: "TMA Leader Challenger",
       color: "from-tma-coral to-tma-coral/80"
     }
   ];
 
   const learningAreas = [
     {
-      title: "Management & Leadership",
-      icon: "💼",
-      description: "Essential leadership skills and management principles"
-    },
-    {
       title: "Psychology & Emotional Resilience",
       icon: "🧠",
       description: "Understanding emotions and building mental strength"
-    },
-    {
-      title: "Finance, Law, and Ethics",
-      icon: "💰",
-      description: "Financial literacy and ethical decision-making"
-    },
-    {
-      title: "Digital & AI Literacy",
-      icon: "🌐",
-      description: "Modern technology and digital skills"
     },
     {
       title: "Communication & Public Speaking",
@@ -53,6 +42,21 @@ const HomePage = () => {
       title: "Sociology & Community Impact",
       icon: "🫂",
       description: "Understanding society and making positive impact"
+    },
+    {
+      title: "Management & Leadership",
+      icon: "💼",
+      description: "Essential leadership skills and management principles"
+    },
+    {
+      title: "Digital & AI Literacy",
+      icon: "🌐",
+      description: "Modern technology and digital skills"
+    },
+    {
+      title: "Finance, Law, and Ethics",
+      icon: "💰",
+      description: "Financial literacy and ethical decision-making"
     }
   ];
 
@@ -165,7 +169,10 @@ const HomePage = () => {
                 <CardHeader>
                   <div className={`w-full h-2 bg-gradient-to-r ${level.color} rounded-full mb-4`}></div>
                   <CardTitle className="text-primary font-inter text-lg">{level.title}</CardTitle>
-                  <p className="text-foreground/70 font-inter">{level.description}</p>
+                  <p className="text-foreground/70 font-inter mb-3">{level.description}</p>
+                  <Badge variant="secondary" className="w-fit">
+                    {level.badge}
+                  </Badge>
                 </CardHeader>
               </Card>
             ))}
