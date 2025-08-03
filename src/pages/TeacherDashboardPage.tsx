@@ -86,8 +86,10 @@ const TeacherDashboardPage = () => {
   });
 
   useEffect(() => {
+    console.log("Teacher Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
     if (!isLoading && !user) {
-      navigate("/portal");
+      console.log("Teacher Dashboard: No user, navigating to /portal");
+      navigate("/portal", { replace: true });
       return;
     }
     
@@ -272,8 +274,14 @@ const TeacherDashboardPage = () => {
   };
 
   const handleSignOut = async () => {
-    await signOut();
-    navigate("/portal");
+    console.log("Teacher Dashboard handleSignOut called");
+    try {
+      await signOut();
+      console.log("SignOut completed, navigating to /portal");
+      navigate("/portal", { replace: true });
+    } catch (error) {
+      console.error("Teacher Dashboard signOut error:", error);
+    }
   };
 
   if (loading || isLoading) {

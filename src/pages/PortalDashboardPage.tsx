@@ -80,13 +80,17 @@ export default function PortalDashboardPage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/portal");
+    console.log("Portal Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
+    if (!isLoading && !user) {
+      console.log("Portal Dashboard: No user, navigating to /portal");
+      navigate("/portal", { replace: true });
       return;
     }
     
-    fetchDashboardData();
-  }, [user, navigate]);
+    if (user) {
+      fetchDashboardData();
+    }
+  }, [user, isLoading, navigate]);
 
   const fetchDashboardData = async () => {
     if (!user) return;
@@ -189,8 +193,14 @@ export default function PortalDashboardPage() {
   };
 
   const handleSignOut = async () => {
-    await signOut();
-    navigate("/portal");
+    console.log("Portal Dashboard handleSignOut called");
+    try {
+      await signOut();
+      console.log("SignOut completed, navigating to /portal");
+      navigate("/portal", { replace: true });
+    } catch (error) {
+      console.error("Portal Dashboard signOut error:", error);
+    }
   };
 
   const formatTimeAgo = (dateString: string) => {
