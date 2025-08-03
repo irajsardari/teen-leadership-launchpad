@@ -57,7 +57,7 @@ interface Student {
 }
 
 const TeacherDashboardPage = () => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -272,8 +272,8 @@ const TeacherDashboardPage = () => {
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
+    await signOut();
+    navigate("/portal");
   };
 
   if (loading || isLoading) {
