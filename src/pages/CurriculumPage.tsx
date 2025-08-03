@@ -7,49 +7,72 @@ import { Link } from "react-router-dom";
 const CurriculumPage = () => {
   const curriculumLevels = [
     {
-      level: "Foundation",
-      years: "Years 1-3",
-      ages: "12-15",
-      terms: 9,
-      focus: "Building Leadership Foundations",
+      level: "Explorers",
+      badge: "Explorer Badge",
+      years: "Years 1-2",
+      ages: "10-11",
+      terms: 6,
+      focus: "Pre-TMA Foundation - Self-Discovery & Basic Life Skills",
       subjects: [
-        "Introduction to Leadership",
-        "Basic Communication Skills", 
-        "Time Management & Organization",
-        "Goal Setting & Achievement",
         "Self-Awareness & Confidence",
-        "Basic Psychology Principles",
+        "Basic Communication Skills", 
+        "Goal Setting for Kids",
+        "Friendship & Social Skills",
+        "Basic Problem-Solving",
+        "Time Management Basics",
+        "Emotion Recognition",
+        "Healthy Habits",
+        "Introduction to Leadership"
+      ],
+      color: "from-green-500 to-teal-500"
+    },
+    {
+      level: "Builders",
+      badge: "Builder Badge",
+      years: "Years 3-5",
+      ages: "12-14",
+      terms: 9,
+      focus: "Foundations of Leadership, Discipline & Emotional Intelligence",
+      subjects: [
+        "Leadership Foundations",
+        "Emotional Intelligence Basics", 
+        "Communication & Presentation",
+        "Time Management & Organization",
+        "Goal Achievement Strategies",
         "Team Collaboration",
-        "Problem-Solving Basics",
-        "Ethics & Values"
+        "Basic Psychology Principles",
+        "Ethics & Values",
+        "Creative Problem-Solving"
       ],
       color: "from-blue-500 to-teal-500"
     },
     {
-      level: "Development", 
-      years: "Years 4-5",
-      ages: "15-17",
+      level: "Innovators", 
+      badge: "Innovator Badge",
+      years: "Years 6-7",
+      ages: "15-16",
       terms: 6,
-      focus: "Advanced Management & Psychology",
+      focus: "Advanced Leadership, Communication & Innovation Skills",
       subjects: [
         "Advanced Leadership Principles",
-        "Emotional Intelligence",
+        "Innovation & Creative Thinking",
         "Project Management",
-        "Public Speaking & Presentation",
+        "Public Speaking & Persuasion",
         "Conflict Resolution",
-        "Developmental Psychology",
+        "Digital Innovation",
         "Decision Making & Critical Thinking",
-        "Negotiation Skills",
-        "Cultural Awareness"
+        "Cultural Awareness",
+        "Entrepreneurial Mindset"
       ],
       color: "from-teal-500 to-blue-600"
     },
     {
-      level: "Mastery",
-      years: "Years 6-7", 
-      ages: "17-19",
-      terms: 6,
-      focus: "Professional Leadership & Life Mastery",
+      level: "Pathfinders",
+      badge: "Pathfinder Badge",
+      years: "Years 8-9", 
+      ages: "17-18",
+      terms: 7,
+      focus: "Professional Leadership, Career Preparation & Life Mastery",
       subjects: [
         "Strategic Leadership",
         "Advanced Psychology & Behavior",
@@ -98,7 +121,9 @@ const CurriculumPage = () => {
               TMA Curriculum Overview
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 mb-8">
-              A comprehensive 7-year, 21-term program designed to develop 
+              TMA — Teenagers Management Academy<br />
+              Future Ready Leaders<br /><br />
+              A comprehensive 8-year, 28-term program for ages 10-18 designed to develop 
               complete leadership and life skills
             </p>
             <Button variant="accent" size="lg" className="bg-white text-tma-blue hover:bg-gray-100">
@@ -116,10 +141,17 @@ const CurriculumPage = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
               Program Structure
             </h2>
-            <p className="text-xl text-tma-gray max-w-3xl mx-auto">
-              Our curriculum is divided into three progressive levels, each building 
-              upon the previous one to ensure comprehensive skill development.
+            <p className="text-xl text-tma-gray max-w-3xl mx-auto mb-8">
+              Our curriculum is divided into four progressive levels, each building 
+              upon the previous one to ensure comprehensive skill development from pre-teens to young adults.
             </p>
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
+              <h3 className="text-xl font-semibold text-primary mb-3">Pre-TMA Foundation Program</h3>
+              <p className="text-foreground/80">
+                Starting at age 10, our foundation program introduces essential life skills 
+                and leadership concepts in an age-appropriate, engaging environment.
+              </p>
+            </div>
           </div>
 
           <div className="space-y-12">
@@ -139,6 +171,9 @@ const CurriculumPage = () => {
                     <h3 className="text-2xl font-bold text-tma-navy mb-2">
                       {level.level} Level
                     </h3>
+                    <Badge variant="secondary" className="mb-3 w-fit">
+                      Challenger - {level.badge}
+                    </Badge>
                     <p className="text-tma-blue font-semibold mb-4">
                       {level.focus}
                     </p>

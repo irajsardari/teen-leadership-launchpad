@@ -53,7 +53,7 @@ const ChallengerPage = () => {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <Badge variant="secondary" className="mb-6 text-sm font-medium">
-                For Students Aged 12-19
+                For Students Aged 10-18 | Future Ready Leaders
               </Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
                 Join as a{" "}
@@ -66,7 +66,7 @@ const ChallengerPage = () => {
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
                 Transform yourself into a confident, capable leader ready to take on any challenge. 
-                Join thousands of teenagers who have already begun their journey to becoming Future Ready Leaders.
+                Join thousands of pre-teens and teenagers who have already begun their journey to becoming Future Ready Leaders.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg" asChild>

@@ -8,21 +8,27 @@ import heroImage from "@/assets/hero-teenagers.jpg";
 const HomePage = () => {
   const levels = [
     {
-      title: "Level 1: Ages 12–14",
-      description: "Foundations of Self-Discovery, Discipline, and Emotional Intelligence",
-      badge: "TMA Junior Challenger",
+      title: "Level 1: Explorers (Ages 10–11)",
+      description: "Pre-TMA Foundation - Self-Discovery and Basic Life Skills",
+      badge: "Challenger - Explorer Badge",
       color: "from-tma-teal to-tma-blue"
     },
     {
-      title: "Level 2: Ages 15–17", 
-      description: "Confidence Building, Leadership Skills, Financial Literacy, and Public Speaking",
-      badge: "TMA Prime Challenger",
+      title: "Level 2: Builders (Ages 12–14)",
+      description: "Foundations of Leadership, Discipline, and Emotional Intelligence",
+      badge: "Challenger - Builder Badge",
       color: "from-tma-navy to-tma-blue"
     },
     {
-      title: "Level 3: Ages 18–19",
-      description: "Decision-Making, Project Management, Career Planning, and Global Citizenship",
-      badge: "TMA Leader Challenger",
+      title: "Level 3: Innovators (Ages 15–16)", 
+      description: "Advanced Leadership, Communication, and Innovation Skills",
+      badge: "Challenger - Innovator Badge",
+      color: "from-tma-blue to-tma-teal"
+    },
+    {
+      title: "Level 4: Pathfinders (Ages 17–18)",
+      description: "Professional Leadership, Career Preparation, and Life Mastery",
+      badge: "Challenger - Pathfinder Badge",
       color: "from-tma-coral to-tma-coral/80"
     }
   ];
@@ -85,7 +91,9 @@ const HomePage = () => {
               Where Future CEOs, Creators & Changemakers Begin
             </h1>
             <h2 className="text-lg sm:text-xl lg:text-2xl mb-10 text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
-              TMA — The world's first 7-year academy dedicated to teenage leadership, emotional intelligence, management, and life mastery.
+              TMA — Teenagers Management Academy<br />
+              Future Ready Leaders<br /><br />
+              The world's first comprehensive academy for pre-teens and teenagers (ages 10-18) dedicated to leadership, emotional intelligence, and life mastery.
             </h2>
             
             {/* CTA Buttons */}
@@ -159,11 +167,18 @@ const HomePage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 font-inter">
-              Our Structure (3 Levels, 21 Terms)
+              Our Structure (4 Levels, 28 Terms)
             </h2>
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
+              <h3 className="text-xl font-semibold text-primary mb-3">Pre-TMA Foundation Program</h3>
+              <p className="text-foreground/80">
+                Our foundation program for ages 10-11 prepares students for the full TMA Academy experience, 
+                introducing basic life skills, self-awareness, and leadership fundamentals in an age-appropriate environment.
+              </p>
+            </div>
           </div>
           
-          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
             {levels.map((level, index) => (
               <Card key={index} className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300 transform hover:-translate-y-2">
                 <CardHeader>

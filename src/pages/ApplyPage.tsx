@@ -17,42 +17,59 @@ const ApplyPage = () => {
 
   const ageGroups = [
     {
-      group: "Foundation Level",
-      ageRange: "12-15 years",
-      description: "Building essential life skills and leadership foundations",
+      group: "Level 1: Explorers",
+      ageRange: "10-11 years",
+      description: "Pre-TMA Foundation - Self-Discovery and Basic Life Skills",
+      price: "$79/month",
+      badge: "Explorer Badge",
+      features: [
+        "6 foundation terms",
+        "Self-awareness & confidence building",
+        "Basic communication skills",
+        "Goal setting for kids",
+        "Friendship & social skills"
+      ]
+    },
+    {
+      group: "Level 2: Builders",
+      ageRange: "12-14 years",
+      description: "Foundations of Leadership, Discipline & Emotional Intelligence",
       price: "$99/month",
+      badge: "Builder Badge",
       features: [
         "9 comprehensive terms",
-        "Basic leadership training",
-        "Communication skills development",
-        "Goal setting & achievement",
-        "Self-awareness building"
+        "Leadership foundations",
+        "Emotional intelligence basics",
+        "Communication & presentation",
+        "Team collaboration"
       ]
     },
     {
-      group: "Development Level", 
-      ageRange: "15-17 years",
-      description: "Advanced management principles and emotional intelligence",
+      group: "Level 3: Innovators", 
+      ageRange: "15-16 years",
+      description: "Advanced Leadership, Communication & Innovation Skills",
       price: "$129/month",
+      badge: "Innovator Badge",
       features: [
         "6 advanced terms",
-        "Emotional intelligence training",
-        "Project management skills",
-        "Public speaking & presentation",
-        "Conflict resolution"
+        "Innovation & creative thinking",
+        "Project management",
+        "Public speaking & persuasion",
+        "Digital innovation"
       ]
     },
     {
-      group: "Mastery Level",
-      ageRange: "17-19 years",
-      description: "Professional leadership and advanced life skills mastery",
+      group: "Level 4: Pathfinders",
+      ageRange: "17-18 years",
+      description: "Professional Leadership, Career Preparation & Life Mastery",
       price: "$149/month",
+      badge: "Pathfinder Badge",
       features: [
-        "6 professional terms",
-        "Strategic leadership training",
+        "7 professional terms",
+        "Strategic leadership",
         "Business & entrepreneurship",
-        "Mentorship & coaching skills",
-        "Career planning & development"
+        "Career planning & development",
+        "Social impact & responsibility"
       ]
     }
   ];
@@ -121,11 +138,11 @@ const ApplyPage = () => {
                     Choose Your Learning Path
                   </h2>
                   <p className="text-xl text-tma-gray">
-                    Select the age-appropriate program that matches your developmental stage
+                    Select the age-appropriate program that matches your developmental stage (Ages 10-18)
                   </p>
                 </div>
                 
-                <div className="grid lg:grid-cols-3 gap-8 mb-12">
+                <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
                   {ageGroups.map((group, index) => (
                     <Card key={index} className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300 cursor-pointer">
                       <CardHeader>
@@ -140,6 +157,9 @@ const ApplyPage = () => {
                         </div>
                         <CardTitle className="text-tma-navy">{group.group}</CardTitle>
                         <CardDescription>{group.description}</CardDescription>
+                        <Badge variant="secondary" className="w-fit mt-2">
+                          Challenger - {group.badge}
+                        </Badge>
                       </CardHeader>
                       <CardContent>
                         <ul className="space-y-2 mb-6">

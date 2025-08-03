@@ -18,12 +18,12 @@ const Footer = () => {
                 />
               </div>
               <div>
-                <span className="text-xl font-bold text-white">TMA Academy</span>
-                <p className="text-sm text-gray-300 mt-1">Future Ready Leaders</p>
+                <span className="text-xl font-bold text-white">TMA — Teenagers Management Academy</span>
+                <p className="text-sm text-tma-gold font-semibold mt-1">Future Ready Leaders</p>
               </div>
             </div>
             <p className="text-gray-300 text-sm">
-              The world's first academy fully dedicated to teenage leadership and life readiness.
+              The world's first comprehensive academy for pre-teens and teenagers (ages 10-18) dedicated to leadership and life readiness.
             </p>
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2">
@@ -142,7 +142,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Get Started</h3>
             <p className="text-primary-foreground/70 text-sm">
-              Ready to empower your teenager with essential life skills?
+              Ready to empower your pre-teen or teenager with essential life skills?
             </p>
             <div className="space-y-3">
               <Button variant="hero" size="sm" className="w-full" asChild>

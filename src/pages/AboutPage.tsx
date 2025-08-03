@@ -9,7 +9,7 @@ const AboutPage = () => {
     {
       icon: Globe,
       title: "Global-first concept",
-      description: "No other academy offers this 7-year teen development structure"
+      description: "No other academy offers this 8-year comprehensive development structure"
     },
     {
       icon: Brain,
@@ -19,7 +19,7 @@ const AboutPage = () => {
     {
       icon: Target,
       title: "Age-appropriate design",
-      description: "Clear stages for growth: ages 12–15, 15–17, 17–19"
+      description: "Clear stages for growth: Explorers (10-11), Builders (12-14), Innovators (15-16), Pathfinders (17-18)"
     },
     {
       icon: Award,
@@ -43,7 +43,9 @@ const AboutPage = () => {
               About Us – TMA: Teenagers Management Academy
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 mb-8 font-inter">
-              The world's first full-scale leadership and life skills academy built specifically for teenagers aged 12 to 19
+              TMA — Teenagers Management Academy<br />
+              Future Ready Leaders<br /><br />
+              The world's first comprehensive leadership academy for pre-teens and teenagers aged 10 to 18
             </p>
           </div>
         </div>
@@ -61,11 +63,11 @@ const AboutPage = () => {
             
             <div className="text-lg text-foreground/80 space-y-6 font-inter">
               <p className="text-xl leading-relaxed">
-                TMA is the world's first full-scale leadership and life skills academy built specifically for teenagers aged 12 to 19.
+                TMA is the world's first comprehensive leadership and life skills academy built specifically for pre-teens and teenagers aged 10 to 18.
               </p>
               
               <p className="leading-relaxed">
-                Founded in the GCC and expanding globally, TMA offers a 7-year, 21-term curriculum that blends management, emotional intelligence, finance, psychology, digital literacy, and leadership — all designed to prepare students for real life, not just academics.
+                Founded in the GCC and expanding globally, TMA offers an 8-year, 28-term curriculum that blends management, emotional intelligence, finance, psychology, digital literacy, and leadership — all designed to prepare students for real life, not just academics. Our Pre-TMA Foundation Program starts at age 10, preparing students for the full TMA Academy experience.
               </p>
             </div>
           </div>
@@ -84,7 +86,7 @@ const AboutPage = () => {
             
             <div className="text-lg text-foreground/80 space-y-6 font-inter">
               <p className="leading-relaxed">
-                Teenagers today face a world full of challenges — from anxiety and peer pressure to information overload and unclear life direction. Traditional education often doesn't equip them for these realities.
+                Young people today face a world full of challenges — from anxiety and peer pressure to information overload and unclear life direction. Traditional education often doesn't equip them for these realities.
               </p>
               
               <p className="text-xl font-semibold text-primary">
@@ -92,7 +94,7 @@ const AboutPage = () => {
               </p>
               
               <p className="leading-relaxed">
-                We give teenagers the tools to understand themselves, lead others, make wise decisions, and thrive in school, work, and life.
+                We give pre-teens and teenagers the tools to understand themselves, lead others, make wise decisions, and thrive in school, work, and life.
               </p>
             </div>
           </div>
@@ -260,7 +262,7 @@ const AboutPage = () => {
               <div className="text-blue-100 font-inter">Countries Reached</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2 font-inter">7</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2 font-inter">8</div>
               <div className="text-blue-100 font-inter">Year Curriculum</div>
             </div>
             <div>
