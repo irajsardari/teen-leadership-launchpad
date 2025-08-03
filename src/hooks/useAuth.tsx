@@ -51,11 +51,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.error("SignOut error:", error);
-        throw error;
+        // Don't throw error - clear local state anyway
       }
-      console.log("SignOut successful");
+      
+      // Force clear local state regardless of server response
+      setSession(null);
+      setUser(null);
+      
+      // Clear any potential localStorage items
+      localStorage.removeItem('supabase.auth.token');
+      localStorage.removeItem('sb-gedgcagidpheugikoyim-auth-token');
+      
+      console.log("SignOut completed - local state cleared");
     } catch (error) {
       console.error("SignOut failed:", error);
+      // Still clear local state even if server call fails
+      setSession(null);
+      setUser(null);
+      localStorage.removeItem('supabase.auth.token');
+      localStorage.removeItem('sb-gedgcagidpheugikoyim-auth-token');
     }
   };
 
