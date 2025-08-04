@@ -180,15 +180,23 @@ const HomePage = () => {
           
           <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
             {levels.map((level, index) => (
-              <Card key={index} className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300 transform hover:-translate-y-2">
-                <CardHeader>
+              <Card key={index} className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full">
+                <CardHeader className="flex-1">
                   <div className="w-full h-2 bg-gradient-to-r from-[#006D6C] to-[#0EA5E9] rounded-full mb-4"></div>
                   <CardTitle className="text-primary font-inter text-lg">{level.title}</CardTitle>
                   <p className="text-foreground/70 font-inter mb-3">{level.description}</p>
-                  <Badge variant="secondary" className="w-fit">
+                  <Badge variant="secondary" className="w-fit bg-[#006D6C]/10 text-[#006D6C] border-[#006D6C]">
                     {level.badge}
                   </Badge>
                 </CardHeader>
+                <CardContent className="pt-0 pb-6">
+                  <Button 
+                    className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter transition-all duration-300"
+                    onClick={() => window.open('/apply', '_blank')}
+                  >
+                    Select This Program
+                  </Button>
+                </CardContent>
               </Card>
             ))}
           </div>
