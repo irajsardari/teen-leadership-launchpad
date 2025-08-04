@@ -190,12 +190,14 @@ const HomePage = () => {
                   </Badge>
                 </CardHeader>
                 <CardContent className="pt-0 pb-6">
-                  <Button 
-                    className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter transition-all duration-300"
-                    onClick={() => window.location.href = '/apply'}
-                  >
+                <Button 
+                  className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter transition-all duration-300"
+                  asChild
+                >
+                  <Link to="/apply#register">
                     Select This Program
-                  </Button>
+                  </Link>
+                </Button>
                 </CardContent>
               </Card>
             ))}

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Download, BookOpen, Users, Clock, Target, Award } from "lucide-react";
+import { Download, BookOpen, Users, Clock, Target, Award, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CurriculumPage = () => {
@@ -156,7 +156,7 @@ const CurriculumPage = () => {
 
           <div className="space-y-12">
             {curriculumLevels.map((level, index) => (
-              <Card key={index} className="border-none shadow-[var(--shadow-card)] overflow-hidden">
+              <Card key={index} className="border-none shadow-[var(--shadow-card)] overflow-hidden hover:shadow-[var(--shadow-elegant)] transition-all duration-300 cursor-pointer group">
                 <div className={`h-2 bg-gradient-to-r ${level.color}`}></div>
                 <div className="grid lg:grid-cols-3 gap-8 p-8">
                   <div className="lg:col-span-1">
@@ -187,7 +187,7 @@ const CurriculumPage = () => {
                     <h4 className="text-lg font-semibold text-tma-navy mb-4">
                       Core Subjects
                     </h4>
-                    <div className="grid md:grid-cols-2 gap-3">
+                    <div className="grid md:grid-cols-2 gap-3 mb-6">
                       {level.subjects.map((subject, subjectIndex) => (
                         <div key={subjectIndex} className="flex items-center text-sm text-tma-gray">
                           <div className="w-2 h-2 bg-tma-teal rounded-full mr-3 flex-shrink-0"></div>
@@ -195,6 +195,15 @@ const CurriculumPage = () => {
                         </div>
                       ))}
                     </div>
+                    <Button 
+                      className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white transition-all duration-300"
+                      asChild
+                    >
+                      <Link to="/apply#register">
+                        Register for {level.level} Level
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </Card>
