@@ -4,7 +4,7 @@ import knowYourselfBanner from "@/assets/know-yourself-teen-mirror-reflection.jp
 import mentalHealthBanner from "@/assets/mental-health-two-wings-connection.jpg";
 import digitalAwarenessBanner from "@/assets/digital-awareness-classroom.jpg";
 import resilienceBanner from "@/assets/resilience-teen-rising-up.jpg";
-import legacyBanner from "@/assets/legacy-teen-mirror-reflection.jpg";
+import legacyBanner from "@/assets/legacy-teen-future-reflection.jpg";
 
 export interface BlogPost {
   id: string;
