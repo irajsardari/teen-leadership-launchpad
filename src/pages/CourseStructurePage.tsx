@@ -347,7 +347,9 @@ const CourseStructurePage = () => {
                     className="w-full justify-start h-auto p-3"
                     onClick={() => {
                       setSelectedSession(session);
-                      navigate(`/portal/course/${courseId}/session/${session.id}`);
+                      fetchSessionContent(session.id);
+                      // Update URL without navigation to maintain accordion behavior
+                      window.history.replaceState(null, '', `/portal/course/${courseId}/session/${session.id}`);
                     }}
                   >
                     <div className="text-left">
