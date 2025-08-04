@@ -4,6 +4,7 @@ import knowYourselfBanner from "@/assets/know-yourself-teen-mirror-reflection.jp
 import mentalHealthBanner from "@/assets/mental-health-two-wings-connection.jpg";
 import digitalAwarenessBanner from "@/assets/digital-awareness-classroom.jpg";
 import resilienceBanner from "@/assets/resilience-teen-rising-up.jpg";
+import legacyBanner from "@/assets/legacy-teen-mirror-reflection.jpg";
 
 export interface BlogPost {
   id: string;
@@ -24,6 +25,82 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: "10",
+    title: "The Question That Defines Your Legacy",
+    author: "Dr. Iraj Sardari Baf",
+    date: "2025-06-27",
+    featuredImage: legacyBanner,
+    excerpt: "A teacher asked his class a question that silenced the room: 'How do people talk about you when you're not around?' This is the question that follows you for life.",
+    content: `# The Question That Defines Your Legacy
+
+Once, a teacher stood in front of a group of teenagers and asked a question that silenced the entire room.
+
+He said:
+
+*"I want to ask you something. If you don't have the answer today, at age 15, that's okay—there's no penalty. But if you still don't know the answer when you're 65, you've lost your life."*
+
+The class looked at him, puzzled. Then he asked:
+
+*"How do people talk about you when you're not around?"*
+
+The silence deepened.
+
+He continued:
+
+*"What are the qualities people associate with your name? Do they say you're **trustworthy**? **Kind**? **Honest**? **Hardworking**? Or do they avoid talking about you at all?"*
+
+*"This,"* he said, *"is the question that follows you for life."*
+
+---
+
+## Your Personal Brand is Always in Progress
+
+Whether you realize it or not, every day you are building something far more important than your social media profile or your school résumé. You are building a reputation. A personal brand.
+
+And unlike a logo or a slogan, this brand isn't made by a marketing team — it's crafted by your actions, one moment at a time.
+
+Every time you show up on time, keep a promise, stand up for a friend, or admit a mistake — you're making a mark.
+Every time you lie, ignore your responsibilities, betray trust, or disrespect someone — you're making a mark, too.
+
+People may not remember everything you said, but they will remember how you made them feel, how dependable you were, and how you carried yourself when no one was watching.
+
+---
+
+## It's Not Too Early, and Never Too Late
+
+At 15, you're just beginning to understand who you are. And it's completely okay if you don't have all the answers. What matters is that you start asking the right questions.
+
+Because by the time you're 65, you will have lived a story — and people will be talking about it. The question is: What story are you writing right now?
+
+Are you someone others can trust?
+Are you the kind of person others want to follow, partner with, or learn from?
+Are you honest when it's difficult? Kind when no one's looking?
+
+---
+
+## Your Life is the Message
+
+You don't need a million followers to have influence. You need **integrity**. You need **consistency**. You need **character**.
+
+That's the real success — the one people remember even when you're not in the room.
+So be intentional. Every step matters. Every interaction is part of your legacy.
+
+Because one day, when someone asks, *"How do people talk about you when you're not around?"* —
+Your actions will already have answered that question.
+
+---
+
+**Explore more insights at TMA Voices — where the future of teenage leadership is written.**`,
+    slug: "the-question-that-defines-your-legacy",
+    seo: {
+      metaTitle: "The Question That Will Define Your Legacy – TMA Voices",
+      metaDescription: "At 15, you're just starting your story. But by 65, your legacy will be written. Discover the one question that shapes how the world remembers you.",
+      keywords: ["legacy", "character development", "personal brand", "teenage leadership", "reputation", "integrity", "TMA Academy"]
+    },
+    category: "Character & Personal Growth",
+    tags: ["Legacy", "Character", "PersonalGrowth", "SelfAwareness"]
+  },
   {
     id: "9",
     title: "We Fall. We Learn. We Rise.",
