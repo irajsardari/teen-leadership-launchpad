@@ -30,7 +30,7 @@ const BlogPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-r from-tma-blue to-tma-teal">
+      <section id="voices-top" className="relative py-20 lg:py-32 bg-gradient-to-r from-tma-blue to-tma-teal">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center text-white">

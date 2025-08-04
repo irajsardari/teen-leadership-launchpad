@@ -52,7 +52,8 @@ const Header = () => {
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : item.href}
+                to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : 
+                    item.href === "/insights" ? "/insights#voices-top" : item.href}
                 className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group whitespace-nowrap ${
                   isActive(item.href)
                     ? "text-[#F28C28] font-semibold"
@@ -128,7 +129,8 @@ const Header = () => {
             {navigation.slice(0, 4).map((item) => (
               <Link
                 key={item.name}
-                  to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : item.href}
+                to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : 
+                    item.href === "/insights" ? "/insights#voices-top" : item.href}
                 className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group ${
                   isActive(item.href)
                     ? "text-[#F28C28] font-semibold"
@@ -174,7 +176,8 @@ const Header = () => {
               {navigation.map((item) => (
                 <Link
                   key={item.name}
-                  to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : item.href}
+                  to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : 
+                      item.href === "/insights" ? "/insights#voices-top" : item.href}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 font-inter hover-scale ${
                     isActive(item.href)
                       ? "text-[#008B8B] bg-[#008B8B]/10"

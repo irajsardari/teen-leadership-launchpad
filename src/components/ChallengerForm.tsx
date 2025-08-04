@@ -142,7 +142,7 @@ const ChallengerForm = () => {
               name="level"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Level</FormLabel>
+                  <FormLabel>Preferred Level</FormLabel>
                   <FormControl>
                     <Input placeholder="Level 1 (Explorers), Level 2 (Builders), Level 3 (Innovators), Level 4 (Pathfinders)" {...field} />
                   </FormControl>

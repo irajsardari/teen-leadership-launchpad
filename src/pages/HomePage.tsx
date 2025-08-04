@@ -67,10 +67,10 @@ const HomePage = () => {
   ];
 
   const stats = [
-    { icon: Users, value: "1000+", label: "Challengers Empowered" },
-    { icon: Globe, value: "25+", label: "Countries Reached" },
-    { icon: Award, value: "7", label: "Year Curriculum" },
-    { icon: Star, value: "4.9", label: "Parent Rating" }
+    { icon: BookOpen, value: "8", label: "Year Curriculum" },
+    { icon: Users, value: "Ages 10–18", label: "Serving Youth" },
+    { icon: Globe, value: "First of its kind", label: "In the World" },
+    { icon: Award, value: "Based in Oman", label: "Expanding Globally" }
   ];
 
   return (
@@ -93,7 +93,7 @@ const HomePage = () => {
             <h2 className="text-lg sm:text-xl lg:text-2xl mb-10 text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
               TMA — Teenagers Management Academy<br />
               Future Ready Leaders<br /><br />
-              The world's first comprehensive academy for pre-teens and teenagers (ages 10-18) dedicated to leadership, emotional intelligence, and life mastery.
+              The world's first comprehensive academy for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
             </h2>
             
             {/* CTA Buttons */}

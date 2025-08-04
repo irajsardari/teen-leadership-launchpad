@@ -123,7 +123,7 @@ const CurriculumPage = () => {
             <p className="text-xl md:text-2xl text-blue-100 mb-8">
               TMA — Teenagers Management Academy<br />
               Future Ready Leaders<br /><br />
-              A comprehensive 8-year, 28-term program for ages 10-18 designed to develop 
+              A comprehensive 8-year, 28-term program for ages 10–18 designed to develop 
               complete leadership and life skills
             </p>
             <Button variant="accent" size="lg" className="bg-white text-tma-blue hover:bg-gray-100">
@@ -297,7 +297,7 @@ const CurriculumPage = () => {
                     <div className="w-2 h-2 bg-tma-blue rounded-full mr-3 mt-2"></div>
                     <div>
                       <h4 className="font-semibold text-tma-navy">Master Diploma</h4>
-                      <p className="text-sm text-tma-gray">Comprehensive diploma upon completing the full 7-year program</p>
+                      <p className="text-sm text-tma-gray">Comprehensive diploma upon completing the full 8-year program</p>
                     </div>
                   </div>
                 </CardContent>
@@ -327,7 +327,7 @@ const CurriculumPage = () => {
                   <Download className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle className="text-tma-navy">Full Curriculum Guide</CardTitle>
-                <CardDescription>Complete 7-year program overview</CardDescription>
+                <CardDescription>Complete 8-year program overview</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button variant="outline" className="w-full">
