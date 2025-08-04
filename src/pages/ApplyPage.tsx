@@ -147,7 +147,7 @@ const ApplyPage = () => {
                     <Card key={index} className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300 cursor-pointer">
                       <CardHeader>
                         <div className="flex justify-between items-start mb-2">
-                          <Badge variant="outline" className="text-tma-blue">
+                          <Badge variant="outline" className="text-[#006D6C] border-[#006D6C]">
                             {group.ageRange}
                           </Badge>
                           <div className="text-right">
@@ -157,7 +157,7 @@ const ApplyPage = () => {
                         </div>
                         <CardTitle className="text-tma-navy">{group.group}</CardTitle>
                         <CardDescription>{group.description}</CardDescription>
-                        <Badge variant="secondary" className="w-fit mt-2">
+                        <Badge variant="secondary" className="w-fit mt-2 bg-[#006D6C]/10 text-[#006D6C]">
                           Challenger - {group.badge}
                         </Badge>
                       </CardHeader>
@@ -171,8 +171,7 @@ const ApplyPage = () => {
                           ))}
                         </ul>
                         <Button 
-                          variant="outline" 
-                          className="w-full"
+                          className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter transition-all duration-300"
                           onClick={() => setStep(2)}
                         >
                           Select This Program

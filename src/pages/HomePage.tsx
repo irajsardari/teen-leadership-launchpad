@@ -182,7 +182,7 @@ const HomePage = () => {
             {levels.map((level, index) => (
               <Card key={index} className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300 transform hover:-translate-y-2">
                 <CardHeader>
-                  <div className={`w-full h-2 bg-gradient-to-r ${level.color} rounded-full mb-4`}></div>
+                  <div className="w-full h-2 bg-gradient-to-r from-[#006D6C] to-[#0EA5E9] rounded-full mb-4"></div>
                   <CardTitle className="text-primary font-inter text-lg">{level.title}</CardTitle>
                   <p className="text-foreground/70 font-inter mb-3">{level.description}</p>
                   <Badge variant="secondary" className="w-fit">
