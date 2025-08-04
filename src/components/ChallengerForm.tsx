@@ -12,7 +12,7 @@ import { Loader2 } from "lucide-react";
 
 const challengerSchema = z.object({
   full_name: z.string().min(2, "Full name must be at least 2 characters"),
-  age: z.number().min(12, "Age must be at least 12").max(19, "Age must be at most 19"),
+  age: z.number().min(10, "Age must be at least 10").max(18, "Age must be at most 18"),
   email: z.string().email("Please enter a valid email address"),
   phone_number: z.string().min(10, "Phone number must be at least 10 digits"),
   level: z.string().min(1, "Please specify your level")
@@ -27,7 +27,7 @@ const ChallengerForm = () => {
     resolver: zodResolver(challengerSchema),
     defaultValues: {
       full_name: "",
-      age: 12,
+      age: 10,
       email: "",
       phone_number: "",
       level: ""
@@ -144,7 +144,7 @@ const ChallengerForm = () => {
                 <FormItem>
                   <FormLabel>Level</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., Level 1, Level 2, Level 3" {...field} />
+                    <Input placeholder="Level 1 (Explorers), Level 2 (Builders), Level 3 (Innovators), Level 4 (Pathfinders)" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
