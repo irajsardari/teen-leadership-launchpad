@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Mail, Phone, MapPin, Clock, MessageCircle, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ContactPage = () => {
   const contactMethods = [
@@ -273,8 +274,8 @@ const ContactPage = () => {
               in our comprehensive FAQ section or parent/teacher resources.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="outline" size="lg">
-                View FAQs
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/faq">View FAQs</Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
                 <a href="/parents-teachers">Parent Resources</a>

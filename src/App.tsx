@@ -11,6 +11,7 @@ import AboutPage from "./pages/AboutPage";
 import FounderPage from "./pages/FounderPage";
 import CurriculumPage from "./pages/CurriculumPage";
 import ContactPage from "./pages/ContactPage";
+import FAQPage from "./pages/FAQPage";
 import ApplyPage from "./pages/ApplyPage";
 import AuthPage from "./pages/AuthPage";
 import TeachersPage from "./pages/TeachersPage";
@@ -45,6 +46,7 @@ const App = () => (
                 <Route path="/founder" element={<FounderPage />} />
                 <Route path="/curriculum" element={<CurriculumPage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/faq" element={<FAQPage />} />
                 <Route path="/apply" element={<ApplyPage />} />
                 <Route path="/teachers" element={<TeachersPage />} />
                 <Route path="/insights" element={<BlogPage />} />
