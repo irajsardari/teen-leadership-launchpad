@@ -15,7 +15,8 @@ const challengerSchema = z.object({
   age: z.number().min(10, "Age must be at least 10").max(18, "Age must be at most 18"),
   email: z.string().email("Please enter a valid email address"),
   phone_number: z.string().min(10, "Phone number must be at least 10 digits"),
-  level: z.string().min(1, "Please specify your level")
+  level: z.string().min(1, "Please specify your level"),
+  confidential_info: z.string().optional()
 });
 
 type ChallengerFormData = z.infer<typeof challengerSchema>;
@@ -30,7 +31,8 @@ const ChallengerForm = () => {
       age: 10,
       email: "",
       phone_number: "",
-      level: ""
+      level: "",
+      confidential_info: ""
     }
   });
 
@@ -151,7 +153,28 @@ const ChallengerForm = () => {
               )}
             />
             
-            <Button 
+            <FormField
+              control={form.control}
+              name="confidential_info"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confidential Information (Optional)</FormLabel>
+                  <FormControl>
+                    <Input 
+                      placeholder="If you have any special learning or attention-related needs (e.g., ADHD), please let us know here (confidential)"
+                      {...field}
+                      className="border-amber-200 focus:border-amber-400"
+                    />
+                  </FormControl>
+                  <p className="text-xs text-amber-600 font-medium">
+                    🔒 This information is confidential and only accessible to authorized TMA administrators.
+                  </p>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <Button
               type="submit" 
               className="w-full" 
               disabled={isSubmitting}

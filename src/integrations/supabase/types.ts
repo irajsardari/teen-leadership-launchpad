@@ -68,6 +68,7 @@ export type Database = {
         Row: {
           age: number | null
           city: string | null
+          confidential_info: string | null
           country: string | null
           created_at: string
           email: string | null
@@ -83,6 +84,7 @@ export type Database = {
         Insert: {
           age?: number | null
           city?: string | null
+          confidential_info?: string | null
           country?: string | null
           created_at?: string
           email?: string | null
@@ -98,6 +100,7 @@ export type Database = {
         Update: {
           age?: number | null
           city?: string | null
+          confidential_info?: string | null
           country?: string | null
           created_at?: string
           email?: string | null
@@ -109,6 +112,33 @@ export type Database = {
           phone_number?: string | null
           referral_source?: string | null
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      confidential_records: {
+        Row: {
+          confidential_info: string | null
+          created_at: string
+          entity_id: string
+          entity_type: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          confidential_info?: string | null
+          created_at?: string
+          entity_id: string
+          entity_type: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          confidential_info?: string | null
+          created_at?: string
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -453,6 +483,7 @@ export type Database = {
       }
       teacher_applications: {
         Row: {
+          confidential_info: string | null
           cover_letter: string | null
           created_at: string
           cv_url: string | null
@@ -468,6 +499,7 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          confidential_info?: string | null
           cover_letter?: string | null
           created_at?: string
           cv_url?: string | null
@@ -483,6 +515,7 @@ export type Database = {
           user_id?: string | null
         }
         Update: {
+          confidential_info?: string | null
           cover_letter?: string | null
           created_at?: string
           cv_url?: string | null
