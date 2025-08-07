@@ -23,6 +23,9 @@ const buttonVariants = cva(
         gold: "bg-tma-gold text-tma-navy hover:bg-tma-gold/90 shadow-[var(--shadow-gold)]",
         lemon: "bg-tma-lemon text-tma-navy hover:bg-tma-lemon/90",
         "outline-hero": "border-2 border-tma-blue text-tma-blue bg-transparent hover:bg-tma-blue hover:text-white",
+        "modern-primary": "btn-modern-primary text-white font-bold",
+        "modern-accent": "btn-modern-accent text-white font-bold",
+        "glass": "glass-card backdrop-blur-lg border-white/30 text-white hover:bg-white/20",
       },
       size: {
         default: "h-10 px-4 py-2",

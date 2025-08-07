@@ -4,6 +4,7 @@
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
+Modern UI design system for TMA Academy - World's First Teenagers Management Academy
 */
 
 @layer base {
@@ -47,17 +48,28 @@ All colors MUST be HSL.
     --tma-gold: 45 41% 57%;
     --tma-lemon: 54 90% 63%;
 
-    /* Gradients */
+    /* Modern Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(var(--tma-blue)), hsl(var(--tma-teal)));
+    --gradient-hero-overlay: linear-gradient(135deg, hsl(var(--tma-blue) / 0.9), hsl(var(--tma-teal) / 0.8));
     --gradient-card: linear-gradient(145deg, hsl(var(--tma-beige)), hsl(var(--background)));
+    --gradient-card-modern: linear-gradient(145deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 100%);
     --gradient-accent: linear-gradient(90deg, hsl(var(--tma-coral)), hsl(var(--tma-gold)));
     --gradient-coral: linear-gradient(135deg, hsl(var(--tma-coral)), hsl(var(--tma-coral) / 0.8));
+    --gradient-glass: linear-gradient(145deg, hsl(var(--background) / 0.1), hsl(var(--background) / 0.05));
+    --gradient-button-primary: linear-gradient(135deg, hsl(var(--tma-blue)), hsl(var(--tma-blue) / 0.8));
+    --gradient-button-accent: linear-gradient(135deg, hsl(var(--tma-coral)), hsl(var(--tma-gold)));
+    --gradient-section: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.4) 50%, hsl(var(--background)) 100%);
 
-    /* Shadows */
+    /* Modern Shadows */
     --shadow-elegant: 0 10px 30px -10px hsl(var(--tma-blue) / 0.15);
     --shadow-card: 0 4px 20px -4px hsl(var(--tma-blue) / 0.08);
+    --shadow-card-hover: 0 20px 40px -8px hsl(var(--tma-blue) / 0.15);
     --shadow-button: 0 4px 15px -3px hsl(var(--tma-coral) / 0.25);
+    --shadow-button-hover: 0 8px 25px -5px hsl(var(--tma-coral) / 0.35);
     --shadow-gold: 0 4px 15px -3px hsl(var(--tma-gold) / 0.25);
+    --shadow-glass: 0 8px 32px 0 hsl(var(--tma-blue) / 0.1);
+    --shadow-floating: 0 25px 50px -12px hsl(var(--tma-blue) / 0.2);
+    --shadow-inner: inset 0 2px 4px 0 hsl(var(--tma-blue) / 0.06);
 
     --radius: 0.5rem;
 
@@ -124,5 +136,103 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Modern Glass Card */
+  .glass-card {
+    @apply backdrop-blur-lg border border-white/20;
+    background: var(--gradient-glass);
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* Floating Animation */
+  .floating {
+    animation: floating 6s ease-in-out infinite;
+  }
+
+  @keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Modern Button Styles */
+  .btn-modern-primary {
+    @apply relative overflow-hidden;
+    background: var(--gradient-button-primary);
+    box-shadow: var(--shadow-button);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-modern-primary:hover {
+    box-shadow: var(--shadow-button-hover);
+    transform: translateY(-2px);
+  }
+
+  .btn-modern-accent {
+    @apply relative overflow-hidden;
+    background: var(--gradient-button-accent);
+    box-shadow: var(--shadow-button);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-modern-accent:hover {
+    box-shadow: var(--shadow-button-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Card Hover Effects */
+  .card-modern {
+    @apply transition-all duration-300 ease-out;
+    background: var(--gradient-card-modern);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(10px);
+  }
+
+  .card-modern:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-8px) scale(1.02);
+  }
+
+  /* Text Gradients */
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-hero);
+  }
+
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+
+  /* Modern Section Backgrounds */
+  .section-gradient {
+    background: var(--gradient-section);
+  }
+
+  /* Counter Animation */
+  .animate-counter {
+    animation: countUp 2s ease-out forwards;
+  }
+
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Pulse Effect */
+  .pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
   }
 }

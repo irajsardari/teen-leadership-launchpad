@@ -79,43 +79,53 @@ const HomePage = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div 
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center transform scale-105"
           style={{ backgroundImage: `url(${heroImage})` }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/70"></div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-32 h-32 bg-tma-coral/20 rounded-full blur-xl floating"></div>
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-tma-teal/20 rounded-full blur-xl floating" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-tma-gold/20 rounded-full blur-xl floating" style={{ animationDelay: '4s' }}></div>
         
         {/* Content */}
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10">
           <div className="max-w-5xl mx-auto text-center text-white">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
-              Where Future CEOs, Creators & Changemakers Begin
-            </h1>
-            <h2 className="text-lg sm:text-xl lg:text-2xl mb-10 text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
-              TMA — Teenagers Management Academy<br />
-              Future Ready Leaders<br /><br />
-              The world's first comprehensive academy for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
-            </h2>
+            <div className="glass-card rounded-3xl p-8 mb-8 animate-fade-in">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
+                Where Future <span className="text-gradient-accent">CEOs</span>, <span className="text-gradient-accent">Creators</span> & <span className="text-gradient-accent">Changemakers</span> Begin
+              </h1>
+              <h2 className="text-lg sm:text-xl lg:text-2xl mb-10 text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
+                <span className="text-2xl font-bold text-tma-coral">TMA — Teenagers Management Academy</span><br />
+                <span className="text-xl text-tma-gold">Future Ready Leaders</span><br /><br />
+                The world's <span className="font-bold text-tma-teal">first comprehensive academy</span> for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
+              </h2>
+            </div>
             
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-inter font-semibold text-lg px-10 py-6 rounded-lg shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1" 
+                className="btn-modern-accent text-white font-inter font-bold text-lg px-12 py-6 rounded-2xl shadow-2xl transition-all duration-500 group" 
                 asChild
               >
-                <Link to="/apply">
+                <Link to="/apply" className="flex items-center">
+                  <span className="mr-3">🚀</span>
                   Start Your Journey
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
               <Button 
                 size="lg" 
-                className="bg-transparent border-2 border-white/80 text-white hover:bg-white hover:text-navy-900 font-inter font-semibold text-lg px-10 py-6 rounded-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl" 
+                className="glass-card text-white hover:bg-white/20 font-inter font-bold text-lg px-12 py-6 rounded-2xl backdrop-blur-sm transition-all duration-500 border-2 border-white/30 hover:border-white/60 group" 
                 variant="outline" 
                 asChild
               >
-                <Link to="/curriculum">
+                <Link to="/curriculum" className="flex items-center">
+                  <span className="mr-3">📚</span>
                   Explore Curriculum
+                  <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
             </div>
@@ -124,16 +134,18 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-background">
+      <section className="py-20 section-gradient">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-tma-blue to-tma-teal rounded-full mb-4">
-                  <stat.icon className="h-6 w-6 text-white" />
+              <div key={index} className="text-center group">
+                <div className="card-modern rounded-2xl p-6 mb-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-tma-blue to-tma-teal rounded-2xl mb-4 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                    <stat.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="text-3xl lg:text-4xl font-bold text-gradient-primary mb-2 animate-counter">{stat.value}</div>
+                  <div className="text-foreground/70 font-medium font-inter">{stat.label}</div>
                 </div>
-                <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
-                <div className="text-foreground/70">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -141,22 +153,27 @@ const HomePage = () => {
       </section>
 
       {/* What Is TMA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-tma-beige/30 to-background"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8 font-inter">
+            <h2 className="text-4xl md:text-5xl font-bold text-gradient-primary mb-12 font-inter">
               What Is TMA?
             </h2>
-            <div className="text-lg md:text-xl text-foreground/80 space-y-6 font-inter">
-              <p>
-                TMA is the world's first academy fully dedicated to teenage leadership and life readiness.
-              </p>
-              <p>
-                Our program combines management, emotional intelligence, strategy, entrepreneurship, and digital literacy — empowering youth to lead with confidence in school, career, and life.
-              </p>
-              <p className="text-xl font-semibold text-primary">
-                We don't just prepare students to pass exams. We prepare them to lead their lives.
-              </p>
+            <div className="glass-card rounded-3xl p-8 lg:p-12 space-y-8">
+              <div className="text-lg md:text-xl text-foreground/80 space-y-6 font-inter">
+                <p className="text-2xl font-bold text-primary">
+                  🌟 TMA is the world's <span className="text-gradient-accent">first academy</span> fully dedicated to teenage leadership and life readiness.
+                </p>
+                <p className="text-xl">
+                  Our program combines <span className="font-bold text-tma-teal">management</span>, <span className="font-bold text-tma-coral">emotional intelligence</span>, <span className="font-bold text-tma-gold">strategy</span>, entrepreneurship, and digital literacy — empowering youth to lead with confidence in school, career, and life.
+                </p>
+                <div className="bg-gradient-to-r from-tma-coral/10 to-tma-gold/10 rounded-2xl p-6 border border-tma-coral/20">
+                  <p className="text-2xl font-bold text-gradient-accent">
+                    💡 "We don't just prepare students to pass exams. We prepare them to lead their lives."
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -178,28 +195,34 @@ const HomePage = () => {
             </div>
           </div>
           
-          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
             {levels.map((level, index) => (
-              <Card key={index} className="border-none shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full">
-                <CardHeader className="flex-1">
-                  <div className="w-full h-2 bg-gradient-to-r from-[#006D6C] to-[#0EA5E9] rounded-full mb-4"></div>
-                  <CardTitle className="text-primary font-inter text-lg">{level.title}</CardTitle>
-                  <p className="text-foreground/70 font-inter mb-3">{level.description}</p>
-                  <Badge variant="secondary" className="w-fit bg-[#006D6C]/10 text-[#006D6C] border-[#006D6C]">
-                    {level.badge}
-                  </Badge>
-                </CardHeader>
-                <CardContent className="pt-0 pb-6">
-                <Button 
-                  className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter transition-all duration-300"
-                  asChild
-                >
-                  <Link to="/apply#register">
-                    Select This Program
-                  </Link>
-                </Button>
-                </CardContent>
-              </Card>
+              <div key={index} className="group">
+                <div className="card-modern border-none flex flex-col h-full rounded-3xl overflow-hidden">
+                  <CardHeader className="flex-1 p-8">
+                    <div className="w-full h-3 bg-gradient-to-r from-tma-teal to-tma-coral rounded-full mb-6 shadow-inner"></div>
+                    <div className="w-16 h-16 bg-gradient-to-br from-tma-blue to-tma-teal rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                      <span className="text-2xl text-white font-bold">{index + 1}</span>
+                    </div>
+                    <CardTitle className="text-gradient-primary font-inter text-xl mb-4">{level.title}</CardTitle>
+                    <p className="text-foreground/70 font-inter mb-4 leading-relaxed">{level.description}</p>
+                    <Badge variant="secondary" className="w-fit bg-gradient-to-r from-tma-coral/10 to-tma-gold/10 text-tma-coral border-tma-coral/30 font-medium">
+                      🏆 {level.badge}
+                    </Badge>
+                  </CardHeader>
+                  <CardContent className="pt-0 pb-8 px-8">
+                  <Button 
+                    className="w-full btn-modern-primary text-white font-inter font-bold transition-all duration-500 group-hover:scale-105"
+                    asChild
+                  >
+                    <Link to="/apply#register" className="flex items-center justify-center">
+                      🚀 Select This Program
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                  </CardContent>
+                </div>
+              </div>
             ))}
           </div>
           
@@ -222,21 +245,27 @@ const HomePage = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {learningAreas.map((area, index) => (
-              <Card key={index} className="border-none shadow-[var(--shadow-card)] text-center">
-                <CardHeader>
-                  <div className="text-4xl mb-4">{area.icon}</div>
-                  <CardTitle className="text-primary font-inter">{area.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-foreground/70 font-inter">{area.description}</p>
-                </CardContent>
-              </Card>
+              <div key={index} className="group">
+                <div className="card-modern border-none text-center rounded-3xl p-8 h-full">
+                  <CardHeader className="pb-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-tma-blue to-tma-teal rounded-2xl flex items-center justify-center mx-auto mb-6 text-4xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                      {area.icon}
+                    </div>
+                    <CardTitle className="text-gradient-primary font-inter text-xl mb-4">{area.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-foreground/70 font-inter leading-relaxed">{area.description}</p>
+                  </CardContent>
+                </div>
+              </div>
             ))}
           </div>
           
           <div className="text-center">
-            <Button size="lg" className="bg-[#FF715B] hover:bg-[#FF715B]/90 text-white font-inter">
-              → View Full Curriculum PDF
+            <Button size="lg" className="btn-modern-accent text-white font-inter font-bold px-12 py-6 rounded-2xl text-lg group">
+              <span className="mr-3">📖</span>
+              View Full Curriculum PDF
+              <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
         </div>
