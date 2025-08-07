@@ -47,6 +47,14 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     --tma-coral: 11 100% 67%;
     --tma-gold: 45 41% 57%;
     --tma-lemon: 54 90% 63%;
+    
+    /* High Contrast CTA Colors for Better Accessibility */
+    --cta-blue: 210 100% 50%;
+    --cta-blue-dark: 210 100% 35%;
+    --cta-teal: 180 100% 35%;
+    --cta-teal-dark: 180 100% 25%;
+    --cta-success: 142 76% 36%;
+    --cta-success-dark: 142 76% 25%;
 
     /* Modern Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(var(--tma-blue)), hsl(var(--tma-teal)));
@@ -61,6 +69,11 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     --gradient-button-accent: linear-gradient(135deg, hsl(var(--tma-coral)), hsl(var(--tma-gold)));
     --gradient-section: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.4) 50%, hsl(var(--background)) 100%);
     --gradient-futuristic: linear-gradient(145deg, hsl(var(--tma-blue) / 0.1), hsl(var(--tma-teal) / 0.05), hsl(var(--tma-coral) / 0.1));
+    
+    /* High Contrast CTA Gradients */
+    --gradient-cta-blue: linear-gradient(135deg, hsl(var(--cta-blue)), hsl(var(--cta-blue-dark)));
+    --gradient-cta-teal: linear-gradient(135deg, hsl(var(--cta-teal)), hsl(var(--cta-teal-dark)));
+    --gradient-cta-success: linear-gradient(135deg, hsl(var(--cta-success)), hsl(var(--cta-success-dark)));
 
     /* Modern Shadows */
     --shadow-elegant: 0 10px 30px -10px hsl(var(--tma-blue) / 0.15);
@@ -75,6 +88,14 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     --shadow-glass-modern: 0 8px 32px 0 hsl(var(--tma-blue) / 0.12), inset 0 1px 0 hsl(var(--background) / 0.2);
     --shadow-floating: 0 25px 50px -12px hsl(var(--tma-blue) / 0.2);
     --shadow-inner: inset 0 2px 4px 0 hsl(var(--tma-blue) / 0.06);
+    
+    /* High Contrast CTA Shadows */
+    --shadow-cta-blue: 0 4px 15px -3px hsl(var(--cta-blue) / 0.4);
+    --shadow-cta-blue-hover: 0 8px 25px -5px hsl(var(--cta-blue) / 0.5);
+    --shadow-cta-teal: 0 4px 15px -3px hsl(var(--cta-teal) / 0.4);
+    --shadow-cta-teal-hover: 0 8px 25px -5px hsl(var(--cta-teal) / 0.5);
+
+    --radius: 0.5rem;
 
     --radius: 0.5rem;
 

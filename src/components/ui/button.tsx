@@ -26,6 +26,11 @@ const buttonVariants = cva(
         "modern-primary": "btn-modern-primary text-white font-bold",
         "modern-accent": "btn-modern-accent text-white font-bold",
         "glass": "glass-card backdrop-blur-lg border-white/30 text-white hover:bg-white/20",
+        // High contrast CTA variants for better accessibility
+        "cta": "bg-[hsl(var(--cta-blue))] text-white hover:bg-[hsl(var(--cta-blue-dark))] focus:bg-[hsl(var(--cta-blue-dark))] active:bg-[hsl(var(--cta-blue-dark))] disabled:bg-[hsl(var(--cta-blue))]/50 disabled:text-white/70 shadow-[var(--shadow-cta-blue)] hover:shadow-[var(--shadow-cta-blue-hover)] transform hover:scale-105 transition-all duration-200 font-semibold",
+        "cta-teal": "bg-[hsl(var(--cta-teal))] text-white hover:bg-[hsl(var(--cta-teal-dark))] focus:bg-[hsl(var(--cta-teal-dark))] active:bg-[hsl(var(--cta-teal-dark))] disabled:bg-[hsl(var(--cta-teal))]/50 disabled:text-white/70 shadow-[var(--shadow-cta-teal)] hover:shadow-[var(--shadow-cta-teal-hover)] transform hover:scale-105 transition-all duration-200 font-semibold",
+        "cta-outline": "border-2 border-[hsl(var(--cta-blue))] text-[hsl(var(--cta-blue))] bg-white hover:bg-[hsl(var(--cta-blue))] hover:text-white focus:bg-[hsl(var(--cta-blue))] focus:text-white active:bg-[hsl(var(--cta-blue-dark))] active:text-white disabled:border-[hsl(var(--cta-blue))]/50 disabled:text-[hsl(var(--cta-blue))]/50 shadow-[var(--shadow-cta-blue)] hover:shadow-[var(--shadow-cta-blue-hover)] transform hover:scale-105 transition-all duration-200 font-semibold",
+        "continue": "bg-[hsl(var(--cta-success))] text-white hover:bg-[hsl(var(--cta-success-dark))] focus:bg-[hsl(var(--cta-success-dark))] active:bg-[hsl(var(--cta-success-dark))] disabled:bg-[hsl(var(--cta-success))]/50 disabled:text-white/70 shadow-[0_4px_15px_-3px_hsl(var(--cta-success)/0.4)] hover:shadow-[0_8px_25px_-5px_hsl(var(--cta-success)/0.5)] transform hover:scale-105 transition-all duration-200 font-semibold min-h-[44px]",
       },
       size: {
         default: "h-10 px-4 py-2",
