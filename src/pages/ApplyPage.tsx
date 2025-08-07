@@ -471,10 +471,10 @@ const ApplyPage = () => {
                       </div>
                       
                       <div className="flex justify-between">
-                        <Button variant="outline" onClick={() => setStep(1)}>
+                        <Button variant="cta-outline" onClick={() => setStep(1)}>
                           Back
                         </Button>
-                        <Button variant="hero" onClick={() => setStep(3)}>
+                        <Button variant="continue" onClick={() => setStep(3)}>
                           Continue
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
@@ -590,10 +590,10 @@ const ApplyPage = () => {
                       </div>
                       
                       <div className="flex justify-between">
-                        <Button variant="outline" onClick={() => setStep(2)}>
+                        <Button variant="cta-outline" onClick={() => setStep(2)}>
                           Back
                         </Button>
-                        <Button variant="hero" size="lg" type="submit">
+                        <Button variant="continue" size="lg" type="submit">
                           Submit Application
                         </Button>
                       </div>
