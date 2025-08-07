@@ -422,7 +422,7 @@ const HomePage = () => {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#012D5A] font-inter" variant="outline" asChild>
+              <Button size="lg" variant="glass" className="font-inter" asChild>
                 <Link to="/curriculum">
                   Explore Curriculum
                 </Link>
