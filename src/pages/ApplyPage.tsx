@@ -188,7 +188,7 @@ const ApplyPage = () => {
               <div>
                 <div className="text-center mb-12">
                   <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
-                    Student Information
+                    Challenger Information
                   </h2>
                   <p className="text-xl text-tma-gray">
                     Tell us about yourself so we can personalize your learning experience
@@ -200,12 +200,12 @@ const ApplyPage = () => {
                     <form className="space-y-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <Label htmlFor="studentFirstName">Student First Name *</Label>
-                          <Input id="studentFirstName" type="text" required />
+                          <Label htmlFor="challengerFirstName">First Name *</Label>
+                          <Input id="challengerFirstName" type="text" required />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="studentLastName">Student Last Name *</Label>
-                          <Input id="studentLastName" type="text" required />
+                          <Label htmlFor="challengerLastName">Last Name *</Label>
+                          <Input id="challengerLastName" type="text" required />
                         </div>
                       </div>
                       
@@ -221,6 +221,8 @@ const ApplyPage = () => {
                               <SelectValue placeholder="Select grade" />
                             </SelectTrigger>
                             <SelectContent>
+                              <SelectItem value="4">Grade 4</SelectItem>
+                              <SelectItem value="5">Grade 5</SelectItem>
                               <SelectItem value="6">Grade 6</SelectItem>
                               <SelectItem value="7">Grade 7</SelectItem>
                               <SelectItem value="8">Grade 8</SelectItem>
@@ -241,13 +243,81 @@ const ApplyPage = () => {
                             <SelectValue placeholder="Select country" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="us">United States</SelectItem>
-                            <SelectItem value="ca">Canada</SelectItem>
-                            <SelectItem value="uk">United Kingdom</SelectItem>
+                            <SelectItem value="af">Afghanistan</SelectItem>
+                            <SelectItem value="al">Albania</SelectItem>
+                            <SelectItem value="dz">Algeria</SelectItem>
+                            <SelectItem value="ar">Argentina</SelectItem>
                             <SelectItem value="au">Australia</SelectItem>
-                            <SelectItem value="de">Germany</SelectItem>
+                            <SelectItem value="at">Austria</SelectItem>
+                            <SelectItem value="bd">Bangladesh</SelectItem>
+                            <SelectItem value="be">Belgium</SelectItem>
+                            <SelectItem value="br">Brazil</SelectItem>
+                            <SelectItem value="bg">Bulgaria</SelectItem>
+                            <SelectItem value="ca">Canada</SelectItem>
+                            <SelectItem value="cl">Chile</SelectItem>
+                            <SelectItem value="cn">China</SelectItem>
+                            <SelectItem value="co">Colombia</SelectItem>
+                            <SelectItem value="hr">Croatia</SelectItem>
+                            <SelectItem value="cz">Czech Republic</SelectItem>
+                            <SelectItem value="dk">Denmark</SelectItem>
+                            <SelectItem value="eg">Egypt</SelectItem>
+                            <SelectItem value="ee">Estonia</SelectItem>
+                            <SelectItem value="fi">Finland</SelectItem>
                             <SelectItem value="fr">France</SelectItem>
+                            <SelectItem value="de">Germany</SelectItem>
+                            <SelectItem value="gh">Ghana</SelectItem>
+                            <SelectItem value="gr">Greece</SelectItem>
+                            <SelectItem value="hk">Hong Kong</SelectItem>
+                            <SelectItem value="hu">Hungary</SelectItem>
+                            <SelectItem value="in">India</SelectItem>
+                            <SelectItem value="id">Indonesia</SelectItem>
+                            <SelectItem value="ir">Iran</SelectItem>
+                            <SelectItem value="iq">Iraq</SelectItem>
+                            <SelectItem value="ie">Ireland</SelectItem>
+                            <SelectItem value="il">Israel</SelectItem>
+                            <SelectItem value="it">Italy</SelectItem>
+                            <SelectItem value="jp">Japan</SelectItem>
+                            <SelectItem value="jo">Jordan</SelectItem>
+                            <SelectItem value="kz">Kazakhstan</SelectItem>
+                            <SelectItem value="ke">Kenya</SelectItem>
+                            <SelectItem value="kw">Kuwait</SelectItem>
+                            <SelectItem value="lv">Latvia</SelectItem>
+                            <SelectItem value="lb">Lebanon</SelectItem>
+                            <SelectItem value="lt">Lithuania</SelectItem>
+                            <SelectItem value="my">Malaysia</SelectItem>
+                            <SelectItem value="mx">Mexico</SelectItem>
+                            <SelectItem value="ma">Morocco</SelectItem>
+                            <SelectItem value="nl">Netherlands</SelectItem>
+                            <SelectItem value="nz">New Zealand</SelectItem>
+                            <SelectItem value="ng">Nigeria</SelectItem>
+                            <SelectItem value="no">Norway</SelectItem>
+                            <SelectItem value="pk">Pakistan</SelectItem>
+                            <SelectItem value="pe">Peru</SelectItem>
+                            <SelectItem value="ph">Philippines</SelectItem>
+                            <SelectItem value="pl">Poland</SelectItem>
+                            <SelectItem value="pt">Portugal</SelectItem>
+                            <SelectItem value="qa">Qatar</SelectItem>
+                            <SelectItem value="ro">Romania</SelectItem>
+                            <SelectItem value="ru">Russia</SelectItem>
+                            <SelectItem value="sa">Saudi Arabia</SelectItem>
                             <SelectItem value="sg">Singapore</SelectItem>
+                            <SelectItem value="sk">Slovakia</SelectItem>
+                            <SelectItem value="si">Slovenia</SelectItem>
+                            <SelectItem value="za">South Africa</SelectItem>
+                            <SelectItem value="kr">South Korea</SelectItem>
+                            <SelectItem value="es">Spain</SelectItem>
+                            <SelectItem value="lk">Sri Lanka</SelectItem>
+                            <SelectItem value="se">Sweden</SelectItem>
+                            <SelectItem value="ch">Switzerland</SelectItem>
+                            <SelectItem value="tw">Taiwan</SelectItem>
+                            <SelectItem value="th">Thailand</SelectItem>
+                            <SelectItem value="tr">Turkey</SelectItem>
+                            <SelectItem value="ua">Ukraine</SelectItem>
+                            <SelectItem value="ae">United Arab Emirates</SelectItem>
+                            <SelectItem value="uk">United Kingdom</SelectItem>
+                            <SelectItem value="us">United States</SelectItem>
+                            <SelectItem value="uy">Uruguay</SelectItem>
+                            <SelectItem value="vn">Vietnam</SelectItem>
                             <SelectItem value="other">Other</SelectItem>
                           </SelectContent>
                         </Select>
