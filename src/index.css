@@ -204,6 +204,15 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     box-shadow: var(--shadow-button-hover);
     transform: translateY(-2px);
   }
+  
+  /* Fix dropdown overlapping issues */
+  .dropdown-menu, [role="menu"] {
+    z-index: 1000 !important;
+    background: white !important;
+    border: 1px solid hsl(var(--border)) !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.3) !important;
+  }
 
   /* Card Hover Effects */
   .card-modern {

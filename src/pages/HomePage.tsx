@@ -227,13 +227,11 @@ const HomePage = () => {
                   <Button 
                     className="w-full btn-modern-accent text-white font-inter font-black text-lg py-6 rounded-2xl transition-all duration-500 group-hover:scale-105"
                     style={{ boxShadow: 'var(--shadow-button-3d)' }}
-                    asChild
+                    onClick={() => window.location.href = '/apply#register'}
                   >
-                    <Link to="/apply#register" className="flex items-center justify-center">
-                      <span className="mr-3 text-xl">🚀</span>
-                      Select This Program
-                      <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
-                    </Link>
+                    <span className="mr-3 text-xl">🚀</span>
+                    Select This Program
+                    <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
                   </Button>
                   </CardContent>
                 </div>

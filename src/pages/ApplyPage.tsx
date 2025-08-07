@@ -363,6 +363,19 @@ const ApplyPage = () => {
                         </Select>
                       </div>
                       
+                      <div className="space-y-2">
+                        <Label htmlFor="confidentialInfo">Confidential Information (Optional)</Label>
+                        <Textarea 
+                          id="confidentialInfo" 
+                          rows={3} 
+                          placeholder="If your child has any special learning or attention-related needs (e.g., ADHD, learning challenges), please let us know here. This information is confidential and will only be accessible to authorized TMA administrators."
+                          className="border-amber-200 focus:border-amber-400"
+                        />
+                        <p className="text-xs text-amber-600 font-medium">
+                          🔒 This information is encrypted and only shared with authorized administrators to better support your child's learning experience.
+                        </p>
+                      </div>
+                      
                       <div className="space-y-4">
                         <div className="flex items-start space-x-2">
                           <Checkbox id="terms" required />

@@ -62,6 +62,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem('supabase.auth.token');
       localStorage.removeItem('sb-gedgcagidpheugikoyim-auth-token');
       
+      // Navigate to homepage after successful logout
+      window.location.href = '/';
+      
       console.log("SignOut completed - local state cleared");
     } catch (error) {
       console.error("SignOut failed:", error);
@@ -70,6 +73,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(null);
       localStorage.removeItem('supabase.auth.token');
       localStorage.removeItem('sb-gedgcagidpheugikoyim-auth-token');
+      
+      // Navigate to homepage even on error
+      window.location.href = '/';
     }
   };
 
