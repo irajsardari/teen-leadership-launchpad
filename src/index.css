@@ -53,21 +53,26 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     --gradient-hero-overlay: linear-gradient(135deg, hsl(var(--tma-blue) / 0.9), hsl(var(--tma-teal) / 0.8));
     --gradient-card: linear-gradient(145deg, hsl(var(--tma-beige)), hsl(var(--background)));
     --gradient-card-modern: linear-gradient(145deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 100%);
+    --gradient-glass-modern: linear-gradient(145deg, hsl(var(--background) / 0.2), hsl(var(--background) / 0.1));
     --gradient-accent: linear-gradient(90deg, hsl(var(--tma-coral)), hsl(var(--tma-gold)));
     --gradient-coral: linear-gradient(135deg, hsl(var(--tma-coral)), hsl(var(--tma-coral) / 0.8));
     --gradient-glass: linear-gradient(145deg, hsl(var(--background) / 0.1), hsl(var(--background) / 0.05));
     --gradient-button-primary: linear-gradient(135deg, hsl(var(--tma-blue)), hsl(var(--tma-blue) / 0.8));
     --gradient-button-accent: linear-gradient(135deg, hsl(var(--tma-coral)), hsl(var(--tma-gold)));
     --gradient-section: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.4) 50%, hsl(var(--background)) 100%);
+    --gradient-futuristic: linear-gradient(145deg, hsl(var(--tma-blue) / 0.1), hsl(var(--tma-teal) / 0.05), hsl(var(--tma-coral) / 0.1));
 
     /* Modern Shadows */
     --shadow-elegant: 0 10px 30px -10px hsl(var(--tma-blue) / 0.15);
     --shadow-card: 0 4px 20px -4px hsl(var(--tma-blue) / 0.08);
     --shadow-card-hover: 0 20px 40px -8px hsl(var(--tma-blue) / 0.15);
+    --shadow-3d: 0 8px 30px -8px hsl(var(--tma-blue) / 0.3), 0 20px 40px -15px hsl(var(--tma-coral) / 0.2);
     --shadow-button: 0 4px 15px -3px hsl(var(--tma-coral) / 0.25);
     --shadow-button-hover: 0 8px 25px -5px hsl(var(--tma-coral) / 0.35);
+    --shadow-button-3d: 0 6px 20px -4px hsl(var(--tma-coral) / 0.4), 0 12px 30px -8px hsl(var(--tma-blue) / 0.2);
     --shadow-gold: 0 4px 15px -3px hsl(var(--tma-gold) / 0.25);
     --shadow-glass: 0 8px 32px 0 hsl(var(--tma-blue) / 0.1);
+    --shadow-glass-modern: 0 8px 32px 0 hsl(var(--tma-blue) / 0.12), inset 0 1px 0 hsl(var(--background) / 0.2);
     --shadow-floating: 0 25px 50px -12px hsl(var(--tma-blue) / 0.2);
     --shadow-inner: inset 0 2px 4px 0 hsl(var(--tma-blue) / 0.06);
 
@@ -152,6 +157,19 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     box-shadow: var(--shadow-glass);
   }
 
+  .glass-card-modern {
+    @apply backdrop-blur-xl border border-white/30;
+    background: var(--gradient-glass-modern);
+    box-shadow: var(--shadow-glass-modern);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card-modern:hover {
+    background: var(--gradient-glass);
+    box-shadow: var(--shadow-floating);
+    transform: translateY(-4px) scale(1.02);
+  }
+
   /* Floating Animation */
   .floating {
     animation: floating 6s ease-in-out infinite;
@@ -200,6 +218,20 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     transform: translateY(-8px) scale(1.02);
   }
 
+  .card-3d {
+    @apply transition-all duration-500 ease-out;
+    background: var(--gradient-futuristic);
+    box-shadow: var(--shadow-3d);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--background) / 0.3);
+  }
+
+  .card-3d:hover {
+    box-shadow: var(--shadow-floating);
+    transform: translateY(-12px) scale(1.03) rotateX(5deg);
+    border-color: hsl(var(--tma-coral) / 0.3);
+  }
+
   /* Text Gradients */
   .text-gradient-primary {
     @apply bg-clip-text text-transparent;
@@ -234,5 +266,39 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
   @keyframes pulse-slow {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.7; }
+  }
+
+  /* Number Badge Animation */
+  .number-badge {
+    @apply relative overflow-hidden;
+    background: var(--gradient-button-primary);
+    box-shadow: var(--shadow-button-3d);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .number-badge:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: var(--shadow-floating);
+  }
+
+  .number-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--background) / 0.3), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .number-badge:hover::before {
+    left: 100%;
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 }

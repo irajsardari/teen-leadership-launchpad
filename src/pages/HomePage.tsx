@@ -37,32 +37,38 @@ const HomePage = () => {
     {
       title: "Psychology & Emotional Resilience",
       icon: "🧠",
-      description: "Understanding emotions and building mental strength"
+      description: "Understanding emotions and building mental strength",
+      gradient: "from-purple-500 to-pink-500"
     },
     {
       title: "Communication & Public Speaking",
       icon: "🗣️",
-      description: "Effective communication and presentation skills"
+      description: "Effective communication and presentation skills",
+      gradient: "from-blue-500 to-cyan-500"
     },
     {
       title: "Sociology & Community Impact",
       icon: "🫂",
-      description: "Understanding society and making positive impact"
+      description: "Understanding society and making positive impact",
+      gradient: "from-green-500 to-emerald-500"
     },
     {
       title: "Management & Leadership",
       icon: "💼",
-      description: "Essential leadership skills and management principles"
+      description: "Essential leadership skills and management principles",
+      gradient: "from-orange-500 to-red-500"
     },
     {
       title: "Digital & AI Literacy",
       icon: "🌐",
-      description: "Modern technology and digital skills"
+      description: "Modern technology and digital skills",
+      gradient: "from-indigo-500 to-purple-500"
     },
     {
       title: "Finance, Law, and Ethics",
       icon: "💰",
-      description: "Financial literacy and ethical decision-making"
+      description: "Financial literacy and ethical decision-making",
+      gradient: "from-yellow-500 to-orange-500"
     }
   ];
 
@@ -92,40 +98,47 @@ const HomePage = () => {
         {/* Content */}
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10">
           <div className="max-w-5xl mx-auto text-center text-white">
-            <div className="glass-card rounded-3xl p-8 mb-8 animate-fade-in">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
-                Where Future <span className="text-gradient-accent">CEOs</span>, <span className="text-gradient-accent">Creators</span> & <span className="text-gradient-accent">Changemakers</span> Begin
+            <div className="glass-card-modern rounded-3xl p-8 lg:p-12 mb-8 animate-fade-in">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
+                Where Future <span className="text-gradient-accent font-black">CEOs</span>, <span className="text-gradient-accent font-black">Creators</span> & <span className="text-gradient-accent font-black">Changemakers</span> Begin
               </h1>
-              <h2 className="text-lg sm:text-xl lg:text-2xl mb-10 text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
-                <span className="text-2xl font-bold text-tma-coral">TMA — Teenagers Management Academy</span><br />
-                <span className="text-xl text-tma-gold">Future Ready Leaders</span><br /><br />
-                The world's <span className="font-bold text-tma-teal">first comprehensive academy</span> for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
-              </h2>
+              <div className="mb-8">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gradient-primary mb-4 font-inter">
+                  TMA — Teenagers Management Academy
+                </h2>
+                <h3 className="text-xl sm:text-2xl text-gradient-accent font-bold mb-6 font-inter">
+                  🌟 Future Ready Leaders
+                </h3>
+                <p className="text-lg sm:text-xl lg:text-2xl text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
+                  The world's <span className="font-black text-tma-teal text-2xl">first comprehensive academy</span> for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
+                </p>
+              </div>
             </div>
             
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Button 
                 size="lg" 
-                className="btn-modern-accent text-white font-inter font-bold text-lg px-12 py-6 rounded-2xl shadow-2xl transition-all duration-500 group" 
+                className="btn-modern-accent text-white font-inter font-black text-xl px-16 py-8 rounded-3xl transition-all duration-500 group relative overflow-hidden" 
+                style={{ boxShadow: 'var(--shadow-button-3d)' }}
                 asChild
               >
-                <Link to="/apply" className="flex items-center">
-                  <span className="mr-3">🚀</span>
+                <Link to="/apply" className="flex items-center relative z-10">
+                  <span className="mr-4 text-2xl">🚀</span>
                   Start Your Journey
-                  <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
                 </Link>
               </Button>
               <Button 
                 size="lg" 
-                className="glass-card text-white hover:bg-white/20 font-inter font-bold text-lg px-12 py-6 rounded-2xl backdrop-blur-sm transition-all duration-500 border-2 border-white/30 hover:border-white/60 group" 
+                className="glass-card-modern text-white hover:bg-white/30 font-inter font-bold text-xl px-16 py-8 rounded-3xl transition-all duration-500 border-2 border-white/40 hover:border-white/80 group" 
                 variant="outline" 
                 asChild
               >
                 <Link to="/curriculum" className="flex items-center">
-                  <span className="mr-3">📚</span>
+                  <span className="mr-4 text-2xl">📚</span>
                   Explore Curriculum
-                  <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
                 </Link>
               </Button>
             </div>
@@ -139,12 +152,12 @@ const HomePage = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center group">
-                <div className="card-modern rounded-2xl p-6 mb-4">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-tma-blue to-tma-teal rounded-2xl mb-4 shadow-lg group-hover:shadow-xl transition-all duration-300">
-                    <stat.icon className="h-8 w-8 text-white" />
+                <div className="card-3d rounded-3xl p-8 mb-4">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-tma-blue to-tma-teal rounded-3xl mb-6 shadow-lg group-hover:shadow-xl transition-all duration-500 number-badge">
+                    <stat.icon className="h-10 w-10 text-white" />
                   </div>
-                  <div className="text-3xl lg:text-4xl font-bold text-gradient-primary mb-2 animate-counter">{stat.value}</div>
-                  <div className="text-foreground/70 font-medium font-inter">{stat.label}</div>
+                  <div className="text-4xl lg:text-5xl font-black text-gradient-primary mb-3 animate-counter">{stat.value}</div>
+                  <div className="text-foreground/80 font-bold text-lg font-inter">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -156,20 +169,20 @@ const HomePage = () => {
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-tma-beige/30 to-background"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-gradient-primary mb-12 font-inter">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-5xl md:text-6xl font-black text-gradient-primary mb-16 font-inter">
               What Is TMA?
             </h2>
-            <div className="glass-card rounded-3xl p-8 lg:p-12 space-y-8">
-              <div className="text-lg md:text-xl text-foreground/80 space-y-6 font-inter">
-                <p className="text-2xl font-bold text-primary">
-                  🌟 TMA is the world's <span className="text-gradient-accent">first academy</span> fully dedicated to teenage leadership and life readiness.
+            <div className="glass-card-modern rounded-3xl p-12 lg:p-16 space-y-10">
+              <div className="text-xl md:text-2xl text-foreground/90 space-y-8 font-inter">
+                <p className="text-3xl md:text-4xl font-black text-gradient-primary">
+                  🌟 TMA is the world's <span className="text-gradient-accent font-black">first academy</span> fully dedicated to teenage leadership and life readiness.
                 </p>
-                <p className="text-xl">
-                  Our program combines <span className="font-bold text-tma-teal">management</span>, <span className="font-bold text-tma-coral">emotional intelligence</span>, <span className="font-bold text-tma-gold">strategy</span>, entrepreneurship, and digital literacy — empowering youth to lead with confidence in school, career, and life.
+                <p className="text-2xl md:text-3xl leading-relaxed">
+                  Our program combines <span className="font-black text-tma-teal text-3xl">management</span>, <span className="font-black text-tma-coral text-3xl">emotional intelligence</span>, <span className="font-black text-tma-gold text-3xl">strategy</span>, entrepreneurship, and digital literacy — empowering youth to lead with confidence in school, career, and life.
                 </p>
-                <div className="bg-gradient-to-r from-tma-coral/10 to-tma-gold/10 rounded-2xl p-6 border border-tma-coral/20">
-                  <p className="text-2xl font-bold text-gradient-accent">
+                <div className="card-3d rounded-3xl p-8 border-2 border-tma-coral/30">
+                  <p className="text-3xl md:text-4xl font-black text-gradient-accent leading-relaxed">
                     💡 "We don't just prepare students to pass exams. We prepare them to lead their lives."
                   </p>
                 </div>
@@ -198,26 +211,28 @@ const HomePage = () => {
           <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
             {levels.map((level, index) => (
               <div key={index} className="group">
-                <div className="card-modern border-none flex flex-col h-full rounded-3xl overflow-hidden">
+                <div className="card-3d border-2 border-white/20 flex flex-col h-full rounded-3xl overflow-hidden">
                   <CardHeader className="flex-1 p-8">
-                    <div className="w-full h-3 bg-gradient-to-r from-tma-teal to-tma-coral rounded-full mb-6 shadow-inner"></div>
-                    <div className="w-16 h-16 bg-gradient-to-br from-tma-blue to-tma-teal rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                      <span className="text-2xl text-white font-bold">{index + 1}</span>
+                    <div className="w-full h-4 bg-gradient-to-r from-tma-teal to-tma-coral rounded-full mb-8 shadow-inner"></div>
+                    <div className="w-20 h-20 number-badge rounded-3xl flex items-center justify-center mb-8 relative">
+                      <span className="text-3xl text-white font-black relative z-10">{index + 1}</span>
                     </div>
-                    <CardTitle className="text-gradient-primary font-inter text-xl mb-4">{level.title}</CardTitle>
-                    <p className="text-foreground/70 font-inter mb-4 leading-relaxed">{level.description}</p>
-                    <Badge variant="secondary" className="w-fit bg-gradient-to-r from-tma-coral/10 to-tma-gold/10 text-tma-coral border-tma-coral/30 font-medium">
+                    <CardTitle className="text-gradient-primary font-inter text-2xl mb-6 font-black">{level.title}</CardTitle>
+                    <p className="text-foreground/80 font-inter mb-6 leading-relaxed text-lg">{level.description}</p>
+                    <Badge variant="secondary" className="w-fit bg-gradient-to-r from-tma-coral/20 to-tma-gold/20 text-tma-coral border-2 border-tma-coral/40 font-bold text-lg p-3 rounded-2xl">
                       🏆 {level.badge}
                     </Badge>
                   </CardHeader>
                   <CardContent className="pt-0 pb-8 px-8">
                   <Button 
-                    className="w-full btn-modern-primary text-white font-inter font-bold transition-all duration-500 group-hover:scale-105"
+                    className="w-full btn-modern-accent text-white font-inter font-black text-lg py-6 rounded-2xl transition-all duration-500 group-hover:scale-105"
+                    style={{ boxShadow: 'var(--shadow-button-3d)' }}
                     asChild
                   >
                     <Link to="/apply#register" className="flex items-center justify-center">
-                      🚀 Select This Program
-                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                      <span className="mr-3 text-xl">🚀</span>
+                      Select This Program
+                      <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
                     </Link>
                   </Button>
                   </CardContent>
@@ -246,15 +261,15 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {learningAreas.map((area, index) => (
               <div key={index} className="group">
-                <div className="card-modern border-none text-center rounded-3xl p-8 h-full">
-                  <CardHeader className="pb-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-tma-blue to-tma-teal rounded-2xl flex items-center justify-center mx-auto mb-6 text-4xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                <div className="card-3d border-2 border-white/20 text-center rounded-3xl p-10 h-full hover:scale-105 transition-all duration-500">
+                  <CardHeader className="pb-8">
+                    <div className={`w-24 h-24 bg-gradient-to-br ${area.gradient} rounded-3xl flex items-center justify-center mx-auto mb-8 text-5xl shadow-lg group-hover:shadow-2xl transition-all duration-500 number-badge`}>
                       {area.icon}
                     </div>
-                    <CardTitle className="text-gradient-primary font-inter text-xl mb-4">{area.title}</CardTitle>
+                    <CardTitle className="text-gradient-primary font-inter text-2xl mb-6 font-black">{area.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-foreground/70 font-inter leading-relaxed">{area.description}</p>
+                    <p className="text-foreground/80 font-inter leading-relaxed text-lg font-medium">{area.description}</p>
                   </CardContent>
                 </div>
               </div>
@@ -262,10 +277,14 @@ const HomePage = () => {
           </div>
           
           <div className="text-center">
-            <Button size="lg" className="btn-modern-accent text-white font-inter font-bold px-12 py-6 rounded-2xl text-lg group">
-              <span className="mr-3">📖</span>
+            <Button 
+              size="lg" 
+              className="btn-modern-accent text-white font-inter font-black px-16 py-8 rounded-3xl text-xl group"
+              style={{ boxShadow: 'var(--shadow-button-3d)' }}
+            >
+              <span className="mr-4 text-2xl">📖</span>
               View Full Curriculum PDF
-              <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
             </Button>
           </div>
         </div>
