@@ -64,6 +64,42 @@ export type Database = {
           },
         ]
       }
+      attendance: {
+        Row: {
+          course_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          recorded_by: string
+          session_id: string | null
+          status: Database["public"]["Enums"]["attendance_status"]
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          recorded_by: string
+          session_id?: string | null
+          status: Database["public"]["Enums"]["attendance_status"]
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          recorded_by?: string
+          session_id?: string | null
+          status?: Database["public"]["Enums"]["attendance_status"]
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       challengers: {
         Row: {
           age: number | null
@@ -151,6 +187,7 @@ export type Database = {
           id: string
           is_published: boolean | null
           learning_objectives: string[] | null
+          lesson_plan: string | null
           session_number: number
           title: string
           updated_at: string
@@ -163,6 +200,7 @@ export type Database = {
           id?: string
           is_published?: boolean | null
           learning_objectives?: string[] | null
+          lesson_plan?: string | null
           session_number: number
           title: string
           updated_at?: string
@@ -175,6 +213,7 @@ export type Database = {
           id?: string
           is_published?: boolean | null
           learning_objectives?: string[] | null
+          lesson_plan?: string | null
           session_number?: number
           title?: string
           updated_at?: string
@@ -370,6 +409,118 @@ export type Database = {
         }
         Relationships: []
       }
+      progress_notes: {
+        Row: {
+          course_id: string
+          created_at: string
+          id: string
+          student_id: string
+          teacher_id: string
+          text: string
+          updated_at: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          id?: string
+          student_id: string
+          teacher_id: string
+          text: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          id?: string
+          student_id?: string
+          teacher_id?: string
+          text?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      resource_access_logs: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          resource_id: string
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          resource_id: string
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          resource_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_access_logs_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "teaching_resources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resource_shares: {
+        Row: {
+          created_at: string
+          from_teacher_id: string
+          id: string
+          resource_id: string
+          to_teacher_id: string
+        }
+        Insert: {
+          created_at?: string
+          from_teacher_id: string
+          id?: string
+          resource_id: string
+          to_teacher_id: string
+        }
+        Update: {
+          created_at?: string
+          from_teacher_id?: string
+          id?: string
+          resource_id?: string
+          to_teacher_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_shares_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "teaching_resources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resource_taxonomy: {
+        Row: {
+          category: string
+          id: string
+          value: string
+        }
+        Insert: {
+          category: string
+          id?: string
+          value: string
+        }
+        Update: {
+          category?: string
+          id?: string
+          value?: string
+        }
+        Relationships: []
+      }
       session_progress: {
         Row: {
           completed: boolean | null
@@ -532,6 +683,57 @@ export type Database = {
         }
         Relationships: []
       }
+      teaching_resources: {
+        Row: {
+          approval_status: Database["public"]["Enums"]["approval_status"]
+          created_at: string
+          description: string | null
+          file_size_bytes: number | null
+          id: string
+          level: string | null
+          owner_id: string
+          storage_path: string
+          subject: string | null
+          tags: string[] | null
+          title: string
+          type: string | null
+          updated_at: string
+          visibility: Database["public"]["Enums"]["resource_visibility"]
+        }
+        Insert: {
+          approval_status?: Database["public"]["Enums"]["approval_status"]
+          created_at?: string
+          description?: string | null
+          file_size_bytes?: number | null
+          id?: string
+          level?: string | null
+          owner_id: string
+          storage_path: string
+          subject?: string | null
+          tags?: string[] | null
+          title: string
+          type?: string | null
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["resource_visibility"]
+        }
+        Update: {
+          approval_status?: Database["public"]["Enums"]["approval_status"]
+          created_at?: string
+          description?: string | null
+          file_size_bytes?: number | null
+          id?: string
+          level?: string | null
+          owner_id?: string
+          storage_path?: string
+          subject?: string | null
+          tags?: string[] | null
+          title?: string
+          type?: string | null
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["resource_visibility"]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -543,7 +745,9 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      approval_status: "pending" | "approved" | "rejected"
+      attendance_status: "present" | "absent" | "late" | "excused"
+      resource_visibility: "private" | "shared" | "global"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -670,6 +874,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      approval_status: ["pending", "approved", "rejected"],
+      attendance_status: ["present", "absent", "late", "excused"],
+      resource_visibility: ["private", "shared", "global"],
+    },
   },
 } as const
