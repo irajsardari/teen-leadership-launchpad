@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -21,25 +21,31 @@ export default function PortalLoginPage() {
   const { user, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
 
-useEffect(() => {
-  const redirectByRole = async () => {
-    if (!authLoading && user) {
-      const { data: prof } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .maybeSingle();
-      const role = (prof?.role as string) || null;
-      if (role === "teacher" || role === "admin") {
-        navigate("/portal/teacher");
-      } else {
-        navigate("/portal/dashboard");
+  useEffect(() => {
+    const redirectByRole = async () => {
+      if (!authLoading && user) {
+        const target = searchParams.get("target");
+        if (target === "teacher") {
+          navigate("/portal/teacher", { replace: true });
+          return;
+        }
+        const { data: prof } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .maybeSingle();
+        const role = (prof?.role as string) || null;
+        if (role === "teacher" || role === "admin") {
+          navigate("/portal/teacher", { replace: true });
+        } else {
+          navigate("/portal/dashboard", { replace: true });
+        }
       }
-    }
-  };
-  redirectByRole();
-}, [user, authLoading, navigate]);
+    };
+    redirectByRole();
+  }, [user, authLoading, navigate, searchParams]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,23 +61,29 @@ useEffect(() => {
       if (error) {
         setError(error.message);
       } else {
-toast({
-  title: "Welcome back!",
-  description: "You have successfully signed in.",
-});
-const { data: authUser } = await supabase.auth.getUser();
-const uid = authUser?.user?.id;
-if (uid) {
-  const { data: prof } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", uid)
-    .maybeSingle();
-  const role = (prof?.role as string) || null;
-  navigate(role === "teacher" || role === "admin" ? "/portal/teacher" : "/portal/dashboard");
-} else {
-  navigate("/portal/dashboard");
-}
+        toast({
+          title: "Welcome back!",
+          description: "You have successfully signed in.",
+        });
+        const target = new URLSearchParams(window.location.search).get("target");
+        if (target === "teacher") {
+          navigate("/portal/teacher", { replace: true });
+          return;
+        }
+        const { data: authUser } = await supabase.auth.getUser();
+        const uid = authUser?.user?.id;
+        if (uid) {
+          const { data: prof } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", uid)
+            .maybeSingle();
+          const role = (prof?.role as string) || null;
+          navigate(role === "teacher" || role === "admin" ? "/portal/teacher" : "/portal/dashboard", { replace: true });
+        } else {
+          navigate("/portal/dashboard", { replace: true });
+        }
+      }
       }
     } catch (err) {
       setError("An unexpected error occurred");

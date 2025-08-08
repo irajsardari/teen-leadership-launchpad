@@ -17,6 +17,7 @@ import TeacherResourcesTab from "@/components/TeacherResourcesTab";
 import TeacherAttendanceTab from "@/components/TeacherAttendanceTab";
 import TeacherProgressNotesTab from "@/components/TeacherProgressNotesTab";
 import TeacherAnalyticsTab from "@/components/TeacherAnalyticsTab";
+import ProfileDialog from "@/components/ProfileDialog";
 import { 
   BookOpen, 
   Users, 
@@ -72,6 +73,7 @@ const TeacherDashboardPage = () => {
   const [selectedCourse, setSelectedCourse] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [profileRole, setProfileRole] = useState<string | null>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
   
   // New course form state
   const [newCourse, setNewCourse] = useState({
@@ -94,8 +96,8 @@ const TeacherDashboardPage = () => {
   useEffect(() => {
     console.log("Teacher Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
     if (!isLoading && !user) {
-      console.log("Teacher Dashboard: No user, navigating to /portal");
-      navigate("/portal", { replace: true });
+      console.log("Teacher Dashboard: No user, navigating to /portal?target=teacher");
+      navigate("/portal?target=teacher", { replace: true });
       return;
     }
 
@@ -334,9 +336,12 @@ const TeacherDashboardPage = () => {
             <h1 className="text-2xl font-bold">Teacher Dashboard</h1>
             <p className="text-muted-foreground">Welcome back, {user?.email}</p>
           </div>
-          <Button onClick={handleSignOut} variant="outline">
-            Sign Out
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={() => setProfileOpen(true)}>Profile</Button>
+            <Button onClick={handleSignOut} variant="outline">
+              Sign Out
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -697,6 +702,8 @@ const TeacherDashboardPage = () => {
           </TabsContent>
         </Tabs>
       </div>
+      {/* ... keep existing code (rest of dashboard content) */}
+      <ProfileDialog open={profileOpen} onOpenChange={setProfileOpen} />
     </div>
   );
 };

@@ -38,7 +38,7 @@ const LearningPortalPage = () => {
               </CardHeader>
               <CardContent>
                 <Button size="lg" className="w-full" asChild>
-                  <Link to="/portal/dashboard">Enter Challengers Portal</Link>
+                  <Link to="/portal?target=dashboard">Enter Challengers Portal</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -56,7 +56,7 @@ const LearningPortalPage = () => {
               </CardHeader>
               <CardContent>
                 <Button size="lg" variant="outline" className="w-full" asChild>
-                  <Link to="/portal/teacher">Enter Teacher Portal</Link>
+                  <Link to="/portal?target=teacher">Enter Teacher Portal</Link>
                 </Button>
               </CardContent>
             </Card>

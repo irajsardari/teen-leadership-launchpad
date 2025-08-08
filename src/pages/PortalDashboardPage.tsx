@@ -20,7 +20,8 @@ import {
   CheckCircle,
   LogOut,
   User,
-  GraduationCap
+  GraduationCap,
+  Settings
 } from "lucide-react";
 
 interface Enrollment {
@@ -76,6 +77,7 @@ export default function PortalDashboardPage() {
   const [recentMaterials, setRecentMaterials] = useState<RecentMaterial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [profileRole, setProfileRole] = useState<string | null>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -83,9 +85,9 @@ export default function PortalDashboardPage() {
   useEffect(() => {
     console.log("Portal Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
     if (!user) {
-      console.log("Portal Dashboard: No user, navigating to /portal");
+      console.log("Portal Dashboard: No user, navigating to /portal?target=dashboard");
       setIsLoading(false);
-      navigate("/portal", { replace: true });
+      navigate("/portal?target=dashboard", { replace: true });
       return;
     }
     if (user) {
@@ -272,7 +274,7 @@ export default function PortalDashboardPage() {
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => setProfileOpen(true)}>
                   <User className="mr-2 h-4 w-4" />
                   Profile
                 </Button>
@@ -475,6 +477,7 @@ export default function PortalDashboardPage() {
           </div>
         </div>
       </div>
+      <ProfileDialog open={profileOpen} onOpenChange={setProfileOpen} />
     </>
   );
 }
