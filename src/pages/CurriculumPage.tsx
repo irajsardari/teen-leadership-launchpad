@@ -8,83 +8,92 @@ const CurriculumPage = () => {
   const curriculumLevels = [
     {
       level: "Explorers",
-      badge: "Explorer Badge",
-      years: "Years 1-2",
-      ages: "10-11",
+      badge: "Explorer",
+      years: "Years 1-3",
+      ages: "10-12",
       terms: 6,
-      focus: "Pre-TMA Foundation - Self-Discovery & Basic Life Skills",
+      focus: "Self-discovery, basic life skills, communication, and healthy habits.",
       subjects: [
         "Self-Awareness & Confidence",
-        "Basic Communication Skills", 
-        "Goal Setting for Kids",
-        "Friendship & Social Skills",
-        "Basic Problem-Solving",
+        "Healthy Habits",
+        "Foundational Communication",
         "Time Management Basics",
         "Emotion Recognition",
-        "Healthy Habits",
-        "Introduction to Leadership"
+        "Goal Setting for Pre-Teens",
+        "Friendship & Social Skills",
+        "Problem-Solving Basics"
       ],
       color: "from-green-500 to-teal-500"
     },
     {
       level: "Builders",
-      badge: "Builder Badge",
-      years: "Years 3-5",
-      ages: "12-14",
-      terms: 9,
-      focus: "Foundations of Leadership, Discipline & Emotional Intelligence",
+      badge: "Builder",
+      years: "Years 4-5",
+      ages: "13-14",
+      terms: 6,
+      focus: "Leadership foundations, emotional intelligence, teamwork, and planning.",
       subjects: [
         "Leadership Foundations",
-        "Emotional Intelligence Basics", 
+        "Emotional Intelligence",
         "Communication & Presentation",
         "Time Management & Organization",
-        "Goal Achievement Strategies",
         "Team Collaboration",
-        "Basic Psychology Principles",
         "Ethics & Values",
-        "Creative Problem-Solving"
+        "Creative Problem-Solving",
+        "Goal Achievement Strategies"
       ],
       color: "from-blue-500 to-teal-500"
     },
     {
       level: "Innovators", 
-      badge: "Innovator Badge",
+      badge: "Innovator",
       years: "Years 6-7",
       ages: "15-16",
       terms: 6,
-      focus: "Advanced Leadership, Communication & Innovation Skills",
+      focus: "Advanced leadership, innovation, project management, and strategy.",
       subjects: [
         "Advanced Leadership Principles",
         "Innovation & Creative Thinking",
         "Project Management",
         "Public Speaking & Persuasion",
         "Conflict Resolution",
-        "Digital Innovation",
         "Decision Making & Critical Thinking",
-        "Cultural Awareness",
+        "Digital Innovation",
         "Entrepreneurial Mindset"
       ],
       color: "from-teal-500 to-blue-600"
     },
     {
-      level: "Pathfinders",
-      badge: "Pathfinder Badge",
-      years: "Years 8-9", 
-      ages: "17-18",
-      terms: 7,
-      focus: "Professional Leadership, Career Preparation & Life Mastery",
+      level: "Trailblazers",
+      badge: "Trailblazer",
+      years: "Year 8",
+      ages: "17",
+      terms: 3,
+      focus: "Professional leadership, career skills, business, and global citizenship.",
       subjects: [
         "Strategic Leadership",
-        "Advanced Psychology & Behavior",
         "Business & Entrepreneurship",
-        "Mentorship & Coaching",
-        "Change Management",
-        "Global Leadership",
         "Career Planning & Development",
-        "Social Impact & Responsibility",
-        "Life Skills Mastery"
+        "Mentorship & Coaching",
+        "Global Leadership",
+        "Social Impact & Responsibility"
       ],
       color: "from-blue-600 to-indigo-600"
+    },
+    {
+      level: "Elite Summit (Black Belt)",
+      badge: "Elite",
+      years: "Capstone",
+      ages: "18",
+      terms: 1,
+      focus: "Final impact project, public presentation, mentoring, and 10-year life plan.",
+      subjects: [
+        "Impact Project",
+        "Public Presentation",
+        "Mentoring",
+        "10-Year Life Plan"
+      ],
+      color: "from-tma-gold to-tma-teal"
     }
   ];
 
@@ -139,17 +148,12 @@ const CurriculumPage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
-              Program Structure
+              TMA Challenger Journey
             </h2>
-            <p className="text-xl text-tma-gray max-w-3xl mx-auto mb-8">
-              Our curriculum is divided into four progressive levels, each building 
-              upon the previous one to ensure comprehensive skill development from pre-teens to young adults.
-            </p>
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
-              <h3 className="text-xl font-semibold text-primary mb-3">Pre-TMA Foundation Program</h3>
+              <h3 className="text-xl font-semibold text-primary mb-2">Total: 8 Years | Ages 10–18 | 28 Terms</h3>
               <p className="text-foreground/80">
-                Starting at age 10, our foundation program introduces essential life skills 
-                and leadership concepts in an age-appropriate, engaging environment.
+                Identity: All participants are TMA Challengers — future-ready leaders in training.
               </p>
             </div>
           </div>
@@ -172,7 +176,7 @@ const CurriculumPage = () => {
                       {level.level} Level
                     </h3>
                     <Badge variant="secondary" className="mb-3 w-fit">
-                      Challenger - {level.badge}
+                      🏅 Challenger - {level.badge}
                     </Badge>
                     <p className="text-tma-blue font-semibold mb-4">
                       {level.focus}

@@ -19,7 +19,7 @@ const AboutPage = () => {
     {
       icon: Target,
       title: "Age-appropriate design",
-      description: "Clear stages for growth: Explorers (10-11), Builders (12-14), Innovators (15-16), Pathfinders (17-18)"
+      description: "Clear stages for growth: Explorers (10-12), Builders (13-14), Innovators (15-16), Trailblazers (17), Elite Summit (18)"
     },
     {
       icon: Award,

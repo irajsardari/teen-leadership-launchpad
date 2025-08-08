@@ -18,8 +18,8 @@ const ApplyPage = () => {
   const ageGroups = [
     {
       group: "Level 1: Explorers",
-      ageRange: "10-11 years",
-      description: "Pre-TMA Foundation - Self-Discovery and Basic Life Skills",
+      ageRange: "10-12 years",
+      description: "Self-discovery, basic life skills, communication, and healthy habits.",
       price: "$79/month",
       badge: "Explorer Badge",
       features: [
@@ -32,8 +32,8 @@ const ApplyPage = () => {
     },
     {
       group: "Level 2: Builders",
-      ageRange: "12-14 years",
-      description: "Foundations of Leadership, Discipline & Emotional Intelligence",
+      ageRange: "13-14 years",
+      description: "Leadership foundations, emotional intelligence, teamwork, and planning.",
       price: "$99/month",
       badge: "Builder Badge",
       features: [
@@ -47,7 +47,7 @@ const ApplyPage = () => {
     {
       group: "Level 3: Innovators", 
       ageRange: "15-16 years",
-      description: "Advanced Leadership, Communication & Innovation Skills",
+      description: "Advanced leadership, innovation, project management, and strategy.",
       price: "$129/month",
       badge: "Innovator Badge",
       features: [
@@ -59,13 +59,13 @@ const ApplyPage = () => {
       ]
     },
     {
-      group: "Level 4: Pathfinders",
-      ageRange: "17-18 years",
-      description: "Professional Leadership, Career Preparation & Life Mastery",
+      group: "Level 4: Trailblazers",
+      ageRange: "17 years",
+      description: "Professional leadership, career skills, business, and global citizenship.",
       price: "$149/month",
-      badge: "Pathfinder Badge",
+      badge: "Trailblazer Badge",
       features: [
-        "7 professional terms",
+        "3 capstone terms",
         "Strategic leadership",
         "Business & entrepreneurship",
         "Career planning & development",
@@ -158,7 +158,7 @@ const ApplyPage = () => {
                         <CardTitle className="text-tma-navy">{group.group}</CardTitle>
                         <CardDescription>{group.description}</CardDescription>
                         <Badge variant="secondary" className="w-fit mt-2 bg-[#006D6C]/10 text-[#006D6C]">
-                          Challenger - {group.badge}
+                          🏅 Challenger - {group.badge}
                         </Badge>
                       </CardHeader>
                       <CardContent>

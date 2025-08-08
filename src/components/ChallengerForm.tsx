@@ -146,7 +146,7 @@ const ChallengerForm = () => {
                 <FormItem>
                   <FormLabel>Preferred Level</FormLabel>
                   <FormControl>
-                    <Input placeholder="Level 1 (Explorers), Level 2 (Builders), Level 3 (Innovators), Level 4 (Pathfinders)" {...field} />
+                    <Input placeholder="Level 1 (Explorers), Level 2 (Builders), Level 3 (Innovators), Level 4 (Trailblazers), Elite Summit" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

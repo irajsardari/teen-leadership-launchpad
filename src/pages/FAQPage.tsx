@@ -17,9 +17,10 @@ const FAQPage = () => {
       answer: "TMA is designed for young people aged 10 to 18, divided across four levels:",
       details: [
         "• Explorers (10–12)",
-        "• Builders (13–15)",
+        "• Builders (13–14)",
         "• Innovators (15–16)",
-        "• Pathfinders (17–18)"
+        "• Trailblazers (17)",
+        "• Elite Summit (18)"
       ],
       additionalText: "Each level includes unique themes and life skills, taught in carefully designed sessions and terms."
     },

@@ -8,28 +8,34 @@ import heroImage from "@/assets/hero-teenagers.jpg";
 const HomePage = () => {
   const levels = [
     {
-      title: "Level 1: Explorers (Ages 10–11)",
-      description: "Pre-TMA Foundation - Self-Discovery and Basic Life Skills",
-      badge: "Challenger - Explorer Badge",
+      title: "Level 1: Explorers (Ages 10–12)",
+      description: "Self-discovery, basic life skills, communication, and healthy habits.",
+      badge: "Explorer",
       color: "from-tma-teal to-tma-blue"
     },
     {
-      title: "Level 2: Builders (Ages 12–14)",
-      description: "Foundations of Leadership, Discipline, and Emotional Intelligence",
-      badge: "Challenger - Builder Badge",
+      title: "Level 2: Builders (Ages 13–14)",
+      description: "Leadership foundations, emotional intelligence, teamwork, and planning.",
+      badge: "Builder",
       color: "from-tma-navy to-tma-blue"
     },
     {
       title: "Level 3: Innovators (Ages 15–16)", 
-      description: "Advanced Leadership, Communication, and Innovation Skills",
-      badge: "Challenger - Innovator Badge",
+      description: "Advanced leadership, innovation, project management, and strategy.",
+      badge: "Innovator",
       color: "from-tma-blue to-tma-teal"
     },
     {
-      title: "Level 4: Pathfinders (Ages 17–18)",
-      description: "Professional Leadership, Career Preparation, and Life Mastery",
-      badge: "Challenger - Pathfinder Badge",
+      title: "Level 4: Trailblazers (Age 17)",
+      description: "Professional leadership, career skills, business, and global citizenship.",
+      badge: "Trailblazer",
       color: "from-tma-coral to-tma-coral/80"
+    },
+    {
+      title: "Elite Summit (Black Belt) — Age 18",
+      description: "Final impact project, public presentation, mentoring, and 10-year life plan.",
+      badge: "Elite",
+      color: "from-tma-gold to-tma-teal"
     }
   ];
 
@@ -209,13 +215,12 @@ const HomePage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 font-inter">
-              Our Structure (4 Levels, 28 Terms)
+              TMA Challenger Journey
             </h2>
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
-              <h3 className="text-xl font-semibold text-primary mb-3">Pre-TMA Foundation Program</h3>
+              <h3 className="text-xl font-semibold text-primary mb-2">Total: 8 Years | Ages 10–18 | 28 Terms</h3>
               <p className="text-foreground/80">
-                Our foundation program for ages 10-11 prepares students for the full TMA Academy experience, 
-                introducing basic life skills, self-awareness, and leadership fundamentals in an age-appropriate environment.
+                Identity: All participants are TMA Challengers — future-ready leaders in training.
               </p>
             </div>
           </div>
@@ -232,7 +237,7 @@ const HomePage = () => {
                     <CardTitle className="text-gradient-primary font-inter text-2xl mb-6 font-black">{level.title}</CardTitle>
                     <p className="text-foreground/80 font-inter mb-6 leading-relaxed text-lg">{level.description}</p>
                     <Badge variant="secondary" className="w-fit bg-gradient-to-r from-tma-coral/20 to-tma-gold/20 text-tma-coral border-2 border-tma-coral/40 font-bold text-lg p-3 rounded-2xl">
-                      🏆 {level.badge}
+                      🏅 Challenger - {level.badge}
                     </Badge>
                   </CardHeader>
                   <CardContent className="pt-0 pb-8 px-8">
