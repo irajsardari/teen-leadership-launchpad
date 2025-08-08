@@ -68,7 +68,7 @@ export default function TeacherProgressNotesTab() {
       if (!selectedCourse || !selectedStudent) return;
       const { data } = await supabase
         .from("progress_notes")
-        .select("id, text, created_at, student_id, session_id")
+        .select("id, text, created_at, student_id")
         .eq("course_id", selectedCourse)
         .eq("student_id", selectedStudent)
         .order("created_at", { ascending: false });
@@ -88,7 +88,7 @@ export default function TeacherProgressNotesTab() {
         {
           student_id: selectedStudent,
           course_id: selectedCourse,
-          session_id: selectedSession || null,
+          
           teacher_id: user.id,
           text,
         }
@@ -98,7 +98,7 @@ export default function TeacherProgressNotesTab() {
       // refresh
       const { data } = await supabase
         .from("progress_notes")
-        .select("id, text, created_at, student_id, session_id")
+        .select("id, text, created_at, student_id")
         .eq("course_id", selectedCourse)
         .eq("student_id", selectedStudent)
         .order("created_at", { ascending: false });
