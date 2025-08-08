@@ -97,8 +97,9 @@ export default function PortalDashboardPage() {
         if (!error) {
           const role = (prof?.role as string) || null;
           setProfileRole(role);
-          if (role !== "student") {
-            toast({ title: "Access denied", description: "Student role required", variant: "destructive" });
+          const isLearner = role === "student" || role === "challenger";
+          if (!isLearner) {
+            toast({ title: "Access denied", description: "Student access required", variant: "destructive" });
             navigate("/portal", { replace: true });
             return;
           }
