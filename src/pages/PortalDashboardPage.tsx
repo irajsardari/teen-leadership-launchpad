@@ -84,35 +84,51 @@ export default function PortalDashboardPage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    console.log("Portal Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
-    if (!user) {
-      console.log("Portal Dashboard: No user, navigating to /portal?target=dashboard");
-      setIsLoading(false);
-      navigate("/portal?target=dashboard", { replace: true });
-      return;
-    }
-    if (user) {
-      (async () => {
+    const init = async () => {
+      console.log("Portal Dashboard init - user:", user?.email);
+      if (!user) {
+        console.log("Portal Dashboard: No user, navigating to /portal?target=dashboard");
+        setIsLoading(false);
+        navigate("/portal?target=dashboard", { replace: true });
+        return;
+      }
+
+      try {
         const { data: prof, error } = await supabase
           .from("profiles")
           .select("role")
           .eq("id", user.id)
           .maybeSingle();
-        if (!error) {
-          const role = (prof?.role as string) || null;
-          setProfileRole(role);
-          const hasAccess = role === "student" || role === "challenger" || role === "admin";
-          if (!hasAccess) {
-            toast({ title: "Access denied", description: "Portal access is restricted.", variant: "destructive" });
-            setIsLoading(false);
-            navigate("/portal", { replace: true });
-            return;
-          }
+
+        if (error) {
+          console.warn("Failed to fetch profile role, proceeding with default access", error);
+          setProfileRole(null);
           await fetchDashboardData();
+          return;
         }
-      })();
-    }
-  }, [user, isLoading, navigate]);
+
+        const role = (prof?.role as string) || null;
+        setProfileRole(role);
+        // Allow access by default if role is missing (new users without profile row)
+        const hasAccess = role === "student" || role === "challenger" || role === "admin" || role === null;
+        if (!hasAccess) {
+          toast({ title: "Access denied", description: "Portal access is restricted.", variant: "destructive" });
+          navigate("/portal", { replace: true });
+          return;
+        }
+
+        await fetchDashboardData();
+      } catch (err) {
+        console.error("Error initializing dashboard:", err);
+        // Try loading dashboard anyway
+        await fetchDashboardData();
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    init();
+  }, [user, navigate]);
 
   const fetchDashboardData = async () => {
     if (!user) return;

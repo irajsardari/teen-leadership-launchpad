@@ -97,6 +97,7 @@ const TeacherDashboardPage = () => {
     console.log("Teacher Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
     if (!isLoading && !user) {
       console.log("Teacher Dashboard: No user, navigating to /portal?target=teacher");
+      setLoading(false);
       navigate("/portal?target=teacher", { replace: true });
       return;
     }
@@ -114,12 +115,14 @@ const TeacherDashboardPage = () => {
           setProfileRole(role);
           if (role !== "teacher" && role !== "admin") {
             toast({ title: "Access denied", description: "Teacher role required", variant: "destructive" });
+            setLoading(false);
             navigate("/portal", { replace: true });
             return;
           }
           await fetchTeacherData();
         } catch (e) {
           console.error("Error checking profile role", e);
+          setLoading(false);
           navigate("/portal", { replace: true });
         }
       })();
