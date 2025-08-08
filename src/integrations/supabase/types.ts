@@ -825,6 +825,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      set_user_role: {
+        Args: { _email: string; _role: string }
+        Returns: undefined
+      }
     }
     Enums: {
       approval_status: "pending" | "approved" | "rejected"
