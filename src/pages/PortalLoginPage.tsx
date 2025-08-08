@@ -84,7 +84,6 @@ export default function PortalLoginPage() {
           navigate("/portal/dashboard", { replace: true });
         }
       }
-      }
     } catch (err) {
       setError("An unexpected error occurred");
     } finally {
