@@ -471,11 +471,68 @@ export type Database = {
           },
         ]
       }
+      resource_links: {
+        Row: {
+          course_id: string | null
+          id: string
+          linked_at: string | null
+          linked_by: string | null
+          resource_id: string
+          session_id: string | null
+        }
+        Insert: {
+          course_id?: string | null
+          id?: string
+          linked_at?: string | null
+          linked_by?: string | null
+          resource_id: string
+          session_id?: string | null
+        }
+        Update: {
+          course_id?: string | null
+          id?: string
+          linked_at?: string | null
+          linked_by?: string | null
+          resource_id?: string
+          session_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_links_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_links_linked_by_fkey"
+            columns: ["linked_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_links_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "teaching_resources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_links_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "course_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       resource_shares: {
         Row: {
           created_at: string
           from_teacher_id: string
           id: string
+          note: string | null
           resource_id: string
           to_teacher_id: string
         }
@@ -483,6 +540,7 @@ export type Database = {
           created_at?: string
           from_teacher_id: string
           id?: string
+          note?: string | null
           resource_id: string
           to_teacher_id: string
         }
@@ -490,6 +548,7 @@ export type Database = {
           created_at?: string
           from_teacher_id?: string
           id?: string
+          note?: string | null
           resource_id?: string
           to_teacher_id?: string
         }
@@ -686,12 +745,16 @@ export type Database = {
       teaching_resources: {
         Row: {
           approval_status: Database["public"]["Enums"]["approval_status"]
+          approved_at: string | null
+          approved_by: string | null
+          audit_meta: Json | null
           created_at: string
           description: string | null
           file_size_bytes: number | null
           id: string
           level: string | null
           owner_id: string
+          rejection_reason: string | null
           storage_path: string
           subject: string | null
           tags: string[] | null
@@ -702,12 +765,16 @@ export type Database = {
         }
         Insert: {
           approval_status?: Database["public"]["Enums"]["approval_status"]
+          approved_at?: string | null
+          approved_by?: string | null
+          audit_meta?: Json | null
           created_at?: string
           description?: string | null
           file_size_bytes?: number | null
           id?: string
           level?: string | null
           owner_id: string
+          rejection_reason?: string | null
           storage_path: string
           subject?: string | null
           tags?: string[] | null
@@ -718,12 +785,16 @@ export type Database = {
         }
         Update: {
           approval_status?: Database["public"]["Enums"]["approval_status"]
+          approved_at?: string | null
+          approved_by?: string | null
+          audit_meta?: Json | null
           created_at?: string
           description?: string | null
           file_size_bytes?: number | null
           id?: string
           level?: string | null
           owner_id?: string
+          rejection_reason?: string | null
           storage_path?: string
           subject?: string | null
           tags?: string[] | null
@@ -732,7 +803,15 @@ export type Database = {
           updated_at?: string
           visibility?: Database["public"]["Enums"]["resource_visibility"]
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "teaching_resources_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -747,7 +826,7 @@ export type Database = {
     Enums: {
       approval_status: "pending" | "approved" | "rejected"
       attendance_status: "present" | "absent" | "late" | "excused"
-      resource_visibility: "private" | "shared" | "global"
+      resource_visibility: "private" | "shared" | "global" | "org"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -877,7 +956,7 @@ export const Constants = {
     Enums: {
       approval_status: ["pending", "approved", "rejected"],
       attendance_status: ["present", "absent", "late", "excused"],
-      resource_visibility: ["private", "shared", "global"],
+      resource_visibility: ["private", "shared", "global", "org"],
     },
   },
 } as const

@@ -75,6 +75,7 @@ export default function PortalDashboardPage() {
   const [recentProgress, setRecentProgress] = useState<SessionProgress[]>([]);
   const [recentMaterials, setRecentMaterials] = useState<RecentMaterial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [profileRole, setProfileRole] = useState<string | null>(null);
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -86,9 +87,24 @@ export default function PortalDashboardPage() {
       navigate("/portal", { replace: true });
       return;
     }
-    
     if (user) {
-      fetchDashboardData();
+      (async () => {
+        const { data: prof, error } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .maybeSingle();
+        if (!error) {
+          const role = (prof?.role as string) || null;
+          setProfileRole(role);
+          if (role !== "student") {
+            toast({ title: "Access denied", description: "Student role required", variant: "destructive" });
+            navigate("/portal", { replace: true });
+            return;
+          }
+          await fetchDashboardData();
+        }
+      })();
     }
   }, [user, isLoading, navigate]);
 

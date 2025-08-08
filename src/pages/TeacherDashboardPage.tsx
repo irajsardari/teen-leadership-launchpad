@@ -391,6 +391,7 @@ const TeacherDashboardPage = () => {
           <TabsList>
             <TabsTrigger value="courses">My Courses</TabsTrigger>
             <TabsTrigger value="students">Students</TabsTrigger>
+            <TabsTrigger value="resources">Resources</TabsTrigger>
             <TabsTrigger value="create">Create Content</TabsTrigger>
           </TabsList>
 
@@ -522,6 +523,10 @@ const TeacherDashboardPage = () => {
                 )}
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="resources" className="space-y-6">
+            <TeacherResourcesTab />
           </TabsContent>
 
           <TabsContent value="create" className="space-y-6">
