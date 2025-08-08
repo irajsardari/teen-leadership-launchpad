@@ -388,6 +388,7 @@ export type Database = {
           id: string
           lms_role: string | null
           role: string | null
+          updated_at: string
         }
         Insert: {
           age?: number | null
@@ -397,6 +398,7 @@ export type Database = {
           id: string
           lms_role?: string | null
           role?: string | null
+          updated_at?: string
         }
         Update: {
           age?: number | null
@@ -406,6 +408,7 @@ export type Database = {
           id?: string
           lms_role?: string | null
           role?: string | null
+          updated_at?: string
         }
         Relationships: []
       }
