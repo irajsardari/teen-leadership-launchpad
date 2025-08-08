@@ -73,19 +73,9 @@ const Header = () => {
                 size="sm" 
                 asChild
               >
-                <Link to="/portal">
-                  Challengers Portal
+                <Link to="/learning-portal">
+                  Learning Portal
                 </Link>
-              </Button>
-              
-              <Button 
-                className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg hover:shadow-[#006D6C]/25 rounded-lg px-5 py-2" 
-                size="sm" 
-                asChild
-              >
-<Link to="/portal">
-  Teacher Login
-</Link>
               </Button>
               
               {/* Auth Section */}
@@ -193,19 +183,9 @@ const Header = () => {
                   size="sm" 
                   asChild
                 >
-                  <Link to="/portal">
-                    Challengers Portal
+                  <Link to="/learning-portal">
+                    Learning Portal
                   </Link>
-                </Button>
-                
-                <Button 
-                  className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter w-full transition-all duration-300 hover:scale-105" 
-                  size="sm" 
-                  asChild
-                >
-<Link to="/portal">
-  Teacher Login
-</Link>
                 </Button>
                 
                 {/* Mobile Auth */}

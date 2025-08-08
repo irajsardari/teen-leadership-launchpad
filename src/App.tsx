@@ -24,6 +24,7 @@ import PortalDashboardPage from "./pages/PortalDashboardPage";
 import TeacherDashboardPage from "./pages/TeacherDashboardPage";
 import TeacherPortalPage from "./pages/TeacherPortalPage";
 import CourseStructurePage from "./pages/CourseStructurePage";
+import LearningPortalPage from "./pages/LearningPortalPage";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./hooks/useAuth";
 
@@ -52,11 +53,12 @@ const App = () => (
                 <Route path="/insights" element={<BlogPage />} />
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
                 <Route path="/challenger" element={<ChallengerPage />} />
-                <Route path="/portal-info" element={<PortalPage />} />
-                <Route path="/portal" element={<PortalLoginPage />} />
-                <Route path="/portal-login" element={<TeacherPortalPage />} />
-                <Route path="/portal/dashboard" element={<PortalDashboardPage />} />
-                <Route path="/portal/teacher" element={<TeacherDashboardPage />} />
+<Route path="/learning-portal" element={<LearningPortalPage />} />
+<Route path="/portal-info" element={<PortalPage />} />
+<Route path="/portal" element={<PortalLoginPage />} />
+<Route path="/portal-login" element={<TeacherPortalPage />} />
+<Route path="/portal/dashboard" element={<PortalDashboardPage />} />
+<Route path="/portal/teacher" element={<TeacherDashboardPage />} />
                 <Route path="/portal/course/:courseId" element={<CourseStructurePage />} />
                 <Route path="/portal/course/:courseId/session/:sessionId" element={<CourseStructurePage />} />
                 <Route path="/auth" element={<AuthPage />} />
