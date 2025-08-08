@@ -82,8 +82,9 @@ export default function PortalDashboardPage() {
 
   useEffect(() => {
     console.log("Portal Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
-    if (!isLoading && !user) {
+    if (!user) {
       console.log("Portal Dashboard: No user, navigating to /portal");
+      setIsLoading(false);
       navigate("/portal", { replace: true });
       return;
     }
@@ -97,9 +98,10 @@ export default function PortalDashboardPage() {
         if (!error) {
           const role = (prof?.role as string) || null;
           setProfileRole(role);
-          const isLearner = role === "student" || role === "challenger";
-          if (!isLearner) {
-            toast({ title: "Access denied", description: "Student access required", variant: "destructive" });
+          const hasAccess = role === "student" || role === "challenger" || role === "admin";
+          if (!hasAccess) {
+            toast({ title: "Access denied", description: "Portal access is restricted.", variant: "destructive" });
+            setIsLoading(false);
             navigate("/portal", { replace: true });
             return;
           }
