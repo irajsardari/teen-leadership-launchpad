@@ -228,13 +228,8 @@ const AboutPage = () => {
                   <div className="pt-8 border-t border-border/30">
                     <p className="text-base text-foreground/70 mb-2">With all my heart,</p>
                     <p className="text-xl font-bold text-primary mb-1">Dr. Iraj Sardari Baf</p>
-                    <p className="text-base text-tma-coral italic mb-8">A servant of the next generation</p>
+                    <p className="text-base text-tma-coral italic mb-4">A servant of the next generation</p>
                     
-                    {/* Founder Photo */}
-                    <Avatar className="w-32 h-32 md:w-40 md:h-40 mx-auto">
-                      <AvatarImage src="/lovable-uploads/3e5fdf0b-b217-4351-89f4-4d4158e63364.png" alt="Dr. Iraj Sardari Baf" />
-                      <AvatarFallback className="text-2xl font-bold">IS</AvatarFallback>
-                    </Avatar>
                   </div>
                 </div>
               </CardContent>
