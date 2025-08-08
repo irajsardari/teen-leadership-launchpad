@@ -131,8 +131,8 @@ const HomePage = () => {
   </Button>
   <Button 
     size="lg" 
-    className="glass-card-modern text-white hover:bg-white/30 font-inter font-bold text-xl px-16 py-8 rounded-3xl transition-all duration-500 border-2 border-white/40 hover:border-white/80 group" 
-    variant="outline" 
+    variant="cta-teal"
+    className="font-inter font-bold text-xl px-16 py-8 rounded-3xl transition-all duration-500 group" 
     asChild
   >
     <Link to="/curriculum" className="flex items-center">
@@ -315,7 +315,7 @@ const HomePage = () => {
                 TMA provides short courses and guides to help parents support their teens' growth, plus teacher training materials to ensure our program is delivered with care and excellence.
               </p>
             </div>
-            <Button size="lg" className="bg-transparent border-2 border-[#012D5A] text-[#012D5A] hover:bg-[#F8F4EE] font-inter" variant="outline">
+            <Button size="lg" variant="outline" className="font-inter">
               → Learn About Parent & Teacher Programs
             </Button>
           </div>

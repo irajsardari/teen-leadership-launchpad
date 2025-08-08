@@ -299,7 +299,7 @@ const AboutPage = () => {
               <Button size="lg" className="bg-[#FF715B] hover:bg-[#FF715B]/90 text-white font-inter" asChild>
                 <Link to="/apply">Apply Now</Link>
               </Button>
-              <Button size="lg" className="bg-transparent border-2 border-[#012D5A] text-[#012D5A] hover:bg-[#F8F4EE] font-inter" variant="outline" asChild>
+              <Button size="lg" variant="outline" className="font-inter" asChild>
                 <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
