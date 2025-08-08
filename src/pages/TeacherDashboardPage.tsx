@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import TeacherResourcesTab from "@/components/TeacherResourcesTab";
 import { 
   BookOpen, 
   Users, 
@@ -66,6 +68,7 @@ const TeacherDashboardPage = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<string>("");
   const [loading, setLoading] = useState(true);
+  const [profileRole, setProfileRole] = useState<string | null>(null);
   
   // New course form state
   const [newCourse, setNewCourse] = useState({
@@ -92,9 +95,29 @@ const TeacherDashboardPage = () => {
       navigate("/portal", { replace: true });
       return;
     }
-    
+
     if (user) {
-      fetchTeacherData();
+      (async () => {
+        try {
+          const { data: prof, error: profError } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .maybeSingle();
+          if (profError) throw profError;
+          const role = (prof?.role as string) || null;
+          setProfileRole(role);
+          if (role !== "teacher" && role !== "admin") {
+            toast({ title: "Access denied", description: "Teacher role required", variant: "destructive" });
+            navigate("/portal", { replace: true });
+            return;
+          }
+          await fetchTeacherData();
+        } catch (e) {
+          console.error("Error checking profile role", e);
+          navigate("/portal", { replace: true });
+        }
+      })();
     }
   }, [user, isLoading, navigate]);
 
@@ -297,6 +320,11 @@ const TeacherDashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Teacher Portal | TMA</title>
+        <meta name="description" content="Teacher Portal to manage courses, students, and resources." />
+        <link rel="canonical" href="/portal/teacher" />
+      </Helmet>
       <div className="border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div>
