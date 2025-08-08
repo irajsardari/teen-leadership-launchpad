@@ -83,9 +83,9 @@ const Header = () => {
                 size="sm" 
                 asChild
               >
-                <Link to="/portal-login">
-                  Teacher Login
-                </Link>
+<Link to="/portal">
+  Teacher Login
+</Link>
               </Button>
               
               {/* Auth Section */}
@@ -203,9 +203,9 @@ const Header = () => {
                   size="sm" 
                   asChild
                 >
-                  <Link to="/portal-login">
-                    Teacher Login
-                  </Link>
+<Link to="/portal">
+  Teacher Login
+</Link>
                 </Button>
                 
                 {/* Mobile Auth */}

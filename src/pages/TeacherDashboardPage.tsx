@@ -14,6 +14,9 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import TeacherResourcesTab from "@/components/TeacherResourcesTab";
+import TeacherAttendanceTab from "@/components/TeacherAttendanceTab";
+import TeacherProgressNotesTab from "@/components/TeacherProgressNotesTab";
+import TeacherAnalyticsTab from "@/components/TeacherAnalyticsTab";
 import { 
   BookOpen, 
   Users, 
@@ -388,12 +391,15 @@ const TeacherDashboardPage = () => {
         </div>
 
         <Tabs defaultValue="courses" className="space-y-6">
-          <TabsList>
-            <TabsTrigger value="courses">My Courses</TabsTrigger>
-            <TabsTrigger value="students">Students</TabsTrigger>
-            <TabsTrigger value="resources">Resources</TabsTrigger>
-            <TabsTrigger value="create">Create Content</TabsTrigger>
-          </TabsList>
+<TabsList>
+  <TabsTrigger value="courses">My Courses</TabsTrigger>
+  <TabsTrigger value="students">Students</TabsTrigger>
+  <TabsTrigger value="attendance">Attendance</TabsTrigger>
+  <TabsTrigger value="notes">Progress Notes</TabsTrigger>
+  <TabsTrigger value="analytics">Analytics</TabsTrigger>
+  <TabsTrigger value="resources">Resources</TabsTrigger>
+  <TabsTrigger value="create">Create Content</TabsTrigger>
+</TabsList>
 
           <TabsContent value="courses" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -525,9 +531,21 @@ const TeacherDashboardPage = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="resources" className="space-y-6">
-            <TeacherResourcesTab />
-          </TabsContent>
+<TabsContent value="attendance" className="space-y-6">
+  <TeacherAttendanceTab />
+</TabsContent>
+
+<TabsContent value="notes" className="space-y-6">
+  <TeacherProgressNotesTab />
+</TabsContent>
+
+<TabsContent value="analytics" className="space-y-6">
+  <TeacherAnalyticsTab />
+</TabsContent>
+
+<TabsContent value="resources" className="space-y-6">
+  <TeacherResourcesTab />
+</TabsContent>
 
           <TabsContent value="create" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

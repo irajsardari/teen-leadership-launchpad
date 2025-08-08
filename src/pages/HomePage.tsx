@@ -115,35 +115,47 @@ const HomePage = () => {
               </div>
             </div>
             
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button 
-                size="lg" 
-                className="btn-modern-accent text-white font-inter font-black text-xl px-16 py-8 rounded-3xl transition-all duration-500 group relative overflow-hidden" 
-                style={{ boxShadow: 'var(--shadow-button-3d)' }}
-                asChild
-              >
-                <Link to="/apply" className="flex items-center relative z-10">
-                  <span className="mr-4 text-2xl">🚀</span>
-                  Start Your Journey
-                  <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-              <Button 
-                size="lg" 
-                className="glass-card-modern text-white hover:bg-white/30 font-inter font-bold text-xl px-16 py-8 rounded-3xl transition-all duration-500 border-2 border-white/40 hover:border-white/80 group" 
-                variant="outline" 
-                asChild
-              >
-                <Link to="/curriculum" className="flex items-center">
-                  <span className="mr-4 text-2xl">📚</span>
-                  Explore Curriculum
-                  <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
+{/* CTA Buttons */}
+<div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+  <Button 
+    size="lg" 
+    className="btn-modern-accent text-white font-inter font-black text-xl px-16 py-8 rounded-3xl transition-all duration-500 group relative overflow-hidden" 
+    style={{ boxShadow: 'var(--shadow-button-3d)' }}
+    asChild
+  >
+    <Link to="/apply" className="flex items-center relative z-10">
+      <span className="mr-4 text-2xl">🚀</span>
+      Start Your Journey
+      <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
+    </Link>
+  </Button>
+  <Button 
+    size="lg" 
+    className="glass-card-modern text-white hover:bg-white/30 font-inter font-bold text-xl px-16 py-8 rounded-3xl transition-all duration-500 border-2 border-white/40 hover:border-white/80 group" 
+    variant="outline" 
+    asChild
+  >
+    <Link to="/curriculum" className="flex items-center">
+      <span className="mr-4 text-2xl">📚</span>
+      Explore Curriculum
+      <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
+    </Link>
+  </Button>
+</div>
+
+{/* Financial Literacy Callout */}
+<div className="mt-8 max-w-4xl mx-auto">
+  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-left">
+    <div className="flex items-start gap-4">
+      <div className="text-3xl">💰</div>
+      <p className="text-lg sm:text-xl text-white leading-relaxed font-semibold">
+        Earning money is important — <span className="font-extrabold text-tma-gold">but managing and growing money</span> is the skill that builds long-term independence.
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
       </section>
 
       {/* Stats Section */}
