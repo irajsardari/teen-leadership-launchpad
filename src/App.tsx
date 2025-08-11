@@ -26,6 +26,7 @@ import TeacherPortalPage from "./pages/TeacherPortalPage";
 import CourseStructurePage from "./pages/CourseStructurePage";
 import LearningPortalPage from "./pages/LearningPortalPage";
 import NotFound from "./pages/NotFound";
+import TeachWithTMAPage from "./pages/TeachWithTMAPage";
 import { AuthProvider } from "./hooks/useAuth";
 
 const queryClient = new QueryClient();
@@ -50,6 +51,7 @@ const App = () => (
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/apply" element={<ApplyPage />} />
                 <Route path="/teachers" element={<TeachersPage />} />
+                <Route path="/teach-with-tma" element={<TeachWithTMAPage />} />
                 <Route path="/insights" element={<BlogPage />} />
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
                 <Route path="/challenger" element={<ChallengerPage />} />

@@ -25,7 +25,7 @@ const Header = () => {
     { name: "Curriculum", href: "/curriculum" },
     { name: "Voices", href: "/insights" },
     { name: "Parents", href: "/apply" },
-    { name: "Join Us", href: "/teachers" },
+    { name: "Teach with TMA", href: "/teach-with-tma" },
     { name: "Contact", href: "/contact" },
   ];
 
