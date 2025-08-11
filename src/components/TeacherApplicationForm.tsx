@@ -102,8 +102,8 @@ const TeacherApplicationForm = () => {
   const { toast } = useToast();
   const { user } = useAuth();
 
-  const form = useForm<TeacherApplicationForm>({
-    resolver: zodResolver(teacherApplicationSchema),
+  const form = useForm<BaseForm>({
+    resolver: zodResolver(baseSchema),
     defaultValues: {
       fullName: "",
       email: "",
@@ -146,7 +146,7 @@ const TeacherApplicationForm = () => {
     return fileName;
   };
 
-  const onSubmit = async (values: TeacherApplicationForm) => {
+  const onSubmit = async (values: BaseForm) => {
     try {
       setIsSubmitting(true);
 
