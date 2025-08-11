@@ -55,6 +55,8 @@ const App = () => (
                 <Route path="/teach-with-tma" element={<TeachWithTMAPage />} />
                 <Route path="/insights" element={<BlogPage />} />
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
+                <Route path="/voices" element={<BlogPage />} />
+                <Route path="/voices/:slug" element={<BlogPostPage />} />
                 <Route path="/challenger" element={<ChallengerPage />} />
 <Route path="/learning-portal" element={<LearningPortalPage />} />
 <Route path="/portal-info" element={<PortalPage />} />

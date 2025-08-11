@@ -5,6 +5,7 @@ import mentalHealthBanner from "@/assets/mental-health-two-wings-connection.jpg"
 import digitalAwarenessBanner from "@/assets/digital-awareness-classroom.jpg";
 import resilienceBanner from "@/assets/resilience-teen-rising-up.jpg";
 import legacyBanner from "@/assets/legacy-teen-future-reflection.jpg";
+import heroTeenagers from "@/assets/hero-teenagers.jpg";
 
 export interface BlogPost {
   id: string;
@@ -25,6 +26,48 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: "11",
+    title: "Where You Live Is Not Important — How You Live Is What Matters",
+    author: "Teenagers Management Academy (TMA)",
+    date: "2025-08-11",
+    featuredImage: heroTeenagers,
+    excerpt: "Success is not about your location — it’s about your daily habits, discipline, and how you live each day.",
+    content: `# Where You Live Is Not Important — How You Live Is What Matters
+
+We often hear people say, “If only I lived in a bigger city…” or “If I had better opportunities around me, my life would be different.” But the truth is, your location is not the key to your success — your habits are.
+
+It’s entirely possible to live in a progressive, modern city surrounded by skyscrapers, world-class facilities, and endless opportunities… and still waste your days. Without discipline, time management, and a sense of purpose, even the most advanced environment can’t save you from a life that drifts nowhere.
+
+On the other hand, imagine someone living in a small town in a remote corner of the world. The streets are quiet, the resources are limited, and the options for entertainment are few. Yet, this person wakes up early, exercises, reads, learns new skills, and plans their future. Over time, their discipline and daily habits shape a life filled with growth, knowledge, and strength.
+
+Success is not built overnight. It comes from the ordinary things we do every day — waking up on time, investing in our health, reading instead of scrolling endlessly, learning instead of complaining, and focusing on what truly matters.
+
+A person in a big city without good habits will eventually lose their edge. A person in a small city with strong habits will eventually rise above their circumstances. The difference is not the map on which you live — it’s the map you create for your life.
+
+So, ask yourself:
+	• Am I making the most of my mornings?
+	• Am I learning something new every day?
+	• Am I building habits that will serve my future?
+
+Because in the end, where you live is not important — how you live is what defines your destiny.
+`,
+    slug: "where-you-live-is-not-important",
+    seo: {
+      metaTitle: "Where You Live Is Not Important — How You Live Is What Matters | TMA Voices",
+      metaDescription: "Success is not about your location — it’s about your daily habits, discipline, and how you live each day. Learn why your routines define your destiny.",
+      keywords: [
+        "habits",
+        "discipline",
+        "personal development",
+        "leadership habits",
+        "daily routines",
+        "TMA Voices"
+      ],
+    },
+    category: "Personal Development / Leadership Habits",
+    tags: ["PersonalDevelopment", "LeadershipHabits", "Routines", "Discipline"],
+  },
   {
     id: "10",
     title: "The Question That Defines Your Legacy",
