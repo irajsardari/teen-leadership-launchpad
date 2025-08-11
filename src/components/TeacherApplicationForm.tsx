@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,18 +13,43 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const teacherApplicationSchema = z.object({
+const baseSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   phoneNumber: z.string().min(1, "Phone number is required"),
   specialization: z.array(z.string()).min(1, "Please select at least one specialization"),
   experienceYears: z.string().min(1, "Please select your experience level"),
   education: z.string().min(1, "Please select your education level"),
-  cv: z.instanceof(FileList).refine((files) => files?.length > 0, "CV/Resume is required"),
-  linkedinPortfolio: z.string().optional()
+  cv: z
+    .instanceof(FileList)
+    .refine((files) => files?.length > 0, "CV/Resume is required"),
+  linkedinPortfolio: z.string().optional(),
 });
 
-type TeacherApplicationForm = z.infer<typeof teacherApplicationSchema>;
+const landingSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  phoneNumber: z.string().optional(),
+  country: z.string().min(1, "Country is required"),
+  experienceDetails: z.string().min(1, "Please share your teaching experience"),
+  qualifications: z.string().optional(),
+  areasOfInterest: z.array(z.string()).min(1, "Select at least one area"),
+  availability: z.array(z.string()).min(1, "Select your availability"),
+  timezone: z.string().optional(),
+  consent: z.literal(true, {
+    errorMap: () => ({ message: "Consent is required" }),
+  }),
+  cv: z
+    .instanceof(FileList)
+    .refine((files) => files?.length > 0, "CV/Resume is required")
+    .refine((files) => (files?.[0]?.size ?? 0) <= 10 * 1024 * 1024, "Max file size is 10MB"),
+  linkedinPortfolio: z.string().optional(),
+  hp: z.string().optional().refine((v) => !v, ""), // honeypot
+});
+
+type BaseForm = z.infer<typeof baseSchema>;
+type LandingForm = z.infer<typeof landingSchema>;
+type TeacherApplicationFormValues = BaseForm | LandingForm;
 
 const specializations = [
   "Leadership Development",
