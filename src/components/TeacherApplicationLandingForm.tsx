@@ -34,7 +34,7 @@ const landingSchema = z.object({
   areasOfInterest: z.array(z.enum(AREAS)).min(1, "Select at least one area"),
   availability: z.array(z.enum(AVAILABILITY)).min(1, "Select your availability"),
   timezone: z.string().optional(),
-  consent: z.literal(true, { errorMap: () => ({ message: "Consent is required" }) }),
+  consent: z.boolean().refine((v) => v === true, { message: "Consent is required" }),
   cv: z
     .instanceof(FileList)
     .refine((files) => files?.length > 0, "CV/Resume is required")
@@ -288,7 +288,7 @@ const TeacherApplicationLandingForm = () => {
                 )} />
 
                 {/* Documents */}
-                <FormField name="cv" control={form.control} render={({ field: { onChange, ...rest } }) => (
+                <FormField name="cv" control={form.control} render={({ field: { onChange, value, ...rest } }) => (
                   <FormItem>
                     <FormLabel>Upload CV (PDF/DOC, max 10MB)</FormLabel>
                     <FormControl>
