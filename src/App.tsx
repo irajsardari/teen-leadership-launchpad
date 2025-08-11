@@ -28,6 +28,7 @@ import LearningPortalPage from "./pages/LearningPortalPage";
 import NotFound from "./pages/NotFound";
 import TeachWithTMAPage from "./pages/TeachWithTMAPage";
 import { AuthProvider } from "./hooks/useAuth";
+import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,7 @@ const App = () => (
                 <Route path="/portal/course/:courseId" element={<CourseStructurePage />} />
                 <Route path="/portal/course/:courseId/session/:sessionId" element={<CourseStructurePage />} />
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/admin/applications" element={<AdminApplicationsPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

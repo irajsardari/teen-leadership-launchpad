@@ -8,6 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import EmbeddedLandingForm from "@/components/TeacherApplicationLandingForm";
 
 const TeachWithTMAPage = () => {
   const canonical = typeof window !== "undefined" ? window.location.href : undefined;
@@ -55,6 +56,16 @@ const TeachWithTMAPage = () => {
         <meta name="description" content="Apply to teach leadership, management, and life skills to teenagers (10–18) at the first academy of its kind in the world. Online and in-person roles available." />
         {canonical && <link rel="canonical" href={canonical} />}
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'JobPosting',
+          title: 'Educator / Teacher',
+          hiringOrganization: { name: 'Teenagers Management Academy (TMA)' },
+          employmentType: 'Contract',
+          jobLocationType: 'TELECOMMUTE',
+          jobLocation: [{ '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Muscat', addressCountry: 'OM' } }],
+          description: 'Teach leadership, management, and life skills to teenagers (10–18). Online and in-person roles available.',
+        })}</script>
       </Helmet>
 
       <header className="section-gradient">
@@ -69,7 +80,7 @@ const TeachWithTMAPage = () => {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button asChild variant="cta-teal" size="lg">
-                  <Link to="/teachers" aria-label="Apply now to teach at TMA">
+                  <Link to="#apply" aria-label="Apply now to teach at TMA" onClick={() => { try { console.info('teach_cta_click', { source: 'hero' }); } catch {} }}>
                     Apply Now to Teach
                   </Link>
                 </Button>
@@ -164,7 +175,7 @@ const TeachWithTMAPage = () => {
             </div>
             <div className="mt-10">
               <Button asChild variant="cta" size="lg">
-                <Link to="/teachers" aria-label="Start your application to teach at TMA">
+                <Link to="#apply" aria-label="Start your application to teach at TMA" onClick={() => { try { console.info('teach_cta_click', { source: 'process' }); } catch {} }}>
                   Apply Now to Teach
                 </Link>
               </Button>
@@ -196,10 +207,24 @@ const TeachWithTMAPage = () => {
             </p>
             <div className="mt-8">
               <Button asChild variant="cta-teal" size="lg">
-                <Link to="/teachers" aria-label="Apply now to teach with TMA">
+                <Link to="#apply" aria-label="Apply now to teach with TMA" onClick={() => { try { console.info('teach_cta_click', { source: 'final' }); } catch {} }}>
                   Apply Now to Teach with TMA
                 </Link>
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Embedded Application Form */}
+        <section className="py-12">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center mb-6">
+              <h3 className="text-2xl font-bold text-primary">Your Experience. Their Future.</h3>
+              <p className="text-muted-foreground">Apply now — it takes less than 5 minutes. Every application is reviewed by our team.</p>
+            </div>
+            <div className="max-w-3xl mx-auto">
+              {/* id="apply" lives in the form component */}
+              <EmbeddedLandingForm />
             </div>
           </div>
         </section>
