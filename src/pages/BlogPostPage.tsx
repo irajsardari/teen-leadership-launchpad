@@ -1,4 +1,4 @@
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useLocation } from "react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -47,6 +47,10 @@ const BlogPostPage = () => {
 
   const readingTime = calculateReadingTime(post.content);
 
+  const location = useLocation();
+  const isVoices = location.pathname.startsWith('/voices');
+  const basePath = isVoices ? '/voices' : '/insights';
+  const canonical = typeof window !== 'undefined' ? window.location.href : undefined;
   const handleTagClick = (tag: string) => {
     toast({
       title: "Tag Search",
@@ -120,6 +124,7 @@ const BlogPostPage = () => {
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
         <meta name="twitter:image" content={post.featuredImage} />
+        {canonical && <link rel="canonical" href={canonical} />}
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -184,9 +189,9 @@ const BlogPostPage = () => {
                       <ChevronRight className="h-4 w-4" />
                     </BreadcrumbSeparator>
                     <BreadcrumbItem>
-                      <BreadcrumbLink asChild>
-                        <Link to="/insights">TMA Voices</Link>
-                      </BreadcrumbLink>
+                    <BreadcrumbLink asChild>
+                      <Link to={basePath}>TMA Voices</Link>
+                    </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator>
                       <ChevronRight className="h-4 w-4" />
@@ -266,6 +271,8 @@ const BlogPostPage = () => {
                 <img 
                   src={post.featuredImage} 
                   alt="Multicultural group of teens in discussion, representing teenage leadership development and the critical importance of age 13 in leadership formation"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
                 {/* TMA Logo Watermark */}
@@ -381,7 +388,7 @@ const BlogPostPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {previousPost && (
                   <Link 
-                    to={`/insights/${previousPost.slug}`}
+                    to={`${basePath}/${previousPost.slug}`}
                     className="group p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-border/50"
                   >
                     <div className="flex items-center text-sm text-muted-foreground mb-2">
@@ -395,7 +402,7 @@ const BlogPostPage = () => {
                 )}
                 {nextPost && (
                   <Link 
-                    to={`/insights/${nextPost.slug}`}
+                    to={`${basePath}/${nextPost.slug}`}
                     className="group p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-border/50 md:text-right"
                   >
                     <div className="flex items-center justify-end text-sm text-muted-foreground mb-2">
@@ -416,7 +423,7 @@ const BlogPostPage = () => {
                   {blogPosts.filter(p => p.slug !== slug).slice(0, 2).map((relatedPost) => (
                     <Link 
                       key={relatedPost.slug}
-                      to={`/insights/${relatedPost.slug}`}
+                      to={`${basePath}/${relatedPost.slug}`}
                       className="group p-4 bg-background rounded-lg hover:shadow-md transition-all duration-200 border border-border/50"
                     >
                       <div className="aspect-video overflow-hidden rounded-lg mb-3">

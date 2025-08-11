@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CalendarIcon, UserIcon, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
 import { Button } from "@/components/ui/button";
 import { 
@@ -13,10 +13,18 @@ import {
   PaginationPrevious 
 } from "@/components/ui/pagination";
 import { useState } from "react";
-
+import { Helmet } from "react-helmet-async";
 const BlogPage = () => {
+  const location = useLocation();
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9; // 3x3 grid for optimal layout
+  const isVoices = location.pathname.startsWith('/voices');
+  const pageTitle = isVoices ? 'TMA Voices' : 'TMA Insights';
+  const metaTitle = isVoices ? 'TMA Voices | Teen leadership insights' : 'TMA Insights | Articles from TMA';
+  const metaDescription = isVoices
+    ? "Insights, perspectives, and thought leadership from the world's first teenage leadership academy"
+    : "Latest insights and articles from the Teenagers Management Academy (TMA).";
+  const canonical = typeof window !== 'undefined' ? window.location.href : undefined;
   
   // Sort posts by date (newest first)
   const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -26,16 +34,20 @@ const BlogPage = () => {
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
   const currentPosts = sortedPosts.slice(startIndex, endIndex);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
+      <Helmet>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
+        {canonical && <link rel="canonical" href={canonical} />}
+      </Helmet>
       {/* Hero Section */}
       <section id="voices-top" className="relative py-20 lg:py-32 bg-gradient-to-r from-tma-blue to-tma-teal">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight">
-              TMA Voices
+              {pageTitle}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl mb-8 text-blue-100/90 max-w-3xl mx-auto font-inter font-medium leading-relaxed">
               Insights, perspectives, and thought leadership from the world's first teenage leadership academy
@@ -54,6 +66,8 @@ const BlogPage = () => {
                   <img 
                     src={post.featuredImage} 
                     alt={post.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -88,7 +102,7 @@ const BlogPage = () => {
                     className="group/btn p-0 h-auto font-medium text-tma-blue hover:text-tma-teal transition-colors duration-200" 
                     asChild
                   >
-                    <Link to={`/insights/${post.slug}`} className="flex items-center">
+                    <Link to={`/${isVoices ? 'voices' : 'insights'}/${post.slug}`} className="flex items-center">
                       Read More
                       <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                     </Link>
@@ -126,6 +140,7 @@ const BlogPage = () => {
                           setCurrentPage(page);
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
+                        aria-label={`Go to page ${page}`}
                       >
                         {page}
                       </PaginationLink>
