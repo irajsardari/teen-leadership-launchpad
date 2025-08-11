@@ -28,7 +28,13 @@ const Footer = () => {
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-tma-gold" />
-                <span>info@teenmanagement.com</span>
+                <a 
+                  href="mailto:info@teenmanagement.com"
+                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors"
+                  aria-label="Email TMA at info@teenmanagement.com"
+                >
+                  info@teenmanagement.com
+                </a>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-tma-gold" />
