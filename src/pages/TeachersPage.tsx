@@ -12,10 +12,10 @@ const TeachersPage = () => {
         <Alert className="mb-6">
           <AlertTitle>Sign in required</AlertTitle>
           <AlertDescription>
-            Please sign in to apply and securely upload your CV.
+            To protect applicants’ data, please sign in before submitting your application and CV.
           </AlertDescription>
           <div className="mt-3">
-            <Link to="/portal">
+            <Link to={`/portal?next=${encodeURIComponent('/teachers')}`}>
               <Button size="sm">Sign in</Button>
             </Link>
           </div>

@@ -9,8 +9,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import EmbeddedLandingForm from "@/components/TeacherApplicationLandingForm";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useAuth } from "@/hooks/useAuth";
 
 const TeachWithTMAPage = () => {
+  const { user } = useAuth();
   const canonical = typeof window !== "undefined" ? window.location.href : undefined;
   const origin = typeof window !== "undefined" ? window.location.origin : "https://teenmanagement.com";
   const faqs = [
@@ -277,6 +280,19 @@ const TeachWithTMAPage = () => {
               <p className="text-muted-foreground">Apply now — it takes less than 5 minutes. Every application is reviewed by our team.</p>
             </div>
             <div className="max-w-3xl mx-auto">
+              {!user && (
+                <Alert className="mb-6">
+                  <AlertTitle>Sign in required</AlertTitle>
+                  <AlertDescription>
+                    To protect applicants’ data, please sign in before submitting your application and CV.
+                  </AlertDescription>
+                  <div className="mt-3">
+                    <Link to={`/portal?next=${encodeURIComponent('/teach-with-tma#apply')}`}>
+                      <Button size="sm">Sign in</Button>
+                    </Link>
+                  </div>
+                </Alert>
+              )}
               {/* id="apply" lives in the form component */}
               <EmbeddedLandingForm />
             </div>

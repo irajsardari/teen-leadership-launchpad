@@ -94,8 +94,28 @@ const TeacherApplicationLandingForm = () => {
     return path;
   };
 
+  const handleAuthExpiry = async () => {
+    try { await supabase.auth.signOut(); } catch {}
+    try {
+      localStorage.removeItem('supabase.auth.token');
+      localStorage.removeItem('sb-gedgcagidpheugikoyim-auth-token');
+    } catch {}
+    const nextUrl = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
+    window.location.href = `/portal?reason=expired&next=${nextUrl}`;
+  };
+
   const onSubmit = async (values: LandingForm) => {
     if (values.hp) return; // honeypot
+    if (!user) {
+      toast({
+        title: "Please sign in to apply",
+        description: "Sign in to submit your application and upload your CV.",
+        variant: "destructive",
+      });
+      const next = encodeURIComponent('/teach-with-tma#apply');
+      window.location.href = `/portal?next=${next}`;
+      return;
+    }
     try {
       setIsSubmitting(true);
       console.info("teach_form_start");
@@ -164,7 +184,7 @@ const TeacherApplicationLandingForm = () => {
           <CardHeader>
             <CardTitle className="text-3xl font-bold text-primary">Application received — thank you!</CardTitle>
             <CardDescription>
-              We’ve emailed a confirmation to {showSuccess.email}. Our team will review your application and get back to you within 5–7 business days.
+              We’ve emailed a confirmation to {showSuccess.email}. Our team will review your application and get back to you within 7–10 business days.
             </CardDescription>
           </CardHeader>
         </Card>
