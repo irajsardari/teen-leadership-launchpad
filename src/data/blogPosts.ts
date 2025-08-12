@@ -7,6 +7,7 @@ import resilienceBanner from "@/assets/resilience-teen-rising-up.jpg";
 import legacyBanner from "@/assets/legacy-teen-future-reflection.jpg";
 import legacyMirrorBanner from "@/assets/legacy-teen-mirror-reflection.jpg";
 import heroTeenagers from "@/assets/hero-teenagers.jpg";
+import voicesBestGiftGraduation from "@/assets/voices-best-gift-graduation.jpg";
 export interface BlogPost {
   id: string;
   title: string;
@@ -524,7 +525,7 @@ It might be just in time.
     title: "The Best Gift You Can Give to Your Family and Friends",
     author: "Teenagers Management Academy (TMA)",
     date: "2025-08-13",
-    featuredImage: legacyMirrorBanner,
+    featuredImage: voicesBestGiftGraduation,
     excerpt: "The greatest gift you can give your loved ones isn’t bought — it’s becoming the best version of yourself. Your growth is the gift that lasts a lifetime.",
     content: `# The Best Gift You Can Give to Your Family and Friends
 
