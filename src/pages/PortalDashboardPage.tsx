@@ -109,8 +109,13 @@ export default function PortalDashboardPage() {
 
         const role = (prof?.role as string) || null;
         setProfileRole(role);
+        // Redirect teachers/admins to the teacher dashboard
+        if (role === "teacher" || role === "admin") {
+          navigate("/portal/teacher", { replace: true });
+          return;
+        }
         // Allow access by default if role is missing (new users without profile row)
-        const hasAccess = role === "student" || role === "challenger" || role === "admin" || role === null;
+        const hasAccess = role === "student" || role === "challenger" || role === null;
         if (!hasAccess) {
           toast({ title: "Access denied", description: "Portal access is restricted.", variant: "destructive" });
           navigate("/portal", { replace: true });

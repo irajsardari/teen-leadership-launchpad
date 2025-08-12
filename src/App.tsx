@@ -29,6 +29,7 @@ import NotFound from "./pages/NotFound";
 import TeachWithTMAPage from "./pages/TeachWithTMAPage";
 import { AuthProvider } from "./hooks/useAuth";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
+import ScrollManager from "./components/ScrollManager";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollManager />
           <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-1">
