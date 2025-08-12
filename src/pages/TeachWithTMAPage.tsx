@@ -12,7 +12,7 @@ import EmbeddedLandingForm from "@/components/TeacherApplicationLandingForm";
 
 const TeachWithTMAPage = () => {
   const canonical = typeof window !== "undefined" ? window.location.href : undefined;
-
+  const origin = typeof window !== "undefined" ? window.location.origin : "https://teenmanagement.com";
   const faqs = [
     {
       q: "What qualifications do I need?",
@@ -49,23 +49,63 @@ const TeachWithTMAPage = () => {
     })),
   };
 
+  const orgAndJobJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Teenagers Management Academy (TMA)",
+        "url": origin,
+        "logo": `${origin}/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png`,
+        "sameAs": [
+          "https://www.instagram.com/tmaleaders",
+          "https://www.linkedin.com/company/tmaleaders"
+        ],
+        "description": "The first academy of its kind in the world, teaching leadership, management, and life skills to youth aged 10–18 through a global network of educators."
+      },
+      {
+        "@type": "JobPosting",
+        "title": "Teach with TMA – Inspire Future-Ready Leaders",
+        "description": "Join Teenagers Management Academy (TMA) to teach leadership, management, and life skills to youth aged 10–18. Flexible global teaching roles, both online and in-person. Professional growth, global community, and the opportunity to shape the leaders of tomorrow.",
+        "identifier": {
+          "@type": "PropertyValue",
+          "name": "Teenagers Management Academy",
+          "value": "TMA-TEACH-001"
+        },
+        "datePosted": "2025-08-12",
+        "employmentType": "Contractor",
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "Teenagers Management Academy (TMA)",
+          "sameAs": origin,
+          "logo": `${origin}/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png`
+        },
+        "jobLocation": [
+          { "@type": "Place", "address": { "@type": "PostalAddress", "addressCountry": "OM" }},
+          { "@type": "Place", "address": { "@type": "PostalAddress", "addressCountry": "AE" }},
+          { "@type": "Place", "address": { "@type": "PostalAddress", "addressCountry": "IN" }}
+        ],
+        "applicantLocationRequirements": {
+          "@type": "Country",
+          "name": "Worldwide"
+        },
+        "directApply": true,
+        "applicationContact": {
+          "@type": "ContactPoint",
+          "url": `${origin}/teach-with-tma`
+        }
+      }
+    ]
+  };
+
   return (
     <div>
       <Helmet>
-        <title>Teach with TMA | Join the Teenagers Management Academy as an Educator</title>
-        <meta name="description" content="Apply to teach leadership, management, and life skills to teenagers (10–18) at the first academy of its kind in the world. Online and in-person roles available." />
+        <title>Teach with TMA – Inspire the Next Generation of Leaders | Global Online & In-Person Opportunities</title>
+        <meta name="description" content="Join Teenagers Management Academy (TMA), the first academy of its kind in the world, to teach leadership, management, and life skills to youth aged 10–18. Flexible global teaching roles, professional growth, and the chance to shape future-ready leaders. Apply today" />
         {canonical && <link rel="canonical" href={canonical} />}
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
-        <script type="application/ld+json">{JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'JobPosting',
-          title: 'Educator / Teacher',
-          hiringOrganization: { name: 'Teenagers Management Academy (TMA)' },
-          employmentType: 'Contract',
-          jobLocationType: 'TELECOMMUTE',
-          jobLocation: [{ '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Muscat', addressCountry: 'OM' } }],
-          description: 'Teach leadership, management, and life skills to teenagers (10–18). Online and in-person roles available.',
-        })}</script>
+        <script type="application/ld+json">{JSON.stringify(orgAndJobJsonLd)}</script>
       </Helmet>
 
       <header className="section-gradient">
@@ -183,6 +223,15 @@ const TeachWithTMAPage = () => {
           </div>
         </section>
 
+        <section aria-labelledby="about-tma" className="py-16 sm:py-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 id="about-tma" className="text-3xl font-bold text-primary mb-6">About TMA</h2>
+            <p className="text-muted-foreground leading-relaxed max-w-3xl">
+              Teenagers Management Academy is a pioneering global initiative based in Oman, empowering teenagers through leadership, management, finance, psychology, and cultural awareness. Our mission is to prepare youth for the challenges of the future, blending academic knowledge with real-world skills.
+            </p>
+          </div>
+        </section>
+
         <section aria-labelledby="faqs-heading" className="py-16 sm:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 id="faqs-heading" className="text-3xl font-bold text-primary mb-8">FAQs</h2>
@@ -200,15 +249,20 @@ const TeachWithTMAPage = () => {
         <section aria-labelledby="final-cta" className="py-16 sm:py-24 section-gradient">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 id="final-cta" className="text-3xl sm:text-4xl font-extrabold text-primary">
-              Your Experience. Their Future.
+              Are you ready to teach life skills online and help shape the leaders of tomorrow?
             </h2>
             <p className="mt-6 max-w-3xl mx-auto text-lg text-muted-foreground">
-              Every teenager you teach at TMA will remember your influence for years to come. Join us in building confident, capable, and compassionate leaders for tomorrow.
+              We’re accepting applications worldwide, with priority for:
             </p>
+            <ul className="mt-4 max-w-xl mx-auto text-left space-y-2 text-base">
+              <li>Oman, UAE, GCC</li>
+              <li>India & Southeast Asia</li>
+              <li>Europe & North America</li>
+            </ul>
             <div className="mt-8">
               <Button asChild variant="cta-teal" size="lg">
-                <Link to="#apply" aria-label="Apply now to teach with TMA" onClick={() => { try { console.info('teach_cta_click', { source: 'final' }); } catch {} }}>
-                  Apply Now to Teach with TMA
+                <Link to="#apply" aria-label="Apply now and join the future of education" onClick={() => { try { console.info('teach_cta_click', { source: 'final' }); } catch {} }}>
+                  Apply Now and Join the Future of Education
                 </Link>
               </Button>
             </div>
