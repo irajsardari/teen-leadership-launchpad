@@ -16,7 +16,8 @@ const challengerSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   phone_number: z.string().min(10, "Phone number must be at least 10 digits"),
   level: z.string().min(1, "Please specify your level"),
-  confidential_info: z.string().optional()
+  confidential_info: z.string().optional(),
+  hp: z.string().optional(),
 });
 
 type ChallengerFormData = z.infer<typeof challengerSchema>;
@@ -32,18 +33,24 @@ const ChallengerForm = () => {
       email: "",
       phone_number: "",
       level: "",
-      confidential_info: ""
+      confidential_info: "",
+      hp: "",
     }
   });
 
   const onSubmit = async (data: ChallengerFormData) => {
+    // Honeypot: if filled, silently abort
+    if ((data as any)?.hp) {
+      return;
+    }
     setIsSubmitting(true);
     
     try {
       // Using any to bypass empty types issue until database types are generated
+      const { hp, ...clean } = data as any;
       const { error } = await (supabase as any)
         .from('challengers')
-        .insert([data]);
+        .insert([clean]);
 
       if (error) {
         throw error;
@@ -182,6 +189,9 @@ const ChallengerForm = () => {
                 </FormItem>
               )}
             />
+            
+            {/* Honeypot */}
+            <input type="text" aria-hidden className="hidden" tabIndex={-1} {...form.register("hp")} />
             
             <Button
               type="submit" 
