@@ -1,7 +1,29 @@
 import TeacherApplicationForm from "@/components/TeacherApplicationForm";
+import { useAuth } from "@/hooks/useAuth";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const TeachersPage = () => {
-  return <TeacherApplicationForm />;
+  const { user } = useAuth();
+  return (
+    <div className="container mx-auto px-4 py-8">
+      {!user && (
+        <Alert className="mb-6">
+          <AlertTitle>Sign in required</AlertTitle>
+          <AlertDescription>
+            Please sign in to apply and securely upload your CV.
+          </AlertDescription>
+          <div className="mt-3">
+            <Link to="/portal">
+              <Button size="sm">Sign in</Button>
+            </Link>
+          </div>
+        </Alert>
+      )}
+      <TeacherApplicationForm />
+    </div>
+  );
 };
 
 export default TeachersPage;
