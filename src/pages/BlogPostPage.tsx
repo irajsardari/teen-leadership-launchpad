@@ -1,4 +1,5 @@
 import { useParams, Link, Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { blogPosts } from "@/data/blogPosts";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +28,25 @@ import { BlogFeedback } from "@/components/BlogFeedback";
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
+  
+  // Force scroll to top when navigating between posts
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+    } catch {}
+    const raf1 = requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      });
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+    };
+  }, [slug]);
   
   const post = blogPosts.find(p => p.slug === slug);
   

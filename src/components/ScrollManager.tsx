@@ -7,6 +7,15 @@ import { useLocation } from "react-router-dom";
 export default function ScrollManager() {
   const location = useLocation();
 
+  // Disable browser scroll restoration to prevent keeping old positions on SPA navigations
+  useEffect(() => {
+    try {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+    } catch {}
+  }, []);
+
   useEffect(() => {
     if (!location.hash) return;
     const id = decodeURIComponent(location.hash.replace('#', ''));
@@ -23,9 +32,13 @@ export default function ScrollManager() {
   }, [location.hash, location.pathname]);
 
   // Ensure we start at the top on normal route changes (no hash)
+  // Start at the top on normal route changes (no hash), after render to avoid scroll anchoring
   useEffect(() => {
     if (location.hash) return;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const raf = requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+    return () => cancelAnimationFrame(raf);
   }, [location.pathname]);
 
   return null;
