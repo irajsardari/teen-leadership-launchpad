@@ -26,6 +26,11 @@ export default function PortalLoginPage() {
   useEffect(() => {
     const redirectByRole = async () => {
       if (!authLoading && user) {
+        const next = searchParams.get("next");
+        if (next && next.startsWith("/")) {
+          navigate(next, { replace: true });
+          return;
+        }
         const target = searchParams.get("target");
         if (target === "teacher") {
           navigate("/portal/teacher", { replace: true });
@@ -65,6 +70,11 @@ export default function PortalLoginPage() {
           title: "Welcome back!",
           description: "You have successfully signed in.",
         });
+        const next = new URLSearchParams(window.location.search).get("next");
+        if (next && next.startsWith("/")) {
+          navigate(next, { replace: true });
+          return;
+        }
         const target = new URLSearchParams(window.location.search).get("target");
         if (target === "teacher") {
           navigate("/portal/teacher", { replace: true });

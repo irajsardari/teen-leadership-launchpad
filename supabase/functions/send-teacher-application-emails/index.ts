@@ -18,10 +18,20 @@ interface EmailPayload {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  const origin = req.headers.get("Origin") ?? "*";
-  const corsHeaders = { ...baseCorsHeaders, "Access-Control-Allow-Origin": origin };
+  const origin = req.headers.get("Origin") ?? "";
+  const allowedOrigins = [
+    "https://teenmanagement.com",
+    "https://portal.teenmanagement.com",
+  ];
+  const isPreview = origin.endsWith(".lovable.app");
+  const allowOrigin = (!origin || allowedOrigins.includes(origin) || isPreview) ? origin : "";
+  const corsHeaders = { ...baseCorsHeaders, ...(allowOrigin ? { "Access-Control-Allow-Origin": allowOrigin } : {}) };
 
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+
+  if (origin && !allowOrigin) {
+    return new Response(JSON.stringify({ error: "Origin not allowed" }), { status: 403, headers: { "Content-Type": "application/json", ...corsHeaders } });
+  }
 
   try {
     // Require authenticated Supabase user (protects against external abuse)
@@ -52,6 +62,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     const resend = new Resend(resendApiKey);
 
+    const fromEmail = Deno.env.get("EMAIL_FROM") ?? "no-reply@teenmanagement.com";
+    const fromName = Deno.env.get("EMAIL_FROM_NAME") ?? "Teenagers Management Academy (TMA)";
+    const fromHeader = `${fromName} <${fromEmail}>`;
+
     const {
       fullName,
       email,
@@ -68,16 +82,16 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Applicant confirmation
     await resend.emails.send({
-      from: "TMA <info@teenmanagement.com>",
+      from: fromHeader,
       to: [email],
       subject: "Your TMA Teacher Application Has Been Received",
-      html: `<p>Thank you for applying to teach at TMA. Our team will review your application and contact you within 5–7 business days.</p>`,
+      html: `<p>Thank you for applying to teach at TMA. Our team will review your application and contact you within 7–10 business days.</p>`,
     });
 
     // Admin notification
     const adminBody = `New Teacher Application\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phoneNumber}\nCountry: ${country}\nAreas: ${areas.join(", ")}\nAvailability: ${avail.join(", ")}\nCV Path: ${cvPath ?? "(none)"}`;
     await resend.emails.send({
-      from: "TMA <info@teenmanagement.com>",
+      from: fromHeader,
       to: ["info@teenmanagement.com"],
       subject: `New Teacher Application — ${fullName}`,
       text: adminBody,

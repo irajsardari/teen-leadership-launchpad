@@ -146,6 +146,11 @@ const TeacherApplicationLandingForm = () => {
         confidential_info: JSON.stringify(confidentialPayload),
       });
       if (error) {
+        const msg = (error?.message || "").toLowerCase();
+        if (error?.code === "401" || error?.code === "403" || msg.includes("jwt") || msg.includes("unauthorized") || msg.includes("permission")) {
+          await handleAuthExpiry();
+          return;
+        }
         console.error("Submission error", error);
         console.info("teach_form_submit_error", { code: error.code });
         toast({ title: "Submission failed", description: "Please try again.", variant: "destructive" });
@@ -165,8 +170,13 @@ const TeacherApplicationLandingForm = () => {
             cvPath,
           },
         });
-      } catch (e) {
-        console.warn("Email function call failed (configure RESEND_API_KEY)", e);
+      } catch (e: any) {
+        const msg = (e?.message || "").toLowerCase();
+        if (e?.status === 401 || msg.includes("unauthorized") || msg.includes("jwt")) {
+          await handleAuthExpiry();
+        } else {
+          console.warn("Email function call failed (configure RESEND_API_KEY)", e);
+        }
       }
 
       console.info("teach_form_submit_success");

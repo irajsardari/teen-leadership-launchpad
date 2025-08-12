@@ -115,6 +115,16 @@ const TeacherApplicationForm = () => {
     },
   });
 
+  const handleAuthExpiry = async () => {
+    try { await supabase.auth.signOut(); } catch {}
+    try {
+      localStorage.removeItem('supabase.auth.token');
+      localStorage.removeItem('sb-gedgcagidpheugikoyim-auth-token');
+    } catch {}
+    const nextUrl = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
+    window.location.href = `/portal?reason=expired&next=${nextUrl}`;
+  };
+
   const uploadCV = async (file: File): Promise<string | null> => {
     if (!user) {
       console.error('User not authenticated for file upload');
@@ -123,6 +133,8 @@ const TeacherApplicationForm = () => {
         description: "Please log in to upload your CV.",
         variant: "destructive",
       });
+      const next = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
+      window.location.href = `/portal?next=${next}`;
       return null;
     }
 
@@ -147,6 +159,12 @@ const TeacherApplicationForm = () => {
   };
 
   const onSubmit = async (values: BaseForm) => {
+    if (!user) {
+      toast({ title: "Please sign in to apply", description: "Sign in to submit your application and upload your CV.", variant: "destructive" });
+      const next = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
+      window.location.href = `/portal?next=${next}`;
+      return;
+    }
     try {
       setIsSubmitting(true);
 
@@ -187,6 +205,11 @@ const TeacherApplicationForm = () => {
         });
 
       if (error) {
+        const msg = (error?.message || "").toLowerCase();
+        if (error?.code === "401" || error?.code === "403" || msg.includes("jwt") || msg.includes("unauthorized") || msg.includes("permission")) {
+          await handleAuthExpiry();
+          return;
+        }
         console.error('Error submitting application:', error);
         toast({
           title: "Error",
