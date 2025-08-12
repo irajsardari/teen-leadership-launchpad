@@ -54,6 +54,15 @@ const ChallengerForm = () => {
         description: "You have been registered as a challenger. We'll be in touch soon!",
       });
 
+      try {
+        const firstName = data.full_name?.split(' ')[0] || undefined;
+        void supabase.functions.invoke('send-auto-reply', {
+          body: { type: 'challenger', to: data.email, firstName }
+        });
+      } catch (e) {
+        console.warn('send-auto-reply failed', e);
+      }
+
       form.reset();
     } catch (error) {
       console.error('Registration error:', error);

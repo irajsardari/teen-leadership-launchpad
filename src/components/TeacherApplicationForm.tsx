@@ -219,6 +219,15 @@ const TeacherApplicationForm = () => {
         return;
       }
 
+      // Fire-and-forget auto-reply emails (non-blocking)
+      try {
+        void supabase.functions.invoke('send-auto-reply', {
+          body: { type: 'teacher', to: values.email, fullName: values.fullName }
+        });
+      } catch (e) {
+        console.warn('send-auto-reply failed', e);
+      }
+
       setShowSuccessMessage(true);
       form.reset();
     } catch (error) {

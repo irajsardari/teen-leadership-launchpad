@@ -1,1 +1,4 @@
 project_id = "gedgcagidpheugikoyim"
+
+[functions.send-auto-reply]
+verify_jwt = false
