@@ -115,7 +115,7 @@ export type Database = {
           level: string | null
           phone_number: string | null
           referral_source: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           age?: number | null
@@ -131,7 +131,7 @@ export type Database = {
           level?: string | null
           phone_number?: string | null
           referral_source?: string | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           age?: number | null
@@ -147,7 +147,7 @@ export type Database = {
           level?: string | null
           phone_number?: string | null
           referral_source?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
