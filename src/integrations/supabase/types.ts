@@ -825,6 +825,14 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      is_resource_owned_by_user: {
+        Args: { res_id: string; user_id: string }
+        Returns: boolean
+      }
+      is_resource_shared_with_user: {
+        Args: { res_id: string; user_id: string }
+        Returns: boolean
+      }
       set_user_role: {
         Args: { _email: string; _role: string }
         Returns: undefined
