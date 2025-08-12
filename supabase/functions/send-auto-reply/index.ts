@@ -50,27 +50,61 @@ const handler = async (req: Request): Promise<Response> => {
   const isTeacher = payload?.type === "teacher";
   const isChallenger = payload?.type === "challenger";
 
-  const teacherHtml = (fullName?: string) => `
-  <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6">
-    <p>Hello ${fullName ? fullName : "Applicant"},</p>
-    <p>Thank you for your interest in joining the <strong>Teenagers Management Academy (TMA)</strong> as an educator.</p>
-    <p>We’ve received your application. If your profile matches our current needs, we’ll reach out within <strong>5 business days</strong> with next steps.</p>
-    <p>Questions? Reply to <a href="mailto:info@teenmanagement.com">info@teenmanagement.com</a>.</p>
-    <p>Warm regards,<br/>Admissions & Recruitment Team<br/>Teenagers Management Academy<br/>🌍 Future Ready Leaders in Training</p>
-  </div>`;
+  // Email templates (HTML + text)
+  const teacherHtml = `
+  <!DOCTYPE html>
+  <html>
+    <body style="font-family: Arial, sans-serif; color: #333;">
+      <h2>Thank You for Your Application</h2>
+      <p>Dear Educator,</p>
+      <p>We have successfully received your application to <strong>Teach with TMA – Teenagers Management Academy</strong>.</p>
+      <p>Our team will carefully review your profile and will be in touch if your experience aligns with our current opportunities.</p>
+      <p>TMA is the first academy of its kind in the world, empowering teenagers through leadership, management, finance, psychology, and cultural awareness.</p>
+      <p>Thank you for your interest in shaping the next generation of leaders.</p>
+      <p style="margin-top: 20px;">Best regards,<br><strong>The TMA Recruitment Team</strong></p>
+      <hr>
+      <small>This is an automated email from Teenagers Management Academy. Please do not reply directly to this message.</small>
+    </body>
+  </html>`;
 
-  const challengerHtml = (firstName?: string) => `
-  <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6">
-    <p>Hey ${firstName ? firstName : "Challenger"}! 🚀</p>
-    <p>Welcome to your <strong>TMA Challenger Journey</strong> — we’ve got your registration! We’ll email you very soon with next steps.</p>
-    <ul>
-      <li>💡 Think like a leader</li>
-      <li>💪 Build real-world skills</li>
-      <li>🌍 Make a difference in your community</li>
-    </ul>
-    <p>Questions? Reply to <a href="mailto:info@teenmanagement.com">info@teenmanagement.com</a>.</p>
-    <p>See you soon,<br/>The TMA Team<br/>🌍 Future Ready Leaders in Training</p>
-  </div>`;
+  const teacherText = `Dear Educator,
+
+Thank you for applying to Teach with TMA – Teenagers Management Academy.
+We have successfully received your application.
+
+Our team will review your profile and be in touch if it matches our current opportunities.
+
+Thank you for your interest in shaping the next generation of leaders.
+
+The TMA Recruitment Team
+(This is an automated email – please do not reply)`;
+
+  const challengerHtml = `
+  <!DOCTYPE html>
+  <html>
+    <body style="font-family: Arial, sans-serif; color: #333;">
+      <h2>Welcome to Teenagers Management Academy!</h2>
+      <p>Hi Challenger,</p>
+      <p>We’re so excited to have received your application to join <strong>TMA – Teenagers Management Academy</strong>!</p>
+      <p>Your journey to becoming a confident, capable, and future-ready leader starts here.</p>
+      <p>Our team will review your details and get back to you soon with the next steps. Keep an eye on your inbox!</p>
+      <p>At TMA, you’ll explore leadership, life skills, creativity, and personal growth like never before.</p>
+      <p style="margin-top: 20px;">See you soon,<br><strong>The TMA Team</strong></p>
+      <hr>
+      <small>This is an automated email from Teenagers Management Academy. Please do not reply directly to this message.</small>
+    </body>
+  </html>`;
+
+  const challengerText = `Hi Challenger,
+
+We’re so excited to have received your application to join TMA – Teenagers Management Academy!
+
+Your journey to becoming a confident, capable, and future-ready leader starts here.
+
+We’ll review your details and contact you soon with the next steps.
+
+The TMA Team
+(This is an automated email – please do not reply)`;
 
   const adminSubject = isTeacher
     ? `New Teacher Application — ${payload?.fullName ?? payload?.to ?? "Unknown"}`
@@ -102,14 +136,16 @@ const handler = async (req: Request): Promise<Response> => {
         ? resend.emails.send({
             from: fromHeader,
             to: [safeTo],
-            subject: "We received your application — TMA",
-            html: teacherHtml(payload?.fullName),
+            subject: "Thank You for Applying to Teach with TMA",
+            html: teacherHtml,
+            text: teacherText,
           })
         : resend.emails.send({
             from: fromHeader,
             to: [safeTo],
-            subject: "Welcome to TMA — Challenger Registration Confirmed",
-            html: challengerHtml(payload?.firstName),
+            subject: "Welcome to Your TMA Journey!",
+            html: challengerHtml,
+            text: challengerText,
           });
 
       const adminEmailPromise = resend.emails.send({

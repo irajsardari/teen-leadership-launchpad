@@ -157,26 +157,17 @@ const TeacherApplicationLandingForm = () => {
         return;
       }
 
-      // Fire Resend emails via edge function (requires RESEND_API_KEY)
+      // Fire-and-forget auto-reply via unified edge function (non-blocking)
       try {
-        await supabase.functions.invoke("send-teacher-application-emails", {
+        void supabase.functions.invoke('send-auto-reply', {
           body: {
+            type: 'teacher',
+            to: values.email,
             fullName: values.fullName,
-            email: values.email,
-            phoneNumber: values.phoneNumber ?? "",
-            country: values.country,
-            areasOfInterest: values.areasOfInterest,
-            availability: values.availability,
-            cvPath,
           },
         });
-      } catch (e: any) {
-        const msg = (e?.message || "").toLowerCase();
-        if (e?.status === 401 || msg.includes("unauthorized") || msg.includes("jwt")) {
-          await handleAuthExpiry();
-        } else {
-          console.warn("Email function call failed (configure RESEND_API_KEY)", e);
-        }
+      } catch (e) {
+        console.warn('send-auto-reply failed', e);
       }
 
       console.info("teach_form_submit_success");
