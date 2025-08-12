@@ -22,5 +22,11 @@ export default function ScrollManager() {
     return () => clearTimeout(t);
   }, [location.hash, location.pathname]);
 
+  // Ensure we start at the top on normal route changes (no hash)
+  useEffect(() => {
+    if (location.hash) return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+
   return null;
 }
