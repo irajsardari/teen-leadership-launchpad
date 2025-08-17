@@ -28,6 +28,45 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "12",
+    title: "The Three Stages of Life: Planting, Growing, and Harvesting",
+    author: "Ali Bagheri",
+    date: "2025-08-17",
+    featuredImage: "/lovable-uploads/83ef38a3-b62f-4273-872d-2d454b6652c6.png",
+    excerpt: "Life is like farming: no harvest comes without planting and growing first. Teenagers, your journey follows the same path.",
+    content: `# The Three Stages of Life: Planting, Growing, and Harvesting
+
+Life is like farming: no harvest comes without planting and growing first. Teenagers, your journey follows the same path.
+
+## Planting (Your Teenage Years) 🌱
+
+Right now, you are in the planting stage. Every choice you make — the habits you build, the friends you keep, the skills you start learning — are seeds you put into the soil of your future. If you plant discipline, curiosity, and kindness, you will create strong roots. If you plant carelessness or bad habits, your future will reflect that.
+
+## Growing (Your 20s and 30s) 🌿
+
+Seeds cannot grow without care. This stage is about hard work, patience, and consistency. It's about protecting your values from "weeds" like distractions and unhealthy influences, and feeding your dreams with knowledge, practice, and persistence. Growth is often invisible at first, but if you keep nurturing, one day it will show.
+
+## Harvesting (Your 40s and Beyond) 🌾
+
+In later life comes the harvest — the results of what you planted and nurtured. Success in business, science, art, or leadership never appears overnight. It is the outcome of years of planting wisely and growing patiently.
+
+So ask yourself: what seeds am I planting today? The harvest of your life will always mirror the choices you make as a teenager.
+
+⸻
+
+## About the Author ✍️
+
+Ali Bagheri is an entrepreneur and businessman in Oman. He started working at the age of 11 and, now in his 40s, leads a successful business. As the father of three teenagers, he is passionate about helping the next generation build better lives by making the right choices early. Through sharing his experiences, he hopes to inspire teenagers to plant good seeds today for a meaningful harvest tomorrow.`,
+    slug: "three-stages-of-life-planting-growing-harvesting",
+    seo: {
+      metaTitle: "The Three Stages of Life: Planting, Growing, and Harvesting | TMA Voices",
+      metaDescription: "Life is like farming: no harvest comes without planting and growing first. Learn about the three stages of life and how teenagers can plant seeds for future success.",
+      keywords: ["life stages", "teenage development", "personal growth", "success habits", "life planning", "teenage advice", "future planning", "personal development"]
+    },
+    category: "TMA Voices",
+    tags: ["Life Lessons", "Personal Growth", "Success", "Habits", "Future Planning"]
+  },
+  {
     id: "11",
     title: "Where You Live Is Not Important — How You Live Is What Matters",
     author: "Teenagers Management Academy (TMA)",
