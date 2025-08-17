@@ -52,13 +52,7 @@ Seeds cannot grow without care. This stage is about hard work, patience, and con
 
 In later life comes the harvest — the results of what you planted and nurtured. Success in business, science, art, or leadership never appears overnight. It is the outcome of years of planting wisely and growing patiently.
 
-So ask yourself: what seeds am I planting today? The harvest of your life will always mirror the choices you make as a teenager.
-
-⸻
-
-## About the Author ✍️
-
-Ali Bagheri is an entrepreneur and businessman in Oman. He started working at the age of 11 and, now in his 40s, leads a successful business. As the father of three teenagers, he is passionate about helping the next generation build better lives by making the right choices early. Through sharing his experiences, he hopes to inspire teenagers to plant good seeds today for a meaningful harvest tomorrow.`,
+So ask yourself: what seeds am I planting today? The harvest of your life will always mirror the choices you make as a teenager.`,
     slug: "three-stages-of-life-planting-growing-harvesting",
     seo: {
       metaTitle: "The Three Stages of Life: Planting, Growing, and Harvesting | TMA Voices",
