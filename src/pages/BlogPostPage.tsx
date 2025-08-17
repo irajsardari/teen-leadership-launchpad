@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { blogPosts } from "@/data/blogPosts";
+import { getAuthorByName } from "@/data/authors";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -53,6 +54,9 @@ const BlogPostPage = () => {
   if (!post) {
     return <Navigate to="/insights" replace />;
   }
+
+  // Get author info from the authors database
+  const authorInfo = getAuthorByName(post.author);
 
   const currentIndex = blogPosts.findIndex(p => p.slug === slug);
   const previousPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
@@ -323,8 +327,8 @@ const BlogPostPage = () => {
                   <div className="flex-shrink-0">
                   <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-tma-blue/20 overflow-hidden">
                     <img 
-                      src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
-                      alt="TMA Academy - Teenagers Management Academy Logo" 
+                      src={authorInfo?.avatar || "/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png"} 
+                      alt={`${post.author} - Profile`} 
                       className="w-14 h-14 object-contain"
                     />
                   </div>
@@ -332,21 +336,25 @@ const BlogPostPage = () => {
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <h4 className="font-semibold text-foreground">{post.author}</h4>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0 hover:bg-blue-50 hover:text-blue-600"
-                        title="Connect on LinkedIn"
-                        onClick={() => toast({
-                          title: "LinkedIn Profile",
-                          description: "Dr. Iraj's LinkedIn profile coming soon!",
-                        })}
-                      >
-                        <Linkedin className="h-3 w-3" />
-                      </Button>
+                      {authorInfo?.role && (
+                        <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+                          {authorInfo.role}
+                        </span>
+                      )}
+                      {authorInfo?.linkedinUrl && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 w-6 p-0 hover:bg-blue-50 hover:text-blue-600"
+                          title="Connect on LinkedIn"
+                          onClick={() => window.open(authorInfo.linkedinUrl, '_blank')}
+                        >
+                          <Linkedin className="h-3 w-3" />
+                        </Button>
+                      )}
                     </div>
                     <p className="text-muted-foreground text-sm leading-relaxed">
-                      Dr. Iraj Sardari Baf is the founder of the Teenagers Management Academy (TMA), with over two decades of leadership experience in banking, education, and organizational behavior. A passionate advocate for youth empowerment, he writes about teenage leadership, emotional intelligence, and the future of education.
+                      {authorInfo?.bio || "No author bio available."}
                     </p>
                   </div>
                 </div>

@@ -12,6 +12,7 @@ export interface BlogPost {
   id: string;
   title: string;
   author: string;
+  authorId: string; // New field to link to author profiles
   date: string;
   featuredImage: string;
   excerpt: string;
@@ -31,6 +32,7 @@ export const blogPosts: BlogPost[] = [
     id: "12",
     title: "The Three Stages of Life: Planting, Growing, and Harvesting",
     author: "Ali Bagheri",
+    authorId: "ali-bagheri",
     date: "2025-08-17",
     featuredImage: "/lovable-uploads/83ef38a3-b62f-4273-872d-2d454b6652c6.png",
     excerpt: "Life is like farming: no harvest comes without planting and growing first. Teenagers, your journey follows the same path.",
@@ -70,6 +72,7 @@ Ali Bagheri is an entrepreneur and businessman in Oman. He started working at th
     id: "11",
     title: "Where You Live Is Not Important — How You Live Is What Matters",
     author: "Teenagers Management Academy (TMA)",
+    authorId: "tma-academy",
     date: "2025-08-11",
     featuredImage: heroTeenagers,
     excerpt: "Success is not about your location — it’s about your daily habits, discipline, and how you live each day.",
@@ -112,6 +115,7 @@ Because in the end, where you live is not important — how you live is what def
     id: "10",
     title: "The Question That Defines Your Legacy",
     author: "Dr. Iraj Sardari Baf",
+    authorId: "dr-iraj-sardari-baf",
     date: "2025-06-27",
     featuredImage: legacyBanner,
     excerpt: "A teacher asked his class a question that silenced the room: 'How do people talk about you when you're not around?' This is the question that follows you for life.",
@@ -188,6 +192,7 @@ Your actions will already have answered that question.
     id: "9",
     title: "We Fall. We Learn. We Rise.",
     author: "Dr. Iraj Sardari Baf",
+    authorId: "dr-iraj-sardari-baf",
     date: "2025-07-10",
     featuredImage: resilienceBanner,
     excerpt: "Failure isn't the end — it's the start of growth. This article explores how consistency, skill-building, and resilience help teenagers turn setbacks into stepping stones.",
@@ -241,6 +246,7 @@ Keep walking. Keep learning. Keep rising.
     id: "8",
     title: "Facts & Illusions in the Digital World",
     author: "Dr. Iraj Sardari Baf",
+    authorId: "dr-iraj-sardari-baf",
     date: "2024-10-03",
     featuredImage: digitalAwarenessBanner,
     excerpt: "In today's digital age, teenagers are constantly surrounded by content that often blurs the line between reality and illusion. Learn to distinguish what is real from online performance.",
@@ -282,6 +288,7 @@ When you are the best version of yourself, nothing online can shake your worth. 
     id: "7",
     title: "Two Wings to Fly: The Power of Mental Health and Meaningful Connection",
     author: "Dr. Iraj Sardari Baf",
+    authorId: "dr-iraj-sardari-baf",
     date: "2025-02-04",
     featuredImage: mentalHealthBanner,
     excerpt: "A happy heart and a pure soul — these are the two wings that will carry you toward your dreams. Mental health isn't just about avoiding sadness or stress.",
@@ -346,6 +353,7 @@ Fly with both wings — a happy heart and a pure soul. That's where your power b
     id: "6",
     title: "Know Yourself — The Beginning of Every Journey",
     author: "Dr. Iraj Sardari Baf",
+    authorId: "dr-iraj-sardari-baf",
     date: "2025-06-03",
     featuredImage: knowYourselfBanner,
     excerpt: "In today's fast-moving world, many teenagers feel uncertain about their identity. The most important journey of your life begins with one step — knowing yourself.",
@@ -411,6 +419,7 @@ Because before you can lead others, you must lead yourself. And before you lead 
     id: "5",
     title: "Responsibility: The First Step to a Life That Matters",
     author: "Dr. Iraj Sardari Baf",
+    authorId: "dr-iraj-sardari-baf",
     date: "2025-05-10",
     featuredImage: responsibilityBanner,
     excerpt: "Being responsible is not something you suddenly learn at 25. It's a practice, a skill, a habit that must start young - and it's the foundation of all progress.",
@@ -492,6 +501,7 @@ If we want our teenagers to become strong, independent, kind, and capable human 
     id: "4",
     title: "Where Teen Leadership Really Begins",
     author: "Dr. Iraj Sardari Baf",
+    authorId: "dr-iraj-sardari-baf",
     date: "2025-08-01",
     featuredImage: teenLeadershipBanner,
     excerpt: "Why age 13 might be the most powerful year of a teenager's life - exploring the secret beginning of leadership in adolescence.",
@@ -563,6 +573,7 @@ It might be just in time.
     id: "12",
     title: "The Best Gift You Can Give to Your Family and Friends",
     author: "Teenagers Management Academy (TMA)",
+    authorId: "tma-academy",
     date: "2025-08-13",
     featuredImage: voicesBestGiftGraduation,
     excerpt: "The greatest gift you can give your loved ones isn’t bought — it’s becoming the best version of yourself. Your growth is the gift that lasts a lifetime.",
