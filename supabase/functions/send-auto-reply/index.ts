@@ -50,62 +50,45 @@ const handler = async (req: Request): Promise<Response> => {
   const isTeacher = payload?.type === "teacher";
   const isChallenger = payload?.type === "challenger";
 
-  // Email templates (HTML + text)
-  const teacherHtml = `
+  // Unified email template (HTML + text)
+  const firstName = payload?.firstName || payload?.fullName?.split(' ')[0] || "Applicant";
+  
+  const unifiedHtml = `
   <!DOCTYPE html>
   <html>
     <body style="font-family: Arial, sans-serif; color: #333;">
-      <h2>Thank you for applying to be a Mentor at TMA 🌟</h2>
-      <p>Dear Mentor Applicant,</p>
-      <p>Thank you for submitting your application to become a Mentor at Teenagers Management Academy (TMA).
-      We have received your details successfully.</p>
-      <p>Our team will review your profile, and we will be in touch if you are shortlisted.</p>
-      <p style="margin-top: 20px;">With appreciation,<br><strong>Teenagers Management Academy (TMA)</strong></p>
+      <h2>Thank you for applying to join TMA</h2>
+      <p>Dear ${firstName},</p>
+      <p>Thank you for your application to join the Teenagers Management Academy (TMA).</p>
+      ${isChallenger ? 
+        '<p>✨ <strong>For Challengers (students):</strong> Our admissions team will review your application and get back to you shortly with the next steps.</p>' :
+        '<p>✨ <strong>For Mentors (teachers):</strong> We appreciate your interest in guiding the next generation of leaders. Your application will be carefully reviewed, and you will hear from us soon.</p>'
+      }
+      <p>Meanwhile, feel free to explore more about TMA on our website: www.teenmanagement.com.</p>
+      <p style="margin-top: 20px;">Warm regards,<br>
+      <strong>TMA Admissions Team</strong><br>
+      Teenagers Management Academy<br>
+      P.O. Box 2643 Ruwi, Sultanate of Oman</p>
       <hr>
       <small>This is an automated email from no-reply@teenmanagement.com. For any questions, please contact info@teenmanagement.com</small>
     </body>
   </html>`;
 
-  const teacherText = `Dear Mentor Applicant,
+  const unifiedText = `Dear ${firstName},
 
-Thank you for submitting your application to become a Mentor at Teenagers Management Academy (TMA).
-We have received your details successfully.
+Thank you for your application to join the Teenagers Management Academy (TMA).
 
-Our team will review your profile, and we will be in touch if you are shortlisted.
+${isChallenger ? 
+  '✨ For Challengers (students): Our admissions team will review your application and get back to you shortly with the next steps.' :
+  '✨ For Mentors (teachers): We appreciate your interest in guiding the next generation of leaders. Your application will be carefully reviewed, and you will hear from us soon.'
+}
 
-With appreciation,
-Teenagers Management Academy (TMA)
+Meanwhile, feel free to explore more about TMA on our website: www.teenmanagement.com.
 
----
-This is an automated email from no-reply@teenmanagement.com. For any questions, please contact info@teenmanagement.com`;
-
-  const challengerHtml = `
-  <!DOCTYPE html>
-  <html>
-    <body style="font-family: Arial, sans-serif; color: #333;">
-      <h2>Welcome to TMA – Your Journey Begins 🚀</h2>
-      <p>Dear Challenger,</p>
-      <p>Thank you for registering with Teenagers Management Academy (TMA).
-      Your application has been received successfully.</p>
-      <p>We will review your information and contact you soon with next steps.</p>
-      <p>Meanwhile, feel free to explore our website: www.teenmanagement.com</p>
-      <p style="margin-top: 20px;">Best regards,<br><strong>Teenagers Management Academy (TMA)</strong></p>
-      <hr>
-      <small>This is an automated email from no-reply@teenmanagement.com. For any questions, please contact info@teenmanagement.com</small>
-    </body>
-  </html>`;
-
-  const challengerText = `Dear Challenger,
-
-Thank you for registering with Teenagers Management Academy (TMA).
-Your application has been received successfully.
-
-We will review your information and contact you soon with next steps.
-
-Meanwhile, feel free to explore our website: www.teenmanagement.com
-
-Best regards,
-Teenagers Management Academy (TMA)
+Warm regards,
+TMA Admissions Team
+Teenagers Management Academy
+P.O. Box 2643 Ruwi, Sultanate of Oman
 
 ---
 This is an automated email from no-reply@teenmanagement.com. For any questions, please contact info@teenmanagement.com`;
@@ -136,27 +119,18 @@ This is an automated email from no-reply@teenmanagement.com. For any questions, 
   // Background task to avoid blocking client
   const task = (async () => {
     try {
-      const userEmailPromise = isTeacher
-        ? resend.emails.send({
-            from: fromHeader,
-            to: [safeTo],
-            replyTo: "info@teenmanagement.com",
-            subject: "Thank you for applying to be a Mentor at TMA 🌟",
-            html: teacherHtml,
-            text: teacherText,
-          })
-        : resend.emails.send({
-            from: fromHeader,
-            to: [safeTo],
-            replyTo: "info@teenmanagement.com",
-            subject: "Welcome to TMA – Your Journey Begins 🚀",
-            html: challengerHtml,
-            text: challengerText,
-          });
+      const userEmailPromise = resend.emails.send({
+        from: fromHeader,
+        to: [safeTo],
+        replyTo: "info@teenmanagement.com",
+        subject: "Thank you for applying to join TMA",
+        html: unifiedHtml,
+        text: unifiedText,
+      });
 
       const adminEmailPromise = resend.emails.send({
         from: fromHeader,
-        to: [adminTo],
+        to: ["info@teenmanagement.com"],
         subject: adminSubject,
         text: adminBody,
       });
