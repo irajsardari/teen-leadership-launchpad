@@ -333,7 +333,7 @@ const TeacherApplicationLandingForm = () => {
                 {/* Honeypot */}
                 <input type="text" aria-hidden className="hidden" tabIndex={-1} {...form.register("hp")} />
 
-                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting || !user}>
                   {isSubmitting ? "Submitting..." : "Submit Application"}
                 </Button>
                 <p className="text-xs text-muted-foreground text-center">We review and reply within 5–7 business days.</p>

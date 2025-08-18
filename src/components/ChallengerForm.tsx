@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const challengerSchema = z.object({
   full_name: z.string().min(2, "Full name must be at least 2 characters"),
@@ -23,6 +24,7 @@ const challengerSchema = z.object({
 type ChallengerFormData = z.infer<typeof challengerSchema>;
 
 const ChallengerForm = () => {
+  const { user } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<ChallengerFormData>({
@@ -39,6 +41,16 @@ const ChallengerForm = () => {
   });
 
   const onSubmit = async (data: ChallengerFormData) => {
+    // Check if user is authenticated
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to submit your application.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     // Honeypot: if filled, silently abort
     if ((data as any)?.hp) {
       return;
@@ -196,7 +208,7 @@ const ChallengerForm = () => {
             <Button
               type="submit" 
               className="w-full" 
-              disabled={isSubmitting}
+              disabled={isSubmitting || !user}
               size="lg"
             >
               {isSubmitting ? (

@@ -5,8 +5,12 @@ import { ArrowRight, BookOpen, Target, Users, Trophy, Lightbulb, Heart } from "l
 import { Link } from "react-router-dom";
 import ChallengerForm from "@/components/ChallengerForm";
 import { Helmet } from "react-helmet-async";
+import { useAuth } from "@/hooks/useAuth";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const ChallengerPage = () => {
+  const { user } = useAuth();
+  
   const benefits = [
     {
       icon: <Target className="h-6 w-6" />,
@@ -130,6 +134,20 @@ const ChallengerPage = () => {
               </p>
             </div>
 
+            {!user && (
+              <Alert className="mb-6">
+                <AlertTitle>Sign in required</AlertTitle>
+                <AlertDescription>
+                  To protect applicants' data, please sign in before submitting your Challenger application.
+                </AlertDescription>
+                <div className="mt-3">
+                  <Link to={`/portal?next=${encodeURIComponent('/challenger#register')}`}>
+                    <Button size="sm">Sign in</Button>
+                  </Link>
+                </div>
+              </Alert>
+            )}
+            
             <ChallengerForm />
             
             {/* Trademark Notice */}

@@ -477,7 +477,7 @@ const TeacherApplicationForm = () => {
 
                 <Button 
                   type="submit" 
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !user}
                   className="w-full"
                   size="lg"
                 >
