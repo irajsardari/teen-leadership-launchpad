@@ -45,7 +45,7 @@ const ChallengerForm = () => {
     if (!user) {
       toast({
         title: "Authentication Required",
-        description: "Please sign in to submit your application.",
+        description: "Please log in before submitting this form.",
         variant: "destructive",
       });
       return;
@@ -62,25 +62,38 @@ const ChallengerForm = () => {
       const { hp, ...clean } = data as any;
       const { error } = await (supabase as any)
         .from('challengers')
-        .insert([clean]);
+        .insert([{
+          user_id: user.id,
+          full_name: data.full_name,
+          age: data.age,
+          email: data.email,
+          phone_number: data.phone_number,
+          level: data.level,
+          confidential_info: data.confidential_info || null,
+        }]);
 
       if (error) {
         throw error;
       }
 
-      toast({
-        title: "Registration Successful!",
-        description: "You have been registered as a challenger. We'll be in touch soon!",
+      // Send email via Resend
+      const { error: emailError } = await supabase.functions.invoke('send-application-emails', {
+        body: {
+          type: 'challenger',
+          to: data.email,
+          applicantName: data.full_name,
+        },
       });
 
-      try {
-        const firstName = data.full_name?.split(' ')[0] || undefined;
-        void supabase.functions.invoke('send-auto-reply', {
-          body: { type: 'challenger', to: data.email, firstName }
-        });
-      } catch (e) {
-        console.warn('send-auto-reply failed', e);
+      if (emailError) {
+        console.warn('Email sending failed:', emailError);
+        // Don't throw error - registration was successful
       }
+
+      toast({
+        title: "Registration Successful!",
+        description: "Your challenger registration has been submitted successfully. Check your email for confirmation.",
+      });
 
       form.reset();
     } catch (error) {
