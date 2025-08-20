@@ -387,7 +387,7 @@ export type Database = {
           full_name: string | null
           id: string
           lms_role: string | null
-          role: string | null
+          role: string
           updated_at: string
         }
         Insert: {
@@ -397,7 +397,7 @@ export type Database = {
           full_name?: string | null
           id: string
           lms_role?: string | null
-          role?: string | null
+          role?: string
           updated_at?: string
         }
         Update: {
@@ -407,7 +407,7 @@ export type Database = {
           full_name?: string | null
           id?: string
           lms_role?: string | null
-          role?: string | null
+          role?: string
           updated_at?: string
         }
         Relationships: []
@@ -833,9 +833,17 @@ export type Database = {
         Args: { res_id: string; user_id: string }
         Returns: boolean
       }
+      is_teacher_of_course: {
+        Args: { course_id_param: string }
+        Returns: boolean
+      }
       set_user_role: {
         Args: { _email: string; _role: string }
         Returns: undefined
+      }
+      user_owns_challenger_record: {
+        Args: { record_user_id: string }
+        Returns: boolean
       }
     }
     Enums: {
