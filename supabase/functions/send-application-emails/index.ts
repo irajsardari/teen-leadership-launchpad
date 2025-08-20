@@ -39,15 +39,13 @@ const handler = async (req: Request): Promise<Response> => {
     if (payload.type === "test") {
       subject = "TMA Test Connection OK";
       htmlContent = `
-        <h2>TMA Test Connection OK</h2>
         <p>This is a test email to confirm Resend integration is working properly.</p>
         <p>Best regards,<br>TMA Team</p>
       `;
-      textContent = "TMA Test Connection OK\n\nThis is a test email to confirm Resend integration is working properly.\n\nBest regards,\nTMA Team";
+      textContent = "This is a test email to confirm Resend integration is working properly.\n\nBest regards,\nTMA Team";
     } else if (payload.type === "mentor") {
       subject = "Thank you for applying as a Mentor with TMA";
       htmlContent = `
-        <h2>Thank you for applying as a Mentor with TMA</h2>
         <p>Dear ${payload.applicantName},</p>
         <p>Thank you for submitting your application to join the Teenagers Management Academy (TMA) as a Mentor.</p>
         <p>Our team will carefully review your application and get back to you within 7–10 business days.</p>
@@ -67,7 +65,6 @@ Teenagers Management Academy`;
     } else if (payload.type === "challenger") {
       subject = "Welcome to TMA – Your Journey Begins!";
       htmlContent = `
-        <h2>Welcome to TMA – Your Journey Begins!</h2>
         <p>Dear ${payload.applicantName},</p>
         <p>Thank you for registering as a Challenger with the Teenagers Management Academy (TMA).</p>
         <p>This is the first step of your leadership journey with us. Our team will review your registration and contact you soon with the next steps.</p>
