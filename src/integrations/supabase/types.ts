@@ -442,6 +442,33 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limit_attempts: {
+        Row: {
+          action: string
+          attempts: number | null
+          created_at: string | null
+          id: string
+          identifier: string
+          window_start: string | null
+        }
+        Insert: {
+          action: string
+          attempts?: number | null
+          created_at?: string | null
+          id?: string
+          identifier: string
+          window_start?: string | null
+        }
+        Update: {
+          action?: string
+          attempts?: number | null
+          created_at?: string | null
+          id?: string
+          identifier?: string
+          window_start?: string | null
+        }
+        Relationships: []
+      }
       resource_access_logs: {
         Row: {
           action: string
@@ -583,6 +610,39 @@ export type Database = {
         }
         Relationships: []
       }
+      security_audit_logs: {
+        Row: {
+          action: string
+          created_at: string | null
+          id: string
+          ip_address: unknown | null
+          resource_id: string | null
+          resource_type: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          resource_id?: string | null
+          resource_type: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          resource_id?: string | null
+          resource_type?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       session_progress: {
         Row: {
           completed: boolean | null
@@ -709,7 +769,7 @@ export type Database = {
           specialization: string | null
           status: string | null
           updated_at: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           confidential_info?: string | null
@@ -725,7 +785,7 @@ export type Database = {
           specialization?: string | null
           status?: string | null
           updated_at?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           confidential_info?: string | null
@@ -741,7 +801,7 @@ export type Database = {
           specialization?: string | null
           status?: string | null
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -836,6 +896,18 @@ export type Database = {
       is_teacher_of_course: {
         Args: { course_id_param: string }
         Returns: boolean
+      }
+      log_file_access: {
+        Args: { p_action?: string; p_file_path: string }
+        Returns: undefined
+      }
+      log_sensitive_operation: {
+        Args: {
+          p_action: string
+          p_resource_id?: string
+          p_resource_type: string
+        }
+        Returns: undefined
       }
       set_user_role: {
         Args: { _email: string; _role: string }
