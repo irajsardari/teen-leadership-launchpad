@@ -211,7 +211,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Our Structure Section */}
+      {/* Our Structure Section - Simplified Teaser */}
       <section className="py-20 bg-gradient-to-b from-background to-background/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -226,53 +226,37 @@ const HomePage = () => {
             </div>
           </div>
           
-          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {levels.map((level, index) => (
               <div key={index} className="group">
                 <div className="card-3d border-2 border-white/20 flex flex-col h-full rounded-3xl overflow-hidden">
                   <CardHeader className="flex-1 p-8">
-                    <div className="flex flex-col items-center space-y-6">
-                      {/* Age Badge and Per Term Badge */}
-                      <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-between">
-                        <div className="bg-tma-coral text-white px-6 py-2 rounded-full text-lg font-medium">
-                          {level.title.match(/\(Ages (\d+-\d+)\)/)?.[1] || '10-18'} years
-                        </div>
-                        <img 
-                          src="/src/assets/tma-badge-per-term-solid.svg" 
-                          alt="Per Term • 10 Sessions" 
-                          className="term-badge"
-                          loading="lazy"
-                        />
+                    <div className="flex flex-col items-center space-y-4 text-center">
+                      <div className="bg-tma-coral text-white px-6 py-2 rounded-full text-lg font-medium mb-2">
+                        {level.title.match(/\(Ages (\d+-\d+)\)/)?.[1] || '10-18'} years
                       </div>
-                      
-                      <div className="text-center">
-                        <h3 className="text-2xl font-bold text-white mb-2">{level.title.split(' (')[0]}</h3>
-                        <div className="challenger-pill mb-4">Challenger • {level.badge}</div>
-                        <p className="text-white/80 mb-4">{level.description}</p>
-                        
-                        <p className="font-semibold text-white mb-2">Affordable investment per term. Exact fee is shared during registration.</p>
-                        <p className="text-sm text-white/80 italic mb-4">Duration: {index === 0 ? '45–50 min per session • 10 sessions per term' : '70 min per session • 10 sessions per term'}</p>
-                        <p className="note mb-6 text-white/70 text-xs">Final fees are confirmed during registration based on program format and cohort availability.</p>
-                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">{level.title.split(' (')[0]}</h3>
+                      <p className="text-white/80 text-lg">{level.description}</p>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-0 pb-8 px-8 space-y-4">
-                    <button 
-                      className="register-btn w-full mb-2"
-                      onClick={() => window.location.href = '/apply#register'}
-                    >
-                      Register for {level.title.split(':')[1].split('(')[0].trim()}
-                    </button>
-                    <a 
-                      href="#fees-faq" 
-                      className="ask-fees block text-center"
-                    >
-                      Ask About Fees
-                    </a>
-                  </CardContent>
                 </div>
               </div>
             ))}
+          </div>
+          
+          <div className="text-center">
+            <Button 
+              size="lg" 
+              className="btn-modern-accent text-white font-inter font-black px-16 py-8 rounded-3xl text-xl group"
+              style={{ boxShadow: 'var(--shadow-button-3d)' }}
+              asChild
+            >
+              <Link to="/curriculum">
+                <span className="mr-4 text-2xl">📚</span>
+                See Full Curriculum
+                <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
+              </Link>
+            </Button>
           </div>
           
           {/* Future-Ready Leader Award Section */}
@@ -384,17 +368,37 @@ const HomePage = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8 font-inter">
               For Parents & Educators
             </h2>
-            <div className="text-lg md:text-xl text-foreground/80 space-y-6 font-inter mb-8">
-              <p>
-                We believe parents are the first mentors.
+            <div className="text-lg md:text-xl text-foreground/80 space-y-6 font-inter mb-8 leading-relaxed">
+              <p className="text-2xl font-semibold">
+                At TMA Academy, your teenager's journey is built step by step — from Explorers to Pathfinders — with a clear structure that builds confidence, skills, and leadership.
               </p>
               <p>
-                TMA provides short courses and guides to help parents support their teens' growth, plus teacher training materials to ensure our program is delivered with care and excellence.
+                We keep parents fully informed about what each level covers. For a detailed breakdown of subjects and badges, please see the Curriculum page.
               </p>
             </div>
-            <Button size="lg" variant="outline" className="font-inter">
-              Learn About Parent & Teacher Programs
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button 
+                size="lg" 
+                className="btn-modern-accent text-white font-inter font-black px-12 py-6 rounded-2xl text-lg group"
+                asChild
+              >
+                <Link to="/curriculum">
+                  See Full Curriculum
+                  <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+                </Link>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="cta-teal"
+                className="font-inter font-bold px-12 py-6 rounded-2xl text-lg group"
+                asChild
+              >
+                <Link to="/apply">
+                  Register Your Teenager
+                  <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

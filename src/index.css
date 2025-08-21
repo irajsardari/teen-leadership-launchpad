@@ -326,16 +326,17 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     left: 100%;
   }
 
-  /* Badge Sizing */
+  /* Badge Sizing - Increased for better visibility */
   .term-badge {
-    width: 232px;
+    width: 240px;
     height: auto;
-    opacity: 0.95;
+    opacity: 1;
+    filter: brightness(1) contrast(1.1);
   }
 
   @media (max-width: 640px) {
     .term-badge {
-      width: 168px;
+      width: 170px;
     }
   }
 

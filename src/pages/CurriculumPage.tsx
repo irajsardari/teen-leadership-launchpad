@@ -195,9 +195,6 @@ const CurriculumPage = () => {
                       </p>
                     </div>
                     
-                    <div className="challenger-pill mb-4 w-fit">
-                      Challenger • {level.badge}
-                    </div>
                     <p className="text-tma-blue font-semibold mb-4">
                       {level.focus}
                     </p>
