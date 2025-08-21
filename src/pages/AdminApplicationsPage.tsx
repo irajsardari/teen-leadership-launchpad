@@ -1,10 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { Helmet } from "react-helmet-async";
+import { Button } from "@/components/ui/button";
+import { SecurityAudit, SecureFileAccess, AuthSecurity } from "@/utils/security";
+import { withSecurityCheck } from "@/components/SecurityProvider";
 
 interface ApplicationRow {
   id: string;
@@ -90,8 +92,21 @@ const AdminApplicationsPage = () => {
   };
 
   const updateStatus = async (id: string, status: string) => {
-    const { error } = await supabase.from("teacher_applications").update({ status }).eq("id", id);
-    if (!error) setRows(prev => prev.map(r => r.id === id ? { ...r, status } : r));
+    try {
+      // Log the status change
+      await SecurityAudit.log('status_change', 'teacher_application', id);
+      
+      const { error } = await supabase.from('teacher_applications').update({ status }).eq('id', id);
+      if (!error) {
+        setRows(prev => prev.map(r => r.id === id ? { ...r, status } : r));
+        toast.success(`Application status updated to ${status}`);
+      } else {
+        toast.error('Failed to update status');
+      }
+    } catch (error) {
+      console.error('Status update error:', error);
+      toast.error('Failed to update status');
+    }
   };
 
   const openCalendly = (row: ApplicationRow) => {
@@ -101,8 +116,16 @@ const AdminApplicationsPage = () => {
 
   const signedUrl = async (path: string | null) => {
     if (!path) return null;
-    const { data } = await supabase.storage.from("teacher-documents").createSignedUrl(path, 60 * 60);
-    return data?.signedUrl ?? null;
+    
+    try {
+      // Use secure file access with logging
+      const secureUrl = await SecureFileAccess.generateSecureUrl('teacher-documents', path, 600); // 10 minutes
+      await SecurityAudit.log('admin_file_access', 'teacher_document', path);
+      return secureUrl;
+    } catch (error) {
+      console.error('Failed to generate secure URL:', error);
+      return null;
+    }
   };
 
   // Show loading while checking authentication
@@ -172,7 +195,11 @@ const AdminApplicationsPage = () => {
                         className="underline text-primary"
                         onClick={async () => {
                           const url = await signedUrl(r.cv_url);
-                          if (url) window.open(url, "_blank");
+                          if (url) {
+                            window.open(url, "_blank", "noopener,noreferrer");
+                          } else {
+                            toast.error('Unable to access file');
+                          }
                         }}
                       >
                         Open CV
@@ -194,4 +221,4 @@ const AdminApplicationsPage = () => {
   );
 };
 
-export default AdminApplicationsPage;
+export default withSecurityCheck(AdminApplicationsPage, 'admin');

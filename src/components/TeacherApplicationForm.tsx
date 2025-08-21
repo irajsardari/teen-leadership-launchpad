@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Checkbox } from "@/components/ui/checkbox";
+import { RateLimiter, SecurityAudit, InputSecurity } from "@/utils/security";
 
 const baseSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
@@ -138,24 +139,28 @@ const TeacherApplicationForm = () => {
       return null;
     }
 
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${user.id}/${Date.now()}.${fileExt}`;
-
-    const { data, error } = await supabase.storage
-      .from('teacher-documents')
-      .upload(fileName, file);
-
-    if (error) {
+    try {
+      // Import security utility
+      const { SecureFileAccess } = await import('@/utils/security');
+      
+      // Use secure upload with validation
+      const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+      const filePath = await SecureFileAccess.uploadSecureFile('teacher-documents', file, fileName);
+      
+      if (!filePath) {
+        throw new Error('Secure upload failed');
+      }
+      
+      return filePath;
+    } catch (error: any) {
       console.error('Error uploading CV:', error);
       toast({
         title: "Upload Error",
-        description: `Failed to upload CV: ${error.message}`,
+        description: error.message || "Failed to upload CV. Please try again.",
         variant: "destructive",
       });
       return null;
     }
-
-    return fileName;
   };
 
   const onSubmit = async (values: BaseForm) => {
@@ -167,12 +172,55 @@ const TeacherApplicationForm = () => {
       });
       return;
     }
+
+    // Rate limiting check
+    const clientIP = 'user_' + user.id; // Use user ID as identifier
+    const canSubmit = await RateLimiter.checkRateLimit(clientIP, 'teacher_application', 3, 60);
+    
+    if (!canSubmit) {
+      toast({
+        title: "Rate Limited",
+        description: "Too many applications submitted. Please wait before trying again.",
+        variant: "destructive",
+      });
+      await RateLimiter.logAttempt(clientIP, 'teacher_application', false);
+      return;
+    }
+
     try {
       setIsSubmitting(true);
 
+      // Input validation and sanitization
+      const sanitizedValues = {
+        ...values,
+        fullName: InputSecurity.sanitizeString(values.fullName),
+        email: values.email.toLowerCase().trim(),
+        phoneNumber: InputSecurity.sanitizeString(values.phoneNumber),
+        linkedinPortfolio: values.linkedinPortfolio ? InputSecurity.sanitizeString(values.linkedinPortfolio) : undefined,
+      };
+
+      // Additional validation
+      if (!InputSecurity.validateEmail(sanitizedValues.email)) {
+        toast({
+          title: "Invalid Email",
+          description: "Please enter a valid email address.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (sanitizedValues.phoneNumber && !InputSecurity.validatePhoneNumber(sanitizedValues.phoneNumber)) {
+        toast({
+          title: "Invalid Phone Number",
+          description: "Please enter a valid phone number.",
+          variant: "destructive",
+        });
+        return;
+      }
+
       let cvUrl = null;
-      if (values.cv && values.cv.length > 0) {
-        cvUrl = await uploadCV(values.cv[0]);
+      if (sanitizedValues.cv && sanitizedValues.cv.length > 0) {
+        cvUrl = await uploadCV(sanitizedValues.cv[0]);
         if (!cvUrl) {
           toast({
             title: "Error",
@@ -196,14 +244,14 @@ const TeacherApplicationForm = () => {
         .from('teacher_applications')
         .insert({
           user_id: user?.id,
-          full_name: values.fullName,
-          email: values.email,
-          phone_number: values.phoneNumber,
-          specialization: values.specialization.join(", "),
-          experience_years: experienceYearsMap[values.experienceYears] || 0,
-          education: values.education,
+          full_name: sanitizedValues.fullName,
+          email: sanitizedValues.email,
+          phone_number: sanitizedValues.phoneNumber,
+          specialization: sanitizedValues.specialization.join(", "),
+          experience_years: experienceYearsMap[sanitizedValues.experienceYears] || 0,
+          education: sanitizedValues.education,
           cv_url: cvUrl,
-          cover_letter: values.linkedinPortfolio || null,
+          cover_letter: sanitizedValues.linkedinPortfolio || null,
         });
 
       if (error) {
@@ -213,6 +261,8 @@ const TeacherApplicationForm = () => {
           return;
         }
         console.error('Error submitting application:', error);
+        await SecurityAudit.log('application_submission_failed', 'teacher_application', user?.id);
+        await RateLimiter.logAttempt(clientIP, 'teacher_application', false);
         toast({
           title: "Error",
           description: "Failed to submit application. Please try again.",
@@ -221,12 +271,16 @@ const TeacherApplicationForm = () => {
         return;
       }
 
+      // Log successful submission
+      await SecurityAudit.log('application_submitted', 'teacher_application', user?.id);
+      await RateLimiter.logAttempt(clientIP, 'teacher_application', true);
+
       // Send email via Resend
       const { error: emailError } = await supabase.functions.invoke('send-application-emails', {
         body: {
           type: 'mentor',
-          to: values.email,
-          applicantName: values.fullName,
+          to: sanitizedValues.email,
+          applicantName: sanitizedValues.fullName,
         },
       });
 
