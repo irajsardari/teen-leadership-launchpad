@@ -18,58 +18,58 @@ const ApplyPage = () => {
   const ageGroups = [
     {
       group: "Level 1: Explorers",
-      ageRange: "10-12 years",
-      description: "Self-discovery, basic life skills, communication, and healthy habits.",
+      ageRange: "10-11 years",
+      description: "Self-awareness, curiosity, discipline, teamwork.",
       price: "$79/month",
       badge: "Explorer Badge",
       features: [
-        "6 foundation terms",
+        "6 foundation terms (2 years)",
         "Self-awareness & confidence building",
-        "Basic communication skills",
-        "Goal setting for kids",
-        "Friendship & social skills"
+        "Curiosity & discovery skills",
+        "Discipline & healthy habits",
+        "Teamwork & friendship skills"
       ]
     },
     {
       group: "Level 2: Builders",
-      ageRange: "13-14 years",
-      description: "Leadership foundations, emotional intelligence, teamwork, and planning.",
+      ageRange: "12-13 years",
+      description: "Communication, collaboration, creativity, leadership.",
       price: "$99/month",
       badge: "Builder Badge",
       features: [
-        "9 comprehensive terms",
-        "Leadership foundations",
-        "Emotional intelligence basics",
+        "6 comprehensive terms (2 years)",
         "Communication & presentation",
-        "Team collaboration"
+        "Collaboration & teamwork",
+        "Creative thinking & leadership",
+        "Ethics & values foundation"
       ]
     },
     {
       group: "Level 3: Innovators", 
-      ageRange: "15-16 years",
-      description: "Advanced leadership, innovation, project management, and strategy.",
+      ageRange: "14-15 years",
+      description: "Critical thinking, problem-solving, resilience, innovation.",
       price: "$129/month",
       badge: "Innovator Badge",
       features: [
-        "6 advanced terms",
-        "Innovation & creative thinking",
-        "Project management",
-        "Public speaking & persuasion",
-        "Digital innovation"
+        "6 advanced terms (2 years)",
+        "Critical thinking & analysis",
+        "Innovation & design thinking",
+        "Resilience & mental strength",
+        "Digital literacy & innovation"
       ]
     },
     {
-      group: "Level 4: Trailblazers",
-      ageRange: "17 years",
-      description: "Professional leadership, career skills, business, and global citizenship.",
+      group: "Level 4: Pathfinders",
+      ageRange: "16-17 years",
+      description: "Strategy, leadership ethics, financial literacy, global citizenship.",
       price: "$149/month",
-      badge: "Trailblazer Badge",
+      badge: "Pathfinder Badge",
       features: [
-        "3 capstone terms",
+        "6 capstone terms (2 years)",
         "Strategic leadership",
-        "Business & entrepreneurship",
-        "Career planning & development",
-        "Social impact & responsibility"
+        "Financial literacy & management",
+        "Leadership ethics & values",
+        "Global citizenship & impact"
       ]
     }
   ];
@@ -138,7 +138,7 @@ const ApplyPage = () => {
                     Choose Your Learning Path
                   </h2>
                   <p className="text-xl text-tma-gray">
-                    Select the age-appropriate program that matches your developmental stage (Ages 10-18)
+                    Select the age-appropriate program that matches your developmental stage. Complete all 4 levels to earn the prestigious Future-Ready Leader Award at age 18.
                   </p>
                 </div>
                 

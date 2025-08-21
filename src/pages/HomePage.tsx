@@ -8,36 +8,37 @@ import heroImage from "@/assets/hero-teenagers.jpg";
 const HomePage = () => {
   const levels = [
     {
-      title: "Level 1: Explorers (Ages 10–12)",
-      description: "Self-discovery, basic life skills, communication, and healthy habits.",
-      badge: "Explorer",
+      title: "Level 1: Explorers (Ages 10–11)",
+      description: "Self-awareness, curiosity, discipline, teamwork.",
+      badge: "Explorer Badge",
       color: "from-tma-teal to-tma-blue"
     },
     {
-      title: "Level 2: Builders (Ages 13–14)",
-      description: "Leadership foundations, emotional intelligence, teamwork, and planning.",
-      badge: "Builder",
+      title: "Level 2: Builders (Ages 12–13)",
+      description: "Communication, collaboration, creativity, leadership.",
+      badge: "Builder Badge",
       color: "from-tma-navy to-tma-blue"
     },
     {
-      title: "Level 3: Innovators (Ages 15–16)", 
-      description: "Advanced leadership, innovation, project management, and strategy.",
-      badge: "Innovator",
+      title: "Level 3: Innovators (Ages 14–15)", 
+      description: "Critical thinking, problem-solving, resilience, innovation.",
+      badge: "Innovator Badge",
       color: "from-tma-blue to-tma-teal"
     },
     {
-      title: "Level 4: Trailblazers (Age 17)",
-      description: "Professional leadership, career skills, business, and global citizenship.",
-      badge: "Trailblazer",
+      title: "Level 4: Pathfinders (Ages 16–17)",
+      description: "Strategy, leadership ethics, financial literacy, global citizenship.",
+      badge: "Pathfinder Badge",
       color: "from-tma-coral to-tma-coral/80"
-    },
-    {
-      title: "Elite Summit (Black Belt) — Age 18",
-      description: "Final impact project, public presentation, mentoring, and 10-year life plan.",
-      badge: "Elite",
-      color: "from-tma-gold to-tma-teal"
     }
   ];
+
+  const graduationAward = {
+    title: "🎓 Future-Ready Leader Award (Age 18)",
+    description: "Final capstone project & graduation recognition. Equivalent in prestige to global certificates.",
+    badge: "Future-Ready Leader",
+    color: "from-tma-gold to-tma-teal"
+  };
 
   const learningAreas = [
     {
@@ -218,9 +219,9 @@ const HomePage = () => {
               TMA Challenger Journey
             </h2>
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
-              <h3 className="text-xl font-semibold text-primary mb-2">Total: 8 Years | Ages 10–18 | 28 Terms</h3>
+              <h3 className="text-xl font-semibold text-primary mb-2">Total: 8 Years | Ages 10–18 | 24 Terms</h3>
               <p className="text-foreground/80">
-                Identity: All participants are TMA Challengers — future-ready leaders in training.
+                4 Levels + Future-Ready Leader Award. All participants are TMA Challengers — future-ready leaders in training.
               </p>
             </div>
           </div>
@@ -256,9 +257,29 @@ const HomePage = () => {
             ))}
           </div>
           
-          <div className="text-center">
+          {/* Future-Ready Leader Award Section */}
+          <div className="mt-16">
+            <Card className="border-2 border-tma-gold/30 shadow-[var(--shadow-elegant)] bg-gradient-to-br from-tma-gold/5 to-tma-teal/5">
+              <CardContent className="p-12 text-center">
+                <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-tma-gold to-tma-teal rounded-full mb-8 shadow-lg">
+                  <Award className="h-12 w-12 text-white" />
+                </div>
+                <h3 className="text-3xl md:text-4xl font-bold text-gradient-primary mb-6 font-inter">
+                  {graduationAward.title}
+                </h3>
+                <p className="text-xl text-foreground/80 font-inter mb-8 leading-relaxed max-w-3xl mx-auto">
+                  {graduationAward.description}
+                </p>
+                <Badge variant="secondary" className="bg-gradient-to-r from-tma-gold/20 to-tma-teal/20 text-tma-navy border-2 border-tma-gold/40 font-bold text-xl p-4 rounded-2xl">
+                  🎓 {graduationAward.badge}
+                </Badge>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="text-center mt-8">
             <p className="text-xl font-semibold text-primary font-inter italic">
-              "More than a school — a launchpad."
+              "4 Levels + Future-Ready Leader Award — A Complete Leadership Journey"
             </p>
           </div>
         </div>

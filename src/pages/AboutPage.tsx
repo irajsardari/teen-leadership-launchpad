@@ -19,7 +19,7 @@ const AboutPage = () => {
     {
       icon: Target,
       title: "Age-appropriate design",
-      description: "Clear stages for growth: Explorers (10-12), Builders (13-14), Innovators (15-16), Trailblazers (17), Elite Summit (18)"
+      description: "Clear stages for growth: Explorers (10-11), Builders (12-13), Innovators (14-15), Pathfinders (16-17), Future-Ready Leader Award (18)"
     },
     {
       icon: Award,
@@ -67,7 +67,7 @@ const AboutPage = () => {
               </p>
               
               <p className="leading-relaxed">
-                Founded in the GCC and expanding globally, TMA offers an 8-year, 28-term curriculum that blends management, emotional intelligence, finance, psychology, digital literacy, and leadership — all designed to prepare students for real life, not just academics. Our Pre-TMA Foundation Program starts at age 10, preparing students for the full TMA Academy experience.
+                Founded in the GCC and expanding globally, TMA offers an 8-year, 24-term curriculum that blends management, emotional intelligence, finance, psychology, digital literacy, and leadership — all designed to prepare students for real life, not just academics. Our curriculum spans 4 levels plus a prestigious Future-Ready Leader Award, starting at age 10.
               </p>
             </div>
           </div>

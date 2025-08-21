@@ -8,94 +8,94 @@ const CurriculumPage = () => {
   const curriculumLevels = [
     {
       level: "Explorers",
-      badge: "Explorer",
-      years: "Years 1-3",
-      ages: "10-12",
+      badge: "Explorer Badge",
+      years: "Years 1-2",
+      ages: "10-11",
       terms: 6,
-      focus: "Self-discovery, basic life skills, communication, and healthy habits.",
+      focus: "Self-awareness, curiosity, discipline, teamwork.",
       subjects: [
         "Self-Awareness & Confidence",
-        "Healthy Habits",
+        "Curiosity & Discovery",
+        "Discipline & Healthy Habits",
         "Foundational Communication",
-        "Time Management Basics",
+        "Teamwork & Friendship",
+        "Basic Problem-Solving",
         "Emotion Recognition",
-        "Goal Setting for Pre-Teens",
-        "Friendship & Social Skills",
-        "Problem-Solving Basics"
+        "Goal Setting for Beginners"
       ],
       color: "from-green-500 to-teal-500"
     },
     {
       level: "Builders",
-      badge: "Builder",
-      years: "Years 4-5",
-      ages: "13-14",
+      badge: "Builder Badge",
+      years: "Years 3-4",
+      ages: "12-13",
       terms: 6,
-      focus: "Leadership foundations, emotional intelligence, teamwork, and planning.",
+      focus: "Communication, collaboration, creativity, leadership.",
       subjects: [
-        "Leadership Foundations",
-        "Emotional Intelligence",
         "Communication & Presentation",
+        "Collaboration Skills",
+        "Creative Thinking",
+        "Leadership Foundations",
         "Time Management & Organization",
-        "Team Collaboration",
         "Ethics & Values",
-        "Creative Problem-Solving",
-        "Goal Achievement Strategies"
+        "Team Building",
+        "Creative Problem-Solving"
       ],
       color: "from-blue-500 to-teal-500"
     },
     {
       level: "Innovators", 
-      badge: "Innovator",
-      years: "Years 6-7",
-      ages: "15-16",
+      badge: "Innovator Badge",
+      years: "Years 5-6",
+      ages: "14-15",
       terms: 6,
-      focus: "Advanced leadership, innovation, project management, and strategy.",
+      focus: "Critical thinking, problem-solving, resilience, innovation.",
       subjects: [
-        "Advanced Leadership Principles",
-        "Innovation & Creative Thinking",
+        "Critical Thinking & Analysis",
+        "Innovation & Design Thinking",
         "Project Management",
+        "Resilience & Mental Strength",
+        "Advanced Problem-Solving",
+        "Digital Literacy & Innovation",
         "Public Speaking & Persuasion",
-        "Conflict Resolution",
-        "Decision Making & Critical Thinking",
-        "Digital Innovation",
         "Entrepreneurial Mindset"
       ],
       color: "from-teal-500 to-blue-600"
     },
     {
-      level: "Trailblazers",
-      badge: "Trailblazer",
-      years: "Year 8",
-      ages: "17",
-      terms: 3,
-      focus: "Professional leadership, career skills, business, and global citizenship.",
+      level: "Pathfinders",
+      badge: "Pathfinder Badge",
+      years: "Years 7-8",
+      ages: "16-17",
+      terms: 6,
+      focus: "Strategy, leadership ethics, financial literacy, global citizenship.",
       subjects: [
         "Strategic Leadership",
-        "Business & Entrepreneurship",
-        "Career Planning & Development",
+        "Leadership Ethics & Values",
+        "Financial Literacy & Management",
+        "Global Citizenship",
+        "Career Strategy & Development",
+        "Social Impact & Responsibility",
         "Mentorship & Coaching",
-        "Global Leadership",
-        "Social Impact & Responsibility"
+        "Future Planning & Vision"
       ],
       color: "from-blue-600 to-indigo-600"
-    },
-    {
-      level: "Elite Summit (Black Belt)",
-      badge: "Elite",
-      years: "Capstone",
-      ages: "18",
-      terms: 1,
-      focus: "Final impact project, public presentation, mentoring, and 10-year life plan.",
-      subjects: [
-        "Impact Project",
-        "Public Presentation",
-        "Mentoring",
-        "10-Year Life Plan"
-      ],
-      color: "from-tma-gold to-tma-teal"
     }
   ];
+
+  const graduationAward = {
+    title: "Future-Ready Leader Award",
+    age: "18",
+    description: "Final capstone project & graduation recognition. Equivalent in prestige to global certificates (similar in positioning to IELTS/TOEFL in languages).",
+    subjects: [
+      "Capstone Leadership Project",
+      "Public Presentation & Defense",
+      "10-Year Life Vision Plan",
+      "Community Impact Initiative"
+    ],
+    color: "from-tma-gold to-tma-teal"
+  };
 
   const features = [
     {
@@ -132,7 +132,7 @@ const CurriculumPage = () => {
             <p className="text-xl md:text-2xl text-blue-100 mb-8">
               TMA — Teenagers Management Academy<br />
               Future Ready Leaders<br /><br />
-              A comprehensive 8-year, 28-term program for ages 10–18 designed to develop 
+              A comprehensive 8-year, 24-term program for ages 10–18 designed to develop 
               complete leadership and life skills
             </p>
             <Button variant="accent" size="lg" className="bg-white text-tma-blue hover:bg-gray-100">
@@ -151,9 +151,9 @@ const CurriculumPage = () => {
               TMA Challenger Journey
             </h2>
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
-              <h3 className="text-xl font-semibold text-primary mb-2">Total: 8 Years | Ages 10–18 | 28 Terms</h3>
+              <h3 className="text-xl font-semibold text-primary mb-2">Total: 8 Years | Ages 10–18 | 24 Terms</h3>
               <p className="text-foreground/80">
-                Identity: All participants are TMA Challengers — future-ready leaders in training.
+                4 Levels + Future-Ready Leader Award. All participants are TMA Challengers — future-ready leaders in training.
               </p>
             </div>
           </div>
@@ -212,6 +212,60 @@ const CurriculumPage = () => {
                 </div>
               </Card>
             ))}
+
+            {/* Future-Ready Leader Award */}
+            <Card className="border-none shadow-[var(--shadow-elegant)] overflow-hidden bg-gradient-to-br from-tma-gold/10 via-background to-tma-teal/10 border-2 border-tma-gold/30">
+              <div className={`h-2 bg-gradient-to-r ${graduationAward.color}`}></div>
+              <div className="p-8">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-tma-gold to-tma-teal rounded-full mb-6 shadow-lg">
+                    <Award className="h-10 w-10 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-tma-navy mb-4">
+                    🎓 {graduationAward.title}
+                  </h3>
+                  <Badge variant="secondary" className="mb-4 bg-gradient-to-r from-tma-gold/20 to-tma-teal/20 text-tma-navy border-2 border-tma-gold/40 font-bold text-lg p-3 rounded-2xl">
+                    Age {graduationAward.age}
+                  </Badge>
+                  <p className="text-tma-blue font-semibold text-lg mb-6">
+                    {graduationAward.description}
+                  </p>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-lg font-semibold text-tma-navy mb-4">
+                      Capstone Requirements
+                    </h4>
+                    <div className="space-y-3">
+                      {graduationAward.subjects.map((subject, subjectIndex) => (
+                        <div key={subjectIndex} className="flex items-center text-sm text-tma-gray">
+                          <div className="w-2 h-2 bg-tma-gold rounded-full mr-3 flex-shrink-0"></div>
+                          {subject}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-tma-light/50 rounded-lg p-6">
+                    <h4 className="text-lg font-semibold text-tma-navy mb-3">
+                      Global Recognition
+                    </h4>
+                    <p className="text-sm text-tma-gray mb-4">
+                      This award holds the same prestige as internationally recognized certificates like IELTS or TOEFL in their respective fields.
+                    </p>
+                    <Button 
+                      className="w-full bg-gradient-to-r from-tma-gold to-tma-teal text-white hover:opacity-90 transition-all duration-300"
+                      asChild
+                    >
+                      <Link to="/apply#register">
+                        Begin Your Journey
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
@@ -309,8 +363,8 @@ const CurriculumPage = () => {
                   <div className="flex items-start">
                     <div className="w-2 h-2 bg-tma-blue rounded-full mr-3 mt-2"></div>
                     <div>
-                      <h4 className="font-semibold text-tma-navy">Master Diploma</h4>
-                      <p className="text-sm text-tma-gray">Comprehensive diploma upon completing the full 8-year program</p>
+                      <h4 className="font-semibold text-tma-navy">Future-Ready Leader Award</h4>
+                      <p className="text-sm text-tma-gray">Prestigious graduation award upon completing the full 8-year program</p>
                     </div>
                   </div>
                 </CardContent>

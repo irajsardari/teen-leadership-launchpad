@@ -14,15 +14,15 @@ const FAQPage = () => {
     {
       icon: <Users className="h-6 w-6" />,
       question: "What ages does TMA serve?",
-      answer: "TMA is designed for young people aged 10 to 18, divided across four levels:",
+      answer: "TMA is designed for young people aged 10 to 18, divided across four levels plus a graduation award:",
       details: [
-        "• Explorers (10–12)",
-        "• Builders (13–14)",
-        "• Innovators (15–16)",
-        "• Trailblazers (17)",
-        "• Elite Summit (18)"
+        "• Level 1: Explorers (Ages 10–11)",
+        "• Level 2: Builders (Ages 12–13)",
+        "• Level 3: Innovators (Ages 14–15)",
+        "• Level 4: Pathfinders (Ages 16–17)",
+        "• Future-Ready Leader Award (Age 18)"
       ],
-      additionalText: "Each level includes unique themes and life skills, taught in carefully designed sessions and terms."
+      additionalText: "Each level includes 6 terms (2 years) with unique themes and life skills, culminating in a prestigious graduation award."
     },
     {
       icon: <Heart className="h-6 w-6" />,
