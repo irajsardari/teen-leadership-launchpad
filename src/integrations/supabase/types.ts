@@ -878,7 +878,36 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      confidential_records_summary: {
+        Row: {
+          created_at: string | null
+          entity_id: string | null
+          entity_type: string | null
+          id: string | null
+          info_length: number | null
+          info_preview: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string | null
+          info_length?: never
+          info_preview?: never
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string | null
+          info_length?: never
+          info_preview?: never
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       check_rate_limit: {
@@ -897,6 +926,17 @@ export type Database = {
           p_file_path: string
         }
         Returns: string
+      }
+      get_confidential_record_secure: {
+        Args: { p_record_id: string }
+        Returns: {
+          confidential_info: string
+          created_at: string
+          entity_id: string
+          entity_type: string
+          id: string
+          updated_at: string
+        }[]
       }
       get_current_user_role: {
         Args: Record<PropertyKey, never>
@@ -932,6 +972,10 @@ export type Database = {
       }
       user_owns_challenger_record: {
         Args: { record_user_id: string }
+        Returns: boolean
+      }
+      verify_confidential_access: {
+        Args: { record_id?: string }
         Returns: boolean
       }
     }
