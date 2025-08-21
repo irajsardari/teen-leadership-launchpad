@@ -84,28 +84,21 @@ export const SafeguardingModal: React.FC<SafeguardingModalProps> = ({ children }
       // Get current user if logged in
       const { data: { user } } = await supabase.auth.getUser();
       
-      // Create safeguarding report
-      const { error } = await supabase
-        .from('safeguarding_reports')
-        .insert({
-          report_type: reportType,
-          description: sanitizedDescription,
-          contact_info: sanitizedContact || null,
-          reporter_id: user?.id || null,
-          status: 'submitted',
-          urgency: reportTypes.find(t => t.id === reportType)?.severity || 'medium'
-        });
+      // Submit safeguarding report using RPC function
+      const { data: reportId, error } = await supabase.rpc('submit_safeguarding_report', {
+        p_report_type: reportType,
+        p_description: sanitizedDescription,
+        p_contact_info: sanitizedContact || null
+      });
 
       if (error) {
         throw error;
       }
 
-      // Log the report submission
-      await SecurityAudit.log('safeguarding_report_submitted', 'safeguarding_report', reportType);
-
       // Send notification email (via Edge Function)
       await supabase.functions.invoke('send-safeguarding-alert', {
         body: {
+          reportId: reportId,
           reportType,
           description: sanitizedDescription,
           contactInfo: sanitizedContact,

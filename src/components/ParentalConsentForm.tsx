@@ -129,65 +129,30 @@ export const ParentalConsentForm: React.FC<ParentalConsentFormProps> = ({
         return;
       }
 
-      // Create parental consent record
-      const { data: consent, error: consentError } = await supabase
-        .from('parental_consents')
-        .insert({
-          child_user_id: childUserId,
-          parent_full_name: sanitizedValues.parentFullName,
-          parent_email: sanitizedValues.parentEmail,
-          parent_phone: sanitizedValues.parentPhone,
-          relationship_to_child: sanitizedValues.relationshipToChild,
-          child_full_name: sanitizedValues.childFullName,
-          child_date_of_birth: sanitizedValues.childDateOfBirth,
-          child_age: sanitizedValues.childAge,
-          emergency_contact_name: sanitizedValues.emergencyContactName,
-          emergency_contact_phone: sanitizedValues.emergencyContactPhone,
-          emergency_contact_relation: sanitizedValues.emergencyContactRelation,
-          medical_conditions: sanitizedValues.medicalConditions,
-          learning_needs: sanitizedValues.learningNeeds,
-          additional_notes: sanitizedValues.additionalNotes,
-          digital_signature: sanitizedValues.digitalSignature,
-          signature_date: sanitizedValues.signatureDate,
-          consent_version: '1.0',
-          status: 'active'
-        })
-        .select()
-        .single();
+      // Prepare consent permissions
+      const permissions = [
+        { permission_type: 'data_collection', granted: sanitizedValues.consentDataCollection, required: true },
+        { permission_type: 'communication', granted: sanitizedValues.consentCommunication, required: true },
+        { permission_type: 'educational_activities', granted: sanitizedValues.consentEducationalActivities, required: true },
+        { permission_type: 'progress_tracking', granted: sanitizedValues.consentProgressTracking, required: true },
+        { permission_type: 'photos_videos', granted: sanitizedValues.consentPhotosVideos, required: false },
+        { permission_type: 'marketing', granted: sanitizedValues.consentMarketing, required: false },
+        { permission_type: 'data_sharing', granted: sanitizedValues.consentDataSharing, required: false },
+      ];
+
+      // Submit parental consent using RPC function
+      const { data: consentId, error: consentError } = await supabase.rpc('submit_parental_consent', {
+        p_child_user_id: childUserId,
+        p_parent_guardian_name: sanitizedValues.parentFullName,
+        p_parent_guardian_email: sanitizedValues.parentEmail,
+        p_relationship: sanitizedValues.relationshipToChild,
+        p_digital_signature: sanitizedValues.digitalSignature,
+        p_permissions: permissions
+      });
 
       if (consentError) {
         throw consentError;
       }
-
-      // Create detailed consent permissions
-      const permissions = [
-        { type: 'data_collection', granted: sanitizedValues.consentDataCollection, required: true },
-        { type: 'communication', granted: sanitizedValues.consentCommunication, required: true },
-        { type: 'educational_activities', granted: sanitizedValues.consentEducationalActivities, required: true },
-        { type: 'progress_tracking', granted: sanitizedValues.consentProgressTracking, required: true },
-        { type: 'photos_videos', granted: sanitizedValues.consentPhotosVideos, required: false },
-        { type: 'marketing', granted: sanitizedValues.consentMarketing, required: false },
-        { type: 'data_sharing', granted: sanitizedValues.consentDataSharing, required: false },
-      ];
-
-      const { error: permissionsError } = await supabase
-        .from('consent_permissions')
-        .insert(
-          permissions.map(p => ({
-            consent_id: consent.id,
-            permission_type: p.type,
-            granted: p.granted,
-            required: p.required,
-            granted_at: p.granted ? new Date().toISOString() : null
-          }))
-        );
-
-      if (permissionsError) {
-        throw permissionsError;
-      }
-
-      // Log consent submission
-      await SecurityAudit.log('parental_consent_submitted', 'parental_consent', consent.id);
 
       // Send confirmation email
       await supabase.functions.invoke('send-consent-confirmation', {
@@ -195,12 +160,12 @@ export const ParentalConsentForm: React.FC<ParentalConsentFormProps> = ({
           parentEmail: sanitizedValues.parentEmail,
           parentName: sanitizedValues.parentFullName,
           childName: sanitizedValues.childFullName,
-          consentId: consent.id
+          consentId: consentId
         }
       });
 
       setConsentSubmitted(true);
-      setConsentId(consent.id);
+      setConsentId(consentId);
       
       toast({
         title: "Parental Consent Recorded",
@@ -208,7 +173,7 @@ export const ParentalConsentForm: React.FC<ParentalConsentFormProps> = ({
       });
 
       if (onSuccess) {
-        onSuccess(consent.id);
+        onSuccess(consentId);
       }
 
     } catch (error: any) {

@@ -178,6 +178,44 @@ export type Database = {
         }
         Relationships: []
       }
+      consent_permissions: {
+        Row: {
+          consent_id: string
+          created_at: string
+          granted: boolean
+          granted_at: string | null
+          id: string
+          permission_type: string
+          required: boolean
+        }
+        Insert: {
+          consent_id: string
+          created_at?: string
+          granted?: boolean
+          granted_at?: string | null
+          id?: string
+          permission_type: string
+          required?: boolean
+        }
+        Update: {
+          consent_id?: string
+          created_at?: string
+          granted?: boolean
+          granted_at?: string | null
+          id?: string
+          permission_type?: string
+          required?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consent_permissions_consent_id_fkey"
+            columns: ["consent_id"]
+            isOneToOne: false
+            referencedRelation: "parental_consents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       course_sessions: {
         Row: {
           course_id: string
@@ -281,6 +319,36 @@ export type Database = {
           },
         ]
       }
+      data_classification: {
+        Row: {
+          column_name: string | null
+          created_at: string | null
+          data_class: string
+          encryption_required: boolean | null
+          id: string
+          retention_months: number
+          table_name: string
+        }
+        Insert: {
+          column_name?: string | null
+          created_at?: string | null
+          data_class: string
+          encryption_required?: boolean | null
+          id?: string
+          retention_months?: number
+          table_name: string
+        }
+        Update: {
+          column_name?: string | null
+          created_at?: string | null
+          data_class?: string
+          encryption_required?: boolean | null
+          id?: string
+          retention_months?: number
+          table_name?: string
+        }
+        Relationships: []
+      }
       enrollments: {
         Row: {
           completed_at: string | null
@@ -379,6 +447,45 @@ export type Database = {
           },
         ]
       }
+      parental_consents: {
+        Row: {
+          child_user_id: string
+          consent_date: string | null
+          consent_given: boolean
+          created_at: string
+          digital_signature: string | null
+          id: string
+          parent_guardian_email: string
+          parent_guardian_name: string
+          relationship: string
+          updated_at: string
+        }
+        Insert: {
+          child_user_id: string
+          consent_date?: string | null
+          consent_given?: boolean
+          created_at?: string
+          digital_signature?: string | null
+          id?: string
+          parent_guardian_email: string
+          parent_guardian_name: string
+          relationship: string
+          updated_at?: string
+        }
+        Update: {
+          child_user_id?: string
+          consent_date?: string | null
+          consent_given?: boolean
+          created_at?: string
+          digital_signature?: string | null
+          id?: string
+          parent_guardian_email?: string
+          parent_guardian_name?: string
+          relationship?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           age: number | null
@@ -387,7 +494,10 @@ export type Database = {
           full_name: string | null
           id: string
           lms_role: string | null
+          parental_consent_date: string | null
+          parental_consent_required: boolean | null
           role: string
+          safeguarding_concern: boolean | null
           updated_at: string
         }
         Insert: {
@@ -397,7 +507,10 @@ export type Database = {
           full_name?: string | null
           id: string
           lms_role?: string | null
+          parental_consent_date?: string | null
+          parental_consent_required?: boolean | null
           role?: string
+          safeguarding_concern?: boolean | null
           updated_at?: string
         }
         Update: {
@@ -407,7 +520,10 @@ export type Database = {
           full_name?: string | null
           id?: string
           lms_role?: string | null
+          parental_consent_date?: string | null
+          parental_consent_required?: boolean | null
           role?: string
+          safeguarding_concern?: boolean | null
           updated_at?: string
         }
         Relationships: []
@@ -607,6 +723,42 @@ export type Database = {
           category?: string
           id?: string
           value?: string
+        }
+        Relationships: []
+      }
+      safeguarding_reports: {
+        Row: {
+          contact_info: string | null
+          created_at: string | null
+          description: string
+          id: string
+          report_type: string
+          reporter_id: string | null
+          status: string | null
+          updated_at: string | null
+          urgency: string | null
+        }
+        Insert: {
+          contact_info?: string | null
+          created_at?: string | null
+          description: string
+          id?: string
+          report_type: string
+          reporter_id?: string | null
+          status?: string | null
+          updated_at?: string | null
+          urgency?: string | null
+        }
+        Update: {
+          contact_info?: string | null
+          created_at?: string | null
+          description?: string
+          id?: string
+          report_type?: string
+          reporter_id?: string | null
+          status?: string | null
+          updated_at?: string | null
+          urgency?: string | null
         }
         Relationships: []
       }
@@ -890,6 +1042,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      flag_parental_consent_required: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       generate_secure_file_url: {
         Args: {
           p_bucket_name: string
@@ -940,6 +1096,25 @@ export type Database = {
       set_user_role: {
         Args: { _email: string; _role: string }
         Returns: undefined
+      }
+      submit_parental_consent: {
+        Args: {
+          p_child_user_id: string
+          p_digital_signature: string
+          p_parent_guardian_email: string
+          p_parent_guardian_name: string
+          p_permissions: Json
+          p_relationship: string
+        }
+        Returns: string
+      }
+      submit_safeguarding_report: {
+        Args: {
+          p_contact_info?: string
+          p_description: string
+          p_report_type: string
+        }
+        Returns: string
       }
       user_owns_challenger_record: {
         Args: { record_user_id: string }
