@@ -237,20 +237,47 @@ const HomePage = () => {
                     </div>
                     <CardTitle className="text-gradient-primary font-inter text-2xl mb-6 font-black">{level.title}</CardTitle>
                     <p className="text-foreground/80 font-inter mb-6 leading-relaxed text-lg">{level.description}</p>
-                    <Badge variant="secondary" className="w-fit bg-gradient-to-r from-tma-coral/20 to-tma-gold/20 text-tma-coral border-2 border-tma-coral/40 font-bold text-lg p-3 rounded-2xl">
+                    
+                    {/* Badge */}
+                    <div className="mb-6">
+                      <img 
+                        src="/src/assets/tma-badge-per-term-solid.svg" 
+                        alt="Per Term • 10 Sessions" 
+                        className="inline-block mb-4"
+                        width="220" 
+                        height="25" 
+                        loading="lazy"
+                      />
+                      <p className="text-white font-semibold mb-2">
+                        Affordable investment per term. Exact fee is shared during registration.
+                      </p>
+                      <p className="text-white/80 text-sm mb-4">
+                        Duration: {index === 0 ? '45–50 min per session • 10 sessions per term' : '70 min per session • 10 sessions per term'}
+                      </p>
+                      <p className="text-white/70 text-xs">
+                        Final fees are confirmed during registration based on program format and cohort availability.
+                      </p>
+                    </div>
+                    
+                    <Badge variant="secondary" className="w-fit bg-gradient-to-r from-tma-coral/20 to-tma-gold/20 text-tma-coral border-2 border-tma-coral/40 font-bold text-lg p-3 rounded-2xl mb-6">
                       🏅 Challenger - {level.badge}
                     </Badge>
                   </CardHeader>
-                  <CardContent className="pt-0 pb-8 px-8">
-                  <Button 
-                    className="w-full btn-modern-accent text-white font-inter font-black text-lg py-6 rounded-2xl transition-all duration-500 group-hover:scale-105"
-                    style={{ boxShadow: 'var(--shadow-button-3d)' }}
-                    onClick={() => window.location.href = '/apply#register'}
-                  >
-                    <span className="mr-3 text-xl">🚀</span>
-                    Select This Program
-                    <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
-                  </Button>
+                  <CardContent className="pt-0 pb-8 px-8 space-y-4">
+                    <Button 
+                      className="w-full btn-modern-accent text-white font-inter font-black text-lg py-6 rounded-2xl transition-all duration-500 group-hover:scale-105"
+                      style={{ boxShadow: 'var(--shadow-button-3d)' }}
+                      onClick={() => window.location.href = '/apply#register'}
+                    >
+                      Register for {level.title.split(':')[1].split('(')[0].trim()}
+                    </Button>
+                    <Button 
+                      variant="link" 
+                      className="w-full text-white hover:text-white/80 text-sm underline"
+                      onClick={() => window.location.href = '#fees-faq'}
+                    >
+                      Ask About Fees
+                    </Button>
                   </CardContent>
                 </div>
               </div>
@@ -326,8 +353,41 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section id="fees-faq" className="py-20 bg-gradient-to-b from-background to-background/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-12 text-center font-inter">
+              Pricing FAQ
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-foreground">Q: How much are the fees?</h4>
+                  <p className="text-muted-foreground leading-relaxed">TMA fees are affordable per-term investments. Each term includes 10 sessions. Exact fees are confirmed during registration and depend on program format (online/offline) and cohort size.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-foreground">Q: What does one term include?</h4>
+                  <p className="text-muted-foreground leading-relaxed">10 sessions, learning materials, progress tracking, and parent updates. Level 1 sessions are 45–50 min; Levels 2–4 are 70 min.</p>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Do you offer scholarships or payment plans?</h4>
+                  <p className="text-muted-foreground leading-relaxed">Yes. Need-based support and installment plans are available for eligible families. Please ask during registration.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Why "per term" instead of monthly?</h4>
+                  <p className="text-muted-foreground leading-relaxed">Our curriculum runs in 10-session terms. This keeps teaching, projects, and assessments aligned and avoids monthly billing confusion.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* For Parents & Educators */}
-      <section className="py-20 bg-gradient-to-b from-background to-background/50">
+      <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8 font-inter">
@@ -342,7 +402,7 @@ const HomePage = () => {
               </p>
             </div>
             <Button size="lg" variant="outline" className="font-inter">
-              → Learn About Parent & Teacher Programs
+              Learn About Parent & Teacher Programs
             </Button>
           </div>
         </div>

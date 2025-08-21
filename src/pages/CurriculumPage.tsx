@@ -172,10 +172,32 @@ const CurriculumPage = () => {
                         Ages {level.ages}
                       </Badge>
                     </div>
-                    <h3 className="text-2xl font-bold text-tma-navy mb-2">
+                    <h3 className="text-2xl font-bold text-tma-navy mb-4">
                       {level.level} Level
                     </h3>
-                    <Badge variant="secondary" className="mb-3 w-fit">
+                    
+                    {/* Badge */}
+                    <div className="mb-4">
+                      <img 
+                        src="/src/assets/tma-badge-per-term-solid.svg" 
+                        alt="Per Term • 10 Sessions" 
+                        className="inline-block mb-3"
+                        width="220" 
+                        height="25" 
+                        loading="lazy"
+                      />
+                      <p className="text-sm font-semibold text-tma-navy mb-2">
+                        Affordable investment per term. Exact fee is shared during registration.
+                      </p>
+                      <p className="text-sm text-tma-gray mb-3">
+                        Duration: {level.level === 'Explorers' ? '45–50 min per session • 10 sessions per term' : '70 min per session • 10 sessions per term'}
+                      </p>
+                      <p className="text-xs text-tma-gray">
+                        Final fees are confirmed during registration based on program format and cohort availability.
+                      </p>
+                    </div>
+                    
+                    <Badge variant="secondary" className="mb-4 w-fit">
                       🏅 Challenger - {level.badge}
                     </Badge>
                     <p className="text-tma-blue font-semibold mb-4">
@@ -199,15 +221,23 @@ const CurriculumPage = () => {
                         </div>
                       ))}
                     </div>
-                    <Button 
-                      className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white transition-all duration-300"
-                      asChild
-                    >
-                      <Link to="/apply#register">
-                        Register for {level.level} Level
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
+                    <div className="space-y-3">
+                      <Button 
+                        className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white transition-all duration-300 w-full"
+                        asChild
+                      >
+                        <Link to="/apply#register">
+                          Register for {level.level}
+                        </Link>
+                      </Button>
+                      <Button 
+                        variant="link" 
+                        className="w-full text-[#006D6C] hover:text-[#006D6C]/80 text-sm underline"
+                        asChild
+                      >
+                        <Link to="#fees-faq">Ask About Fees</Link>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </Card>
@@ -259,7 +289,6 @@ const CurriculumPage = () => {
                     >
                       <Link to="/apply#register">
                         Begin Your Journey
-                        <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
                   </div>
@@ -369,6 +398,39 @@ const CurriculumPage = () => {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="fees-faq" className="py-20 bg-tma-light">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-12 text-center">
+              Pricing FAQ
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-tma-navy">Q: How much are the fees?</h4>
+                  <p className="text-tma-gray leading-relaxed">TMA fees are affordable per-term investments. Each term includes 10 sessions. Exact fees are confirmed during registration and depend on program format (online/offline) and cohort size.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-tma-navy">Q: What does one term include?</h4>
+                  <p className="text-tma-gray leading-relaxed">10 sessions, learning materials, progress tracking, and parent updates. Level 1 sessions are 45–50 min; Levels 2–4 are 70 min.</p>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-tma-navy">Q: Do you offer scholarships or payment plans?</h4>
+                  <p className="text-tma-gray leading-relaxed">Yes. Need-based support and installment plans are available for eligible families. Please ask during registration.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-tma-navy">Q: Why "per term" instead of monthly?</h4>
+                  <p className="text-tma-gray leading-relaxed">Our curriculum runs in 10-session terms. This keeps teaching, projects, and assessments aligned and avoids monthly billing confusion.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

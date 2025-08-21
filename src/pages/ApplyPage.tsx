@@ -173,21 +173,19 @@ const ApplyPage = () => {
                           ))}
                         </ul>
                         
-                        {/* Tooltip for pricing explanation */}
-                        <div className="flex items-center justify-start mb-4 text-xs text-muted-foreground">
-                          <Info className="h-3 w-3 mr-2 flex-shrink-0" />
-                          <span>We price by term, not by month. Each term includes 10 sessions. Final fees are confirmed during registration based on program format and cohort availability.</span>
-                        </div>
                         
                         <div className="space-y-3">
                           <Button 
-                            className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter transition-all duration-300"
+                            className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 group-hover:scale-105"
                             onClick={() => setStep(2)}
                           >
                             Register for {group.group.split(":")[1]?.trim() || group.group}
-                            <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
-                          <Button variant="link" className="w-full text-[#006D6C] hover:text-[#006D6C]/80 text-sm">
+                          <Button 
+                            variant="link" 
+                            className="w-full text-[#006D6C] hover:text-[#006D6C]/80 text-sm underline"
+                            onClick={() => document.getElementById('fees-faq')?.scrollIntoView({ behavior: 'smooth' })}
+                          >
                             Ask About Fees
                           </Button>
                         </div>
@@ -197,13 +195,13 @@ const ApplyPage = () => {
                 </div>
                 
                 {/* FAQ Section */}
-                <div className="mt-16 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg p-8">
+                <div id="fees-faq" className="mt-16 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg p-8">
                   <h3 className="text-2xl font-bold text-center mb-8 text-foreground">Pricing FAQ</h3>
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-6">
                       <div>
-                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Why don't you list exact prices on the website?</h4>
-                        <p className="text-muted-foreground leading-relaxed">TMA prices are set per term (10 sessions) and vary by level, format (online/offline), and cohort availability. This helps keep programs affordable and sustainable while placing your child in the best-fit group. We share the exact fee during registration before you commit.</p>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: How much are the fees?</h4>
+                        <p className="text-muted-foreground leading-relaxed">TMA fees are affordable per-term investments. Each term includes 10 sessions. Exact fees are confirmed during registration and depend on program format (online/offline) and cohort size.</p>
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Do you offer scholarships or payment plans?</h4>
