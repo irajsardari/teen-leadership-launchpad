@@ -457,6 +457,7 @@ export type Database = {
           id: string
           parent_guardian_email: string
           parent_guardian_name: string
+          parent_user_id: string | null
           relationship: string
           updated_at: string
         }
@@ -469,6 +470,7 @@ export type Database = {
           id?: string
           parent_guardian_email: string
           parent_guardian_name: string
+          parent_user_id?: string | null
           relationship: string
           updated_at?: string
         }
@@ -481,6 +483,7 @@ export type Database = {
           id?: string
           parent_guardian_email?: string
           parent_guardian_name?: string
+          parent_user_id?: string | null
           relationship?: string
           updated_at?: string
         }
