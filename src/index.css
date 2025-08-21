@@ -2,145 +2,135 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-Modern UI design system for TMA Academy - World's First Teenagers Management Academy
-*/
+/* TMA Academy Design System - Official Brand Colors */
 
 @layer base {
   :root {
-    --background: 34 50% 96%;
-    --foreground: 210 93% 18%;
+    --background: 0 0% 100%;
+    --foreground: 220 64% 29%;
 
-    --card: 34 50% 96%;
-    --card-foreground: 210 93% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 64% 29%;
 
-    --popover: 34 50% 96%;
-    --popover-foreground: 210 93% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 64% 29%;
 
-    --primary: 210 93% 18%;
-    --primary-foreground: 34 50% 96%;
+    --primary: 220 64% 29%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 34 50% 96%;
-    --secondary-foreground: 210 93% 18%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 220 64% 29%;
 
-    --muted: 34 35% 90%;
-    --muted-foreground: 210 93% 18%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 20%;
 
-    --accent: 180 100% 27%;
-    --accent-foreground: 34 50% 96%;
+    --accent: 28 88% 56%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 34 50% 96%;
+    --destructive: 0 67% 42%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 34 35% 85%;
-    --input: 34 35% 85%;
-    --ring: 210 93% 18%;
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 220 64% 29%;
 
-    /* TMA Brand Colors */
-    --tma-blue: 210 93% 18%;
-    --tma-blue-light: 210 80% 35%;
-    --tma-teal: 180 100% 27%;
-    --tma-teal-light: 180 80% 40%;
-    --tma-navy: 210 93% 18%;
-    --tma-beige: 34 50% 96%;
-    --tma-coral: 11 100% 67%;
-    --tma-gold: 45 41% 57%;
-    --tma-lemon: 54 90% 63%;
+    /* TMA Official Brand Colors */
+    --tma-deep-blue: 220 64% 29%;
+    --tma-bright-orange: 28 88% 56%;
+    --tma-emerald-green: 146 51% 36%;
+    --tma-golden-yellow: 51 100% 50%;
+    --tma-light-grey: 0 0% 96%;
+    --tma-charcoal-grey: 0 0% 20%;
+    --tma-sky-blue: 210 100% 65%;
+    --tma-crimson-red: 0 67% 42%;
+
+    /* Legacy Colors for Compatibility */
+    --tma-blue: 220 64% 29%;
+    --tma-blue-light: 210 100% 65%;
+    --tma-teal: 146 51% 36%;
+    --tma-teal-light: 146 51% 56%;
+    --tma-navy: 220 64% 29%;
+    --tma-beige: 0 0% 96%;
+    --tma-coral: 28 88% 56%;
+    --tma-gold: 51 100% 50%;
+    --tma-lemon: 51 100% 50%;
     
     /* High Contrast CTA Colors for Better Accessibility */
-    --cta-blue: 210 100% 50%;
-    --cta-blue-dark: 210 100% 35%;
-    --cta-teal: 180 100% 35%;
-    --cta-teal-dark: 180 100% 25%;
-    --cta-success: 142 76% 36%;
-    --cta-success-dark: 142 76% 25%;
+    --cta-blue: 220 64% 29%;
+    --cta-blue-dark: 220 64% 24%;
+    --cta-teal: 146 51% 36%;
+    --cta-teal-dark: 146 51% 31%;
+    --cta-success: 146 51% 36%;
+    --cta-success-dark: 146 51% 31%;
 
     /* Modern Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--tma-blue)), hsl(var(--tma-teal)));
-    --gradient-hero-overlay: linear-gradient(135deg, hsl(var(--tma-blue) / 0.9), hsl(var(--tma-teal) / 0.8));
-    --gradient-card: linear-gradient(145deg, hsl(var(--tma-beige)), hsl(var(--background)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--tma-deep-blue)), hsl(var(--tma-emerald-green)));
+    --gradient-hero-overlay: linear-gradient(135deg, hsl(var(--tma-deep-blue) / 0.9), hsl(var(--tma-emerald-green) / 0.8));
+    --gradient-card: linear-gradient(145deg, hsl(var(--background)), hsl(var(--tma-light-grey)));
     --gradient-card-modern: linear-gradient(145deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 100%);
     --gradient-glass-modern: linear-gradient(145deg, hsl(var(--background) / 0.2), hsl(var(--background) / 0.1));
-    --gradient-accent: linear-gradient(90deg, hsl(var(--tma-coral)), hsl(var(--tma-gold)));
-    --gradient-coral: linear-gradient(135deg, hsl(var(--tma-coral)), hsl(var(--tma-coral) / 0.8));
+    --gradient-accent: linear-gradient(90deg, hsl(var(--tma-bright-orange)), hsl(var(--tma-golden-yellow)));
+    --gradient-coral: linear-gradient(135deg, hsl(var(--tma-bright-orange)), hsl(var(--tma-bright-orange) / 0.8));
     --gradient-glass: linear-gradient(145deg, hsl(var(--background) / 0.1), hsl(var(--background) / 0.05));
-    --gradient-button-primary: linear-gradient(135deg, hsl(var(--tma-blue)), hsl(var(--tma-blue) / 0.8));
-    --gradient-button-accent: linear-gradient(135deg, hsl(var(--tma-coral)), hsl(var(--tma-gold)));
+    --gradient-button-primary: linear-gradient(135deg, hsl(var(--tma-deep-blue)), hsl(var(--tma-deep-blue) / 0.8));
+    --gradient-button-accent: linear-gradient(135deg, hsl(var(--tma-bright-orange)), hsl(var(--tma-golden-yellow)));
     --gradient-section: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.4) 50%, hsl(var(--background)) 100%);
-    --gradient-futuristic: linear-gradient(145deg, hsl(var(--tma-blue) / 0.1), hsl(var(--tma-teal) / 0.05), hsl(var(--tma-coral) / 0.1));
+    --gradient-futuristic: linear-gradient(145deg, hsl(var(--tma-deep-blue) / 0.1), hsl(var(--tma-emerald-green) / 0.05), hsl(var(--tma-bright-orange) / 0.1));
     
     /* High Contrast CTA Gradients */
-    --gradient-cta-blue: linear-gradient(135deg, hsl(var(--cta-blue)), hsl(var(--cta-blue-dark)));
-    --gradient-cta-teal: linear-gradient(135deg, hsl(var(--cta-teal)), hsl(var(--cta-teal-dark)));
-    --gradient-cta-success: linear-gradient(135deg, hsl(var(--cta-success)), hsl(var(--cta-success-dark)));
+    --gradient-cta-blue: linear-gradient(135deg, hsl(var(--tma-deep-blue)), hsl(var(--cta-blue-dark)));
+    --gradient-cta-teal: linear-gradient(135deg, hsl(var(--tma-emerald-green)), hsl(var(--cta-teal-dark)));
+    --gradient-cta-success: linear-gradient(135deg, hsl(var(--tma-emerald-green)), hsl(var(--cta-success-dark)));
 
     /* Modern Shadows */
-    --shadow-elegant: 0 10px 30px -10px hsl(var(--tma-blue) / 0.15);
-    --shadow-card: 0 4px 20px -4px hsl(var(--tma-blue) / 0.08);
-    --shadow-card-hover: 0 20px 40px -8px hsl(var(--tma-blue) / 0.15);
-    --shadow-3d: 0 8px 30px -8px hsl(var(--tma-blue) / 0.3), 0 20px 40px -15px hsl(var(--tma-coral) / 0.2);
-    --shadow-button: 0 4px 15px -3px hsl(var(--tma-coral) / 0.25);
-    --shadow-button-hover: 0 8px 25px -5px hsl(var(--tma-coral) / 0.35);
-    --shadow-button-3d: 0 6px 20px -4px hsl(var(--tma-coral) / 0.4), 0 12px 30px -8px hsl(var(--tma-blue) / 0.2);
-    --shadow-gold: 0 4px 15px -3px hsl(var(--tma-gold) / 0.25);
-    --shadow-glass: 0 8px 32px 0 hsl(var(--tma-blue) / 0.1);
-    --shadow-glass-modern: 0 8px 32px 0 hsl(var(--tma-blue) / 0.12), inset 0 1px 0 hsl(var(--background) / 0.2);
-    --shadow-floating: 0 25px 50px -12px hsl(var(--tma-blue) / 0.2);
-    --shadow-inner: inset 0 2px 4px 0 hsl(var(--tma-blue) / 0.06);
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--tma-deep-blue) / 0.15);
+    --shadow-card: 0 4px 20px -4px hsl(var(--tma-deep-blue) / 0.08);
+    --shadow-card-hover: 0 20px 40px -8px hsl(var(--tma-deep-blue) / 0.15);
+    --shadow-3d: 0 8px 30px -8px hsl(var(--tma-deep-blue) / 0.3), 0 20px 40px -15px hsl(var(--tma-bright-orange) / 0.2);
+    --shadow-button: 0 4px 15px -3px hsl(var(--tma-bright-orange) / 0.25);
+    --shadow-button-hover: 0 8px 25px -5px hsl(var(--tma-bright-orange) / 0.35);
+    --shadow-button-3d: 0 6px 20px -4px hsl(var(--tma-bright-orange) / 0.4), 0 12px 30px -8px hsl(var(--tma-deep-blue) / 0.2);
+    --shadow-gold: 0 4px 15px -3px hsl(var(--tma-golden-yellow) / 0.25);
+    --shadow-glass: 0 8px 32px 0 hsl(var(--tma-deep-blue) / 0.1);
+    --shadow-glass-modern: 0 8px 32px 0 hsl(var(--tma-deep-blue) / 0.12), inset 0 1px 0 hsl(var(--background) / 0.2);
+    --shadow-floating: 0 25px 50px -12px hsl(var(--tma-deep-blue) / 0.2);
+    --shadow-inner: inset 0 2px 4px 0 hsl(var(--tma-deep-blue) / 0.06);
     
     /* High Contrast CTA Shadows */
-    --shadow-cta-blue: 0 4px 15px -3px hsl(var(--cta-blue) / 0.4);
-    --shadow-cta-blue-hover: 0 8px 25px -5px hsl(var(--cta-blue) / 0.5);
-    --shadow-cta-teal: 0 4px 15px -3px hsl(var(--cta-teal) / 0.4);
-    --shadow-cta-teal-hover: 0 8px 25px -5px hsl(var(--cta-teal) / 0.5);
-
-    --radius: 0.5rem;
+    --shadow-cta-blue: 0 4px 15px -3px hsl(var(--tma-deep-blue) / 0.4);
+    --shadow-cta-blue-hover: 0 8px 25px -5px hsl(var(--tma-deep-blue) / 0.5);
+    --shadow-cta-teal: 0 4px 15px -3px hsl(var(--tma-emerald-green) / 0.4);
+    --shadow-cta-teal-hover: 0 8px 25px -5px hsl(var(--tma-emerald-green) / 0.5);
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -167,6 +157,7 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 }
 
@@ -201,6 +192,16 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     50% { transform: translateY(-20px); }
   }
 
+  /* Fade In Animation */
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   /* Modern Button Styles */
   .btn-modern-primary {
     @apply relative overflow-hidden;
@@ -224,167 +225,5 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
   .btn-modern-accent:hover {
     box-shadow: var(--shadow-button-hover);
     transform: translateY(-2px);
-  }
-  
-  /* Fix dropdown overlapping issues */
-  .dropdown-menu, [role="menu"] {
-    z-index: 1000 !important;
-    background: white !important;
-    border: 1px solid hsl(var(--border)) !important;
-    border-radius: 0.5rem !important;
-    box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.3) !important;
-  }
-
-  /* Card Hover Effects */
-  .card-modern {
-    @apply transition-all duration-300 ease-out;
-    background: var(--gradient-card-modern);
-    box-shadow: var(--shadow-card);
-    backdrop-filter: blur(10px);
-  }
-
-  .card-modern:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-8px) scale(1.02);
-  }
-
-  .card-3d {
-    @apply transition-all duration-500 ease-out;
-    background: var(--gradient-futuristic);
-    box-shadow: var(--shadow-3d);
-    backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--background) / 0.3);
-  }
-
-  .card-3d:hover {
-    box-shadow: var(--shadow-floating);
-    transform: translateY(-12px) scale(1.03) rotateX(5deg);
-    border-color: hsl(var(--tma-coral) / 0.3);
-  }
-
-  /* Text Gradients */
-  .text-gradient-primary {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-hero);
-  }
-
-  .text-gradient-accent {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-accent);
-  }
-
-  /* Modern Section Backgrounds */
-  .section-gradient {
-    background: var(--gradient-section);
-  }
-
-  /* Counter Animation */
-  .animate-counter {
-    animation: countUp 2s ease-out forwards;
-  }
-
-  @keyframes countUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Pulse Effect */
-  .pulse-slow {
-    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  /* Number Badge Animation */
-  .number-badge {
-    @apply relative overflow-hidden;
-    background: var(--gradient-button-primary);
-    box-shadow: var(--shadow-button-3d);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .number-badge:hover {
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: var(--shadow-floating);
-  }
-
-  .number-badge::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, hsl(var(--background) / 0.3), transparent);
-    transition: left 0.6s ease;
-  }
-
-  .number-badge:hover::before {
-    left: 100%;
-  }
-
-  /* Badge Sizing - Increased for better visibility */
-  .term-badge {
-    width: 240px;
-    height: auto;
-    opacity: 1;
-    filter: brightness(1) contrast(1.1);
-  }
-
-  @media (max-width: 640px) {
-    .term-badge {
-      width: 170px;
-    }
-  }
-
-  /* Challenger Pill */
-  .challenger-pill {
-    display: inline-block;
-    margin: 2px 0 10px;
-    font-size: 0.85rem;
-    padding: 4px 8px;
-    background: #EEF4F2;
-    color: #0F766E;
-    border-radius: 12px;
-  }
-
-  /* Register Button */
-  .register-btn {
-    background: #0F766E;
-    color: #fff;
-    padding: 10px 18px;
-    border: 0;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .register-btn:hover {
-    background: #0d6659;
-    transform: translateY(-1px);
-  }
-
-  .ask-fees {
-    display: inline-block;
-    margin-left: 12px;
-    text-decoration: underline;
-    color: #0F766E;
-    font-weight: 500;
-  }
-
-  .note {
-    color: #485460;
-    font-size: 0.925rem;
-    line-height: 1.4;
-  }
-
-  /* Smooth scroll */
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
   }
 }

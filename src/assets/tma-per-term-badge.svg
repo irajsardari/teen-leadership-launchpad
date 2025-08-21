@@ -1,0 +1,8 @@
+<svg viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .badge-bg { fill: hsl(220, 64%, 29%); }
+    .badge-text { fill: white; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; font-weight: 600; }
+  </style>
+  <rect class="badge-bg" width="220" height="40" rx="20" ry="20"/>
+  <text class="badge-text" x="110" y="25" text-anchor="middle" dominant-baseline="middle">Per Term • 10 Sessions</text>
+</svg>

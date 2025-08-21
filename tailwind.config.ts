@@ -19,8 +19,10 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ["Inter", "sans-serif"],
+				sans: ["Open Sans", "sans-serif"],
 				inter: ["Inter", "sans-serif"],
+				montserrat: ["Montserrat", "sans-serif"],
+				'open-sans': ["Open Sans", "sans-serif"],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -57,13 +59,22 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				tma: {
-					blue: 'hsl(var(--tma-blue))',
-					'blue-light': 'hsl(var(--tma-blue-light))',
-					teal: 'hsl(var(--tma-teal))',
-					'teal-light': 'hsl(var(--tma-teal-light))',
-					navy: 'hsl(var(--tma-navy))',
-					gray: 'hsl(var(--tma-gray))',
-					light: 'hsl(var(--tma-light))'
+					'deep-blue': 'hsl(var(--tma-deep-blue))',
+					'bright-orange': 'hsl(var(--tma-bright-orange))',
+					'emerald-green': 'hsl(var(--tma-emerald-green))',
+					'golden-yellow': 'hsl(var(--tma-golden-yellow))',
+					'light-grey': 'hsl(var(--tma-light-grey))',
+					'charcoal-grey': 'hsl(var(--tma-charcoal-grey))',
+					'sky-blue': 'hsl(var(--tma-sky-blue))',
+					'crimson-red': 'hsl(var(--tma-crimson-red))',
+					// Legacy aliases
+					blue: 'hsl(var(--tma-deep-blue))',
+					'blue-light': 'hsl(var(--tma-sky-blue))',
+					teal: 'hsl(var(--tma-emerald-green))',
+					'teal-light': 'hsl(var(--tma-emerald-green))',
+					navy: 'hsl(var(--tma-deep-blue))',
+					gray: 'hsl(var(--tma-charcoal-grey))',
+					light: 'hsl(var(--tma-light-grey))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
