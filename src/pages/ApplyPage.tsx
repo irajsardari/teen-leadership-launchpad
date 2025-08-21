@@ -151,17 +151,16 @@ const ApplyPage = () => {
                           <Badge variant="outline" className="text-[#006D6C] border-[#006D6C]">
                             {group.ageRange}
                           </Badge>
-                          <div className="text-right">
-                            <img src={badgeSolid} alt="Per Term • 10 Sessions" className="w-48 h-auto mb-2" />
-                          </div>
+                          <img src={badgeSolid} alt="Per Term • 10 Sessions" className="term-badge" />
                         </div>
                         <CardTitle className="text-tma-navy">{group.group}</CardTitle>
+                        <div className="challenger-pill mb-2 w-fit">
+                          Challenger • {group.badge}
+                        </div>
                         <CardDescription>{group.description}</CardDescription>
                         <p className="text-sm text-muted-foreground mb-2">Affordable investment per term. Exact fee is shared during registration.</p>
-                        <p className="text-sm font-medium text-tma-navy mb-2">Duration: {group.duration}</p>
-                        <Badge variant="secondary" className="w-fit mt-2 bg-[#006D6C]/10 text-[#006D6C]">
-                          🏅 Challenger - {group.badge}
-                        </Badge>
+                        <p className="text-sm font-medium text-tma-navy mb-2">Duration: {group.duration} • 10 sessions per term</p>
+                        <p className="note mb-4">Final fees are confirmed during registration based on program format and cohort availability.</p>
                       </CardHeader>
                       <CardContent>
                         <ul className="space-y-2 mb-6">
@@ -175,19 +174,13 @@ const ApplyPage = () => {
                         
                         
                         <div className="space-y-3">
-                          <Button 
-                            className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 group-hover:scale-105"
-                            onClick={() => setStep(2)}
+                          <button 
+                            onClick={() => setStep(2)} 
+                            className="register-btn w-full"
                           >
-                            Register for {group.group.split(":")[1]?.trim() || group.group}
-                          </Button>
-                          <Button 
-                            variant="link" 
-                            className="w-full text-[#006D6C] hover:text-[#006D6C]/80 text-sm underline"
-                            onClick={() => document.getElementById('fees-faq')?.scrollIntoView({ behavior: 'smooth' })}
-                          >
-                            Ask About Fees
-                          </Button>
+                            Register for {group.group.split(':')[1]?.trim() || group.group}
+                          </button>
+                          <a href="#fees-faq" className="ask-fees block text-center">Ask About Fees</a>
                         </div>
                       </CardContent>
                     </Card>

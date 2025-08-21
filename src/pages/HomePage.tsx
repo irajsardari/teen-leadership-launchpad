@@ -231,53 +231,44 @@ const HomePage = () => {
               <div key={index} className="group">
                 <div className="card-3d border-2 border-white/20 flex flex-col h-full rounded-3xl overflow-hidden">
                   <CardHeader className="flex-1 p-8">
-                    <div className="w-full h-4 bg-gradient-to-r from-tma-teal to-tma-coral rounded-full mb-8 shadow-inner"></div>
-                    <div className="w-20 h-20 number-badge rounded-3xl flex items-center justify-center mb-8 relative">
-                      <span className="text-3xl text-white font-black relative z-10">{index + 1}</span>
+                    <div className="flex flex-col items-center space-y-6">
+                      {/* Age Badge and Per Term Badge */}
+                      <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-between">
+                        <div className="bg-tma-coral text-white px-6 py-2 rounded-full text-lg font-medium">
+                          {level.title.match(/\(Ages (\d+-\d+)\)/)?.[1] || '10-18'} years
+                        </div>
+                        <img 
+                          src="/src/assets/tma-badge-per-term-solid.svg" 
+                          alt="Per Term • 10 Sessions" 
+                          className="term-badge"
+                          loading="lazy"
+                        />
+                      </div>
+                      
+                      <div className="text-center">
+                        <h3 className="text-2xl font-bold text-white mb-2">{level.title.split(' (')[0]}</h3>
+                        <div className="challenger-pill mb-4">Challenger • {level.badge}</div>
+                        <p className="text-white/80 mb-4">{level.description}</p>
+                        
+                        <p className="font-semibold text-white mb-2">Affordable investment per term. Exact fee is shared during registration.</p>
+                        <p className="text-sm text-white/80 italic mb-4">Duration: {index === 0 ? '45–50 min per session • 10 sessions per term' : '70 min per session • 10 sessions per term'}</p>
+                        <p className="note mb-6 text-white/70 text-xs">Final fees are confirmed during registration based on program format and cohort availability.</p>
+                      </div>
                     </div>
-                    <CardTitle className="text-gradient-primary font-inter text-2xl mb-6 font-black">{level.title}</CardTitle>
-                    <p className="text-foreground/80 font-inter mb-6 leading-relaxed text-lg">{level.description}</p>
-                    
-                    {/* Badge */}
-                    <div className="mb-6">
-                      <img 
-                        src="/src/assets/tma-badge-per-term-solid.svg" 
-                        alt="Per Term • 10 Sessions" 
-                        className="inline-block mb-4"
-                        width="220" 
-                        height="25" 
-                        loading="lazy"
-                      />
-                      <p className="text-white font-semibold mb-2">
-                        Affordable investment per term. Exact fee is shared during registration.
-                      </p>
-                      <p className="text-white/80 text-sm mb-4">
-                        Duration: {index === 0 ? '45–50 min per session • 10 sessions per term' : '70 min per session • 10 sessions per term'}
-                      </p>
-                      <p className="text-white/70 text-xs">
-                        Final fees are confirmed during registration based on program format and cohort availability.
-                      </p>
-                    </div>
-                    
-                    <Badge variant="secondary" className="w-fit bg-gradient-to-r from-tma-coral/20 to-tma-gold/20 text-tma-coral border-2 border-tma-coral/40 font-bold text-lg p-3 rounded-2xl mb-6">
-                      🏅 Challenger - {level.badge}
-                    </Badge>
                   </CardHeader>
                   <CardContent className="pt-0 pb-8 px-8 space-y-4">
-                    <Button 
-                      className="w-full btn-modern-accent text-white font-inter font-black text-lg py-6 rounded-2xl transition-all duration-500 group-hover:scale-105"
-                      style={{ boxShadow: 'var(--shadow-button-3d)' }}
+                    <button 
+                      className="register-btn w-full mb-2"
                       onClick={() => window.location.href = '/apply#register'}
                     >
                       Register for {level.title.split(':')[1].split('(')[0].trim()}
-                    </Button>
-                    <Button 
-                      variant="link" 
-                      className="w-full text-white hover:text-white/80 text-sm underline"
-                      onClick={() => window.location.href = '#fees-faq'}
+                    </button>
+                    <a 
+                      href="#fees-faq" 
+                      className="ask-fees block text-center"
                     >
                       Ask About Fees
-                    </Button>
+                    </a>
                   </CardContent>
                 </div>
               </div>

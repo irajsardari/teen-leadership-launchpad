@@ -181,9 +181,7 @@ const CurriculumPage = () => {
                       <img 
                         src="/src/assets/tma-badge-per-term-solid.svg" 
                         alt="Per Term • 10 Sessions" 
-                        className="inline-block mb-3"
-                        width="220" 
-                        height="25" 
+                        className="term-badge mb-3"
                         loading="lazy"
                       />
                       <p className="text-sm font-semibold text-tma-navy mb-2">
@@ -192,14 +190,14 @@ const CurriculumPage = () => {
                       <p className="text-sm text-tma-gray mb-3">
                         Duration: {level.level === 'Explorers' ? '45–50 min per session • 10 sessions per term' : '70 min per session • 10 sessions per term'}
                       </p>
-                      <p className="text-xs text-tma-gray">
+                      <p className="note">
                         Final fees are confirmed during registration based on program format and cohort availability.
                       </p>
                     </div>
                     
-                    <Badge variant="secondary" className="mb-4 w-fit">
-                      🏅 Challenger - {level.badge}
-                    </Badge>
+                    <div className="challenger-pill mb-4 w-fit">
+                      Challenger • {level.badge}
+                    </div>
                     <p className="text-tma-blue font-semibold mb-4">
                       {level.focus}
                     </p>
@@ -222,21 +220,12 @@ const CurriculumPage = () => {
                       ))}
                     </div>
                     <div className="space-y-3">
-                      <Button 
-                        className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white transition-all duration-300 w-full"
-                        asChild
-                      >
-                        <Link to="/apply#register">
-                          Register for {level.level}
-                        </Link>
-                      </Button>
-                      <Button 
-                        variant="link" 
-                        className="w-full text-[#006D6C] hover:text-[#006D6C]/80 text-sm underline"
-                        asChild
-                      >
-                        <Link to="#fees-faq">Ask About Fees</Link>
-                      </Button>
+                      <Link to="/apply" className="register-btn w-full text-center no-underline block">
+                        Register for {level.level}
+                      </Link>
+                      <a href="#fees-faq" className="ask-fees block text-center">
+                        Ask About Fees
+                      </a>
                     </div>
                   </div>
                 </div>

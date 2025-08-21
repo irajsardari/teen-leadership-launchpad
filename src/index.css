@@ -326,6 +326,61 @@ Modern UI design system for TMA Academy - World's First Teenagers Management Aca
     left: 100%;
   }
 
+  /* Badge Sizing */
+  .term-badge {
+    width: 232px;
+    height: auto;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 640px) {
+    .term-badge {
+      width: 168px;
+    }
+  }
+
+  /* Challenger Pill */
+  .challenger-pill {
+    display: inline-block;
+    margin: 2px 0 10px;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    background: #EEF4F2;
+    color: #0F766E;
+    border-radius: 12px;
+  }
+
+  /* Register Button */
+  .register-btn {
+    background: #0F766E;
+    color: #fff;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .register-btn:hover {
+    background: #0d6659;
+    transform: translateY(-1px);
+  }
+
+  .ask-fees {
+    display: inline-block;
+    margin-left: 12px;
+    text-decoration: underline;
+    color: #0F766E;
+    font-weight: 500;
+  }
+
+  .note {
+    color: #485460;
+    font-size: 0.925rem;
+    line-height: 1.4;
+  }
+
   /* Smooth scroll */
   html {
     scroll-behavior: smooth;
