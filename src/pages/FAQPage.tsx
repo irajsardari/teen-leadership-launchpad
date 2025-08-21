@@ -99,46 +99,54 @@ const FAQPage = () => {
 
             <Separator className="my-16" />
 
-            {/* Contact Section */}
-            <Card className="border-0 shadow-xl bg-gradient-to-r from-primary/5 to-primary/10">
-              <CardContent className="p-12 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/20 rounded-full mb-6">
-                  <Mail className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-                  📩 Still have questions?
+            {/* FAQ Section */}
+            <div className="max-w-4xl mx-auto">
+              <Card className="border-0 shadow-xl bg-gradient-to-r from-primary/5 to-primary/10">
+                <CardContent className="p-12">
+                  <h3 className="text-2xl md:text-3xl font-bold text-center text-foreground mb-8">
+                    Pricing FAQ
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Why don't you list exact prices on the website?</h4>
+                        <p className="text-muted-foreground leading-relaxed">TMA prices are set per term (10 sessions) and vary by level, format (online/offline), and cohort availability. This helps keep programs affordable and sustainable while placing your child in the best-fit group. We share the exact fee during registration before you commit.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Do you offer scholarships or payment plans?</h4>
+                        <p className="text-muted-foreground leading-relaxed">Yes. Need-based support and installment plans are available for eligible families. Please ask during registration.</p>
+                      </div>
+                    </div>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: What does one term include?</h4>
+                        <p className="text-muted-foreground leading-relaxed">10 sessions, learning materials, progress tracking, and parent updates. Level 1 sessions are 45–50 min; Levels 2–4 are 70 min.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Why "per term" instead of monthly?</h4>
+                        <p className="text-muted-foreground leading-relaxed">Our curriculum runs in 10-session terms. This keeps teaching, projects, and assessments aligned and avoids monthly billing confusion.</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Additional Resources */}
+              <div className="mt-16 text-center">
+                <h3 className="text-2xl font-bold text-foreground mb-6">
+                  Explore More Resources
                 </h3>
-                <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  We'd love to hear from you. Our team is here to help with any additional questions about TMA programs and enrollment.
-                </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" asChild>
-                    <Link to="/contact">Contact Us</Link>
+                  <Button variant="outline" size="lg" asChild>
+                    <Link to="/curriculum">View Curriculum</Link>
                   </Button>
                   <Button variant="outline" size="lg" asChild>
-                    <a href="mailto:info@teenmanagement.com">
-                      Send Email
-                    </a>
+                    <Link to="/about">About TMA</Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild>
+                    <Link to="/contact">Contact Us</Link>
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Additional Resources */}
-            <div className="mt-16 text-center">
-              <h3 className="text-2xl font-bold text-foreground mb-6">
-                Explore More Resources
-              </h3>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="outline" size="lg" asChild>
-                  <Link to="/curriculum">View Curriculum</Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <Link to="/about">About TMA</Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <Link to="/apply">Apply Now</Link>
-                </Button>
               </div>
             </div>
           </div>

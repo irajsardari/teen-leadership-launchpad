@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
@@ -17,6 +18,8 @@ const challengerSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   phone_number: z.string().min(10, "Phone number must be at least 10 digits"),
   level: z.string().min(1, "Please specify your level"),
+  preferred_format: z.string().optional(),
+  preferred_cohort_time: z.string().optional(),
   confidential_info: z.string().optional(),
   hp: z.string().optional(),
 });
@@ -35,6 +38,8 @@ const ChallengerForm = () => {
       email: "",
       phone_number: "",
       level: "",
+      preferred_format: "",
+      preferred_cohort_time: "",
       confidential_info: "",
       hp: "",
     }
@@ -92,7 +97,7 @@ const ChallengerForm = () => {
 
       toast({
         title: "Registration Successful!",
-        description: "Your challenger registration has been submitted successfully. Check your email for confirmation.",
+        description: "Thanks! Your place is being reviewed. We'll share the exact term fee and available cohorts in your confirmation email.",
       });
 
       form.reset();
@@ -189,6 +194,52 @@ const ChallengerForm = () => {
                   <FormControl>
                     <Input placeholder="Level 1 (Explorers), Level 2 (Builders), Level 3 (Innovators), Level 4 (Pathfinders)" {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="preferred_format"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Preferred Format (Optional)</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select preferred format" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="online">Online</SelectItem>
+                      <SelectItem value="offline">Offline</SelectItem>
+                      <SelectItem value="either">Either</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="preferred_cohort_time"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Preferred Cohort Time (Optional)</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select preferred time" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="weekday">Weekday</SelectItem>
+                      <SelectItem value="weekend">Weekend</SelectItem>
+                      <SelectItem value="either">Either</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

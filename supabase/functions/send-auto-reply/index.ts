@@ -56,42 +56,116 @@ const handler = async (req: Request): Promise<Response> => {
   const unifiedHtml = `
   <!DOCTYPE html>
   <html>
-    <body style="font-family: Arial, sans-serif; color: #333;">
-      <h2>Thank you for applying to join TMA</h2>
-      <p>Dear ${firstName},</p>
-      <p>Thank you for your application to join the Teenagers Management Academy (TMA).</p>
-      ${isChallenger ? 
-        '<p>✨ <strong>For Challengers (students):</strong> Our admissions team will review your application and get back to you shortly with the next steps.</p>' :
-        '<p>✨ <strong>For Mentors (teachers):</strong> We appreciate your interest in guiding the next generation of leaders. Your application will be carefully reviewed, and you will hear from us soon.</p>'
-      }
-      <p>Meanwhile, feel free to explore more about TMA on our website: www.teenmanagement.com.</p>
-      <p style="margin-top: 20px;">Warm regards,<br>
-      <strong>TMA Admissions Team</strong><br>
-      Teenagers Management Academy<br>
-      P.O. Box 2643 Ruwi, Sultanate of Oman</p>
-      <hr>
-      <small>This is an automated email from no-reply@teenmanagement.com. For any questions, please contact info@teenmanagement.com</small>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>TMA Registration Confirmation</title>
+      <style>
+        body { font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #006D6C, #0F766E); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+        .content { background: white; padding: 30px; border: 1px solid #e5e5e5; border-top: none; border-radius: 0 0 8px 8px; }
+        .badge { display: inline-block; background: #E9F6F2; color: #0F766E; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px; margin: 16px 0; }
+        .highlight { background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #006D6C; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 14px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1 style="margin: 0;">TMA — Teenagers Management Academy</h1>
+          <p style="margin: 10px 0 0 0; font-size: 18px;">${isChallenger ? 'Registration' : 'Application'} Confirmation</p>
+        </div>
+        <div class="content">
+          <h2 style="color: #006D6C;">Hello ${firstName}!</h2>
+          
+          ${isChallenger ? `
+            <p>Thank you for registering for TMA. Our programs run by term (10 sessions).</p>
+            
+            <div class="badge">Per Term • 10 Sessions</div>
+            
+            <div class="highlight">
+              <h3 style="margin-top: 0; color: #006D6C;">Session Duration:</h3>
+              <p style="margin-bottom: 0;">
+                <strong>Level 1:</strong> 45–50 minutes<br>
+                <strong>Levels 2–4:</strong> 70 minutes
+              </p>
+            </div>
+            
+            <p>We will confirm your cohort (online/offline, schedule) and share the exact fee for your term within 1–2 business days.</p>
+            
+            <p>If you have any questions now, simply reply to this email.</p>
+            
+            <p style="margin-top: 30px;">
+              Warmly,<br>
+              <strong>TMA Admissions</strong>
+            </p>
+          ` : `
+            <p>Thank you for your interest in teaching with TMA. We've received your application and are reviewing it carefully.</p>
+            
+            <div class="highlight">
+              <h3 style="margin-top: 0; color: #006D6C;">Next Steps:</h3>
+              <ul style="margin-bottom: 0;">
+                <li>Our team will review your application within 3-5 business days</li>
+                <li>If selected for interview, we'll contact you to schedule a meeting</li>
+                <li>Training and certification information will be provided upon acceptance</li>
+              </ul>
+            </div>
+            
+            <p>We're building a global community of educators dedicated to teenage leadership development. Thank you for wanting to be part of this mission.</p>
+            
+            <p>If you have any questions, please reply to this email.</p>
+            
+            <p style="margin-top: 30px;">
+              Best regards,<br>
+              <strong>TMA Teacher Relations Team</strong>
+            </p>
+          `}
+        </div>
+        <div class="footer">
+          <p>© 2024 TMA — Teenagers Management Academy. All rights reserved.</p>
+          <p>Building future-ready leaders since 2024.</p>
+        </div>
+      </div>
     </body>
   </html>`;
 
   const unifiedText = `Dear ${firstName},
 
-Thank you for your application to join the Teenagers Management Academy (TMA).
+${isChallenger ? `
+Thank you for registering for TMA. Our programs run by term (10 sessions).
 
-${isChallenger ? 
-  '✨ For Challengers (students): Our admissions team will review your application and get back to you shortly with the next steps.' :
-  '✨ For Mentors (teachers): We appreciate your interest in guiding the next generation of leaders. Your application will be carefully reviewed, and you will hear from us soon.'
-}
+Session Duration:
+- Level 1: 45–50 minutes
+- Levels 2–4: 70 minutes
 
-Meanwhile, feel free to explore more about TMA on our website: www.teenmanagement.com.
+We will confirm your cohort (online/offline, schedule) and share the exact fee for your term within 1–2 business days.
 
-Warm regards,
-TMA Admissions Team
-Teenagers Management Academy
-P.O. Box 2643 Ruwi, Sultanate of Oman
+If you have any questions now, simply reply to this email.
+
+Warmly,
+TMA Admissions
+` : `
+Thank you for your interest in teaching with TMA. We've received your application and are reviewing it carefully.
+
+Next Steps:
+- Our team will review your application within 3-5 business days
+- If selected for interview, we'll contact you to schedule a meeting
+- Training and certification information will be provided upon acceptance
+
+We're building a global community of educators dedicated to teenage leadership development. Thank you for wanting to be part of this mission.
+
+If you have any questions, please reply to this email.
+
+Best regards,
+TMA Teacher Relations Team
+`}
+
+© 2024 TMA — Teenagers Management Academy. All rights reserved.
+Building future-ready leaders since 2024.
 
 ---
-This is an automated email from no-reply@teenmanagement.com. For any questions, please contact info@teenmanagement.com`;
+This is an automated email. For questions, please contact info@teenmanagement.com`;
 
   const adminSubject = isTeacher
     ? `New Mentor Application — ${payload?.fullName ?? payload?.to ?? "Unknown"}`
@@ -123,7 +197,7 @@ This is an automated email from no-reply@teenmanagement.com. For any questions, 
         from: fromHeader,
         to: [safeTo],
         replyTo: "info@teenmanagement.com",
-        subject: "Thank you for applying to join TMA",
+        subject: isChallenger ? "Your TMA Registration — Next Steps" : "Your TMA Teacher Application — Next Steps",
         html: unifiedHtml,
         text: unifiedText,
       });

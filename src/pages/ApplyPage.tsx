@@ -7,8 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Users, Clock, Award, ArrowRight } from "lucide-react";
+import { CheckCircle, Users, Clock, Award, ArrowRight, Info } from "lucide-react";
 import { Link } from "react-router-dom";
+import badgeSolid from "@/assets/tma-badge-per-term-solid.svg";
 
 
 const ApplyPage = () => {
@@ -20,7 +21,7 @@ const ApplyPage = () => {
       group: "Level 1: Explorers",
       ageRange: "10-11 years",
       description: "Self-awareness, curiosity, discipline, teamwork.",
-      price: "$79/month",
+      duration: "45–50 min per session",
       badge: "Explorer Badge",
       features: [
         "6 foundation terms (2 years)",
@@ -34,7 +35,7 @@ const ApplyPage = () => {
       group: "Level 2: Builders",
       ageRange: "12-13 years",
       description: "Communication, collaboration, creativity, leadership.",
-      price: "$99/month",
+      duration: "70 min per session",
       badge: "Builder Badge",
       features: [
         "6 comprehensive terms (2 years)",
@@ -48,7 +49,7 @@ const ApplyPage = () => {
       group: "Level 3: Innovators", 
       ageRange: "14-15 years",
       description: "Critical thinking, problem-solving, resilience, innovation.",
-      price: "$129/month",
+      duration: "70 min per session",
       badge: "Innovator Badge",
       features: [
         "6 advanced terms (2 years)",
@@ -62,7 +63,7 @@ const ApplyPage = () => {
       group: "Level 4: Pathfinders",
       ageRange: "16-17 years",
       description: "Strategy, leadership ethics, financial literacy, global citizenship.",
-      price: "$149/month",
+      duration: "70 min per session",
       badge: "Pathfinder Badge",
       features: [
         "6 capstone terms (2 years)",
@@ -151,12 +152,13 @@ const ApplyPage = () => {
                             {group.ageRange}
                           </Badge>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-tma-navy">{group.price}</div>
-                            <div className="text-sm text-tma-gray">per month</div>
+                            <img src={badgeSolid} alt="Per Term • 10 Sessions" className="w-48 h-auto mb-2" />
                           </div>
                         </div>
                         <CardTitle className="text-tma-navy">{group.group}</CardTitle>
                         <CardDescription>{group.description}</CardDescription>
+                        <p className="text-sm text-muted-foreground mb-2">Affordable investment per term. Exact fee is shared during registration.</p>
+                        <p className="text-sm font-medium text-tma-navy mb-2">Duration: {group.duration}</p>
                         <Badge variant="secondary" className="w-fit mt-2 bg-[#006D6C]/10 text-[#006D6C]">
                           🏅 Challenger - {group.badge}
                         </Badge>
@@ -170,16 +172,55 @@ const ApplyPage = () => {
                             </li>
                           ))}
                         </ul>
-                        <Button 
-                          className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter transition-all duration-300"
-                          onClick={() => setStep(2)}
-                        >
-                          Select This Program
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
+                        
+                        {/* Tooltip for pricing explanation */}
+                        <div className="flex items-center justify-start mb-4 text-xs text-muted-foreground">
+                          <Info className="h-3 w-3 mr-2 flex-shrink-0" />
+                          <span>We price by term, not by month. Each term includes 10 sessions. Final fees are confirmed during registration based on program format and cohort availability.</span>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <Button 
+                            className="w-full bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter transition-all duration-300"
+                            onClick={() => setStep(2)}
+                          >
+                            Register for {group.group.split(":")[1]?.trim() || group.group}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                          <Button variant="link" className="w-full text-[#006D6C] hover:text-[#006D6C]/80 text-sm">
+                            Ask About Fees
+                          </Button>
+                        </div>
                       </CardContent>
                     </Card>
                   ))}
+                </div>
+                
+                {/* FAQ Section */}
+                <div className="mt-16 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg p-8">
+                  <h3 className="text-2xl font-bold text-center mb-8 text-foreground">Pricing FAQ</h3>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Why don't you list exact prices on the website?</h4>
+                        <p className="text-muted-foreground leading-relaxed">TMA prices are set per term (10 sessions) and vary by level, format (online/offline), and cohort availability. This helps keep programs affordable and sustainable while placing your child in the best-fit group. We share the exact fee during registration before you commit.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Do you offer scholarships or payment plans?</h4>
+                        <p className="text-muted-foreground leading-relaxed">Yes. Need-based support and installment plans are available for eligible families. Please ask during registration.</p>
+                      </div>
+                    </div>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: What does one term include?</h4>
+                        <p className="text-muted-foreground leading-relaxed">10 sessions, learning materials, progress tracking, and parent updates. Level 1 sessions are 45–50 min; Levels 2–4 are 70 min.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-3 text-foreground">Q: Why "per term" instead of monthly?</h4>
+                        <p className="text-muted-foreground leading-relaxed">Our curriculum runs in 10-session terms. This keeps teaching, projects, and assessments aligned and avoids monthly billing confusion.</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
