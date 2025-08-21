@@ -1036,6 +1036,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_manage_child_consent: {
+        Args: { p_child_user_id: string }
+        Returns: boolean
+      }
       check_rate_limit: {
         Args: {
           p_action: string
