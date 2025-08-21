@@ -878,36 +878,7 @@ export type Database = {
       }
     }
     Views: {
-      confidential_records_summary: {
-        Row: {
-          created_at: string | null
-          entity_id: string | null
-          entity_type: string | null
-          id: string | null
-          info_length: number | null
-          info_preview: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          entity_id?: string | null
-          entity_type?: string | null
-          id?: string | null
-          info_length?: never
-          info_preview?: never
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          entity_id?: string | null
-          entity_type?: string | null
-          id?: string | null
-          info_length?: never
-          info_preview?: never
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       check_rate_limit: {
