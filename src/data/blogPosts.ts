@@ -29,6 +29,128 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'resilience-for-teenagers',
+    title: '🌱 Resilience for Teenagers: Bounce Back, Learn, and Grow',
+    author: 'Dr. Iraj Sardari Baf',
+    authorId: 'dr-iraj-sardari-baf',
+    date: '2025-08-24',
+    featuredImage: resilienceBanner,
+    excerpt: 'Learn how to turn life\'s setbacks into stepping stones. Discover the TMA 3-step framework, daily habits, and practical tools that help teenagers build resilience and become Future Ready Leaders.',
+    content: `# Introduction: Why Resilience Matters
+
+There are moments in life when everything feels finished. A bad grade, losing a friend, family pressure, or a broken dream can make a teenager feel hopeless. Some even begin to think there is no way forward.
+
+The truth is: life without resilience is heavy. But with resilience, even the hardest storms become lessons that lead to growth. Resilience does not mean you never feel pain. It means you face pain, process it, and rise again. As the saying goes: "No pain, no gain." Pain is part of progress — and resilience is the bridge that turns pain into strength.
+
+At Teenagers Management Academy (TMA), we believe resilience is one of the five core pillars of becoming a Future Ready Leader.
+
+## What is Resilience?
+
+Resilience is the ability to recover and grow after difficulties. It is the skill of:
+- Facing stress without breaking
+- Learning from failure instead of giving up
+- Adapting to change with courage
+- Turning setbacks into opportunities
+
+Resilience is not something you are born with — it's something you practice every day.
+
+## Why Teenagers Need Resilience Today
+
+Modern life is full of challenges:
+- 📚 **School pressure** – exams, competition, and expectations
+- 📱 **Social media** – comparison, cyberbullying, and distractions
+- ❤️ **Relationships** – friendships ending, peer pressure, or loneliness
+- 🌍 **Uncertainty** – changing world, future jobs, and rapid technology shifts
+
+Without resilience, these challenges can feel crushing. With resilience, they become stepping stones toward maturity and success.
+
+## The TMA 3-Step Mini-Framework
+
+We teach teens a simple method: **Notice → Normalize → Navigate**.
+
+1. **Notice** → Recognize what you feel. (Example: "I feel rejected because I failed my test.")
+2. **Normalize** → Remind yourself it's human to feel this way. ("It's normal to fail sometimes. Everyone struggles.")
+3. **Navigate** → Take one positive action forward. (Study 20 minutes, talk to a teacher, or plan a new routine.)
+
+This framework makes resilience practical, not just inspirational.
+
+## Everyday Habits That Build Resilience
+
+Here are five daily habits teenagers can practice:
+
+1. **Sleep Well** → 7–9 hours, consistent bedtime.
+2. **Move Your Body** → Walk, play sports, or stretch daily.
+3. **Connect** → Talk to at least one supportive person face-to-face.
+4. **Gratitude Journal** → Write 1–2 things you are thankful for.
+5. **Digital Balance** → Silence non-stop alerts, and practice 1-hour "no phone before bed."
+
+## The Bounce-Back Plan (Practical Exercise)
+
+Next time you fail or face rejection, try this 4-step Bounce-Back Plan:
+
+1. **Pause & Breathe** – Take 5 deep breaths.
+2. **Write the Facts** – "I failed my math test with 42%." (Facts only, not emotions.)
+3. **Extract the Lesson** – "I didn't study consistently. Next time I will review daily."
+4. **Choose One Action** – "I'll make a study timetable tonight."
+
+👉 Practice this after small setbacks too, so your resilience "muscle" grows stronger.
+
+## Real-Life Example
+
+Imagine a student named Aisha who failed her driving test. She cried for two days and wanted to quit. But instead of giving up, she applied the Bounce-Back Plan:
+
+- She admitted the fact: she panicked in parking.
+- She learned: she needed more practice in tight spaces.
+- She acted: she booked 3 extra practice lessons.
+
+One month later, she passed. That's resilience in action.
+
+## Parent Corner: How Parents Can Support Resilience
+
+Parents play a powerful role in shaping resilience. Here's how:
+
+- **Model calmness** → Share your own struggles honestly, without shame.
+- **Praise effort, not only results** → Celebrate persistence, strategies, and courage.
+- **Reflect together** → Ask, "What did we learn today?" instead of "Why did you fail?"
+
+When parents normalize mistakes, teenagers feel safe to try again.
+
+## When to Seek Help
+
+Resilience is not ignoring emotions. If a teenager feels sadness, anxiety, or hopelessness for more than two weeks, or if thoughts of self-harm appear, it is time to seek support. Talking to a parent, counselor, or trusted mentor is a sign of strength — not weakness.
+
+## Closing Thought
+
+Resilience is not about avoiding pain. It is about using pain to grow. Every time you rise after falling, you prove to yourself that you are stronger than yesterday.
+
+At TMA – Teenagers Management Academy, resilience is at the heart of preparing young people to become Future Ready Leaders — able to face tomorrow with courage, adaptability, and hope.
+
+## Frequently Asked Questions
+
+**Q: What is resilience for teenagers?**  
+A: Resilience is the ability to face stress, setbacks, or change and still keep learning, caring for yourself, and moving toward your goals.
+
+**Q: How can I build resilience every day?**  
+A: Teens can build resilience through daily habits like consistent sleep, 20–30 minutes of activity, writing gratitude notes, and limiting phone use before bed.
+
+**Q: What should I do after failure?**  
+A: Pause and breathe, write the facts, extract one lesson, and choose a single next action within 24 hours.
+
+**Q: How does social media affect resilience?**  
+A: Social media comparison and alerts drain focus and energy. Limiting notifications and creating a no-phone bedtime zone helps protect resilience.
+
+**Q: How can parents help?**  
+A: Parents can support resilience by modeling calm, praising effort more than results, and asking reflection questions like "What did we learn today?"`,
+    slug: 'resilience-for-teenagers',
+    seo: {
+      metaTitle: '🌱 Resilience for Teenagers: Bounce Back, Learn, and Grow | TMA Voices',
+      metaDescription: 'Learn how to turn life\'s setbacks into stepping stones. Discover the TMA 3-step framework, daily habits, and practical tools that help teenagers build resilience and become Future Ready Leaders.',
+      keywords: ['teenage resilience', 'resilience for teenagers', 'bounce back plan', 'teenage mental health', 'TMA framework', 'teenage leadership', 'emotional intelligence', 'stress management', 'failure recovery', 'teenage development']
+    },
+    category: 'voices',
+    tags: ['resilience', 'mental-health', 'leadership', 'personal-growth', 'framework']
+  },
+  {
     id: "12",
     title: "The Three Stages of Life: Planting, Growing, and Harvesting",
     author: "Ali Bagheri",
