@@ -104,58 +104,58 @@ const HomePage = () => {
         
         {/* Content */}
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10">
-          <div className="max-w-5xl mx-auto text-center text-white">
-            <div className="glass-card-modern rounded-3xl p-8 lg:p-12 mb-8 animate-fade-in">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
-                Where Future <span className="text-gradient-accent font-black">CEOs</span>, <span className="text-gradient-accent font-black">Creators</span> & <span className="text-gradient-accent font-black">Changemakers</span> Begin
-              </h1>
-              <div className="mb-8">
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gradient-primary mb-4 font-inter">
-                  TMA — Teenagers Management Academy
-                </h2>
-                <h3 className="text-xl sm:text-2xl text-gradient-accent font-bold mb-6 font-inter">
-                  🌟 Future Ready Leaders
-                </h3>
-                <p className="text-lg sm:text-xl lg:text-2xl text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
-                  The world's <span className="font-black text-tma-teal text-2xl">first comprehensive academy</span> for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
-                </p>
-              </div>
+            <div className="max-w-5xl mx-auto text-center text-white px-4 sm:px-0">
+              <div className="glass-card-modern rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 mb-6 sm:mb-8 animate-fade-in">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 sm:mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
+                  Where Future <span className="text-gradient-accent font-black">CEOs</span>, <span className="text-gradient-accent font-black">Creators</span> & <span className="text-gradient-accent font-black">Changemakers</span> Begin
+                </h1>
+                <div className="mb-6 sm:mb-8">
+                  <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black text-gradient-primary mb-3 sm:mb-4 font-inter">
+                    TMA — Teenagers Management Academy
+                  </h2>
+                  <h3 className="text-lg xs:text-xl sm:text-2xl text-gradient-accent font-bold mb-4 sm:mb-6 font-inter">
+                    🌟 Future Ready Leaders
+                  </h3>
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-200 max-w-4xl mx-auto font-inter font-medium leading-relaxed">
+                    The world's <span className="font-black text-tma-teal text-lg sm:text-xl lg:text-2xl">first comprehensive academy</span> for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
+                  </p>
+                </div>
             </div>
             
 {/* CTA Buttons */}
-<div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+<div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-2xl mx-auto">
   <Button 
     size="lg" 
-    className="btn-modern-accent text-white font-inter font-black text-xl px-16 py-8 rounded-3xl transition-all duration-500 group relative overflow-hidden" 
+    className="btn-modern-accent text-white font-inter font-black text-lg sm:text-xl px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl transition-all duration-500 group relative overflow-hidden w-full sm:w-auto" 
     style={{ boxShadow: 'var(--shadow-button-3d)' }}
     asChild
   >
-    <Link to="/apply" className="flex items-center relative z-10">
-      <span className="mr-4 text-2xl">🚀</span>
+    <Link to="/apply" className="flex items-center justify-center relative z-10">
+      <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">🚀</span>
       Start Your Journey
-      <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
+      <ArrowRight className="ml-3 sm:ml-4 h-6 w-6 sm:h-7 sm:w-7 transition-transform group-hover:translate-x-2" />
     </Link>
   </Button>
   <Button 
     size="lg" 
     variant="cta-teal"
-    className="font-inter font-bold text-xl px-16 py-8 rounded-3xl transition-all duration-500 group" 
+    className="font-inter font-bold text-lg sm:text-xl px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl transition-all duration-500 group w-full sm:w-auto" 
     asChild
   >
-    <Link to="/curriculum" className="flex items-center">
-      <span className="mr-4 text-2xl">📚</span>
+    <Link to="/curriculum" className="flex items-center justify-center">
+      <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">📚</span>
       Explore Curriculum
-      <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
+      <ArrowRight className="ml-3 sm:ml-4 h-6 w-6 sm:h-7 sm:w-7 transition-transform group-hover:translate-x-2" />
     </Link>
   </Button>
 </div>
 
 {/* Financial Literacy Callout */}
-<div className="mt-8 max-w-4xl mx-auto">
-  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-left">
-    <div className="flex items-start gap-4">
-      <div className="text-3xl">💰</div>
-      <p className="text-lg sm:text-xl text-white leading-relaxed font-semibold">
+<div className="mt-6 sm:mt-8 max-w-4xl mx-auto">
+  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-left">
+    <div className="flex items-start gap-3 sm:gap-4">
+      <div className="text-2xl sm:text-3xl mt-1">💰</div>
+      <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed font-semibold">
         Earning money is important — <span className="font-extrabold text-tma-gold">but managing and growing money</span> is the skill that builds long-term independence.
       </p>
     </div>
@@ -168,15 +168,15 @@ const HomePage = () => {
       {/* Stats Section */}
       <section className="py-20 section-gradient">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center group">
-                <div className="card-3d rounded-3xl p-8 mb-4">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-tma-blue to-tma-teal rounded-3xl mb-6 shadow-lg group-hover:shadow-xl transition-all duration-500 number-badge">
-                    <stat.icon className="h-10 w-10 text-white" />
+                <div className="card-3d rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-tma-blue to-tma-teal rounded-2xl sm:rounded-3xl mb-4 sm:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-500 number-badge">
+                    <stat.icon className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
                   </div>
-                  <div className="text-4xl lg:text-5xl font-black text-gradient-primary mb-3 animate-counter">{stat.value}</div>
-                  <div className="text-foreground/80 font-bold text-lg font-inter">{stat.label}</div>
+                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-gradient-primary mb-2 sm:mb-3 animate-counter">{stat.value}</div>
+                  <div className="text-foreground/80 font-bold text-sm sm:text-base lg:text-lg font-inter">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -226,17 +226,17 @@ const HomePage = () => {
             </div>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12">
             {levels.map((level, index) => (
               <div key={index} className="group">
-                <div className="card-3d border-2 border-white/20 flex flex-col h-full rounded-3xl overflow-hidden">
-                  <CardHeader className="flex-1 p-8">
-                    <div className="flex flex-col items-center space-y-4 text-center">
-                      <div className="bg-tma-coral text-white px-6 py-2 rounded-full text-lg font-medium mb-2">
+                <div className="card-3d border-2 border-white/20 flex flex-col h-full rounded-2xl sm:rounded-3xl overflow-hidden">
+                  <CardHeader className="flex-1 p-4 sm:p-6 lg:p-8">
+                    <div className="flex flex-col items-center space-y-3 sm:space-y-4 text-center">
+                      <div className="bg-tma-coral text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base lg:text-lg font-medium mb-2">
                         {level.title.match(/\(Ages (\d+-\d+)\)/)?.[1] || '10-18'} years
                       </div>
-                      <h3 className="text-2xl font-bold text-white mb-2">{level.title.split(' (')[0]}</h3>
-                      <p className="text-white/80 text-lg">{level.description}</p>
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2">{level.title.split(' (')[0]}</h3>
+                      <p className="text-white/80 text-sm sm:text-base lg:text-lg leading-relaxed">{level.description}</p>
                     </div>
                   </CardHeader>
                 </div>
@@ -244,17 +244,17 @@ const HomePage = () => {
             ))}
           </div>
           
-          <div className="text-center">
+          <div className="text-center px-4 sm:px-0">
             <Button 
               size="lg" 
-              className="btn-modern-accent text-white font-inter font-black px-16 py-8 rounded-3xl text-xl group"
+              className="btn-modern-accent text-white font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none"
               style={{ boxShadow: 'var(--shadow-button-3d)' }}
               asChild
             >
-              <Link to="/curriculum">
-                <span className="mr-4 text-2xl">📚</span>
+              <Link to="/curriculum" className="flex items-center justify-center">
+                <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">📚</span>
                 See Full Curriculum
-                <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
+                <ArrowRight className="ml-3 sm:ml-4 h-6 w-6 sm:h-7 sm:w-7 transition-transform group-hover:translate-x-2" />
               </Link>
             </Button>
           </div>
@@ -296,33 +296,33 @@ const HomePage = () => {
             </h2>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
             {learningAreas.map((area, index) => (
               <div key={index} className="group">
-                <div className="card-3d border-2 border-white/20 text-center rounded-3xl p-10 h-full hover:scale-105 transition-all duration-500">
-                  <CardHeader className="pb-8">
-                    <div className={`w-24 h-24 bg-gradient-to-br ${area.gradient} rounded-3xl flex items-center justify-center mx-auto mb-8 text-5xl shadow-lg group-hover:shadow-2xl transition-all duration-500 number-badge`}>
+                <div className="card-3d border-2 border-white/20 text-center rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 h-full hover:scale-105 transition-all duration-500">
+                  <CardHeader className="pb-6 sm:pb-8">
+                    <div className={`w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br ${area.gradient} rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 text-4xl sm:text-5xl shadow-lg group-hover:shadow-2xl transition-all duration-500 number-badge`}>
                       {area.icon}
                     </div>
-                    <CardTitle className="text-gradient-primary font-inter text-2xl mb-6 font-black">{area.title}</CardTitle>
+                    <CardTitle className="text-gradient-primary font-inter text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 font-black leading-tight">{area.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-foreground/80 font-inter leading-relaxed text-lg font-medium">{area.description}</p>
+                    <p className="text-foreground/80 font-inter leading-relaxed text-base sm:text-lg font-medium">{area.description}</p>
                   </CardContent>
                 </div>
               </div>
             ))}
           </div>
           
-          <div className="text-center">
+          <div className="text-center px-4 sm:px-0">
             <Button 
               size="lg" 
-              className="btn-modern-accent text-white font-inter font-black px-16 py-8 rounded-3xl text-xl group"
+              className="btn-modern-accent text-white font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none"
               style={{ boxShadow: 'var(--shadow-button-3d)' }}
             >
-              <span className="mr-4 text-2xl">📖</span>
+              <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">📖</span>
               View Full Curriculum PDF
-              <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
+              <ArrowRight className="ml-3 sm:ml-4 h-6 w-6 sm:h-7 sm:w-7 transition-transform group-hover:translate-x-2" />
             </Button>
           </div>
         </div>

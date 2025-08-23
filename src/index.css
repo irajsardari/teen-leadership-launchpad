@@ -161,6 +161,27 @@
   }
 }
 
+/* Responsive Breakpoints */
+@screen xs {
+  /* Extra small devices (phones, 320px and up) */
+}
+
+@screen sm {
+  /* Small devices (landscape phones, 640px and up) */
+}
+
+@screen md {
+  /* Medium devices (tablets, 768px and up) */
+}
+
+@screen lg {
+  /* Large devices (desktops, 1024px and up) */
+}
+
+@screen xl {
+  /* Extra large devices (large desktops, 1280px and up) */
+}
+
 @layer components {
   /* Modern Glass Card */
   .glass-card {
@@ -225,5 +246,50 @@
   .btn-modern-accent:hover {
     box-shadow: var(--shadow-button-hover);
     transform: translateY(-2px);
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    /* Ensure buttons have proper tap targets on mobile */
+    .btn-mobile-optimized {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Improve text readability on small screens */
+    h1, h2, h3, h4, h5, h6 {
+      line-height: 1.2;
+    }
+    
+    /* Better spacing for mobile cards */
+    .mobile-card-spacing {
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Optimize images for mobile */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  /* Tablet optimizations */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .tablet-optimized {
+      padding: 1.5rem;
+    }
+  }
+
+  /* High DPI display optimizations */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .high-dpi-optimized {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
   }
 }

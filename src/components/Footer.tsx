@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 lg:gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-4 mb-6">
@@ -166,9 +166,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-xs sm:text-sm text-primary-foreground/70 space-y-2">
+        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm sm:text-base text-primary-foreground/70 space-y-3 px-4 sm:px-0">
           <p>&copy; 2025 <span className="font-bold">TMA®</span> — All rights reserved.</p>
-          <p><span className="font-bold">TMA</span> (Teenagers Management and Leadership Academy) is an officially registered trademark in the Sultanate of Oman, under Registration Number: 185581.</p>
+          <p className="leading-relaxed"><span className="font-bold">TMA</span> (Teenagers Management and Leadership Academy) is an officially registered trademark in the Sultanate of Oman, under Registration Number: 185581.</p>
           <p className="leading-relaxed">No part of this website — including its text, visuals, curriculum content, or digital materials — may be copied, reproduced, distributed, or used in any form without prior written permission from <span className="font-bold">TMA</span>.</p>
         </div>
       </div>

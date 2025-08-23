@@ -34,15 +34,15 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 hover:opacity-90 transition-opacity duration-200">
-            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-tma-blue/20 overflow-hidden hover:shadow-lg transition-shadow duration-200">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 hover:opacity-90 transition-opacity duration-200">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-tma-blue/20 overflow-hidden hover:shadow-lg transition-shadow duration-200">
               <img 
                 src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
                 alt="TMA Academy - Teenagers Management and Leadership Academy Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
               />
             </div>
-            <span className="text-xl font-semibold text-[#003A5D] font-inter hidden sm:block tracking-wide">
+            <span className="text-lg sm:text-xl font-semibold text-[#003A5D] font-inter hidden xs:block tracking-wide">
               TMA Academy
             </span>
           </Link>
@@ -151,23 +151,23 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="hover:bg-[#008B8B]/5 transition-colors duration-200"
+              className="hover:bg-[#008B8B]/5 transition-colors duration-200 h-10 w-10 min-w-[2.5rem]"
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden animate-fade-in">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="md:hidden animate-fade-in absolute top-full left-0 right-0 bg-white/98 backdrop-blur-md border-b shadow-lg z-50">
+            <div className="px-4 pt-4 pb-6 space-y-2">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : 
                       item.href === "/insights" ? "/insights#voices-top" : item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 font-inter hover-scale ${
+                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 font-inter min-h-[44px] flex items-center ${
                     isActive(item.href)
                       ? "text-[#008B8B] bg-[#008B8B]/10"
                       : "text-[#012D5A] hover:text-[#008B8B] hover:bg-[#008B8B]/5"
@@ -177,7 +177,7 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-              <div className="px-3 py-2 space-y-3 pt-4 border-t border-gray-200 mt-3">
+              <div className="px-1 py-2 space-y-3 pt-4 border-t border-gray-200 mt-3">
                 <Button 
                   className="bg-[#008B8B] hover:bg-[#008B8B]/90 text-white font-inter w-full transition-all duration-300 hover:scale-105" 
                   size="sm" 
