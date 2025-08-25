@@ -24,6 +24,26 @@ interface UseSpeechSynthesisReturn extends SpeechSynthesisState {
 const CHUNK_SIZE = 4000; // Safe chunk size for utterances
 const STORAGE_KEY_PREFIX = 'voices:';
 
+// Safe storage utility
+const safeStorage = {
+  get: (key: string) => {
+    try {
+      return typeof window !== 'undefined' ? localStorage.getItem(key) : null;
+    } catch {
+      return null;
+    }
+  },
+  set: (key: string, value: string) => {
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(key, value);
+      }
+    } catch {
+      // Fail silently
+    }
+  }
+};
+
 export const useSpeechSynthesis = (
   text: string,
   slug: string
@@ -33,6 +53,12 @@ export const useSpeechSynthesis = (
   const chunksRef = useRef<string[]>([]);
   const startTimeRef = useRef<number | null>(null);
   const pausedAtRef = useRef(0);
+  const [isClient, setIsClient] = useState(false);
+
+  // Safe feature detection
+  const isSupported = typeof window !== 'undefined' && 
+                     'speechSynthesis' in window && 
+                     typeof SpeechSynthesisUtterance !== 'undefined';
 
   const [state, setState] = useState<SpeechSynthesisState>({
     isPlaying: false,
@@ -42,14 +68,19 @@ export const useSpeechSynthesis = (
     rate: 1.0,
     selectedVoice: null,
     availableVoices: [],
-    isSupported: typeof window !== 'undefined' && 'speechSynthesis' in window
+    isSupported
   });
 
-  // Load saved state from localStorage
+  // Client-side hydration guard
   useEffect(() => {
-    if (!state.isSupported) return;
+    setIsClient(true);
+  }, []);
 
-    const savedState = localStorage.getItem(`${STORAGE_KEY_PREFIX}${slug}`);
+  // Load saved state from localStorage (client-side only)
+  useEffect(() => {
+    if (!isClient || !isSupported) return;
+
+    const savedState = safeStorage.get(`${STORAGE_KEY_PREFIX}${slug}`);
     if (savedState) {
       try {
         const parsed = JSON.parse(savedState);
@@ -63,24 +94,32 @@ export const useSpeechSynthesis = (
         console.warn('Failed to parse saved speech state:', error);
       }
     }
-  }, [slug, state.isSupported]);
+  }, [slug, isClient, isSupported]);
 
-  // Load available voices
+  // Load available voices (client-side only)
   useEffect(() => {
-    if (!state.isSupported) return;
+    if (!isClient || !isSupported) return;
 
     const loadVoices = () => {
-      const voices = speechSynthesis.getVoices();
-      setState(prev => ({ ...prev, availableVoices: voices }));
+      try {
+        const voices = speechSynthesis.getVoices();
+        setState(prev => ({ ...prev, availableVoices: voices }));
+      } catch (error) {
+        console.warn('Failed to load voices:', error);
+      }
     };
 
     loadVoices();
     speechSynthesis.addEventListener('voiceschanged', loadVoices);
 
     return () => {
-      speechSynthesis.removeEventListener('voiceschanged', loadVoices);
+      try {
+        speechSynthesis.removeEventListener('voiceschanged', loadVoices);
+      } catch {
+        // Cleanup failed, ignore
+      }
     };
-  }, [state.isSupported]);
+  }, [isClient, isSupported]);
 
   // Split text into chunks
   useEffect(() => {
@@ -108,22 +147,27 @@ export const useSpeechSynthesis = (
     setState(prev => ({ ...prev, duration: estimatedDuration }));
   }, [text]);
 
-  // Save state to localStorage
+  // Save state to localStorage (client-side only)
   const saveState = useCallback(() => {
-    if (!state.isSupported) return;
+    if (!isClient || !isSupported) return;
 
     const stateToSave = {
       positionMs: state.currentPosition,
       rate: state.rate,
       voiceURI: state.selectedVoice
     };
-    localStorage.setItem(`${STORAGE_KEY_PREFIX}${slug}`, JSON.stringify(stateToSave));
-  }, [slug, state.currentPosition, state.rate, state.selectedVoice, state.isSupported]);
+    safeStorage.set(`${STORAGE_KEY_PREFIX}${slug}`, JSON.stringify(stateToSave));
+  }, [slug, state.currentPosition, state.rate, state.selectedVoice, isClient, isSupported]);
 
   const stop = useCallback(() => {
-    if (!state.isSupported) return;
+    if (!isClient || !isSupported) return;
 
-    speechSynthesis.cancel();
+    try {
+      speechSynthesis.cancel();
+    } catch (error) {
+      console.warn('Failed to cancel speech:', error);
+    }
+    
     utteranceRef.current = null;
     currentChunkRef.current = 0;
     startTimeRef.current = null;
@@ -135,13 +179,17 @@ export const useSpeechSynthesis = (
       isPaused: false,
       currentPosition: 0
     }));
-  }, [state.isSupported]);
+  }, [isClient, isSupported]);
 
   const play = useCallback((fromPosition?: number) => {
-    if (!state.isSupported || chunksRef.current.length === 0) return;
+    if (!isClient || !isSupported || chunksRef.current.length === 0) return;
 
     // Stop any ongoing speech
-    speechSynthesis.cancel();
+    try {
+      speechSynthesis.cancel();
+    } catch (error) {
+      console.warn('Failed to cancel existing speech:', error);
+    }
 
     const startPosition = fromPosition ?? state.currentPosition;
     
@@ -190,17 +238,26 @@ export const useSpeechSynthesis = (
       };
 
       utteranceRef.current = utterance;
-      speechSynthesis.speak(utterance);
+      try {
+        speechSynthesis.speak(utterance);
+      } catch (error) {
+        console.error('Failed to start speech:', error);
+        stop();
+      }
     };
 
     playChunk(startChunk);
     setState(prev => ({ ...prev, isPlaying: true, isPaused: false }));
-  }, [state.isSupported, state.currentPosition, state.rate, state.selectedVoice, state.availableVoices, state.duration, stop]);
+  }, [isClient, isSupported, state.currentPosition, state.rate, state.selectedVoice, state.availableVoices, state.duration, stop]);
 
   const pause = useCallback(() => {
-    if (!state.isSupported) return;
+    if (!isClient || !isSupported) return;
 
-    speechSynthesis.pause();
+    try {
+      speechSynthesis.pause();
+    } catch (error) {
+      console.warn('Failed to pause speech:', error);
+    }
     
     if (startTimeRef.current) {
       pausedAtRef.current += Date.now() - startTimeRef.current;
@@ -208,19 +265,24 @@ export const useSpeechSynthesis = (
     
     setState(prev => ({ ...prev, isPlaying: false, isPaused: true }));
     saveState();
-  }, [state.isSupported, saveState]);
+  }, [isClient, isSupported, saveState]);
 
   const resume = useCallback(() => {
-    if (!state.isSupported) return;
+    if (!isClient || !isSupported) return;
 
     if (state.isPaused) {
-      speechSynthesis.resume();
-      startTimeRef.current = Date.now();
-      setState(prev => ({ ...prev, isPlaying: true, isPaused: false }));
+      try {
+        speechSynthesis.resume();
+        startTimeRef.current = Date.now();
+        setState(prev => ({ ...prev, isPlaying: true, isPaused: false }));
+      } catch (error) {
+        console.warn('Failed to resume speech:', error);
+        play();
+      }
     } else {
       play();
     }
-  }, [state.isSupported, state.isPaused, play]);
+  }, [isClient, isSupported, state.isPaused, play]);
 
   const setRate = useCallback((rate: number) => {
     setState(prev => ({ ...prev, rate }));

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -49,18 +50,57 @@ const TRANSLATIONS = {
   }
 };
 
+// Error Boundary Component
+class TTSErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: any, errorInfo: any) {
+    console.error('TTS Player crashed:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return null; // Hide player if it crashes
+    }
+    return this.props.children;
+  }
+}
+
 export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProps) => {
   const [plainText, setPlainText] = useState('');
   const [language, setLanguage] = useState<'en' | 'ar' | 'fa'>('en');
+  const [isClient, setIsClient] = useState(false);
   
+  // Client-side hydration guard
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const speech = useSpeechSynthesis(plainText, slug);
 
-  // Extract text and detect language
+  // Extract text and detect language (client-side only)
   useEffect(() => {
-    const text = extractTextFromHtml(content);
-    setPlainText(text);
-    setLanguage(detectLanguage(text));
-  }, [content]);
+    if (!isClient) return;
+    
+    try {
+      const text = extractTextFromHtml(content || '');
+      setPlainText(text);
+      setLanguage(detectLanguage(text));
+    } catch (error) {
+      console.warn('Failed to extract text from HTML:', error);
+      setPlainText('');
+    }
+  }, [content, isClient]);
 
   // Get translations for current language
   const t = TRANSLATIONS[language];
@@ -91,8 +131,10 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
     speech.seek(value[0]);
   }, [speech]);
 
-  // Handle keyboard shortcuts
+  // Handle keyboard shortcuts (scoped to avoid interfering with navigation)
   useEffect(() => {
+    if (!isClient) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       // Only handle if the player is focused or no input is focused
       const activeElement = document.activeElement as HTMLElement;
@@ -101,6 +143,10 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
                             activeElement?.contentEditable === 'true';
       
       if (isInputFocused) return;
+
+      // Only handle if we're in the article area (avoid interfering with navigation)
+      const playerElement = document.querySelector('[data-tts-player]');
+      if (!playerElement) return;
 
       if (e.code === 'Space' || e.code === 'Enter') {
         e.preventDefault();
@@ -118,10 +164,10 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handlePlayPause, speech]);
+  }, [handlePlayPause, speech, isClient]);
 
-  // Don't render if speech synthesis is not supported
-  if (!speech.isSupported) {
+  // Don't render during SSR or if not supported
+  if (!isClient || !speech.isSupported) {
     return (
       <div className={`text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg ${className}`}>
         {t.unsupported}
@@ -129,8 +175,8 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
     );
   }
 
-  // Don't render if no content
-  if (!plainText.trim()) {
+  // Don't render if no content or content is still loading
+  if (!plainText || !plainText.trim()) {
     return null;
   }
 
@@ -141,7 +187,11 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
   const showResumeText = speech.currentPosition > 5000 && !speech.isPlaying && !speech.isPaused;
 
   return (
-    <div className={`bg-muted/30 border border-border/50 rounded-xl p-4 space-y-4 ${className}`}>
+    <TTSErrorBoundary>
+      <div 
+        className={`bg-muted/30 border border-border/50 rounded-xl p-4 space-y-4 ${className}`}
+        data-tts-player
+      >
       {/* Main Controls */}
       <div className="flex items-center gap-4">
         <Button
@@ -245,6 +295,7 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
           <RotateCcw className="h-3 w-3" />
         </Button>
       </div>
-    </div>
+      </div>
+    </TTSErrorBoundary>
   );
 };

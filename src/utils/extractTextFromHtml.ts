@@ -3,9 +3,15 @@
  * Preserves paragraph breaks and adds pauses for better speech flow
  */
 export const extractTextFromHtml = (htmlContent: string): string => {
-  // Create a temporary DOM element to parse HTML
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = htmlContent;
+  // Guard against null/undefined content
+  if (!htmlContent || typeof htmlContent !== 'string') {
+    return '';
+  }
+
+  try {
+    // Create a temporary DOM element to parse HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
 
   // Remove script and style elements
   const scriptsAndStyles = tempDiv.querySelectorAll('script, style');
@@ -75,16 +81,29 @@ export const extractTextFromHtml = (htmlContent: string): string => {
     .trim();
 
   return text;
+  } catch (error) {
+    console.warn('Error extracting text from HTML:', error);
+    return '';
+  }
 };
 
 /**
  * Formats time in milliseconds to MM:SS format
  */
 export const formatTime = (ms: number): string => {
-  const totalSeconds = Math.floor(ms / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  if (!ms || typeof ms !== 'number' || ms < 0) {
+    return '0:00';
+  }
+  
+  try {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  } catch (error) {
+    console.warn('Error formatting time:', error);
+    return '0:00';
+  }
 };
 
 /**
@@ -92,16 +111,25 @@ export const formatTime = (ms: number): string => {
  * This is a simple heuristic - could be enhanced with proper language detection
  */
 export const detectLanguage = (text: string): 'en' | 'ar' | 'fa' => {
-  // Arabic script detection
-  if (/[\u0600-\u06FF]/.test(text)) {
-    return 'ar';
+  if (!text || typeof text !== 'string') {
+    return 'en';
   }
   
-  // Persian/Farsi script detection (includes Arabic script + Persian-specific characters)
-  if (/[\u06A9\u06AF\u06C0\u06CC\u067E\u0686\u0698\u06A9]/.test(text)) {
-    return 'fa';  
+  try {
+    // Arabic script detection
+    if (/[\u0600-\u06FF]/.test(text)) {
+      return 'ar';
+    }
+    
+    // Persian/Farsi script detection (includes Arabic script + Persian-specific characters)
+    if (/[\u06A9\u06AF\u06C0\u06CC\u067E\u0686\u0698\u06A9]/.test(text)) {
+      return 'fa';  
+    }
+    
+    // Default to English for any other text
+    return 'en';
+  } catch (error) {
+    console.warn('Error detecting language:', error);
+    return 'en';
   }
-  
-  // Default to English for any other text
-  return 'en';
 };
