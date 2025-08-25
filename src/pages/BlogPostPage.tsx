@@ -25,6 +25,7 @@ import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { BlogFeedback } from "@/components/BlogFeedback";
+import { ListenPlayer } from "@/components/voices/ListenPlayer";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -247,6 +248,15 @@ const BlogPostPage = () => {
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground">
                   {post.title}
                 </h1>
+
+                {/* Listen Player - Only for Voices articles */}
+                {isVoices && (
+                  <ListenPlayer 
+                    content={post.content}
+                    slug={post.slug}
+                    className="mt-6"
+                  />
+                )}
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-muted-foreground">
                   <div className="flex items-center">
