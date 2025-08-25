@@ -250,13 +250,21 @@ const BlogPostPage = () => {
                 </h1>
 
                 {/* Listen Player - Only for Voices articles */}
-                {isVoices && (
-                  <ListenPlayer 
-                    content={post.content}
-                    slug={post.slug}
-                    className="mt-6"
-                  />
-                )}
+                {(() => {
+                  console.log('BlogPostPage Debug:', { 
+                    isVoices, 
+                    pathname: location.pathname, 
+                    postSlug: post.slug,
+                    hasContent: !!post.content 
+                  });
+                  return isVoices && (
+                    <ListenPlayer 
+                      content={post.content}
+                      slug={post.slug}
+                      className="mt-6"
+                    />
+                  );
+                })()}
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-muted-foreground">
                   <div className="flex items-center">

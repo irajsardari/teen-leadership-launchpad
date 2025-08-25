@@ -77,12 +77,15 @@ class TTSErrorBoundary extends React.Component<
 }
 
 export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProps) => {
+  console.log('ListenPlayer render:', { content: content?.substring(0, 100), slug, className });
+  
   const [plainText, setPlainText] = useState('');
   const [language, setLanguage] = useState<'en' | 'ar' | 'fa'>('en');
   const [isClient, setIsClient] = useState(false);
   
   // Client-side hydration guard
   useEffect(() => {
+    console.log('ListenPlayer: Setting isClient to true');
     setIsClient(true);
   }, []);
 
@@ -168,6 +171,7 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
 
   // Don't render during SSR
   if (!isClient) {
+    console.log('ListenPlayer: Not client-side yet, showing loading');
     return (
       <div className={`text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg ${className}`}>
         Loading listen feature...
@@ -177,6 +181,7 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
 
   // Show unsupported message if TTS not available
   if (!speech.isSupported) {
+    console.log('ListenPlayer: TTS not supported');
     return (
       <div className={`text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg ${className}`}>
         {t.unsupported}
@@ -187,6 +192,14 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
   // Check if content is ready
   const hasContent = plainText && plainText.trim();
   const isDisabled = !hasContent;
+  
+  console.log('ListenPlayer: Render state', { 
+    isClient, 
+    isSupported: speech.isSupported, 
+    hasContent, 
+    isDisabled, 
+    plainTextLength: plainText?.length 
+  });
 
   const progressPercentage = speech.duration > 0 
     ? (speech.currentPosition / speech.duration) * 100 
