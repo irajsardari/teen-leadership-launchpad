@@ -166,8 +166,17 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handlePlayPause, speech, isClient]);
 
-  // Don't render during SSR or if not supported
-  if (!isClient || !speech.isSupported) {
+  // Don't render during SSR
+  if (!isClient) {
+    return (
+      <div className={`text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg ${className}`}>
+        Loading listen feature...
+      </div>
+    );
+  }
+
+  // Show unsupported message if TTS not available
+  if (!speech.isSupported) {
     return (
       <div className={`text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg ${className}`}>
         {t.unsupported}
@@ -175,10 +184,9 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
     );
   }
 
-  // Don't render if no content or content is still loading
-  if (!plainText || !plainText.trim()) {
-    return null;
-  }
+  // Check if content is ready
+  const hasContent = plainText && plainText.trim();
+  const isDisabled = !hasContent;
 
   const progressPercentage = speech.duration > 0 
     ? (speech.currentPosition / speech.duration) * 100 
@@ -200,6 +208,7 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
           size="sm"
           className="flex items-center gap-2 bg-tma-blue hover:bg-tma-blue/90"
           aria-label={speech.isPlaying ? t.pause : speech.isPaused ? t.resume : t.listen}
+          disabled={isDisabled}
         >
           {speech.isPlaying ? (
             <Pause className="h-4 w-4" />
@@ -211,9 +220,15 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
           </span>
         </Button>
 
-        {showResumeText && (
+        {showResumeText && !isDisabled && (
           <span className="text-xs text-muted-foreground italic">
             {t.resumeWhere}
+          </span>
+        )}
+
+        {isDisabled && (
+          <span className="text-xs text-muted-foreground italic">
+            Loading article content...
           </span>
         )}
 
