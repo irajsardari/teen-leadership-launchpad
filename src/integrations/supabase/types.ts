@@ -1127,6 +1127,10 @@ export type Database = {
         Args: { record_user_id: string }
         Returns: boolean
       }
+      validate_user_data_access: {
+        Args: { record_user_id: string; table_name: string }
+        Returns: boolean
+      }
       verify_confidential_access: {
         Args: { record_id?: string }
         Returns: boolean
