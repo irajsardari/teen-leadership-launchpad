@@ -28,6 +28,7 @@ import LearningPortalPage from "./pages/LearningPortalPage";
 import NotFound from "./pages/NotFound";
 import TeachWithTMAPage from "./pages/TeachWithTMAPage";
 import { AuthProvider } from "./hooks/useAuth";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 import ScrollManager from "./components/ScrollManager";
 
@@ -69,6 +70,7 @@ const App = () => (
                 <Route path="/portal/course/:courseId" element={<CourseStructurePage />} />
                 <Route path="/portal/course/:courseId/session/:sessionId" element={<CourseStructurePage />} />
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="/admin/applications" element={<AdminApplicationsPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

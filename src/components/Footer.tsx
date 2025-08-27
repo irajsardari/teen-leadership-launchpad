@@ -136,6 +136,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/privacy-policy" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://tma.academy/portal"
                   target="_blank"
