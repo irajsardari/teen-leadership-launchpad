@@ -1187,6 +1187,17 @@ export type Database = {
           updated_at: string
         }[]
       }
+      get_confidential_record_ultra_secure: {
+        Args: { p_access_reason?: string; p_record_id: string }
+        Returns: {
+          confidential_info: string
+          created_at: string
+          entity_id: string
+          entity_type: string
+          id: string
+          updated_at: string
+        }[]
+      }
       get_current_user_role: {
         Args: Record<PropertyKey, never>
         Returns: string
