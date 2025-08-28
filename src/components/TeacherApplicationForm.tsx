@@ -10,11 +10,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Checkbox } from "@/components/ui/checkbox";
-import { RateLimiter, SecurityAudit, InputSecurity } from "@/utils/security";
 import { Link } from "react-router-dom";
+import { secureApi, validateInput, ClientRateLimit } from "@/utils/secureApi";
 
 const baseSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
@@ -119,11 +118,6 @@ const TeacherApplicationForm = () => {
   });
 
   const handleAuthExpiry = async () => {
-    try { await supabase.auth.signOut(); } catch {}
-    try {
-      localStorage.removeItem('supabase.auth.token');
-      localStorage.removeItem('sb-gedgcagidpheugikoyim-auth-token');
-    } catch {}
     const nextUrl = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
     window.location.href = `/portal?reason=expired&next=${nextUrl}`;
   };
@@ -136,24 +130,18 @@ const TeacherApplicationForm = () => {
         description: "Please log in to upload your CV.",
         variant: "destructive",
       });
-      const next = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
-      window.location.href = `/portal?next=${next}`;
       return null;
     }
 
     try {
-      // Import security utility
-      const { SecureFileAccess } = await import('@/utils/security');
+      // Use secure file upload API
+      const result = await secureApi.uploadFile('secure-teacher-cvs', file.name, file);
       
-      // Use secure upload with validation
-      const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-      const filePath = await SecureFileAccess.uploadSecureFile('teacher-documents', file, fileName);
-      
-      if (!filePath) {
-        throw new Error('Secure upload failed');
+      if (!result.success) {
+        throw new Error(result.error || 'Upload failed');
       }
       
-      return filePath;
+      return result.data?.path || null;
     } catch (error: any) {
       console.error('Error uploading CV:', error);
       toast({
@@ -175,57 +163,56 @@ const TeacherApplicationForm = () => {
       return;
     }
 
-    // Rate limiting check
-    const clientIP = 'user_' + user.id; // Use user ID as identifier
-    const canSubmit = await RateLimiter.checkRateLimit(clientIP, 'teacher_application', 3, 60);
-    
-    if (!canSubmit) {
+    // Client-side rate limiting
+    const rateLimitKey = `teacher_application_${user.id}`;
+    if (!ClientRateLimit.check(rateLimitKey, 3, 60 * 60 * 1000)) {
+      const remainingTime = ClientRateLimit.getRemainingTime(rateLimitKey);
       toast({
-        title: "Rate Limited",
-        description: "Too many applications submitted. Please wait before trying again.",
+        title: "Rate Limit Exceeded",
+        description: `Please wait ${Math.ceil(remainingTime / 60000)} minutes before submitting another application.`,
         variant: "destructive",
       });
-      await RateLimiter.logAttempt(clientIP, 'teacher_application', false);
       return;
     }
 
+    // Input validation
+    if (!validateInput.name(values.fullName)) {
+      toast({
+        title: "Invalid Name",
+        description: "Please enter a valid full name (2-100 characters).",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!validateInput.email(values.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!validateInput.phone(values.phoneNumber)) {
+      toast({
+        title: "Invalid Phone Number",
+        description: "Please enter a valid phone number (minimum 10 digits).",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
-      setIsSubmitting(true);
-
-      // Input validation and sanitization
-      const sanitizedValues = {
-        ...values,
-        fullName: InputSecurity.sanitizeString(values.fullName),
-        email: values.email.toLowerCase().trim(),
-        phoneNumber: InputSecurity.sanitizeString(values.phoneNumber),
-        linkedinPortfolio: values.linkedinPortfolio ? InputSecurity.sanitizeString(values.linkedinPortfolio) : undefined,
-      };
-
-      // Additional validation
-      if (!InputSecurity.validateEmail(sanitizedValues.email)) {
-        toast({
-          title: "Invalid Email",
-          description: "Please enter a valid email address.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (sanitizedValues.phoneNumber && !InputSecurity.validatePhoneNumber(sanitizedValues.phoneNumber)) {
-        toast({
-          title: "Invalid Phone Number",
-          description: "Please enter a valid phone number.",
-          variant: "destructive",
-        });
-        return;
-      }
-
+      // Handle CV upload first if provided
       let cvUrl = null;
-      if (sanitizedValues.cv && sanitizedValues.cv.length > 0) {
-        cvUrl = await uploadCV(sanitizedValues.cv[0]);
+      if (values.cv && values.cv.length > 0) {
+        cvUrl = await uploadCV(values.cv[0]);
         if (!cvUrl) {
           toast({
-            title: "Error",
+            title: "Upload Error",
             description: "Failed to upload CV. Please try again.",
             variant: "destructive",
           });
@@ -233,71 +220,38 @@ const TeacherApplicationForm = () => {
         }
       }
 
-      // Convert experience years string to number for database
-      const experienceYearsMap: { [key: string]: number } = {
-        "0-1": 1,
-        "2-4": 3,
-        "5-7": 6,
-        "8-10": 9,
-        "10+": 15
+      // Prepare sanitized data
+      const sanitizedData = {
+        full_name: validateInput.sanitizeText(values.fullName),
+        email: values.email.toLowerCase().trim(),
+        phone_number: validateInput.sanitizeText(values.phoneNumber),
+        specialization: Array.isArray(values.specialization) ? values.specialization : [values.specialization],
+        education: values.education,
+        experience_years: values.experienceYears,
+        cv_url: cvUrl,
+        cover_letter: values.linkedinPortfolio ? validateInput.sanitizeText(values.linkedinPortfolio) : null,
       };
 
-      const { error } = await supabase
-        .from('teacher_applications')
-        .insert({
-          user_id: user?.id,
-          full_name: sanitizedValues.fullName,
-          email: sanitizedValues.email,
-          phone_number: sanitizedValues.phoneNumber,
-          specialization: sanitizedValues.specialization.join(", "),
-          experience_years: experienceYearsMap[sanitizedValues.experienceYears] || 0,
-          education: sanitizedValues.education,
-          cv_url: cvUrl,
-          cover_letter: sanitizedValues.linkedinPortfolio || null,
-        });
+      // Submit via secure API
+      const result = await secureApi.submitForm('teacher', sanitizedData);
 
-      if (error) {
-        const msg = (error?.message || "").toLowerCase();
-        if (error?.code === "401" || error?.code === "403" || msg.includes("jwt") || msg.includes("unauthorized") || msg.includes("permission")) {
-          await handleAuthExpiry();
-          return;
-        }
-        console.error('Error submitting application:', error);
-        await SecurityAudit.log('application_submission_failed', 'teacher_application', user?.id);
-        await RateLimiter.logAttempt(clientIP, 'teacher_application', false);
-        toast({
-          title: "Error",
-          description: "Failed to submit application. Please try again.",
-          variant: "destructive",
-        });
-        return;
+      if (!result.success) {
+        throw new Error(result.error || 'Application submission failed');
       }
 
-      // Log successful submission
-      await SecurityAudit.log('application_submitted', 'teacher_application', user?.id);
-      await RateLimiter.logAttempt(clientIP, 'teacher_application', true);
-
-      // Send email via Resend
-      const { error: emailError } = await supabase.functions.invoke('send-application-emails', {
-        body: {
-          type: 'mentor',
-          to: sanitizedValues.email,
-          applicantName: sanitizedValues.fullName,
-        },
+      toast({
+        title: "Application Submitted!",
+        description: "Thank you for your application. We'll review it and contact you within 7-10 business days.",
       });
-
-      if (emailError) {
-        console.warn('Email sending failed:', emailError);
-        // Don't throw error - application was successful
-      }
 
       setShowSuccessMessage(true);
       form.reset();
-    } catch (error) {
+
+    } catch (error: any) {
       console.error('Error submitting application:', error);
       toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
+        title: "Application Failed",
+        description: error.message || "There was an error submitting your application. Please try again.",
         variant: "destructive",
       });
     } finally {
