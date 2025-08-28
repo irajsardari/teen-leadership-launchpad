@@ -81,23 +81,6 @@ const HomePage = () => {
     { icon: Award, value: "Based in Oman", label: "Expanding Globally" }
   ];
 
-  const testimonials = [
-    {
-      quote: "TMA transformed my confidence and leadership skills beyond what I imagined possible.",
-      author: "Future Challenger",
-      role: "Level 3 Graduate"
-    },
-    {
-      quote: "Watching my teenager grow into a thoughtful leader has been incredible.",
-      author: "Parent Testimonial", 
-      role: "TMA Parent Community"
-    },
-    {
-      quote: "The world's first academy dedicated to teenage leadership - truly groundbreaking.",
-      author: "Education Expert",
-      role: "Youth Development Specialist"
-    }
-  ];
 
   return (
     <>
@@ -325,33 +308,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="py-20 bg-gradient-to-b from-tma-light-grey to-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-black text-tma-deep-blue mb-8 font-montserrat">
-                Future Impact
-              </h2>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105">
-                  <CardContent className="p-8">
-                    <div className="text-4xl mb-4">⭐</div>
-                    <blockquote className="text-lg text-tma-charcoal-grey font-open-sans mb-6 italic">
-                      "{testimonial.quote}"
-                    </blockquote>
-                    <div>
-                      <div className="font-bold text-tma-deep-blue font-montserrat">{testimonial.author}</div>
-                      <div className="text-sm text-tma-charcoal-grey font-open-sans">{testimonial.role}</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Registration CTA */}
         <section className="py-20 bg-gradient-to-br from-tma-deep-blue to-tma-emerald-green text-white">
