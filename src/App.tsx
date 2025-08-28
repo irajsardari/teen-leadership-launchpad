@@ -30,14 +30,17 @@ import TeachWithTMAPage from "./pages/TeachWithTMAPage";
 import { AuthProvider } from "./hooks/useAuth";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
+import AdminSecurityPage from "./pages/AdminSecurityPage";
 import ScrollManager from "./components/ScrollManager";
+import { SessionTimeoutProvider } from "./components/SessionTimeoutProvider";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <HelmetProvider>
+      <SessionTimeoutProvider>
+        <HelmetProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
@@ -72,6 +75,7 @@ const App = () => (
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="/admin/applications" element={<AdminApplicationsPage />} />
+                <Route path="/admin/security" element={<AdminSecurityPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
@@ -80,7 +84,8 @@ const App = () => (
           </div>
           </BrowserRouter>
         </TooltipProvider>
-      </HelmetProvider>
+        </HelmetProvider>
+      </SessionTimeoutProvider>
     </AuthProvider>
   </QueryClientProvider>
 );
