@@ -58,6 +58,7 @@ export const ConfidentialRecordsManager: React.FC<ConfidentialRecordsManagerProp
     try {
       await logSecurityEvent('confidential_records_access_attempt', 'confidential_records');
       
+      // Use the new ultra-secure RLS policies - records will be filtered automatically
       let query = supabase
         .from('confidential_records')
         .select('*')
@@ -75,22 +76,38 @@ export const ConfidentialRecordsManager: React.FC<ConfidentialRecordsManagerProp
 
       if (error) {
         console.error('Error fetching confidential records:', error);
-        toast({
-          title: "Access Error",
-          description: "Failed to fetch confidential records. Access may be restricted.",
-          variant: "destructive",
-        });
+        
+        // Enhanced error handling for new security policies
+        if (error.message?.includes('policy') || error.code === '42501') {
+          toast({
+            title: "Access Denied",
+            description: "Insufficient privileges to access confidential records. Admin access required.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Access Error", 
+            description: "Failed to fetch confidential records. Please check your permissions.",
+            variant: "destructive",
+          });
+        }
         return;
       }
 
       setRecords(data || []);
-      await SecurityAudit.log('confidential_records_retrieved', 'confidential_records', `count:${data?.length || 0}`);
+      
+      // Enhanced audit logging with more details
+      await SecurityAudit.log(
+        'confidential_records_retrieved_secure', 
+        'confidential_records', 
+        `count:${data?.length || 0}_entity_filter:${entityType || 'all'}`
+      );
       
     } catch (error) {
       console.error('Confidential records fetch error:', error);
       toast({
         title: "Security Error",
-        description: "Unable to access confidential records.",
+        description: "Unable to access confidential records due to security restrictions.",
         variant: "destructive",
       });
     } finally {
@@ -243,11 +260,12 @@ export const ConfidentialRecordsManager: React.FC<ConfidentialRecordsManagerProp
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <Alert className="mb-4">
-            <Shield className="w-4 h-4" />
-            <AlertDescription>
-              These records contain sensitive confidential information. All access is logged and monitored.
-              Only authorized administrators can view, create, or modify these records.
+          <Alert className="mb-4 border-red-200 bg-red-50">
+            <Shield className="w-4 h-4 text-red-600" />
+            <AlertDescription className="text-red-700">
+              <strong>ULTRA-SECURE ACCESS:</strong> These records contain highly sensitive confidential information. 
+              All access attempts are logged with restrictive security policies. Only verified administrators 
+              with valid reasons can access this data. Unauthorized access attempts will be audited.
             </AlertDescription>
           </Alert>
 
