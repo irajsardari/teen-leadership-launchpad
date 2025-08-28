@@ -1206,6 +1206,24 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      get_teacher_application_secure: {
+        Args: { application_id: string }
+        Returns: {
+          cover_letter: string
+          created_at: string
+          cv_url: string
+          education: string
+          email: string
+          experience_years: number
+          full_name: string
+          id: string
+          phone_number: string
+          specialization: string
+          status: string
+          updated_at: string
+          user_id: string
+        }[]
+      }
       grant_safeguarding_access: {
         Args: {
           access_role: Database["public"]["Enums"]["safeguarding_role"]
