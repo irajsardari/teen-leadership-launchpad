@@ -63,14 +63,17 @@ export const SecurityMiddleware: React.FC<SecurityMiddlewareProps> = ({
 
             if (error) {
               console.warn('Rate limit check failed:', error);
-            } else if (rateLimitResult && !rateLimitResult.allowed) {
-              setIsBlocked(true);
-              if (rateLimitResult.blocked_until) {
-                setBlockExpiry(new Date(rateLimitResult.blocked_until));
+            } else if (rateLimitResult && typeof rateLimitResult === 'object' && rateLimitResult !== null) {
+              const rateLimit = rateLimitResult as { allowed?: boolean; blocked_until?: string };
+              if (!rateLimit.allowed) {
+                setIsBlocked(true);
+                if (rateLimit.blocked_until) {
+                  setBlockExpiry(new Date(rateLimit.blocked_until));
+                }
+                setHasAccess(false);
+                setErrorMessage('Rate limit exceeded. Please try again later.');
+                return;
               }
-              setHasAccess(false);
-              setErrorMessage('Rate limit exceeded. Please try again later.');
-              return;
             }
           } catch (rateLimitError) {
             console.warn('Rate limiting error:', rateLimitError);
