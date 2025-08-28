@@ -1156,6 +1156,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      confidential_access_control: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       flag_parental_consent_required: {
         Args: Record<PropertyKey, never>
         Returns: undefined
@@ -1253,6 +1257,17 @@ export type Database = {
           p_window_minutes?: number
         }
         Returns: boolean
+      }
+      secure_get_confidential_record: {
+        Args: { access_justification?: string; record_id: string }
+        Returns: {
+          confidential_info: string
+          created_at: string
+          entity_id: string
+          entity_type: string
+          id: string
+          updated_at: string
+        }[]
       }
       set_user_role: {
         Args: { _email: string; _role: string }
