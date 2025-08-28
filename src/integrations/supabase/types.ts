@@ -499,7 +499,7 @@ export type Database = {
           lms_role: string | null
           parental_consent_date: string | null
           parental_consent_required: boolean | null
-          role: string
+          role: Database["public"]["Enums"]["user_role"]
           safeguarding_concern: boolean | null
           updated_at: string
         }
@@ -512,7 +512,7 @@ export type Database = {
           lms_role?: string | null
           parental_consent_date?: string | null
           parental_consent_required?: boolean | null
-          role?: string
+          role?: Database["public"]["Enums"]["user_role"]
           safeguarding_concern?: boolean | null
           updated_at?: string
         }
@@ -525,7 +525,7 @@ export type Database = {
           lms_role?: string | null
           parental_consent_date?: string | null
           parental_consent_required?: boolean | null
-          role?: string
+          role?: Database["public"]["Enums"]["user_role"]
           safeguarding_concern?: boolean | null
           updated_at?: string
         }
@@ -1183,6 +1183,7 @@ export type Database = {
       attendance_status: "present" | "absent" | "late" | "excused"
       resource_visibility: "private" | "shared" | "global" | "org"
       safeguarding_role: "safeguarding_officer" | "safeguarding_manager"
+      user_role: "admin" | "mentor" | "challenger"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1314,6 +1315,7 @@ export const Constants = {
       attendance_status: ["present", "absent", "late", "excused"],
       resource_visibility: ["private", "shared", "global", "org"],
       safeguarding_role: ["safeguarding_officer", "safeguarding_manager"],
+      user_role: ["admin", "mentor", "challenger"],
     },
   },
 } as const
