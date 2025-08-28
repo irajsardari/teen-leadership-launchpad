@@ -106,20 +106,20 @@ const AdminSecurityPage: React.FC = () => {
           </CardContent>
         </Card>
 
-        {/* Manual Configuration Required */}
-        <Alert className="mb-8 border-yellow-200 bg-yellow-50">
-          <AlertTriangle className="h-4 w-4 text-yellow-600" />
-          <AlertDescription className="text-yellow-800">
-            <strong>Action Required:</strong> To complete security hardening, enable "Leaked Password Protection" 
-            in your Supabase Dashboard. This requires upgrading to the Pro Plan.
+        {/* Manual Configuration Available */}
+        <Alert className="mb-8 border-blue-200 bg-blue-50">
+          <Shield className="h-4 w-4 text-blue-600" />
+          <AlertDescription className="text-blue-800">
+            <strong>Additional Protection Available:</strong> Enable Captcha protection to protect 
+            authentication endpoints from bots and abuse attacks.
             <div className="mt-2">
               <Button variant="outline" size="sm" asChild>
                 <a 
-                  href="https://supabase.com/dashboard/project/gedgcagidpheugikoyim/settings/auth" 
+                  href="https://supabase.com/dashboard/project/gedgcagidpheugikoyim/auth/protection" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
-                  Open Auth Settings
+                  Configure Attack Protection
                 </a>
               </Button>
             </div>
