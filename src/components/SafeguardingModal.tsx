@@ -7,9 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
 import { Shield, AlertTriangle, Phone, Mail, Clock } from 'lucide-react';
-import { SecurityAudit, InputSecurity } from '@/utils/security';
+import { secureApi, validateInput, ClientRateLimit } from '@/utils/secureApi';
 
 interface SafeguardingModalProps {
   children: React.ReactNode;
@@ -74,38 +73,53 @@ export const SafeguardingModal: React.FC<SafeguardingModalProps> = ({ children }
       return;
     }
 
+    // Client-side rate limiting
+    const rateLimitKey = `safeguarding_report`;
+    if (!ClientRateLimit.check(rateLimitKey, 2, 60 * 60 * 1000)) {
+      const remainingTime = ClientRateLimit.getRemainingTime(rateLimitKey);
+      toast({
+        title: "Rate Limit Exceeded",
+        description: `Please wait ${Math.ceil(remainingTime / 60000)} minutes before submitting another report.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Input validation
+    if (description.trim().length < 10) {
+      toast({
+        title: "Description Too Short",
+        description: "Please provide more details about your concern (minimum 10 characters).",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (contactInfo && contactInfo.includes('@') && !validateInput.email(contactInfo)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address for contact information.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       // Sanitize inputs
-      const sanitizedDescription = InputSecurity.sanitizeString(description);
-      const sanitizedContact = InputSecurity.sanitizeString(contactInfo);
+      const sanitizedData = {
+        report_type: reportType,
+        description: validateInput.sanitizeText(description),
+        contact_info: contactInfo ? validateInput.sanitizeText(contactInfo) : null,
+      };
       
-      // Get current user if logged in
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      // Submit safeguarding report using RPC function
-      const { data: reportId, error } = await supabase.rpc('submit_safeguarding_report', {
-        p_report_type: reportType,
-        p_description: sanitizedDescription,
-        p_contact_info: sanitizedContact || null
-      });
+      // Submit via secure API
+      const result = await secureApi.submitForm('safeguarding', sanitizedData);
 
-      if (error) {
-        throw error;
+      if (!result.success) {
+        throw new Error(result.error || 'Report submission failed');
       }
-
-      // Send notification email (via Edge Function)
-      await supabase.functions.invoke('send-safeguarding-alert', {
-        body: {
-          reportId: reportId,
-          reportType,
-          description: sanitizedDescription,
-          contactInfo: sanitizedContact,
-          reporterId: user?.id,
-          timestamp: new Date().toISOString()
-        }
-      });
 
       toast({
         title: "Report Submitted Successfully",
@@ -122,10 +136,9 @@ export const SafeguardingModal: React.FC<SafeguardingModalProps> = ({ children }
       console.error('Error submitting safeguarding report:', error);
       toast({
         title: "Submission Error",
-        description: "There was an issue submitting your report. Please try again or contact us directly.",
+        description: error.message || "There was an issue submitting your report. Please try again or contact us directly.",
         variant: "destructive",
       });
-      await SecurityAudit.log('safeguarding_report_failed', 'safeguarding_report', error.message);
     } finally {
       setIsSubmitting(false);
     }

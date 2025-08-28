@@ -9,10 +9,10 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
+import { secureApi, validateInput, ClientRateLimit } from "@/utils/secureApi";
 
 const challengerSchema = z.object({
   full_name: z.string().min(2, "Full name must be at least 2 characters"),
@@ -62,39 +62,65 @@ const ChallengerForm = () => {
     if ((data as any)?.hp) {
       return;
     }
+
+    // Client-side rate limiting
+    const rateLimitKey = `challenger_${user.id}`;
+    if (!ClientRateLimit.check(rateLimitKey, 3, 60 * 60 * 1000)) {
+      const remainingTime = ClientRateLimit.getRemainingTime(rateLimitKey);
+      toast({
+        title: "Rate Limit Exceeded",
+        description: `Please wait ${Math.ceil(remainingTime / 60000)} minutes before submitting again.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Input validation
+    if (!validateInput.name(data.full_name)) {
+      toast({
+        title: "Invalid Name",
+        description: "Please enter a valid full name (2-100 characters).",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!validateInput.email(data.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!validateInput.phone(data.phone_number)) {
+      toast({
+        title: "Invalid Phone Number",
+        description: "Please enter a valid phone number (minimum 10 digits).",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      // Using any to bypass empty types issue until database types are generated
-      const { hp, ...clean } = data as any;
-      const { error } = await (supabase as any)
-        .from('challengers')
-        .insert([{
-          user_id: user.id,
-          full_name: data.full_name,
-          age: data.age,
-          email: data.email,
-          phone_number: data.phone_number,
-          level: data.level,
-          confidential_info: data.confidential_info || null,
-        }]);
+      // Sanitize inputs
+      const sanitizedData = {
+        full_name: validateInput.sanitizeText(data.full_name),
+        age: data.age,
+        email: data.email.toLowerCase().trim(),
+        phone_number: validateInput.sanitizeText(data.phone_number),
+        level: validateInput.sanitizeText(data.level),
+        confidential_info: data.confidential_info ? validateInput.sanitizeText(data.confidential_info) : null,
+      };
 
-      if (error) {
-        throw error;
-      }
+      // Submit via secure API
+      const result = await secureApi.submitForm('challenger', sanitizedData);
 
-      // Send email via Resend
-      const { error: emailError } = await supabase.functions.invoke('send-application-emails', {
-        body: {
-          type: 'challenger',
-          to: data.email,
-          applicantName: data.full_name,
-        },
-      });
-
-      if (emailError) {
-        console.warn('Email sending failed:', emailError);
-        // Don't throw error - registration was successful
+      if (!result.success) {
+        throw new Error(result.error || 'Submission failed');
       }
 
       toast({
@@ -103,11 +129,11 @@ const ChallengerForm = () => {
       });
 
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Registration error:', error);
       toast({
         title: "Registration Failed",
-        description: "There was an error submitting your registration. Please try again.",
+        description: error.message || "There was an error submitting your registration. Please try again.",
         variant: "destructive",
       });
     } finally {
