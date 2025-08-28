@@ -729,6 +729,33 @@ export type Database = {
         }
         Relationships: []
       }
+      safeguarding_permissions: {
+        Row: {
+          granted_at: string | null
+          granted_by: string | null
+          id: string
+          is_active: boolean | null
+          role: Database["public"]["Enums"]["safeguarding_role"]
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string | null
+          granted_by?: string | null
+          id?: string
+          is_active?: boolean | null
+          role: Database["public"]["Enums"]["safeguarding_role"]
+          user_id: string
+        }
+        Update: {
+          granted_at?: string | null
+          granted_by?: string | null
+          id?: string
+          is_active?: boolean | null
+          role?: Database["public"]["Enums"]["safeguarding_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       safeguarding_reports: {
         Row: {
           contact_info: string | null
@@ -1080,6 +1107,17 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      grant_safeguarding_access: {
+        Args: {
+          access_role: Database["public"]["Enums"]["safeguarding_role"]
+          target_user_id: string
+        }
+        Returns: string
+      }
+      has_safeguarding_access: {
+        Args: { check_user_id?: string }
+        Returns: boolean
+      }
       is_resource_owned_by_user: {
         Args: { res_id: string; user_id: string }
         Returns: boolean
@@ -1144,6 +1182,7 @@ export type Database = {
       approval_status: "pending" | "approved" | "rejected"
       attendance_status: "present" | "absent" | "late" | "excused"
       resource_visibility: "private" | "shared" | "global" | "org"
+      safeguarding_role: "safeguarding_officer" | "safeguarding_manager"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1274,6 +1313,7 @@ export const Constants = {
       approval_status: ["pending", "approved", "rejected"],
       attendance_status: ["present", "absent", "late", "excused"],
       resource_visibility: ["private", "shared", "global", "org"],
+      safeguarding_role: ["safeguarding_officer", "safeguarding_manager"],
     },
   },
 } as const
