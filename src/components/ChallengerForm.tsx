@@ -5,12 +5,14 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const challengerSchema = z.object({
   full_name: z.string().min(2, "Full name must be at least 2 characters"),
@@ -112,6 +114,41 @@ const ChallengerForm = () => {
       setIsSubmitting(false);
     }
   };
+
+  // PHASE 6: UX Gating - Show authentication gate if not logged in
+  if (!user) {
+    return (
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-center">Register as a Challenger</CardTitle>
+          <CardDescription className="text-center">
+            Join TMA and start your leadership journey today
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="text-center space-y-6">
+          <Alert className="border-amber-200 bg-amber-50">
+            <AlertTitle className="text-amber-800">🔐 Login Required</AlertTitle>
+            <AlertDescription className="text-amber-700">
+              Please sign in to register as a challenger and protect your personal information.
+            </AlertDescription>
+          </Alert>
+          <div className="space-y-4">
+            <p className="text-muted-foreground">
+              Your registration includes personal details that need to be securely stored and protected.
+            </p>
+            <Link to={`/portal?next=${encodeURIComponent(window.location.pathname)}`}>
+              <Button size="lg" className="text-lg px-8">
+                Sign In to Register
+              </Button>
+            </Link>
+            <p className="text-sm text-muted-foreground">
+              Don't have an account? You can create one during the sign-in process.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full max-w-2xl mx-auto">

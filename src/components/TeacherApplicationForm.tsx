@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RateLimiter, SecurityAudit, InputSecurity } from "@/utils/security";
+import { Link } from "react-router-dom";
 
 const baseSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
@@ -342,6 +344,49 @@ const TeacherApplicationForm = () => {
               <Button onClick={() => setShowSuccessMessage(false)} variant="outline">
                 Submit Another Application
               </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // PHASE 6: UX Gating - Show authentication gate if not logged in
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-muted py-12">
+        <div className="container mx-auto px-4">
+          <Card className="max-w-4xl mx-auto">
+            <CardHeader className="text-center">
+              <CardTitle className="text-4xl font-bold">Join Our Teaching Team</CardTitle>
+              <CardDescription className="text-xl mt-2">
+                Inspire the next generation of leaders.
+              </CardDescription>
+              <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+                We're looking for passionate, caring, and qualified individuals who want to help teenagers grow into confident, capable, and conscious leaders.
+              </p>
+            </CardHeader>
+            <CardContent className="text-center space-y-6">
+              <Alert className="border-amber-200 bg-amber-50">
+                <AlertTitle className="text-amber-800">🔐 Login Required</AlertTitle>
+                <AlertDescription className="text-amber-700">
+                  To protect applicant data and ensure secure submissions, please sign in before completing your teacher application.
+                </AlertDescription>
+              </Alert>
+              <div className="space-y-4">
+                <p className="text-muted-foreground">
+                  Your application contains sensitive personal information including your CV, contact details, and professional background. 
+                  We require authentication to keep this data secure.
+                </p>
+                <Link to={`/portal?next=${encodeURIComponent('/teachers')}`}>
+                  <Button size="lg" className="text-lg px-8">
+                    Sign In to Apply
+                  </Button>
+                </Link>
+                <p className="text-sm text-muted-foreground">
+                  Don't have an account? You can create one during the sign-in process.
+                </p>
+              </div>
             </CardContent>
           </Card>
         </div>

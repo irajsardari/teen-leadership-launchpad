@@ -89,7 +89,7 @@ export default function TeacherResourcesTab() {
         const { data: teacherRows } = await supabase
           .from("profiles")
           .select("id, full_name, role")
-          .eq("role", "teacher");
+          .eq("role", "mentor");
         setTeachers((teacherRows || []).filter(t => t.id !== user?.id).map(t => ({ id: t.id, full_name: (t as any).full_name })));
 
         const { data: courseRows } = await supabase
