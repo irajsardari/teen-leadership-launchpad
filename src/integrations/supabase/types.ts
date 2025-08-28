@@ -861,6 +861,36 @@ export type Database = {
         }
         Relationships: []
       }
+      security_rate_limits: {
+        Row: {
+          action: string
+          attempts: number | null
+          blocked_until: string | null
+          created_at: string | null
+          id: string
+          identifier: string
+          window_start: string | null
+        }
+        Insert: {
+          action: string
+          attempts?: number | null
+          blocked_until?: string | null
+          created_at?: string | null
+          id?: string
+          identifier: string
+          window_start?: string | null
+        }
+        Update: {
+          action?: string
+          attempts?: number | null
+          blocked_until?: string | null
+          created_at?: string | null
+          id?: string
+          identifier?: string
+          window_start?: string | null
+        }
+        Relationships: []
+      }
       session_progress: {
         Row: {
           completed: boolean | null
@@ -1107,6 +1137,16 @@ export type Database = {
         Args: { p_child_user_id: string }
         Returns: boolean
       }
+      check_enhanced_rate_limit: {
+        Args: {
+          p_action: string
+          p_block_minutes?: number
+          p_identifier: string
+          p_max_attempts?: number
+          p_window_minutes?: number
+        }
+        Returns: Json
+      }
       check_rate_limit: {
         Args: {
           p_action: string
@@ -1119,6 +1159,10 @@ export type Database = {
       flag_parental_consent_required: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      generate_csrf_token: {
+        Args: Record<PropertyKey, never>
+        Returns: string
       }
       generate_secure_file_url: {
         Args: {
@@ -1225,6 +1269,10 @@ export type Database = {
       user_owns_challenger_record: {
         Args: { record_user_id: string }
         Returns: boolean
+      }
+      validate_and_sanitize_input: {
+        Args: { p_input: string; p_max_length?: number; p_type?: string }
+        Returns: Json
       }
       validate_user_data_access: {
         Args: { record_user_id: string; table_name: string }
