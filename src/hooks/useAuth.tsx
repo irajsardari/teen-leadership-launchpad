@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext, ReactNode } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { useSessionTimeout } from './useSessionTimeout';
 
 interface AuthContextType {
   user: User | null;
@@ -23,6 +24,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Enable session timeout for admin users (30 min timeout, 5 min warning)
+  useSessionTimeout({ 
+    timeoutMinutes: 30, 
+    warningMinutes: 5, 
+    adminOnly: true 
+  });
 
   useEffect(() => {
     // Set up auth state listener FIRST
