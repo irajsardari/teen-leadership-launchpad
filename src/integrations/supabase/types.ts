@@ -1092,6 +1092,10 @@ export type Database = {
         }
         Returns: string
       }
+      get_authenticated_user_role: {
+        Args: Record<PropertyKey, never>
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
       get_confidential_record_secure: {
         Args: { p_record_id: string }
         Returns: {
@@ -1141,6 +1145,14 @@ export type Database = {
           p_resource_type: string
         }
         Returns: undefined
+      }
+      secure_form_submission: {
+        Args: {
+          p_form_type: string
+          p_max_attempts?: number
+          p_window_minutes?: number
+        }
+        Returns: boolean
       }
       set_user_role: {
         Args: { _email: string; _role: string }
