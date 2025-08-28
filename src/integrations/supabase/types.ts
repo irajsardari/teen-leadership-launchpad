@@ -1036,6 +1036,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      block_unauthorized_access: {
+        Args: { table_name: string }
+        Returns: boolean
+      }
       can_manage_child_consent: {
         Args: { p_child_user_id: string }
         Returns: boolean
