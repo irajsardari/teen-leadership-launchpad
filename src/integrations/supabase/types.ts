@@ -792,6 +792,72 @@ export type Database = {
         }
         Relationships: []
       }
+      safeguarding_access_approvals: {
+        Row: {
+          access_reason: string
+          approved_at: string | null
+          approving_admin_id: string | null
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          ip_address: unknown | null
+          requested_at: string | null
+          requesting_admin_id: string
+          status: string | null
+        }
+        Insert: {
+          access_reason: string
+          approved_at?: string | null
+          approving_admin_id?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          requested_at?: string | null
+          requesting_admin_id: string
+          status?: string | null
+        }
+        Update: {
+          access_reason?: string
+          approved_at?: string | null
+          approving_admin_id?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          requested_at?: string | null
+          requesting_admin_id?: string
+          status?: string | null
+        }
+        Relationships: []
+      }
+      safeguarding_ip_whitelist: {
+        Row: {
+          added_by: string
+          created_at: string | null
+          description: string | null
+          id: string
+          ip_address: unknown
+          is_active: boolean | null
+        }
+        Insert: {
+          added_by: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          ip_address: unknown
+          is_active?: boolean | null
+        }
+        Update: {
+          added_by?: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          ip_address?: unknown
+          is_active?: boolean | null
+        }
+        Relationships: []
+      }
       safeguarding_permissions: {
         Row: {
           granted_at: string | null
@@ -1195,6 +1261,27 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      access_safeguarding_report_secure: {
+        Args: { p_access_reason?: string; p_report_id: string }
+        Returns: {
+          contact_info: string
+          created_at: string
+          description: string
+          id: string
+          report_type: string
+          reporter_id: string
+          status: string
+          urgency: string
+        }[]
+      }
+      add_safeguarding_ip_whitelist: {
+        Args: { p_description?: string; p_ip_address: string }
+        Returns: string
+      }
+      archive_old_safeguarding_reports: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       block_unauthorized_access: {
         Args: { table_name: string }
         Returns: boolean
@@ -1441,6 +1528,14 @@ export type Database = {
       }
       verify_confidential_access_maximum_security: {
         Args: { p_access_reason?: string; p_record_id?: string }
+        Returns: boolean
+      }
+      verify_safeguarding_access_critical: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      verify_safeguarding_access_maximum_security: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
       verify_student_data_access_rate_limit: {
