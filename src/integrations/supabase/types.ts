@@ -1230,6 +1230,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      confidential_access_guardian: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       flag_parental_consent_required: {
         Args: Record<PropertyKey, never>
         Returns: undefined
