@@ -25,49 +25,52 @@
     --ring: 220 64% 29%;
     --radius: 0.5rem;
     
-    /* TMA OFFICIAL Brand Colors - STRICT COMPLIANCE */
-    --tma-primary-blue: 217 71% 32%;     /* #0D47A1 */
-    --tma-secondary-orange: 24 100% 50%; /* #FF6F00 */
-    --tma-accent-green: 134 66% 27%;     /* #2E7D32 */
-    --tma-navy-text: 209 44% 25%;        /* #26415A */
-    --tma-neutral-bg: 214 100% 97%;      /* #F4F7FB */
+    /* TMA OFFICIAL Brand Colors - EXACT COMPLIANCE */
+    --tma-primary-dark: 217 66% 16%;     /* #0A1F44 - Primary Dark Blue */
+    --tma-primary-bright: 207 100% 35%;  /* #0056B3 - Primary Bright Blue */
+    --tma-accent-green: 163 100% 30%;    /* #009B77 - Accent Green */
+    --tma-accent-orange: 19 95% 49%;     /* #F25C05 - Accent Orange */
+    --tma-neutral-white: 0 0% 100%;      /* #FFFFFF - Neutral White */
+    --tma-neutral-light: 220 33% 97%;    /* #F5F7FA - Neutral Light Gray */
+    --tma-neutral-dark: 0 0% 20%;        /* #333333 - Neutral Dark Gray */
     
-    /* Legacy aliases for backward compatibility */
-    --tma-deep-blue: 217 71% 32%;
-    --tma-bright-orange: 24 100% 50%;
-    --tma-emerald-green: 134 66% 27%;
-    --tma-light-grey: 214 100% 97%;
-    --tma-charcoal-grey: 209 44% 25%;
+    /* Legacy aliases updated to new brand colors */
+    --tma-deep-blue: 217 66% 16%;        /* Primary Dark Blue */
+    --tma-bright-blue: 207 100% 35%;     /* Primary Bright Blue */
+    --tma-emerald-green: 163 100% 30%;   /* Accent Green */
+    --tma-bright-orange: 19 95% 49%;     /* Accent Orange */
+    --tma-light-grey: 220 33% 97%;       /* Neutral Light Gray */
+    --tma-charcoal-grey: 0 0% 20%;       /* Neutral Dark Gray */
     
-    /* Extended colors using official palette */
-    --tma-navy: 209 44% 25%;
-    --tma-success: 134 66% 27%;
-    --tma-primary: 217 71% 32%;
+    /* Design system aliases */
+    --tma-navy: 217 66% 16%;             /* Primary Dark Blue */
+    --tma-success: 163 100% 30%;         /* Accent Green */
+    --tma-primary: 207 100% 35%;         /* Primary Bright Blue */
     
-    /* Design System Gradients - Official Brand Colors Only */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--tma-primary-blue)), hsl(var(--tma-secondary-orange)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--tma-accent-green)), hsl(var(--tma-primary-blue)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--tma-navy-text)), hsl(var(--tma-primary-blue)));
+    /* Brand-compliant gradients - clean and professional */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--tma-primary-dark)), hsl(var(--tma-primary-bright)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--tma-accent-green)), hsl(var(--tma-primary-bright)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--tma-primary-dark)), hsl(var(--tma-primary-bright)));
     
-    /* CTA Color Variables for Button Variants */
-    --cta-blue: var(--tma-deep-blue);
-    --cta-blue-dark: 200 100% 15%;
-    --cta-teal: var(--tma-emerald-green);
-    --cta-teal-dark: 158 64% 45%;
-    --cta-success: 142 76% 36%;
-    --cta-success-dark: 142 76% 30%;
+    /* CTA Button Colors - Brand Compliant */
+    --cta-primary: var(--tma-primary-bright);       /* #0056B3 - Primary CTA */
+    --cta-primary-hover: var(--tma-primary-dark);   /* #0A1F44 - Primary Hover */
+    --cta-secondary: var(--tma-accent-green);       /* #009B77 - Secondary CTA */
+    --cta-secondary-hover: 163 100% 25%;            /* Darker green for hover */
+    --cta-accent: var(--tma-accent-orange);         /* #F25C05 - Accent CTA */
+    --cta-accent-hover: 19 95% 44%;                 /* Darker orange for hover */
     
-    /* CTA Shadows */
-    --shadow-cta-blue: 0 4px 14px 0 hsl(var(--cta-blue) / 0.39);
-    --shadow-cta-blue-hover: 0 6px 20px 0 hsl(var(--cta-blue) / 0.5);
-    --shadow-cta-teal: 0 4px 14px 0 hsl(var(--cta-teal) / 0.39);
-    --shadow-cta-teal-hover: 0 6px 20px 0 hsl(var(--cta-teal) / 0.5);
+    /* CTA Shadows - Brand Compliant */
+    --shadow-cta-primary: 0 4px 14px 0 hsl(var(--cta-primary) / 0.3);
+    --shadow-cta-primary-hover: 0 6px 20px 0 hsl(var(--cta-primary) / 0.4);
+    --shadow-cta-secondary: 0 4px 14px 0 hsl(var(--cta-secondary) / 0.3);
+    --shadow-cta-secondary-hover: 0 6px 20px 0 hsl(var(--cta-secondary) / 0.4);
     
-    /* Shadows and Effects */
-    --shadow-elegant: 0 10px 30px -10px hsl(var(--tma-deep-blue) / 0.3);
-    --shadow-button: 0 4px 14px 0 hsl(var(--tma-bright-orange) / 0.39);
-    --shadow-button-3d: 0 8px 25px -5px hsl(var(--tma-deep-blue) / 0.3), 0 4px 12px -2px hsl(var(--tma-bright-orange) / 0.2);
-    --shadow-gold: 0 4px 14px 0 hsl(var(--tma-golden-yellow) / 0.39);
+    /* Professional Shadows and Effects */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--tma-primary-dark) / 0.2);
+    --shadow-button: 0 4px 14px 0 hsl(var(--tma-accent-orange) / 0.3);
+    --shadow-button-3d: 0 8px 25px -5px hsl(var(--tma-primary-dark) / 0.2), 0 4px 12px -2px hsl(var(--tma-accent-orange) / 0.15);
+    --shadow-card: 0 4px 6px -1px hsl(var(--tma-neutral-dark) / 0.1), 0 2px 4px -1px hsl(var(--tma-neutral-dark) / 0.06);
     
     /* Mobile fixes */
     --header-height: 4rem;
@@ -163,7 +166,7 @@
     bottom: 0;
     width: 100%;
     max-width: 100%;
-    background: hsl(var(--tma-neutral-bg));
+    background: hsl(var(--tma-neutral-light));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     z-index: 1001;
@@ -243,36 +246,37 @@
     background-clip: text;
   }
   
-  /* Section backgrounds - Official brand colors */
+  /* Section backgrounds - Clean brand colors */
   .section-gradient {
-    background: linear-gradient(135deg, hsl(var(--tma-neutral-bg)) 0%, white 50%, hsl(var(--tma-neutral-bg)) 100%);
+    background: linear-gradient(135deg, hsl(var(--tma-neutral-light)) 0%, hsl(var(--tma-neutral-white)) 50%, hsl(var(--tma-neutral-light)) 100%);
   }
   
-  /* Hero text - Strong contrast */
+  /* Hero text - Perfect contrast with brand colors */
   .hero-title {
-    color: hsl(var(--tma-navy-text));
+    color: hsl(var(--tma-neutral-white));
     font-weight: 700;
   }
   
   .hero-subtitle {
-    color: hsl(var(--tma-navy-text));
+    color: hsl(var(--tma-neutral-white));
     opacity: 1;
     font-weight: 500;
   }
   
-  /* Level card corrections */
+  /* Professional level cards with brand colors */
   .level-card {
-    background: var(--gradient-primary);
-    color: white;
+    background: linear-gradient(135deg, hsl(var(--tma-primary-dark)), hsl(var(--tma-primary-bright)));
+    color: hsl(var(--tma-neutral-white));
     border-radius: 1rem;
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-card);
   }
   
   .level-card .age-badge {
-    background: hsl(var(--tma-secondary-orange));
-    color: white;
+    background: hsl(var(--tma-accent-orange));
+    color: hsl(var(--tma-neutral-white));
     padding: 0.5rem 1rem;
     border-radius: 9999px;
     font-weight: 600;
@@ -280,13 +284,13 @@
   }
   
   .level-card h3 {
-    color: white;
+    color: hsl(var(--tma-neutral-white));
     font-weight: 700;
     margin: 1rem 0 0.5rem 0;
   }
   
   .level-card p {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
     font-weight: 400;
   }
   

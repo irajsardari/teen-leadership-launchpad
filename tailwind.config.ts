@@ -67,28 +67,32 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				tma: {
-					// OFFICIAL TMA Brand Colors - STRICT COMPLIANCE
-					'primary-blue': 'hsl(var(--tma-primary-blue))',     // #0D47A1
-					'secondary-orange': 'hsl(var(--tma-secondary-orange))', // #FF6F00
-					'accent-green': 'hsl(var(--tma-accent-green))',     // #2E7D32
-					'navy-text': 'hsl(var(--tma-navy-text))',           // #26415A
-					'neutral-bg': 'hsl(var(--tma-neutral-bg))',         // #F4F7FB
+					// OFFICIAL TMA Brand Colors - EXACT COMPLIANCE
+					'primary-dark': 'hsl(var(--tma-primary-dark))',      // #0A1F44 - Primary Dark Blue
+					'primary-bright': 'hsl(var(--tma-primary-bright))',  // #0056B3 - Primary Bright Blue
+					'accent-green': 'hsl(var(--tma-accent-green))',      // #009B77 - Accent Green
+					'accent-orange': 'hsl(var(--tma-accent-orange))',    // #F25C05 - Accent Orange
+					'neutral-white': 'hsl(var(--tma-neutral-white))',    // #FFFFFF - Neutral White
+					'neutral-light': 'hsl(var(--tma-neutral-light))',    // #F5F7FA - Neutral Light Gray
+					'neutral-dark': 'hsl(var(--tma-neutral-dark))',      // #333333 - Neutral Dark Gray
 					
-					// Legacy aliases for backward compatibility
-					'deep-blue': 'hsl(var(--tma-primary-blue))',
-					'bright-orange': 'hsl(var(--tma-secondary-orange))',
+					// Legacy aliases updated to new brand colors
+					'deep-blue': 'hsl(var(--tma-primary-dark))',
+					'bright-blue': 'hsl(var(--tma-primary-bright))',
 					'emerald-green': 'hsl(var(--tma-accent-green))',
-					'light-grey': 'hsl(var(--tma-neutral-bg))',
-					'charcoal-grey': 'hsl(var(--tma-navy-text))',
+					'bright-orange': 'hsl(var(--tma-accent-orange))',
+					'light-grey': 'hsl(var(--tma-neutral-light))',
+					'charcoal-grey': 'hsl(var(--tma-neutral-dark))',
 					
-					// Extended colors using official palette
-					'navy': 'hsl(var(--tma-navy-text))',
+					// Design system aliases
+					'navy': 'hsl(var(--tma-primary-dark))',
 					'success': 'hsl(var(--tma-accent-green))',
+					'primary': 'hsl(var(--tma-primary-bright))',
 					
-					// Backward compatibility aliases
-					blue: 'hsl(var(--tma-primary-blue))',
-					gray: 'hsl(var(--tma-navy-text))',
-					light: 'hsl(var(--tma-neutral-bg))'
+					// Backward compatibility
+					blue: 'hsl(var(--tma-primary-bright))',
+					gray: 'hsl(var(--tma-neutral-dark))',
+					light: 'hsl(var(--tma-neutral-light))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
