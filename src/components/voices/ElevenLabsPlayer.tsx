@@ -395,35 +395,36 @@ const ElevenLabsPlayer = ({ content, slug, className = "" }: ElevenLabsPlayerPro
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="relative">
-            {/* TMA 3D Button with Orange Accent Ring */}
+            {/* Enhanced TMA 3D Button with Prominent Design */}
             <button
               onClick={loadingState === 'error' ? retryGeneration : togglePlayback}
               disabled={isLoading}
               className={`
                 tma-play-button
                 inline-flex items-center justify-center
-                w-14 h-14 rounded-full
-                bg-gradient-to-b from-tma-deep-blue to-tma-deep-blue/90
+                w-16 h-16 rounded-full
+                bg-gradient-to-b from-tma-bright-orange to-tma-deep-blue
                 text-white cursor-pointer relative
-                shadow-lg hover:shadow-xl
-                transition-all duration-200 ease-out
-                ${isLoading ? 'opacity-60 cursor-not-allowed' : 'hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0'}
-                ${isCached && isReady ? 'ring-2 ring-tma-bright-orange/50' : ''}
-                focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-tma-bright-orange focus-visible:ring-offset-2
-                before:content-[''] before:absolute before:inset-1 before:rounded-full 
-                before:border-2 before:border-tma-bright-orange before:pointer-events-none
-                before:shadow-inner
+                shadow-xl hover:shadow-2xl
+                transition-all duration-300 ease-out
+                ${isLoading ? 'opacity-70 cursor-not-allowed scale-95' : 'hover:-translate-y-1 hover:shadow-2xl hover:scale-105 active:translate-y-0 active:scale-100'}
+                ${isCached && isReady ? 'ring-4 ring-tma-bright-orange/80 ring-offset-2' : 'ring-2 ring-white/20'}
+                focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-tma-bright-orange focus-visible:ring-offset-3
+                before:content-[''] before:absolute before:inset-0 before:rounded-full 
+                before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none
+                after:content-[''] after:absolute after:inset-0 after:rounded-full
+                after:shadow-inner after:pointer-events-none
               `}
               aria-label={loadingState === 'error' ? 'Retry audio generation' : (isPlaying ? 'Pause audio' : 'Play audio')}
             >
               {isLoading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : loadingState === 'error' ? (
-                <AlertCircle className="w-6 h-6" />
+                <AlertCircle className="w-7 h-7 drop-shadow-lg" />
               ) : isPlaying ? (
-                <Pause className="w-6 h-6" />
+                <Pause className="w-7 h-7 drop-shadow-lg" />
               ) : (
-                <Play className="w-6 h-6 ml-0.5" />
+                <Play className="w-7 h-7 ml-0.5 drop-shadow-lg" />
               )}
             </button>
             
