@@ -384,7 +384,17 @@ const ElevenLabsPlayer = ({ content, slug, className = "" }: ElevenLabsPlayerPro
   return (
     <div 
       ref={playerRef} 
-      className={`bg-white border border-tma-deep-blue/10 rounded-xl p-6 space-y-5 shadow-sm hover:shadow-md transition-all duration-300 ${className}`}
+      className={`
+        relative overflow-hidden
+        bg-gradient-to-br from-white via-tma-light-grey/30 to-tma-bright-orange/5
+        border-2 border-tma-deep-blue/20 rounded-2xl p-8 space-y-6 
+        shadow-xl hover:shadow-2xl transition-all duration-500
+        before:content-[''] before:absolute before:inset-0 
+        before:bg-gradient-to-r before:from-tma-bright-orange/5 before:to-tma-deep-blue/5 before:pointer-events-none
+        after:content-[''] after:absolute after:top-0 after:left-0 after:right-0 after:h-1
+        after:bg-gradient-to-r after:from-tma-bright-orange after:via-tma-deep-blue after:to-tma-bright-orange
+        ${className}
+      `}
       aria-live="polite"
       tabIndex={0}
       role="region"
