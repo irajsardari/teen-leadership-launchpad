@@ -67,32 +67,20 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				tma: {
-					// OFFICIAL TMA Brand Colors - EXACT COMPLIANCE
-					'primary-dark': 'hsl(var(--tma-primary-dark))',      // #0A1F44 - Primary Dark Blue
-					'primary-bright': 'hsl(var(--tma-primary-bright))',  // #0056B3 - Primary Bright Blue
-					'accent-green': 'hsl(var(--tma-accent-green))',      // #009B77 - Accent Green
-					'accent-orange': 'hsl(var(--tma-accent-orange))',    // #F25C05 - Accent Orange
-					'neutral-white': 'hsl(var(--tma-neutral-white))',    // #FFFFFF - Neutral White
-					'neutral-light': 'hsl(var(--tma-neutral-light))',    // #F5F7FA - Neutral Light Gray
-					'neutral-dark': 'hsl(var(--tma-neutral-dark))',      // #333333 - Neutral Dark Gray
-					
-					// Legacy aliases updated to new brand colors
-					'deep-blue': 'hsl(var(--tma-primary-dark))',
-					'bright-blue': 'hsl(var(--tma-primary-bright))',
-					'emerald-green': 'hsl(var(--tma-accent-green))',
-					'bright-orange': 'hsl(var(--tma-accent-orange))',
-					'light-grey': 'hsl(var(--tma-neutral-light))',
-					'charcoal-grey': 'hsl(var(--tma-neutral-dark))',
+					// TMA OFFICIAL Brand Colors - EXACT HEX COMPLIANCE
+					'blue': 'hsl(var(--tma-blue))',              // #003366 - TMA Blue
+					'orange': 'hsl(var(--tma-orange))',          // #FF6600 - TMA Orange  
+					'green': 'hsl(var(--tma-green))',            // #008060 - TMA Green
+					'neutral-gray': 'hsl(var(--tma-neutral-gray))', // #F5F5F5 - TMA Neutral Gray
+					'dark-gray': 'hsl(var(--tma-dark-gray))',    // #333333 - TMA Dark Gray
+					'white': 'hsl(var(--tma-white))',            // #FFFFFF - White
 					
 					// Design system aliases
-					'navy': 'hsl(var(--tma-primary-dark))',
-					'success': 'hsl(var(--tma-accent-green))',
-					'primary': 'hsl(var(--tma-primary-bright))',
-					
-					// Backward compatibility
-					blue: 'hsl(var(--tma-primary-bright))',
-					gray: 'hsl(var(--tma-neutral-dark))',
-					light: 'hsl(var(--tma-neutral-light))'
+					'primary': 'hsl(var(--tma-blue))',           // TMA Blue
+					'secondary': 'hsl(var(--tma-orange))',       // TMA Orange
+					'accent': 'hsl(var(--tma-green))',           // TMA Green
+					'background': 'hsl(var(--tma-neutral-gray))', // TMA Neutral Gray
+					'text': 'hsl(var(--tma-dark-gray))',         // TMA Dark Gray
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
