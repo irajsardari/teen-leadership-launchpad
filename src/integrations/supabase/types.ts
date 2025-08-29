@@ -1192,7 +1192,126 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      admin_secure_challengers: {
+        Row: {
+          access_level: string | null
+          accessed_at: string | null
+          accessor_role: string | null
+          age: number | null
+          city: string | null
+          confidential_info: string | null
+          country: string | null
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          gender: string | null
+          guardian_email: string | null
+          id: number | null
+          level: string | null
+          phone_number: string | null
+          referral_source: string | null
+          user_id: string | null
+        }
+        Insert: {
+          access_level?: never
+          accessed_at?: never
+          accessor_role?: never
+          age?: number | null
+          city?: string | null
+          confidential_info?: string | null
+          country?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          gender?: string | null
+          guardian_email?: string | null
+          id?: number | null
+          level?: string | null
+          phone_number?: string | null
+          referral_source?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          access_level?: never
+          accessed_at?: never
+          accessor_role?: never
+          age?: number | null
+          city?: string | null
+          confidential_info?: string | null
+          country?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          gender?: string | null
+          guardian_email?: string | null
+          id?: number | null
+          level?: string | null
+          phone_number?: string | null
+          referral_source?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      admin_secure_teacher_applications: {
+        Row: {
+          access_level: string | null
+          accessed_at: string | null
+          accessor_role: string | null
+          confidential_info: string | null
+          cover_letter: string | null
+          created_at: string | null
+          cv_url: string | null
+          education: string | null
+          email: string | null
+          experience_years: number | null
+          full_name: string | null
+          id: string | null
+          phone_number: string | null
+          specialization: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          access_level?: never
+          accessed_at?: never
+          accessor_role?: never
+          confidential_info?: string | null
+          cover_letter?: string | null
+          created_at?: string | null
+          cv_url?: string | null
+          education?: string | null
+          email?: string | null
+          experience_years?: number | null
+          full_name?: string | null
+          id?: string | null
+          phone_number?: string | null
+          specialization?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          access_level?: never
+          accessed_at?: never
+          accessor_role?: never
+          confidential_info?: string | null
+          cover_letter?: string | null
+          created_at?: string | null
+          cv_url?: string | null
+          education?: string | null
+          email?: string | null
+          experience_years?: number | null
+          full_name?: string | null
+          id?: string | null
+          phone_number?: string | null
+          specialization?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       block_unauthorized_access: {
