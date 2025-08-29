@@ -229,16 +229,16 @@ const HomePage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12">
             {levels.map((level, index) => (
               <div key={index} className="group">
-                <div className="card-3d border-2 border-white/20 flex flex-col h-full rounded-2xl sm:rounded-3xl overflow-hidden">
-                  <CardHeader className="flex-1 p-4 sm:p-6 lg:p-8">
+                <div className="level-card flex flex-col h-full overflow-hidden">
+                  <div className="flex-1 p-4 sm:p-6 lg:p-8">
                     <div className="flex flex-col items-center space-y-3 sm:space-y-4 text-center">
-                      <div className="bg-tma-coral text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base lg:text-lg font-medium mb-2">
-                        {level.title.match(/\(Ages (\d+-\d+)\)/)?.[1] || '10-18'} years
+                      <div className="age-badge">
+                        {level.title.match(/\(Ages (\d+-\d+)\)/)?.[1]}
                       </div>
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2">{level.title.split(' (')[0]}</h3>
-                      <p className="text-white/80 text-sm sm:text-base lg:text-lg leading-relaxed">{level.description}</p>
+                      <h3 className="text-lg sm:text-xl lg:text-2xl">{level.title.split(' (')[0]}</h3>
+                      <p className="text-sm sm:text-base lg:text-lg leading-relaxed">{level.description}</p>
                     </div>
-                  </CardHeader>
+                  </div>
                 </div>
               </div>
             ))}
@@ -247,8 +247,7 @@ const HomePage = () => {
           <div className="text-center px-4 sm:px-0">
             <Button 
               size="lg" 
-              className="btn-modern-accent text-white font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none"
-              style={{ boxShadow: 'var(--shadow-button-3d)' }}
+              className="bg-tma-primary-blue hover:bg-tma-primary-blue/90 text-white font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px]"
               asChild
             >
               <Link to="/curriculum" className="flex items-center justify-center">
@@ -317,8 +316,7 @@ const HomePage = () => {
           <div className="text-center px-4 sm:px-0">
             <Button 
               size="lg" 
-              className="btn-modern-accent text-white font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none"
-              style={{ boxShadow: 'var(--shadow-button-3d)' }}
+              className="bg-tma-primary-blue hover:bg-tma-primary-blue/90 text-white font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px]"
             >
               <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">📖</span>
               View Full Curriculum PDF

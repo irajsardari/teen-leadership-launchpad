@@ -67,25 +67,28 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				tma: {
-					'deep-blue': 'hsl(var(--tma-deep-blue))',
-					'bright-orange': 'hsl(var(--tma-bright-orange))',
-					'emerald-green': 'hsl(var(--tma-emerald-green))',
-					'golden-yellow': 'hsl(var(--tma-golden-yellow))',
-					'light-grey': 'hsl(var(--tma-light-grey))',
-					'charcoal-grey': 'hsl(var(--tma-charcoal-grey))',
-					'sky-blue': 'hsl(var(--tma-sky-blue))',
-					'crimson-red': 'hsl(var(--tma-crimson-red))',
-					// Extended colors
-					'coral': 'hsl(var(--tma-coral))',
-					'gold': 'hsl(var(--tma-gold))',
-					'beige': 'hsl(var(--tma-beige))',
-					'navy': 'hsl(var(--tma-navy))',
-					'teal': 'hsl(var(--tma-teal))',
-					// Legacy aliases
-					blue: 'hsl(var(--tma-deep-blue))',
-					'blue-light': 'hsl(var(--tma-sky-blue))',
-					gray: 'hsl(var(--tma-charcoal-grey))',
-					light: 'hsl(var(--tma-light-grey))'
+					// OFFICIAL TMA Brand Colors - STRICT COMPLIANCE
+					'primary-blue': 'hsl(var(--tma-primary-blue))',     // #0D47A1
+					'secondary-orange': 'hsl(var(--tma-secondary-orange))', // #FF6F00
+					'accent-green': 'hsl(var(--tma-accent-green))',     // #2E7D32
+					'navy-text': 'hsl(var(--tma-navy-text))',           // #26415A
+					'neutral-bg': 'hsl(var(--tma-neutral-bg))',         // #F4F7FB
+					
+					// Legacy aliases for backward compatibility
+					'deep-blue': 'hsl(var(--tma-primary-blue))',
+					'bright-orange': 'hsl(var(--tma-secondary-orange))',
+					'emerald-green': 'hsl(var(--tma-accent-green))',
+					'light-grey': 'hsl(var(--tma-neutral-bg))',
+					'charcoal-grey': 'hsl(var(--tma-navy-text))',
+					
+					// Extended colors using official palette
+					'navy': 'hsl(var(--tma-navy-text))',
+					'success': 'hsl(var(--tma-accent-green))',
+					
+					// Backward compatibility aliases
+					blue: 'hsl(var(--tma-primary-blue))',
+					gray: 'hsl(var(--tma-navy-text))',
+					light: 'hsl(var(--tma-neutral-bg))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

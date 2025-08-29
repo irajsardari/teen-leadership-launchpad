@@ -25,27 +25,29 @@
     --ring: 220 64% 29%;
     --radius: 0.5rem;
     
-    /* TMA Color System */
-    --tma-deep-blue: 200 100% 18%;
-    --tma-bright-orange: 28 88% 56%;
-    --tma-emerald-green: 158 64% 52%;
-    --tma-golden-yellow: 45 93% 58%;
-    --tma-light-grey: 0 0% 96%;
-    --tma-charcoal-grey: 0 0% 20%;
-    --tma-sky-blue: 200 100% 70%;
-    --tma-crimson-red: 348 83% 47%;
+    /* TMA OFFICIAL Brand Colors - STRICT COMPLIANCE */
+    --tma-primary-blue: 217 71% 32%;     /* #0D47A1 */
+    --tma-secondary-orange: 24 100% 50%; /* #FF6F00 */
+    --tma-accent-green: 134 66% 27%;     /* #2E7D32 */
+    --tma-navy-text: 209 44% 25%;        /* #26415A */
+    --tma-neutral-bg: 214 100% 97%;      /* #F4F7FB */
     
-    /* Extended TMA Colors */
-    --tma-coral: 14 100% 67%;
-    --tma-gold: 45 93% 58%;
-    --tma-beige: 39 77% 83%;
-    --tma-navy: 220 64% 29%;
-    --tma-teal: 158 64% 52%;
+    /* Legacy aliases for backward compatibility */
+    --tma-deep-blue: 217 71% 32%;
+    --tma-bright-orange: 24 100% 50%;
+    --tma-emerald-green: 134 66% 27%;
+    --tma-light-grey: 214 100% 97%;
+    --tma-charcoal-grey: 209 44% 25%;
     
-    /* Design System Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--tma-deep-blue)), hsl(var(--tma-bright-orange)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--tma-coral)), hsl(var(--tma-gold)));
-    --gradient-teal: linear-gradient(135deg, hsl(var(--tma-emerald-green)), hsl(var(--tma-deep-blue)));
+    /* Extended colors using official palette */
+    --tma-navy: 209 44% 25%;
+    --tma-success: 134 66% 27%;
+    --tma-primary: 217 71% 32%;
+    
+    /* Design System Gradients - Official Brand Colors Only */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--tma-primary-blue)), hsl(var(--tma-secondary-orange)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--tma-accent-green)), hsl(var(--tma-primary-blue)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--tma-navy-text)), hsl(var(--tma-primary-blue)));
     
     /* CTA Color Variables for Button Variants */
     --cta-blue: var(--tma-deep-blue);
@@ -109,12 +111,13 @@
     scroll-behavior: smooth;
   }
   
-  /* Mobile body scroll lock */
+  /* Mobile body scroll lock - Enhanced */
   body.nav-open {
     overflow: hidden;
     touch-action: none;
     position: fixed;
     width: 100%;
+    height: 100%;
   }
   
   /* Anchor scroll offset for fixed header */
@@ -142,16 +145,17 @@
 }
 
 @layer components {
-  /* Mobile navigation backdrop */
+  /* Mobile navigation backdrop - Full coverage */
   .mobile-nav-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
   
-  /* Mobile navigation panel */
+  /* Mobile navigation panel - Full screen with proper stacking */
   .mobile-nav-panel {
     position: fixed;
     top: 0;
@@ -159,16 +163,30 @@
     bottom: 0;
     width: 100%;
     max-width: 100%;
-    background: white;
+    background: hsl(var(--tma-neutral-bg));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     z-index: 1001;
     transform: translateX(100%);
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overscroll-behavior: contain;
   }
   
   .mobile-nav-panel.open {
     transform: translateX(0);
+  }
+  
+  /* Prevent content interaction when menu is open */
+  .mobile-nav-panel .cta-buttons {
+    position: static !important;
+    margin-top: 1.5rem;
+    display: block;
+  }
+  
+  .mobile-nav-panel .cta-buttons > * {
+    width: 100%;
+    display: block;
+    margin-bottom: 0.75rem;
   }
   
   /* Enhanced button styles */
@@ -225,9 +243,51 @@
     background-clip: text;
   }
   
-  /* Section backgrounds */
+  /* Section backgrounds - Official brand colors */
   .section-gradient {
-    background: linear-gradient(135deg, hsl(var(--tma-light-grey)) 0%, white 50%, hsl(var(--tma-beige)) 100%);
+    background: linear-gradient(135deg, hsl(var(--tma-neutral-bg)) 0%, white 50%, hsl(var(--tma-neutral-bg)) 100%);
+  }
+  
+  /* Hero text - Strong contrast */
+  .hero-title {
+    color: hsl(var(--tma-navy-text));
+    font-weight: 700;
+  }
+  
+  .hero-subtitle {
+    color: hsl(var(--tma-navy-text));
+    opacity: 1;
+    font-weight: 500;
+  }
+  
+  /* Level card corrections */
+  .level-card {
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .level-card .age-badge {
+    background: hsl(var(--tma-secondary-orange));
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+  
+  .level-card h3 {
+    color: white;
+    font-weight: 700;
+    margin: 1rem 0 0.5rem 0;
+  }
+  
+  .level-card p {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
   }
   
   /* Loading animations */

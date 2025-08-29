@@ -82,10 +82,9 @@ const Header = () => {
             
             <div className="flex items-center space-x-4 ml-8 pl-6 border-l border-gray-200">
               <Button 
-                className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg hover:shadow-[#006D6C]/25 rounded-lg px-5 py-2" 
+                className="bg-tma-accent-green hover:bg-tma-accent-green/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg hover:shadow-tma-accent-green/25 rounded-lg px-5 py-2 min-h-[44px]" 
                 size="sm" 
-                asChild
-              >
+                asChild>
                 <Link to="/learning-portal">
                   Learning Portal
                 </Link>
@@ -149,22 +148,23 @@ const Header = () => {
             {!isLoading && !user && (
               <Button 
                 variant="outline"
-                className="border-[#F28C28] text-[#F28C28] hover:bg-[#F28C28] hover:text-white font-inter font-medium transition-all duration-300 rounded-lg ml-3" 
+                className="border-tma-secondary-orange text-tma-secondary-orange hover:bg-tma-secondary-orange hover:text-white font-inter font-medium transition-all duration-300 rounded-lg ml-3 min-h-[44px]" 
                 size="sm" 
-                onClick={() => setIsAuthModalOpen(true)}
-              >
+                onClick={() => setIsAuthModalOpen(true)}>
                 Sign In
               </Button>
             )}
           </nav>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="hover:bg-[#008B8B]/5 transition-colors duration-200 h-10 w-10 min-w-[2.5rem]"
+              className="hover:bg-tma-neutral-bg transition-colors duration-200 h-10 w-10 min-w-[44px] min-h-[44px] text-tma-navy-text"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -173,25 +173,25 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <>
-          {/* Mobile menu backdrop */}
-          {isMenuOpen && (
-            <div 
-              className="mobile-nav-backdrop md:hidden"
-              onClick={() => setIsMenuOpen(false)}
-              aria-hidden="true"
-            />
-          )}
+            {/* Mobile menu backdrop */}
+            {isMenuOpen && (
+              <div 
+                className="mobile-nav-backdrop lg:hidden"
+                onClick={() => setIsMenuOpen(false)}
+                aria-hidden="true"
+              />
+            )}
           
           {/* Mobile menu panel */}
-          <div className={`mobile-nav-panel md:hidden ${isMenuOpen ? 'open' : ''}`}>
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <div className={`mobile-nav-panel lg:hidden ${isMenuOpen ? 'open' : ''}`}>
+            <div className="flex items-center justify-between p-4 border-b border-tma-neutral-bg">
               <div className="flex items-center space-x-2">
                 <img 
                   src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
                   alt="TMA Academy Logo" 
                   className="w-8 h-8 object-contain"
                 />
-                <span className="text-lg font-semibold text-tma-deep-blue font-inter">
+                <span className="text-lg font-semibold text-tma-navy-text font-inter">
                   TMA Academy
                 </span>
               </div>
@@ -199,7 +199,7 @@ const Header = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsMenuOpen(false)}
-                className="h-10 w-10"
+                className="h-10 w-10 min-h-[44px] min-w-[44px] hover:bg-tma-neutral-bg text-tma-navy-text"
                 aria-label="Close menu"
               >
                 <X className="h-6 w-6" />
@@ -214,8 +214,8 @@ const Header = () => {
                       item.href === "/insights" ? "/insights#voices-top" : item.href}
                   className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 font-inter min-h-[44px] flex items-center ${
                     isActive(item.href)
-                      ? "text-tma-emerald-green bg-tma-emerald-green/10"
-                      : "text-tma-deep-blue hover:text-tma-emerald-green hover:bg-tma-emerald-green/5"
+                      ? "text-white bg-tma-primary-blue"
+                      : "text-tma-navy-text hover:text-tma-primary-blue hover:bg-tma-neutral-bg"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -224,9 +224,9 @@ const Header = () => {
               ))}
               
               {/* Mobile CTA buttons - non-sticky */}
-              <div className="px-1 py-2 space-y-3 pt-4 border-t border-gray-200 mt-3">
+              <div className="cta-buttons px-1 py-2 space-y-3 pt-4 border-t border-tma-neutral-bg mt-3">
                 <Button 
-                  className="bg-tma-emerald-green hover:bg-tma-emerald-green/90 text-white font-inter w-full transition-all duration-300 min-h-[44px] display-block static"
+                  className="bg-tma-accent-green hover:bg-tma-accent-green/90 text-white font-inter w-full transition-all duration-300 min-h-[44px]"
                   size="sm" 
                   asChild
                 >
@@ -240,13 +240,13 @@ const Header = () => {
                   <>
                     {user ? (
                       <div className="space-y-2">
-                        <div className="text-sm text-tma-deep-blue px-3 py-1 font-medium">
+                        <div className="text-sm text-tma-navy-text px-3 py-1 font-medium">
                           {user.user_metadata?.full_name || user.email}
                         </div>
                         <Button 
                           variant="outline" 
                           size="sm" 
-                          className="w-full transition-all duration-300 min-h-[44px] display-block"
+                          className="w-full transition-all duration-300 min-h-[44px] border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
                           onClick={() => {
                             signOut();
                             setIsMenuOpen(false);
@@ -258,7 +258,7 @@ const Header = () => {
                       </div>
                     ) : (
                       <Button 
-                        className="bg-gradient-to-r from-tma-coral to-tma-coral/90 hover:from-tma-coral/90 hover:to-tma-coral/80 text-white font-inter w-full shadow-lg transition-all duration-300 min-h-[44px] display-block static"
+                        className="bg-tma-secondary-orange hover:bg-tma-secondary-orange/90 text-white font-inter w-full shadow-lg transition-all duration-300 min-h-[44px]"
                         size="sm" 
                         onClick={() => {
                           setIsAuthModalOpen(true);
