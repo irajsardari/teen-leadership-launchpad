@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { RateLimiter, AuthSecurity, InputSecurity } from '@/utils/security';
-import { PasswordStrengthIndicator } from './PasswordStrengthIndicator';
+import { SecurePasswordInput } from './SecurePasswordInput';
 
 const signUpSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters'),
@@ -236,21 +236,19 @@ export const SecureAuthForm: React.FC<SecureAuthFormProps> = ({
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input 
-                      type="password"
-                      placeholder={isSignUp ? "Create a strong password" : "Enter your password"}
-                      {...field}
-                      disabled={isLoading}
-                      autoComplete={isSignUp ? "new-password" : "current-password"}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        setPassword(e.target.value);
-                      }}
-                    />
-                  </FormControl>
-                  {isSignUp && <PasswordStrengthIndicator password={password} />}
+                  <SecurePasswordInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    onValidationChange={(isValid) => {
+                      // Store validation state if needed
+                      setPassword(field.value);
+                    }}
+                    label="Password"
+                    placeholder={isSignUp ? "Create a strong password" : "Enter your password"}
+                    required
+                    showStrengthMeter={isSignUp}
+                    checkBreach={isSignUp}
+                  />
                   <FormMessage />
                 </FormItem>
               )}
