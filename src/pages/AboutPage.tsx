@@ -36,13 +36,13 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-tma-blue to-tma-teal">
+      <section className="py-20 bg-tma-teal">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 font-inter">
               About Us – TMA: Teenagers Management Academy
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 mb-8 font-inter">
+            <p className="text-xl md:text-2xl text-white/90 mb-8 font-inter">
               TMA — Teenagers Management Academy<br />
               Future Ready Leaders<br /><br />
               The world's first comprehensive leadership academy for pre-teens and teenagers aged 10 to 18

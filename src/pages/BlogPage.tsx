@@ -42,14 +42,13 @@ const BlogPage = () => {
         {canonical && <link rel="canonical" href={canonical} />}
       </Helmet>
       {/* Hero Section */}
-      <section id="voices-top" className="relative py-20 lg:py-32 bg-gradient-to-r from-tma-blue to-tma-teal">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <section id="voices-top" className="relative py-20 lg:py-32 bg-tma-teal">
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight">
               {pageTitle}
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-blue-100/90 max-w-3xl mx-auto font-inter font-medium leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white/90 max-w-3xl mx-auto font-inter font-medium leading-relaxed">
               Insights, perspectives, and thought leadership from the world's first teenage leadership academy
             </p>
           </div>
