@@ -216,69 +216,82 @@ const ElevenLabsPlayer = ({ content, slug, className = "" }: ElevenLabsPlayerPro
   }, [volume]);
 
   return (
-    <div className={`bg-accent/50 rounded-lg p-4 space-y-4 ${className}`}>
+    <div className={`bg-gradient-to-br from-tma-primary/5 to-tma-secondary/5 border border-tma-primary/20 rounded-xl p-6 space-y-5 ${className}`}>
       <audio ref={audioRef} preload="none" />
       
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <Button
             onClick={togglePlayback}
             disabled={isLoading}
-            variant="outline"
+            className="h-12 w-12 rounded-full bg-gradient-to-r from-tma-primary to-tma-secondary hover:from-tma-primary/90 hover:to-tma-secondary/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             size="sm"
-            className="flex items-center gap-2"
           >
             {isLoading ? (
-              <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : isPlaying ? (
-              <Pause className="w-4 h-4" />
+              <Pause className="w-5 h-5" />
             ) : (
-              <Play className="w-4 h-4" />
+              <Play className="w-5 h-5 ml-0.5" />
             )}
-            {isLoading ? 'Generating...' : isPlaying ? 'Pause' : 'Listen'}
           </Button>
+          
+          <div className="flex flex-col">
+            <span className="text-sm font-medium text-tma-text-primary">
+              {isLoading ? 'Generating Audio...' : isPlaying ? 'Now Playing' : 'Ready to Listen'}
+            </span>
+            <span className="text-xs text-tma-text-secondary">
+              Article Audio
+            </span>
+          </div>
           
           <Button
             onClick={resetAudio}
             variant="ghost"
             size="sm"
             disabled={!audioRef.current?.src}
+            className="ml-2 text-tma-text-secondary hover:text-tma-primary hover:bg-tma-primary/10 rounded-lg"
           >
             <RotateCcw className="w-4 h-4" />
           </Button>
         </div>
 
-        <div className="text-sm text-muted-foreground">
+        <div className="text-sm font-medium text-tma-text-primary bg-tma-background-subtle px-3 py-1 rounded-lg">
           {formatTime(currentTime)} / {formatTime(duration)}
         </div>
       </div>
 
       {duration > 0 && (
-        <div className="space-y-3">
-          <Slider
-            value={[duration > 0 ? (currentTime / duration) * 100 : 0]}
-            onValueChange={handleSeek}
-            max={100}
-            step={1}
-            className="w-full"
-          />
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs text-tma-text-secondary">
+              <span>Progress</span>
+              <span>{Math.round((currentTime / duration) * 100)}%</span>
+            </div>
+            <Slider
+              value={[duration > 0 ? (currentTime / duration) * 100 : 0]}
+              onValueChange={handleSeek}
+              max={100}
+              step={1}
+              className="w-full [&_.slider-track]:bg-tma-primary/20 [&_.slider-range]:bg-gradient-to-r [&_.slider-range]:from-tma-primary [&_.slider-range]:to-tma-secondary [&_.slider-thumb]:bg-white [&_.slider-thumb]:border-2 [&_.slider-thumb]:border-tma-primary [&_.slider-thumb]:shadow-lg"
+            />
+          </div>
           
-          <div className="flex items-center gap-2">
-            <Volume2 className="w-4 h-4" />
+          <div className="flex items-center gap-3 pt-2 border-t border-tma-primary/10">
+            <Volume2 className="w-4 h-4 text-tma-text-secondary" />
             <Slider
               value={[volume * 100]}
               onValueChange={handleVolumeChange}
               max={100}
               step={1}
-              className="w-20"
+              className="w-24 [&_.slider-track]:bg-tma-primary/20 [&_.slider-range]:bg-tma-primary [&_.slider-thumb]:bg-white [&_.slider-thumb]:border-2 [&_.slider-thumb]:border-tma-primary"
             />
+            <span className="text-xs text-tma-text-secondary min-w-[2rem]">
+              {Math.round(volume * 100)}%
+            </span>
           </div>
         </div>
       )}
-
-      <p className="text-xs text-muted-foreground">
-        🎧 High-quality AI voice powered by ElevenLabs
-      </p>
     </div>
   );
 };
