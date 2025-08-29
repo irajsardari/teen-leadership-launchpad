@@ -56,17 +56,4 @@
   body {
     @apply bg-background text-foreground;
   }
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
-@layer components {
-  .btn-modern-primary {
-    @apply relative bg-primary text-primary-foreground px-4 py-2 rounded-md;
-  }
-  
-  .btn-modern-accent {
-    @apply relative bg-accent text-accent-foreground px-4 py-2 rounded-md;
-  }
 }
