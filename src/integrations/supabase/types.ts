@@ -1393,6 +1393,10 @@ export type Database = {
         Args: { p_access_reason?: string; p_record_id?: string }
         Returns: boolean
       }
+      verify_confidential_access_maximum_security: {
+        Args: { p_access_reason?: string; p_record_id?: string }
+        Returns: boolean
+      }
     }
     Enums: {
       approval_status: "pending" | "approved" | "rejected"
