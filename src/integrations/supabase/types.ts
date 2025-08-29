@@ -1254,6 +1254,44 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: Database["public"]["Enums"]["user_role"]
       }
+      get_challenger_secure: {
+        Args: { p_challenger_id: number }
+        Returns: {
+          age: number
+          city: string
+          confidential_info: string
+          country: string
+          created_at: string
+          email: string
+          full_name: string
+          gender: string
+          guardian_email: string
+          id: number
+          level: string
+          phone_number: string
+          referral_source: string
+          user_id: string
+        }[]
+      }
+      get_challengers_secure: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          age: number
+          city: string
+          confidential_info: string
+          country: string
+          created_at: string
+          email: string
+          full_name: string
+          gender: string
+          guardian_email: string
+          id: number
+          level: string
+          phone_number: string
+          referral_source: string
+          user_id: string
+        }[]
+      }
       get_confidential_record_secure: {
         Args: { p_record_id: string }
         Returns: {
@@ -1403,6 +1441,10 @@ export type Database = {
       }
       verify_confidential_access_maximum_security: {
         Args: { p_access_reason?: string; p_record_id?: string }
+        Returns: boolean
+      }
+      verify_student_data_access_rate_limit: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
     }
