@@ -185,11 +185,11 @@ const HomePage = () => {
       </section>
 
       {/* What Is TMA Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section id="what-is-tma" className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-tma-beige/30 to-background"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-5xl mx-auto text-center">
-            <h2 className="text-5xl md:text-6xl font-black text-gradient-primary mb-16 font-inter">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gradient-primary mb-8 sm:mb-12 lg:mb-16 font-inter leading-tight">
               What Is TMA?
             </h2>
             <div className="glass-card-modern rounded-3xl p-12 lg:p-16 space-y-10">
@@ -212,12 +212,12 @@ const HomePage = () => {
       </section>
 
       {/* Our Structure Section - Simplified Teaser */}
-      <section className="py-20 bg-gradient-to-b from-background to-background/50">
+      <section id="challenger-journey" className="py-20 bg-gradient-to-b from-background to-background/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 font-inter">
+            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-6 font-inter">
               TMA Challenger Journey
-            </h2>
+            </h1>
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
               <h3 className="text-xl font-semibold text-primary mb-2">Total: 8 Years | Ages 10–18 | 24 Terms</h3>
               <p className="text-foreground/80">
@@ -288,7 +288,7 @@ const HomePage = () => {
       </section>
 
       {/* What Students Learn */}
-      <section className="py-20">
+      <section id="curriculum" className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 font-inter">

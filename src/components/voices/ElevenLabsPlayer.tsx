@@ -471,34 +471,50 @@ const ElevenLabsPlayer = ({ content, slug, className = "" }: ElevenLabsPlayerPro
         </div>
       </div>
 
-      {/* Honest Loading States */}
+      {/* Enhanced Loading States for Better UX */}
       {isLoading && (
-        <div className="space-y-3" aria-live="polite">
-          <div className="w-full bg-tma-deep-blue/10 rounded-full h-2 overflow-hidden">
-            <div className="h-full bg-tma-bright-orange animate-pulse relative">
+        <div className="space-y-4" aria-live="polite">
+          <div className="w-full bg-tma-deep-blue/10 rounded-full h-3 overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-tma-bright-orange to-tma-deep-blue animate-pulse relative">
               <div 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                style={{
-                  animation: 'slide 1.2s infinite',
-                  animationName: 'slide-progress'
-                }}
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-slide-progress"
               />
             </div>
           </div>
-          <div className="text-center space-y-1">
-            <p className="text-sm text-tma-deep-blue font-medium">
-              {getStateMessage()}
+          <div className="text-center space-y-2">
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-2 h-2 bg-tma-bright-orange rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+              <div className="w-2 h-2 bg-tma-bright-orange rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+              <div className="w-2 h-2 bg-tma-bright-orange rounded-full animate-bounce"></div>
+            </div>
+            <p className="text-base font-semibold text-tma-deep-blue">
+              Preparing studio-quality audio (~30–45s)
             </p>
-            {loadingState === 'preparing' && (
-              <p className="text-xs text-tma-charcoal-grey/70">
-                First load prepares the voice; future plays are instant.
-              </p>
-            )}
+            <p className="text-sm text-tma-charcoal-grey/80">
+              {loadingState === 'queued' && "Queued for processing..."}
+              {loadingState === 'preparing' && "Generating high-quality voice. This takes a moment first time."}
+              {loadingState === 'finalizing' && "Almost ready..."}
+            </p>
             {showTimeout && (
-              <p className="text-xs text-tma-bright-orange">
-                Still working—this can take ~10–20s the first time.
-              </p>
+              <div className="bg-tma-bright-orange/10 border border-tma-bright-orange/30 rounded-lg p-3 mt-3">
+                <p className="text-sm text-tma-bright-orange font-medium">
+                  ⏱️ Still working—quality audio takes 30–45 seconds to generate
+                </p>
+                <p className="text-xs text-tma-charcoal-grey/80 mt-1">
+                  Future plays will be instant once cached
+                </p>
+              </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Ready State Indicator */}
+      {isReady && !isLoading && (
+        <div className="text-center py-2">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-tma-emerald-green">
+            <div className="w-2 h-2 bg-tma-emerald-green rounded-full animate-pulse"></div>
+            {isCached ? "Audio ready (cached)" : "Audio ready"}
           </div>
         </div>
       )}
