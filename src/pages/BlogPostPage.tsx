@@ -26,6 +26,7 @@ import ReactMarkdown from "react-markdown";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { BlogFeedback } from "@/components/BlogFeedback";
 import { ListenPlayer } from "@/components/voices/ListenPlayer";
+import ElevenLabsPlayer from "@/components/voices/ElevenLabsPlayer";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -249,7 +250,7 @@ const BlogPostPage = () => {
                   {post.title}
                 </h1>
 
-                {/* Listen Player - Only for Voices articles */}
+                {/* ElevenLabs Voice Player - Only for Voices articles */}
                 {(() => {
                   console.log('BlogPostPage Debug:', { 
                     isVoices, 
@@ -258,7 +259,7 @@ const BlogPostPage = () => {
                     hasContent: !!post.content 
                   });
                   return isVoices && (
-                    <ListenPlayer 
+                    <ElevenLabsPlayer 
                       content={post.content}
                       slug={post.slug}
                       className="mt-6"
