@@ -60,9 +60,15 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Convert audio to base64 for transmission
     const audioArrayBuffer = await response.arrayBuffer();
-    const audioBase64 = btoa(
-      String.fromCharCode(...new Uint8Array(audioArrayBuffer))
-    );
+    const uint8Array = new Uint8Array(audioArrayBuffer);
+    
+    // Convert to base64 in chunks to avoid stack overflow
+    let audioBase64 = '';
+    const chunkSize = 0x8000; // 32KB chunks
+    for (let i = 0; i < uint8Array.length; i += chunkSize) {
+      const chunk = uint8Array.subarray(i, i + chunkSize);
+      audioBase64 += btoa(String.fromCharCode.apply(null, Array.from(chunk)));
+    }
 
     console.log('Successfully generated audio, size:', audioArrayBuffer.byteLength);
 
