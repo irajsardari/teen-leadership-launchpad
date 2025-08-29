@@ -117,23 +117,32 @@
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
+
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
+
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
+
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
+
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
+
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
+
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -200,88 +209,6 @@
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* TMA Voice Player Styles */
-  .voice-status {
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: hsl(var(--foreground));
-  }
-
-  /* Indeterminate Progress Bar */
-  .progress {
-    height: 8px;
-    border-radius: 999px;
-    background: hsl(var(--muted));
-    overflow: hidden;
-    position: relative;
-  }
-
-  .progress.indeterminate::after {
-    content: "";
-    position: absolute;
-    left: -40%;
-    top: 0;
-    height: 100%;
-    width: 40%;
-    background: linear-gradient(90deg, transparent, hsl(var(--tma-deep-blue)), transparent);
-    animation: slide-progress 1.2s infinite;
-  }
-
-  /* TMA Play Button with 3D Effect */
-  .tma-play {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.9rem 1.2rem;
-    border-radius: 999px;
-    border: none;
-    background: linear-gradient(180deg, hsl(var(--tma-deep-blue)), hsl(var(--tma-deep-blue) / 0.8));
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 6px 14px hsl(var(--tma-deep-blue) / 0.18), inset 0 1px 0 hsl(0 0% 100% / 0.25);
-    position: relative;
-    transition: transform 0.06s ease, box-shadow 0.12s ease, filter 0.12s ease;
-  }
-
-  .tma-play::before {
-    content: "";
-    position: absolute;
-    inset: 4px;
-    border-radius: 999px;
-    border: 2px solid hsl(var(--tma-bright-orange));
-    pointer-events: none;
-  }
-
-  .tma-play:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    filter: grayscale(0.1);
-  }
-
-  .tma-play:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 10px 18px hsl(var(--tma-deep-blue) / 0.22), inset 0 1px 0 hsl(0 0% 100% / 0.25);
-  }
-
-  .tma-play:active:not(:disabled) {
-    transform: translateY(0);
-  }
-
-  .tma-play:focus-visible {
-    outline: 3px solid hsl(var(--tma-bright-orange));
-    outline-offset: 4px;
-  }
-
-  .tma-play .icon {
-    width: 18px;
-    height: 18px;
-    fill: white;
-  }
-
-  .tma-play .label {
-    font-weight: 700;
   }
 
   /* Modern Button Styles */
