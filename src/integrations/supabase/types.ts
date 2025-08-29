@@ -1268,6 +1268,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      secure_confidential_access_check: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       secure_form_submission: {
         Args: {
           p_form_type: string
