@@ -483,6 +483,33 @@ export type Database = {
           },
         ]
       }
+      parent_student_links: {
+        Row: {
+          created_at: string | null
+          id: string
+          parent_user_id: string
+          relationship: string
+          student_user_id: string
+          verified: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          parent_user_id: string
+          relationship: string
+          student_user_id: string
+          verified?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          parent_user_id?: string
+          relationship?: string
+          student_user_id?: string
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
       parental_consents: {
         Row: {
           child_user_id: string
@@ -861,6 +888,45 @@ export type Database = {
         }
         Relationships: []
       }
+      security_audit_trail: {
+        Row: {
+          created_at: string | null
+          id: string
+          ip_address: unknown | null
+          new_values: Json | null
+          old_values: Json | null
+          operation: string
+          record_id: string | null
+          table_name: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          new_values?: Json | null
+          old_values?: Json | null
+          operation: string
+          record_id?: string | null
+          table_name: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          new_values?: Json | null
+          old_values?: Json | null
+          operation?: string
+          record_id?: string | null
+          table_name?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       security_rate_limits: {
         Row: {
           action: string
@@ -1156,6 +1222,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      cleanup_sensitive_data: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       confidential_access_control: {
         Args: Record<PropertyKey, never>
         Returns: boolean
@@ -1336,7 +1406,13 @@ export type Database = {
       attendance_status: "present" | "absent" | "late" | "excused"
       resource_visibility: "private" | "shared" | "global" | "org"
       safeguarding_role: "safeguarding_officer" | "safeguarding_manager"
-      user_role: "admin" | "mentor" | "challenger"
+      user_role:
+        | "admin"
+        | "mentor"
+        | "challenger"
+        | "parent"
+        | "teacher"
+        | "student"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1468,7 +1544,14 @@ export const Constants = {
       attendance_status: ["present", "absent", "late", "excused"],
       resource_visibility: ["private", "shared", "global", "org"],
       safeguarding_role: ["safeguarding_officer", "safeguarding_manager"],
-      user_role: ["admin", "mentor", "challenger"],
+      user_role: [
+        "admin",
+        "mentor",
+        "challenger",
+        "parent",
+        "teacher",
+        "student",
+      ],
     },
   },
 } as const
