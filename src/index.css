@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* TMA Academy Design System - Official Brand Colors */
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -25,8 +23,6 @@
     --border: 0 0% 89%;
     --input: 0 0% 89%;
     --ring: 220 64% 29%;
-
-    /* TMA Official Brand Colors */
     --tma-deep-blue: 220 64% 29%;
     --tma-bright-orange: 28 88% 56%;
     --tma-emerald-green: 146 51% 36%;
@@ -35,8 +31,6 @@
     --tma-charcoal-grey: 0 0% 20%;
     --tma-sky-blue: 210 100% 65%;
     --tma-crimson-red: 0 67% 42%;
-
-    /* Legacy Colors for Compatibility */
     --tma-blue: 220 64% 29%;
     --tma-blue-light: 210 100% 65%;
     --tma-teal: 146 51% 36%;
@@ -46,17 +40,13 @@
     --tma-coral: 28 88% 56%;
     --tma-gold: 51 100% 50%;
     --tma-lemon: 51 100% 50%;
-    
-    /* High Contrast CTA Colors for Better Accessibility */
     --cta-blue: 220 64% 29%;
     --cta-blue-dark: 220 64% 24%;
     --cta-teal: 146 51% 36%;
     --cta-teal-dark: 146 51% 31%;
     --cta-success: 146 51% 36%;
     --cta-success-dark: 146 51% 31%;
-
     --radius: 0.5rem;
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -102,12 +92,10 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
-
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
@@ -115,27 +103,15 @@
 }
 
 @layer components {
-  /* Modern Glass Card */
   .glass-card {
     @apply backdrop-blur-lg border border-white/20;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    box-shadow: 0 8px 32px 0 rgba(59, 77, 129, 0.1);
   }
 
   .glass-card-modern {
     @apply backdrop-blur-xl border border-white/30;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    box-shadow: 0 8px 32px 0 rgba(59, 77, 129, 0.12);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .glass-card-modern:hover {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    box-shadow: 0 25px 50px -12px rgba(59, 77, 129, 0.2);
-    transform: translateY(-4px) scale(1.02);
-  }
-
-  /* Floating Animation */
   .floating {
     animation: floating 6s ease-in-out infinite;
   }
@@ -149,7 +125,6 @@
     }
   }
 
-  /* Fade In Animation */
   .animate-fade-in {
     animation: fadeIn 1s ease-out;
   }
@@ -165,69 +140,51 @@
     }
   }
 
-  /* Modern Button Styles */
   .btn-modern-primary {
     @apply relative overflow-hidden;
-    background: linear-gradient(135deg, hsl(220, 64%, 29%), hsl(220, 64%, 25%));
-    box-shadow: 0 4px 15px -3px rgba(230, 126, 34, 0.25);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .btn-modern-primary:hover {
-    box-shadow: 0 8px 25px -5px rgba(230, 126, 34, 0.35);
-    transform: translateY(-2px);
   }
 
   .btn-modern-accent {
     @apply relative overflow-hidden;
-    background: linear-gradient(135deg, hsl(28, 88%, 56%), hsl(51, 100%, 50%));
-    box-shadow: 0 4px 15px -3px rgba(230, 126, 34, 0.25);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+}
 
-  .btn-modern-accent:hover {
-    box-shadow: 0 8px 25px -5px rgba(230, 126, 34, 0.35);
-    transform: translateY(-2px);
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-
-  /* Mobile-specific improvements */
-  @media (max-width: 640px) {
-    .container {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-    
-    .btn-mobile-optimized {
-      min-height: 44px;
-      min-width: 44px;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      line-height: 1.2;
-    }
-    
-    .mobile-card-spacing {
-      margin-bottom: 1.5rem;
-    }
-    
-    img {
-      max-width: 100%;
-      height: auto;
-    }
+  
+  .btn-mobile-optimized {
+    min-height: 44px;
+    min-width: 44px;
   }
-
-  /* Tablet optimizations */
-  @media (min-width: 641px) and (max-width: 1024px) {
-    .tablet-optimized {
-      padding: 1.5rem;
-    }
+  
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
   }
+  
+  .mobile-card-spacing {
+    margin-bottom: 1.5rem;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
 
-  /* High DPI display optimizations */
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .high-dpi-optimized {
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-    }
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-optimized {
+    padding: 1.5rem;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-optimized {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 }
