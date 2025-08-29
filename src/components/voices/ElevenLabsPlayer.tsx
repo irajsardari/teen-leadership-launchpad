@@ -78,32 +78,38 @@ const ElevenLabsPlayer = ({ content, slug, className = "" }: ElevenLabsPlayerPro
       }
 
       console.log('Received audio data type:', typeof data.audioContent);
-      console.log('Audio data length:', data.audioContent.length);
+      console.log('Audio data length:', data.audioContent?.length);
 
       // Validate base64 string before decoding
       let audioBlob: Blob;
       try {
         // Check if it's a valid base64 string
-        if (typeof data.audioContent !== 'string') {
-          throw new Error('Audio content is not a string');
+        if (typeof data.audioContent !== 'string' || !data.audioContent) {
+          throw new Error('No valid audio content received from server');
         }
 
         // Remove any whitespace and validate base64 format
         const base64Data = data.audioContent.replace(/\s/g, '');
         if (!/^[A-Za-z0-9+/]*={0,2}$/.test(base64Data)) {
-          throw new Error('Invalid base64 format');
+          throw new Error('Received data is not in valid base64 format');
         }
 
-        // Convert base64 to blob
+        console.log('Decoding base64 audio data...');
+        
+        // Convert base64 to binary data
         const binaryString = atob(base64Data);
         const bytes = new Uint8Array(binaryString.length);
+        
         for (let i = 0; i < binaryString.length; i++) {
           bytes[i] = binaryString.charCodeAt(i);
         }
         
         audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
+        console.log('Created audio blob, size:', audioBlob.size);
+        
       } catch (decodeError) {
         console.error('Base64 decode error:', decodeError);
+        console.error('First 100 chars of received data:', data.audioContent?.substring(0, 100));
         throw new Error(`Failed to decode audio data: ${decodeError.message}`);
       }
       
