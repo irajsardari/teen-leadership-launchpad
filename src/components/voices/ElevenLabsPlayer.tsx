@@ -77,11 +77,35 @@ const ElevenLabsPlayer = ({ content, slug, className = "" }: ElevenLabsPlayerPro
         throw new Error('No audio content received');
       }
 
-      // Convert base64 to blob and create audio URL
-      const audioBlob = new Blob(
-        [Uint8Array.from(atob(data.audioContent), c => c.charCodeAt(0))],
-        { type: 'audio/mpeg' }
-      );
+      console.log('Received audio data type:', typeof data.audioContent);
+      console.log('Audio data length:', data.audioContent.length);
+
+      // Validate base64 string before decoding
+      let audioBlob: Blob;
+      try {
+        // Check if it's a valid base64 string
+        if (typeof data.audioContent !== 'string') {
+          throw new Error('Audio content is not a string');
+        }
+
+        // Remove any whitespace and validate base64 format
+        const base64Data = data.audioContent.replace(/\s/g, '');
+        if (!/^[A-Za-z0-9+/]*={0,2}$/.test(base64Data)) {
+          throw new Error('Invalid base64 format');
+        }
+
+        // Convert base64 to blob
+        const binaryString = atob(base64Data);
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+        
+        audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
+      } catch (decodeError) {
+        console.error('Base64 decode error:', decodeError);
+        throw new Error(`Failed to decode audio data: ${decodeError.message}`);
+      }
       
       const audioUrl = URL.createObjectURL(audioBlob);
       
