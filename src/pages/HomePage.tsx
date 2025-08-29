@@ -11,25 +11,25 @@ const HomePage = () => {
       title: "Level 1: Explorers (Ages 10–11)",
       description: "Self-awareness, curiosity, discipline, teamwork.",
       badge: "Explorer Badge",
-      color: "from-tma-teal to-tma-blue"
+      color: "from-tma-teal to-tma-navy"
     },
     {
       title: "Level 2: Builders (Ages 12–13)",
       description: "Communication, collaboration, creativity, leadership.",
       badge: "Builder Badge",
-      color: "from-tma-navy to-tma-blue"
+      color: "from-tma-navy to-tma-teal"
     },
     {
       title: "Level 3: Innovators (Ages 14–15)", 
       description: "Critical thinking, problem-solving, resilience, innovation.",
       badge: "Innovator Badge",
-      color: "from-tma-blue to-tma-teal"
+      color: "from-tma-teal to-tma-navy"
     },
     {
       title: "Level 4: Pathfinders (Ages 16–17)",
       description: "Strategy, leadership ethics, financial literacy, global citizenship.",
       badge: "Pathfinder Badge",
-      color: "from-tma-coral to-tma-coral/80"
+      color: "from-tma-orange to-tma-yellow"
     }
   ];
 
@@ -37,7 +37,7 @@ const HomePage = () => {
     title: "🎓 Future-Ready Leader Award (Age 18)",
     description: "Final capstone project & graduation recognition. Equivalent in prestige to global certificates.",
     badge: "Future-Ready Leader",
-    color: "from-tma-gold to-tma-teal"
+    color: "from-tma-yellow to-tma-teal"
   };
 
   const learningAreas = [
@@ -45,37 +45,37 @@ const HomePage = () => {
       title: "Psychology & Emotional Resilience",
       icon: "🧠",
       description: "Understanding emotions and building mental strength",
-      brandColor: "tma-primary-bright"
+      brandColor: "tma-teal"
     },
     {
       title: "Communication & Public Speaking",
       icon: "🗣️",
       description: "Effective communication and presentation skills",
-      brandColor: "tma-accent-green"
+      brandColor: "tma-navy"
     },
     {
       title: "Sociology & Community Impact",
       icon: "🫂",
       description: "Understanding society and making positive impact",
-      brandColor: "tma-primary-dark"
+      brandColor: "tma-navy"
     },
     {
       title: "Management & Leadership",
       icon: "💼",
       description: "Essential leadership skills and management principles",
-      brandColor: "tma-accent-orange"
+      brandColor: "tma-orange"
     },
     {
       title: "Digital & AI Literacy",
       icon: "🌐",
       description: "Modern technology and digital skills",
-      brandColor: "tma-primary-bright"
+      brandColor: "tma-teal"
     },
     {
       title: "Finance, Law, and Ethics",
       icon: "💰",
       description: "Financial literacy and ethical decision-making",
-      brandColor: "tma-accent-green"
+      brandColor: "tma-yellow"
     }
   ];
 
@@ -95,29 +95,29 @@ const HomePage = () => {
           className="absolute inset-0 bg-cover bg-center transform scale-105"
           style={{ backgroundImage: `url(${heroImage})` }}
         ></div>
-        <div className="absolute inset-0 bg-tma-blue/85"></div>
+        <div className="absolute inset-0 bg-tma-navy/85"></div>
         
         {/* Floating Elements */}
         <div className="absolute top-20 left-10 w-32 h-32 bg-tma-orange/20 rounded-full blur-xl floating"></div>
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-tma-green/20 rounded-full blur-xl floating" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-tma-blue/30 rounded-full blur-xl floating" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-tma-yellow/20 rounded-full blur-xl floating" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-tma-teal/30 rounded-full blur-xl floating" style={{ animationDelay: '4s' }}></div>
         
         {/* Content */}
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10">
             <div className="max-w-5xl mx-auto text-center text-white px-4 sm:px-0">
               <div className="glass-card-modern rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 mb-6 sm:mb-8 animate-fade-in">
                 <h1 className="hero-title text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 sm:mb-6 lg:mb-8 leading-tight font-inter tracking-tight">
-                  Where Future <span className="text-tma-blue font-black">CEOs</span>, <span className="text-tma-green font-black">Creators</span> & <span className="text-tma-orange font-black">Changemakers</span> Begin
+                  Where Future <span className="text-tma-teal font-black">CEOs</span>, <span className="text-tma-yellow font-black">Creators</span> & <span className="text-tma-orange font-black">Changemakers</span> Begin
                 </h1>
                 <div className="mb-6 sm:mb-8">
                   <h2 className="hero-title text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 font-inter">
                     TMA — Teenagers Management Academy
                   </h2>
-                  <h3 className="text-lg xs:text-xl sm:text-2xl text-tma-green font-bold mb-4 sm:mb-6 font-inter">
+                  <h3 className="text-lg xs:text-xl sm:text-2xl text-tma-yellow font-bold mb-4 sm:mb-6 font-inter">
                     🌟 Future Ready Leaders
                   </h3>
                   <p className="hero-subtitle text-base sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto font-inter font-medium leading-relaxed">
-                    The world's <span className="font-black text-tma-green text-lg sm:text-xl lg:text-2xl">first comprehensive academy</span> for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
+                    The world's <span className="font-black text-tma-yellow text-lg sm:text-xl lg:text-2xl">first comprehensive academy</span> for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
                   </p>
                 </div>
             </div>

@@ -25,37 +25,37 @@
     --ring: 220 64% 29%;
     --radius: 0.5rem;
     
-    /* TMA OFFICIAL Brand Colors - EXACT COMPLIANCE */
-    --tma-blue: 210 100% 20%;            /* #003366 - TMA Blue */
-    --tma-orange: 24 100% 50%;           /* #FF6600 - TMA Orange */
-    --tma-green: 162 100% 25%;           /* #008060 - TMA Green */
-    --tma-neutral-gray: 0 0% 96%;        /* #F5F5F5 - TMA Neutral Gray */
-    --tma-dark-gray: 0 0% 20%;           /* #333333 - TMA Dark Gray (Text) */
-    --tma-white: 0 0% 100%;              /* #FFFFFF - White */
+    /* TMA OFFICIAL Brand Colors - EXACT BRAND IDENTITY MANUAL COMPLIANCE */
+    --tma-teal: 179 100% 21%;            /* #006D6C - Primary Teal */
+    --tma-navy: 213 100% 18%;            /* #003A5D - Dark Blue */
+    --tma-orange: 28 89% 56%;            /* #F28C28 - Highlight Orange */
+    --tma-yellow: 41 98% 62%;            /* #FDB940 - Accent Yellow */
+    --tma-cream: 36 57% 96%;             /* #FAF5EF - Soft Cream */
+    --tma-dark-text: 0 0% 11%;           /* #1D1D1D - Dark Text */
     
     /* Design system aliases */
-    --tma-primary: 210 100% 20%;         /* TMA Blue */
-    --tma-secondary: 24 100% 50%;        /* TMA Orange */
-    --tma-accent: 162 100% 25%;          /* TMA Green */
-    --tma-background: 0 0% 96%;          /* TMA Neutral Gray */
-    --tma-text: 0 0% 20%;                /* TMA Dark Gray */
+    --tma-primary: 179 100% 21%;         /* Primary Teal */
+    --tma-secondary: 28 89% 56%;         /* Highlight Orange */
+    --tma-accent: 41 98% 62%;            /* Accent Yellow */
+    --tma-background: 36 57% 96%;        /* Soft Cream */
+    --tma-text: 0 0% 11%;                /* Dark Text */
     
-    /* TMA Brand Compliant Gradients - NO UNAUTHORIZED GRADIENTS */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--tma-blue)), hsl(var(--tma-blue)));
+    /* TMA Brand Compliant Gradients - BRAND IDENTITY MANUAL APPROVED */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--tma-teal)), hsl(var(--tma-navy)));
     
-    /* CTA Button Colors - TMA Brand Compliant */
-    --cta-primary: var(--tma-blue);          /* #003366 - Primary CTA */
-    --cta-primary-hover: 210 100% 15%;      /* Darker blue for hover */
-    --cta-secondary: var(--tma-orange);     /* #FF6600 - Secondary CTA */
-    --cta-secondary-hover: 24 100% 45%;     /* Darker orange for hover */
-    --cta-accent: var(--tma-green);         /* #008060 - Accent CTA */
-    --cta-accent-hover: 162 100% 20%;       /* Darker green for hover */
+    /* CTA Button Colors - TMA Brand Identity Manual Compliant */
+    --cta-primary: var(--tma-teal);          /* #006D6C - Primary Teal CTA */
+    --cta-primary-hover: 179 100% 16%;      /* Darker teal for hover */
+    --cta-secondary: var(--tma-orange);     /* #F28C28 - Highlight Orange CTA */
+    --cta-secondary-hover: 28 89% 51%;      /* Darker orange for hover */
+    --cta-accent: var(--tma-yellow);        /* #FDB940 - Accent Yellow CTA */
+    --cta-accent-hover: 41 98% 57%;         /* Darker yellow for hover */
     
-    /* TMA Brand Shadows */
-    --shadow-cta-primary: 0 4px 14px 0 hsl(var(--tma-blue) / 0.3);
+    /* TMA Brand Identity Manual Shadows */
+    --shadow-cta-primary: 0 4px 14px 0 hsl(var(--tma-teal) / 0.3);
     --shadow-cta-secondary: 0 4px 14px 0 hsl(var(--tma-orange) / 0.3);
-    --shadow-cta-accent: 0 4px 14px 0 hsl(var(--tma-green) / 0.3);
-    --shadow-card: 0 4px 6px -1px hsl(var(--tma-dark-gray) / 0.1);
+    --shadow-cta-accent: 0 4px 14px 0 hsl(var(--tma-yellow) / 0.3);
+    --shadow-card: 0 4px 6px -1px hsl(var(--tma-dark-text) / 0.1);
     
     /* Mobile fixes */
     --header-height: 4rem;
@@ -177,10 +177,10 @@
     margin-bottom: 0.75rem;
   }
   
-  /* TMA Brand Button Styles */
+  /* TMA Brand Identity Manual Button Styles */
   .btn-tma-primary {
-    background: hsl(var(--tma-blue));
-    color: hsl(var(--tma-white));
+    background: hsl(var(--tma-teal));
+    color: white;
     box-shadow: var(--shadow-cta-primary);
     border: none;
     transition: all 0.3s ease;
@@ -193,7 +193,7 @@
   
   .btn-tma-secondary {
     background: hsl(var(--tma-orange));
-    color: hsl(var(--tma-white));
+    color: white;
     box-shadow: var(--shadow-cta-secondary);
     border: none;
     transition: all 0.3s ease;

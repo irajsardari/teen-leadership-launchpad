@@ -67,20 +67,20 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				tma: {
-					// TMA OFFICIAL Brand Colors - EXACT HEX COMPLIANCE
-					'blue': 'hsl(var(--tma-blue))',              // #003366 - TMA Blue
-					'orange': 'hsl(var(--tma-orange))',          // #FF6600 - TMA Orange  
-					'green': 'hsl(var(--tma-green))',            // #008060 - TMA Green
-					'neutral-gray': 'hsl(var(--tma-neutral-gray))', // #F5F5F5 - TMA Neutral Gray
-					'dark-gray': 'hsl(var(--tma-dark-gray))',    // #333333 - TMA Dark Gray
-					'white': 'hsl(var(--tma-white))',            // #FFFFFF - White
+					// TMA OFFICIAL Brand Identity Manual Colors - EXACT HEX COMPLIANCE
+					'teal': 'hsl(var(--tma-teal))',              // #006D6C - Primary Teal
+					'navy': 'hsl(var(--tma-navy))',              // #003A5D - Dark Blue
+					'orange': 'hsl(var(--tma-orange))',          // #F28C28 - Highlight Orange
+					'yellow': 'hsl(var(--tma-yellow))',          // #FDB940 - Accent Yellow
+					'cream': 'hsl(var(--tma-cream))',            // #FAF5EF - Soft Cream
+					'dark-text': 'hsl(var(--tma-dark-text))',    // #1D1D1D - Dark Text
 					
 					// Design system aliases
-					'primary': 'hsl(var(--tma-blue))',           // TMA Blue
-					'secondary': 'hsl(var(--tma-orange))',       // TMA Orange
-					'accent': 'hsl(var(--tma-green))',           // TMA Green
-					'background': 'hsl(var(--tma-neutral-gray))', // TMA Neutral Gray
-					'text': 'hsl(var(--tma-dark-gray))',         // TMA Dark Gray
+					'primary': 'hsl(var(--tma-teal))',           // Primary Teal
+					'secondary': 'hsl(var(--tma-orange))',       // Highlight Orange
+					'accent': 'hsl(var(--tma-yellow))',          // Accent Yellow
+					'background': 'hsl(var(--tma-cream))',       // Soft Cream
+					'text': 'hsl(var(--tma-dark-text))',         // Dark Text
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
