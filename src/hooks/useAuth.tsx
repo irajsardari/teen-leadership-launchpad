@@ -26,24 +26,52 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 
   useEffect(() => {
-    // Set up auth state listener FIRST
+    let mounted = true;
+
+    const initAuth = async () => {
+      try {
+        // Get initial session first (synchronously)
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error("Error getting session:", error);
+        }
+        
+        if (mounted) {
+          setSession(session);
+          setUser(session?.user ?? null);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Auth initialization error:", error);
+        if (mounted) {
+          setSession(null);
+          setUser(null);
+          setIsLoading(false);
+        }
+      }
+    };
+
+    // Initialize auth state
+    initAuth();
+
+    // Set up auth state listener for future changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        console.log("Auth state change:", event, session?.user?.email);
-        setSession(session);
-        setUser(session?.user ?? null);
-        setIsLoading(false);
+      async (event, session) => {
+        console.log("Auth state change:", event, session?.user?.email || 'no-user');
+        
+        if (mounted) {
+          setSession(session);
+          setUser(session?.user ?? null);
+          setIsLoading(false);
+        }
       }
     );
 
-    // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setIsLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signOut = async () => {

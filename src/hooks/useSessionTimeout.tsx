@@ -13,7 +13,7 @@ export const useSessionTimeout = ({
   warningMinutes = 5,
   adminOnly = true
 }: SessionTimeoutConfig = {}) => {
-  const { user, signOut } = useAuth();
+  const { user, session, signOut } = useAuth();
   const timeoutRef = useRef<NodeJS.Timeout>();
   const warningRef = useRef<NodeJS.Timeout>();
   const lastActivityRef = useRef<number>(Date.now());
@@ -25,7 +25,7 @@ export const useSessionTimeout = ({
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     if (warningRef.current) clearTimeout(warningRef.current);
     
-    if (!shouldTimeout) return;
+    if (!shouldTimeout || !session) return;
 
     lastActivityRef.current = Date.now();
 
@@ -48,7 +48,7 @@ export const useSessionTimeout = ({
       toast.error('Session expired due to inactivity');
       signOut();
     }, timeoutMinutes * 60 * 1000);
-  }, [shouldTimeout, timeoutMinutes, warningMinutes, signOut]);
+  }, [shouldTimeout, session, timeoutMinutes, warningMinutes, signOut]);
 
   const handleActivity = useCallback(() => {
     const now = Date.now();
@@ -61,7 +61,7 @@ export const useSessionTimeout = ({
   }, [resetTimers]);
 
   useEffect(() => {
-    if (!shouldTimeout) {
+    if (!shouldTimeout || !session) {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (warningRef.current) clearTimeout(warningRef.current);
       return;
@@ -85,7 +85,7 @@ export const useSessionTimeout = ({
         document.removeEventListener(event, handleActivity);
       });
     };
-  }, [shouldTimeout, handleActivity, resetTimers]);
+  }, [shouldTimeout, session, handleActivity, resetTimers]);
 
   return {
     resetTimers,
