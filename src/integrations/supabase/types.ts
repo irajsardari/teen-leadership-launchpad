@@ -1354,6 +1354,10 @@ export type Database = {
           updated_at: string
         }[]
       }
+      secure_table_access_guardian: {
+        Args: { operation?: string; table_name: string }
+        Returns: boolean
+      }
       set_user_role: {
         Args: { _email: string; _role: string }
         Returns: undefined
