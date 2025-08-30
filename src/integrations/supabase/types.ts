@@ -1325,6 +1325,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      emergency_revoke_safeguarding_access: {
+        Args: { target_user_id: string }
+        Returns: undefined
+      }
       flag_parental_consent_required: {
         Args: Record<PropertyKey, never>
         Returns: undefined
@@ -1559,6 +1563,10 @@ export type Database = {
         Returns: boolean
       }
       verify_safeguarding_access_maximum_security: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      verify_safeguarding_session_security: {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
