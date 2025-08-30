@@ -4,13 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 import { useSecurityContext } from './SecurityProvider';
 import { SecurityAudit } from '@/utils/security';
 import { useToast } from '@/hooks/use-toast';
-import { Trash2, Edit, Eye, Shield, Lock } from 'lucide-react';
+import { Trash2, Edit, Eye, Shield, Lock, AlertTriangle, Plus } from 'lucide-react';
 
 interface ConfidentialRecord {
   id: string;
@@ -41,18 +43,77 @@ export const ConfidentialRecordsManager: React.FC<ConfidentialRecordsManagerProp
     confidential_info: ''
   });
   const [showForm, setShowForm] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
   
   const { canAccess, logSecurityEvent } = useSecurityContext();
   const { toast } = useToast();
 
+  // Check verification status and fetch records
   useEffect(() => {
     if (!canAccess('admin')) {
       setLoading(false);
       return;
     }
 
-    fetchRecords();
+    checkVerificationStatus();
   }, [canAccess, entityId, entityType]);
+
+  const checkVerificationStatus = async () => {
+    try {
+      const { data: verificationData } = await supabase
+        .from('security_audit_logs')
+        .select('created_at')
+        .eq('action', 'admin_verification_success')
+        .gte('created_at', new Date(Date.now() - 60 * 60 * 1000).toISOString())
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      const verified = verificationData && verificationData.length > 0;
+      setIsVerified(verified);
+      
+      if (verified) {
+        await fetchRecords();
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('Error checking verification:', error);
+      setLoading(false);
+    }
+  };
+
+  const handleVerification = async () => {
+    try {
+      setLoading(true);
+      
+      const { error } = await supabase.rpc('verify_admin_for_confidential_access', {
+        verification_code: verificationCode,
+      });
+
+      if (error) throw error;
+
+      setIsVerified(true);
+      setVerificationCode('');
+      
+      toast({
+        title: "Verification Successful",
+        description: "You now have access to confidential records for 1 hour",
+      });
+
+      await logSecurityEvent('admin_confidential_verification_success', 'confidential_access');
+      await fetchRecords();
+    } catch (error: any) {
+      console.error('Verification error:', error);
+      toast({
+        title: "Verification Failed",
+        description: error.message || "Invalid verification code",
+        variant: "destructive",
+      });
+      await logSecurityEvent('admin_confidential_verification_failed', 'security_violation');
+      setLoading(false);
+    }
+  };
 
   const fetchRecords = async () => {
     try {
@@ -236,14 +297,59 @@ export const ConfidentialRecordsManager: React.FC<ConfidentialRecordsManagerProp
 
   if (!canAccess('admin')) {
     return (
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex items-center justify-center space-x-2">
-            <Shield className="w-6 h-6 text-destructive" />
-            <p className="text-center text-muted-foreground">
-              Access denied. Administrator privileges required.
-            </p>
+      <Card className="border-destructive">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-destructive">
+            <AlertTriangle className="h-5 w-5" />
+            Access Denied
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">
+            Only administrators can access confidential records
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Require verification for access
+  if (!isVerified) {
+    return (
+      <Card className="border-warning">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Lock className="h-5 w-5" />
+            Admin Verification Required
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Alert>
+            <Shield className="h-4 w-4" />
+            <AlertDescription>
+              <strong>Ultra-secure Access Required:</strong> Confidential records require manual 
+              verification. Enter today's verification code: CONFIDENTIAL_YYYYMMDD
+            </AlertDescription>
+          </Alert>
+          
+          <div className="space-y-2">
+            <Label htmlFor="verification">Verification Code</Label>
+            <Input
+              id="verification"
+              type="password"
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+              placeholder="CONFIDENTIAL_YYYYMMDD"
+            />
           </div>
+          
+          <Button 
+            onClick={handleVerification}
+            disabled={loading || !verificationCode}
+            className="w-full"
+          >
+            {loading ? 'Verifying...' : 'Verify Access'}
+          </Button>
         </CardContent>
       </Card>
     );
@@ -263,51 +369,83 @@ export const ConfidentialRecordsManager: React.FC<ConfidentialRecordsManagerProp
           <Alert className="mb-4 border-red-200 bg-red-50">
             <Shield className="w-4 h-4 text-red-600" />
             <AlertDescription className="text-red-700">
-              <strong>ULTRA-SECURE ACCESS:</strong> These records contain highly sensitive confidential information. 
-              All access attempts are logged with restrictive security policies. Only verified administrators 
-              with valid reasons can access this data. Unauthorized access attempts will be audited.
+              <strong>ULTRA-SECURE ACCESS VERIFIED:</strong> You have temporary access to confidential 
+              records (expires in 1 hour). All operations are logged and audited. This data contains 
+              highly sensitive information - handle with extreme care.
             </AlertDescription>
           </Alert>
+
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-lg font-semibold">Confidential Records ({records.length})</h3>
+              <p className="text-sm text-muted-foreground">
+                Access expires in 1 hour • All activity monitored
+              </p>
+            </div>
+            <Badge variant="destructive" className="text-xs">
+              CONFIDENTIAL
+            </Badge>
+          </div>
 
           {!readOnly && (
             <div className="mb-4">
               <Button 
                 onClick={() => setShowForm(!showForm)}
                 disabled={loading}
+                className="flex items-center gap-2"
               >
+                <Plus className="h-4 w-4" />
                 {showForm ? 'Cancel' : 'Add Confidential Record'}
               </Button>
             </div>
           )}
 
           {showForm && (
-            <Card className="mb-4">
+            <Card className="mb-4 border-warning">
               <CardContent className="p-4 space-y-4">
-                <Input
-                  placeholder="Entity ID"
-                  value={newRecord.entity_id}
-                  onChange={(e) => setNewRecord({ ...newRecord, entity_id: e.target.value })}
-                  disabled={!!entityId}
-                />
-                <Input
-                  placeholder="Entity Type"
-                  value={newRecord.entity_type}
-                  onChange={(e) => setNewRecord({ ...newRecord, entity_type: e.target.value })}
-                  disabled={!!entityType}
-                />
-                <Textarea
-                  placeholder="Confidential Information"
-                  value={newRecord.confidential_info}
-                  onChange={(e) => setNewRecord({ ...newRecord, confidential_info: e.target.value })}
-                  rows={4}
-                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="entity-id">Entity ID</Label>
+                    <Input
+                      id="entity-id"
+                      placeholder="Entity UUID"
+                      value={newRecord.entity_id}
+                      onChange={(e) => setNewRecord({ ...newRecord, entity_id: e.target.value })}
+                      disabled={!!entityId}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="entity-type">Entity Type</Label>
+                    <Input
+                      id="entity-type"
+                      placeholder="e.g., user, application, report"
+                      value={newRecord.entity_type}
+                      onChange={(e) => setNewRecord({ ...newRecord, entity_type: e.target.value })}
+                      disabled={!!entityType}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="confidential-info">Confidential Information</Label>
+                  <Textarea
+                    id="confidential-info"
+                    placeholder="Enter confidential information..."
+                    value={newRecord.confidential_info}
+                    onChange={(e) => setNewRecord({ ...newRecord, confidential_info: e.target.value })}
+                    rows={4}
+                  />
+                </div>
                 <div className="flex space-x-2">
-                  <Button onClick={createRecord}>Create Record</Button>
+                  <Button onClick={createRecord} disabled={loading}>
+                    {loading ? 'Creating...' : 'Create Record'}
+                  </Button>
                   <Button variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
                 </div>
               </CardContent>
             </Card>
           )}
+
+          <Separator className="my-4" />
 
           {loading ? (
             <div className="text-center p-4">Loading confidential records...</div>

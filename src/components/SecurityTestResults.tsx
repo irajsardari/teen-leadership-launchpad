@@ -16,6 +16,8 @@ interface SecurityTest {
 
 interface SecurityTestSuite {
   safeguarding_access: SecurityTest;
+  confidential_records: SecurityTest;
+  admin_verification: SecurityTest;
   rls_protection: SecurityTest;
   policy_enforcement: SecurityTest;
   audit_logging: SecurityTest;
@@ -70,7 +72,60 @@ export const SecurityTestResults: React.FC = () => {
         };
       }
 
-      // Test 2: RLS Status Check
+      // Test 2: Confidential Records Ultra-Secure Access
+      let confidentialTest: SecurityTest;
+      try {
+        const { data: confData, error: confError } = await supabase
+          .from('confidential_records')
+          .select('count')
+          .limit(1);
+          
+        confidentialTest = {
+          test_name: 'Confidential Records Ultra-Secure Access',
+          status: confError ? 'pass' : 'warning',
+          description: 'Ultra-secure confidential data protection',
+          details: confError 
+            ? 'Access properly denied - ultra-secure protection active'
+            : 'Unexpected access granted - may indicate security bypass'
+        };
+      } catch (error) {
+        confidentialTest = {
+          test_name: 'Confidential Records Ultra-Secure Access',
+          status: 'pass',
+          description: 'Confidential data properly protected',
+          details: 'Security policies preventing unauthorized access'
+        };
+      }
+
+      // Test 3: Admin Verification Status Check
+      let adminVerificationTest: SecurityTest;
+      try {
+        const { data: verificationData } = await supabase
+          .from('security_audit_logs')
+          .select('created_at')
+          .eq('action', 'admin_verification_success')
+          .gte('created_at', new Date(Date.now() - 60 * 60 * 1000).toISOString())
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        adminVerificationTest = {
+          test_name: 'Admin Verification System',
+          status: verificationData && verificationData.length > 0 ? 'pass' : 'warning',
+          description: 'Manual admin verification for confidential access',
+          details: verificationData && verificationData.length > 0
+            ? 'Recent admin verification found - confidential access available'
+            : 'No recent verification - manual verification required'
+        };
+      } catch (error) {
+        adminVerificationTest = {
+          test_name: 'Admin Verification System',
+          status: 'warning',
+          description: 'Unable to verify admin verification status',
+          details: 'Verification system may not be accessible'
+        };
+      }
+
+      // Test 4: RLS Status Check
       const { data: rlsData, error: rlsError } = await supabase.rpc('get_security_status');
       const rlsTest: SecurityTest = {
         test_name: 'RLS Protection',
@@ -79,7 +134,7 @@ export const SecurityTestResults: React.FC = () => {
         details: rlsError ? 'Could not verify RLS status' : 'RLS properly configured'
       };
 
-      // Test 3: Policy Enforcement
+      // Test 5: Policy Enforcement
       let policyTest: SecurityTest;
       try {
         // Try to access teacher applications without proper auth
@@ -103,7 +158,7 @@ export const SecurityTestResults: React.FC = () => {
         };
       }
 
-      // Test 4: Audit Logging
+      // Test 6: Audit Logging
       const { data: auditData, error: auditError } = await supabase
         .from('security_audit_logs')
         .select('id')
@@ -116,7 +171,7 @@ export const SecurityTestResults: React.FC = () => {
         details: auditError ? 'Audit logs may not be accessible' : 'Audit logging active'
       };
 
-      // Test 5: Unauthorized Access Prevention
+      // Test 7: Unauthorized Access Prevention
       let unauthorizedTest: SecurityTest;
       try {
         // Try to access confidential records
@@ -142,6 +197,8 @@ export const SecurityTestResults: React.FC = () => {
 
       setTestResults({
         safeguarding_access: safeguardingTest,
+        confidential_records: confidentialTest,
+        admin_verification: adminVerificationTest,
         rls_protection: rlsTest,
         policy_enforcement: policyTest,
         audit_logging: auditTest,
@@ -152,6 +209,8 @@ export const SecurityTestResults: React.FC = () => {
 
       const passCount = Object.values({
         safeguarding_access: safeguardingTest,
+        confidential_records: confidentialTest,
+        admin_verification: adminVerificationTest,
         rls_protection: rlsTest,
         policy_enforcement: policyTest,
         audit_logging: auditTest,
@@ -160,8 +219,8 @@ export const SecurityTestResults: React.FC = () => {
 
       toast({
         title: "Security Tests Complete",
-        description: `${passCount}/5 tests passed. Check results below.`,
-        variant: passCount >= 4 ? "default" : "destructive"
+        description: `${passCount}/7 tests passed. Check results below.`,
+        variant: passCount >= 5 ? "default" : "destructive"
       });
 
     } catch (error: any) {

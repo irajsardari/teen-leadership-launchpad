@@ -1329,6 +1329,10 @@ export type Database = {
         Args: { access_reason: string }
         Returns: string
       }
+      emergency_confidential_lockdown: {
+        Args: { reason: string }
+        Returns: undefined
+      }
       emergency_revoke_safeguarding_access: {
         Args: { target_user_id: string }
         Returns: undefined
@@ -1546,6 +1550,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      ultra_secure_confidential_check: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       user_owns_challenger_record: {
         Args: { record_user_id: string }
         Returns: boolean
@@ -1569,6 +1577,10 @@ export type Database = {
       verify_admin_access: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      verify_admin_for_confidential_access: {
+        Args: { verification_code: string }
+        Returns: string
       }
       verify_admin_with_mfa: {
         Args: Record<PropertyKey, never>
