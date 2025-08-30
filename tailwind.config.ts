@@ -67,14 +67,14 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				tma: {
-					// TMA OFFICIAL Brand Identity Manual Colors - EXACT HEX COMPLIANCE
-					'teal': 'hsl(var(--tma-teal))',              // #006D6C - Primary Teal
-					'blue': 'hsl(var(--tma-blue))',              // #003A5D - Dark Blue
-					'orange': 'hsl(var(--tma-orange))',          // #F28C28 - Highlight Orange
-					'yellow': 'hsl(var(--tma-yellow))',          // #FDB940 - Accent Yellow
-					'cream': 'hsl(var(--tma-cream))',            // #FAF5EF - Soft Cream
-					'text': 'hsl(var(--tma-text))',              // #1D1D1D - Dark Text
-					'white': 'hsl(var(--tma-white))',            // #FFFFFF - White
+					// TMA Brand Colors
+					'teal': '#006D6C',              // Primary Teal
+					'blue': '#003A5D',              // Dark Blue
+					'orange': '#F28C28',            // Highlight Orange
+					'yellow': '#FDB940',            // Accent Yellow
+					'cream': '#FAF5EF',             // Soft Cream
+					'text': '#1D1D1D',              // Dark Text
+					'footer': '#005856',            // Footer Background
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

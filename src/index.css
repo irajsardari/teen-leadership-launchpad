@@ -4,66 +4,60 @@
 
 @layer base {
   :root {
-    /* TMA OFFICIAL Brand Identity Manual Colors - EXACT HEX COMPLIANCE */
+    /* Core brand colors - single source of truth */
     --tma-teal: 179 100% 21%;            /* #006D6C - Primary Teal */
-    --tma-blue: 207 100% 18%;            /* #003A5D - Dark Blue */  
+    --tma-blue: 207 100% 18%;            /* #003A5D - Dark Blue */
     --tma-orange: 29 85% 56%;            /* #F28C28 - Highlight Orange */
     --tma-yellow: 41 93% 64%;            /* #FDB940 - Accent Yellow */
-    --tma-cream: 35 22% 94%;             /* #FAF5EF - Soft Cream */
+    --tma-cream: 35 22% 94%;             /* #FAF5EF - Soft Cream (bg) */
     --tma-text: 0 0% 11%;                /* #1D1D1D - Body text */
-    --tma-white: 0 0% 100%;              /* #FFFFFF */
 
-    /* Elevations */
-    --tma-card-bg: 0 0% 100%;            /* #FFFFFF */
-    --tma-card-shadow: 0 8px 16px rgba(0,0,0,.08);
-    --tma-radius-lg: 16px;
-    --tma-radius-md: 12px;
+    /* Semantic colors (use these in components) */
+    --c-bg-page: var(--tma-cream);
+    --c-bg-card: 0 0% 100%;              /* #FFFFFF */
+    --c-bg-footer: 180 100% 19%;         /* #005856 - Teal at 90% toward blue for depth */
+    --c-text-body: var(--tma-text);
+    --c-text-heading: var(--tma-blue);
+    --c-text-invert: 0 0% 100%;          /* #FFFFFF */
+
+    --c-primary: var(--tma-teal);
+    --c-primary-600: 180 100% 18%;       /* #005957 - hover */
+    --c-primary-700: 180 100% 14%;       /* #004746 - active */
+
+    --c-accent: var(--tma-orange);
+    --c-accent-600: 29 76% 50%;          /* #DB7B22 - hover */
+    --c-accent-700: 29 70% 42%;          /* #B8661B - active */
+
+    --c-info: var(--tma-blue);
+
+    --c-border: 35 22% 88%;              /* #E7E0D9 - 1px lines on cream */
+    --c-muted: 35 22% 92%;               /* #F3EEE8 - subtle panel bg on cream */
+
+    /* Gradients (hero/section overlays) */
+    --g-hero-blue: linear-gradient(90deg, hsl(var(--tma-blue)) 0%, hsl(var(--tma-blue)) 100%);
+    --g-hero-teal: linear-gradient(90deg, hsl(var(--c-bg-footer)) 0%, hsl(var(--c-bg-footer)) 100%);
 
     /* Shadcn compatibility layer */
-    --background: var(--tma-cream);
-    --foreground: var(--tma-text);
-    --card: var(--tma-card-bg);
-    --card-foreground: var(--tma-text);
-    --popover: var(--tma-card-bg);
-    --popover-foreground: var(--tma-text);
-    --primary: var(--tma-teal);
-    --primary-foreground: var(--tma-white);
-    --secondary: var(--tma-orange);
-    --secondary-foreground: var(--tma-white);
-    --muted: 0 0% 96%;
+    --background: var(--c-bg-page);
+    --foreground: var(--c-text-body);
+    --card: var(--c-bg-card);
+    --card-foreground: var(--c-text-body);
+    --popover: var(--c-bg-card);
+    --popover-foreground: var(--c-text-body);
+    --primary: var(--c-primary);
+    --primary-foreground: var(--c-text-invert);
+    --secondary: 0 0% 96%;
+    --secondary-foreground: var(--c-text-body);
+    --muted: var(--c-muted);
     --muted-foreground: 0 0% 45%;
-    --accent: var(--tma-yellow);
-    --accent-foreground: var(--tma-text);
+    --accent: var(--c-accent);
+    --accent-foreground: var(--c-text-invert);
     --destructive: 0 67% 42%;
-    --destructive-foreground: var(--tma-white);
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
-    --ring: var(--tma-teal);
+    --destructive-foreground: var(--c-text-invert);
+    --border: var(--c-border);
+    --input: var(--c-border);
+    --ring: var(--c-primary);
     --radius: 0.5rem;
-    
-    /* Design system aliases */
-    --tma-primary: 179 100% 21%;         /* Primary Teal */
-    --tma-secondary: 28 89% 56%;         /* Highlight Orange */
-    --tma-accent: 41 98% 62%;            /* Accent Yellow */
-    --tma-background: 36 57% 96%;        /* Soft Cream */
-    --tma-text: 0 0% 11%;                /* Dark Text */
-    
-    /* TMA Brand Compliant Gradients - BRAND IDENTITY MANUAL APPROVED */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--tma-teal)), hsl(var(--tma-navy)));
-    
-    /* CTA Button Colors - TMA Brand Identity Manual Compliant */
-    --cta-primary: var(--tma-teal);          /* #006D6C - Primary Teal CTA */
-    --cta-primary-hover: 179 100% 16%;      /* Darker teal for hover */
-    --cta-secondary: var(--tma-orange);     /* #F28C28 - Highlight Orange CTA */
-    --cta-secondary-hover: 28 89% 51%;      /* Darker orange for hover */
-    --cta-accent: var(--tma-yellow);        /* #FDB940 - Accent Yellow CTA */
-    --cta-accent-hover: 41 98% 57%;         /* Darker yellow for hover */
-    
-    /* TMA Brand Identity Manual Shadows */
-    --shadow-cta-primary: 0 4px 14px 0 hsl(var(--tma-teal) / 0.3);
-    --shadow-cta-secondary: 0 4px 14px 0 hsl(var(--tma-orange) / 0.3);
-    --shadow-cta-accent: 0 4px 14px 0 hsl(var(--tma-yellow) / 0.3);
-    --shadow-card: 0 4px 6px -1px hsl(var(--tma-dark-text) / 0.1);
     
     /* Mobile fixes */
     --header-height: 4rem;
@@ -147,17 +141,17 @@
 }
 
 @layer components {
-  /* Mobile navigation backdrop - Full coverage */
+  /* Mobile navigation backdrop */
   .mobile-nav-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1090; /* below menu but above content */
+    z-index: 1090;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
   }
   
-  /* Mobile navigation panel - Full screen with proper stacking */
+  /* Mobile navigation panel */
   .mobile-nav-panel {
     position: fixed;
     top: 0;
@@ -165,10 +159,10 @@
     bottom: 0;
     width: 100%;
     max-width: 100%;
-    background: hsl(var(--tma-neutral-light));
+    background: hsl(var(--c-bg-card));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    z-index: 1100; /* above backdrop and header */
+    z-index: 1100;
     transform: translateX(100%);
     transition: transform 0.25s ease;
     overscroll-behavior: contain;
@@ -178,168 +172,126 @@
     transform: translateX(0);
   }
   
-  /* Prevent content interaction when menu is open */
-  .mobile-nav-panel .cta-buttons {
-    position: static !important;
-    margin-top: 1.5rem;
-    display: block;
+  /* Header / nav */
+  .header { 
+    background: hsl(var(--c-bg-card)); 
   }
   
-  .mobile-nav-panel .cta-buttons > * {
-    width: 100%;
-    display: block;
-    margin-bottom: 0.75rem;
+  .nav-link { 
+    color: hsl(var(--c-text-heading)); 
   }
   
-  /* TMA Brand Identity Manual Button Styles */
-  .btn-tma-primary {
-    background: hsl(var(--tma-teal));
-    color: white;
-    box-shadow: var(--shadow-cta-primary);
+  .nav-link.active { 
+    border-bottom: 2px solid hsl(var(--c-accent)); 
+  }
+
+  /* Primary action (teal) */
+  .btn-primary {
+    background: hsl(var(--c-primary));
+    color: hsl(var(--c-text-invert));
     border: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
   
-  .btn-tma-primary:hover {
-    background: hsl(var(--cta-primary-hover));
-    transform: translateY(-2px);
+  .btn-primary:hover { 
+    background: hsl(var(--c-primary-600)); 
   }
   
-  .btn-tma-secondary {
-    background: hsl(var(--tma-orange));
-    color: white;
-    box-shadow: var(--shadow-cta-secondary);
+  .btn-primary:active { 
+    background: hsl(var(--c-primary-700)); 
+  }
+  
+  .btn-primary:disabled { 
+    opacity: 0.45; 
+    cursor: not-allowed; 
+  }
+
+  /* Accent action (orange) – use sparingly: Apply/Enroll/CTA only */
+  .btn-accent {
+    background: hsl(var(--c-accent));
+    color: hsl(var(--c-text-invert));
     border: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
   
-  .btn-tma-secondary:hover {
-    background: hsl(var(--cta-secondary-hover));
-    transform: translateY(-2px);
+  .btn-accent:hover { 
+    background: hsl(var(--c-accent-600)); 
   }
   
-  /* TMA Brand Card Styles */
-  .tma-card {
-    background: hsl(var(--tma-white));
-    border: 1px solid hsl(var(--tma-neutral-gray));
-    box-shadow: var(--shadow-card);
-    transition: all 0.3s ease;
+  .btn-accent:active { 
+    background: hsl(var(--c-accent-700)); 
+  }
+
+  /* Outline (nav Sign In) */
+  .btn-outline {
+    background: transparent;
+    color: hsl(var(--c-primary));
+    border: 1px solid hsl(var(--c-primary));
+    transition: all 0.2s ease;
   }
   
-  .tma-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-cta-primary);
+  .btn-outline:hover { 
+    background: hsl(var(--c-primary) / 0.1); 
   }
   
-  /* TMA Level Cards */
-  .tma-level-card {
-    background: hsl(var(--tma-blue));
-    color: hsl(var(--tma-white));
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: var(--shadow-card);
+  /* Hero overlays – remove gradients that shift color left/right */
+  .hero--blue::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    background: var(--g-hero-blue); 
+    opacity: 0.55; 
+    pointer-events: none;
   }
   
-  /* TMA Text Styles */
-  .text-tma-primary {
-    color: hsl(var(--tma-blue));
+  .hero--teal::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    background: var(--g-hero-teal); 
+    opacity: 0.55; 
+    pointer-events: none;
+  }
+
+  /* Feature cards (Levels 1–4, stats) */
+  .card { 
+    background: hsl(var(--c-bg-card)); 
+    border: 1px solid hsl(var(--c-border)); 
+    transition: all 0.2s ease;
   }
   
-  .text-tma-secondary {
-    color: hsl(var(--tma-orange));
+  .card .title { 
+    color: hsl(var(--c-text-heading)); 
+  }
+
+  /* Footer – single, consistent shade */
+  .footer { 
+    background: hsl(var(--c-bg-footer)); 
+    color: hsl(var(--c-text-invert)); 
   }
   
-  .text-tma-accent {
-    color: hsl(var(--tma-green));
+  .footer a { 
+    color: hsl(220 27% 90%); /* #E6F7F6 - readable links on teal */
   }
   
-  /* TMA Section Backgrounds - Clean brand colors only */
-  .section-tma-background {
-    background: hsl(var(--tma-neutral-gray));
+  .footer .btn-accent { 
+    background: hsl(var(--c-accent)); 
   }
-  
-  /* TMA Hero Section */
-  .hero-tma {
-    background: hsl(var(--tma-blue));
-  }
-  
-  .hero-title {
-    color: hsl(var(--tma-white));
-    font-weight: 700;
-  }
-  
-  .hero-subtitle {
-    color: hsl(var(--tma-white));
-    font-weight: 500;
-  }
-  
-  /* TMA Level Cards - Exact Brand Colors */
-  .level-card {
-    background: hsl(var(--tma-blue));
-    color: hsl(var(--tma-white));
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: var(--shadow-card);
-  }
-  
-  .level-card .age-badge {
-    background: hsl(var(--tma-orange));
-    color: hsl(var(--tma-white));
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    font-size: 0.875rem;
-  }
-  
-  .level-card h3 {
-    color: hsl(var(--tma-white));
-    font-weight: 700;
-    margin: 1rem 0 0.5rem 0;
-  }
-  
-  .level-card p {
-    color: hsl(var(--tma-white));
-    font-weight: 400;
-  }
-  
-  /* TMA Brand Typography */
+
+  /* Typography */
   h1 { 
     font-size: clamp(28px, 4.5vw, 48px); 
     line-height: 1.15; 
-    color: hsl(var(--tma-blue));
+    color: hsl(var(--c-text-heading));
   }
   
   h2 { 
     font-size: clamp(22px, 3.2vw, 32px); 
-    color: hsl(var(--tma-blue));
+    color: hsl(var(--c-text-heading));
   }
   
   h3 {
-    color: hsl(var(--tma-blue));
-  }
-  
-  /* Primary button style using TMA tokens */
-  .btn-tma-primary {
-    background: hsl(var(--tma-orange));
-    color: hsl(var(--tma-white));
-    border: none;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-tma-primary:hover {
-    filter: brightness(0.92);
-  }
-  
-  /* Secondary button style using TMA tokens */
-  .btn-tma-secondary {
-    background: hsl(var(--tma-blue));
-    color: hsl(var(--tma-white));
-    border: none;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-tma-secondary:hover {
-    filter: brightness(0.92);
+    color: hsl(var(--c-text-heading));
   }
   
   /* Fix Pack v1 - Target scroll offset */
@@ -375,23 +327,27 @@
     opacity: 1; 
   }
   
-  /* TMA Form Styles - Fix Contact Page Faded Fields */
+  /* Form styles - Contact page fixes */
   input, select, textarea {
-    background: hsl(var(--tma-white));
-    border: 1px solid #D6D9DE;
-    color: hsl(var(--tma-text));
+    background: hsl(var(--c-bg-card));
+    border: 1px solid hsl(var(--c-border));
+    color: hsl(var(--c-text-body));
     transition: all 0.2s ease;
   }
   
   input:focus, select:focus, textarea:focus {
-    border-color: hsl(var(--tma-teal));
-    box-shadow: 0 0 0 3px hsl(var(--tma-teal) / 0.15);
+    border-color: hsl(var(--c-primary));
+    box-shadow: 0 0 0 3px hsl(var(--c-primary) / 0.25);
     outline: none;
   }
   
   input::placeholder, textarea::placeholder { 
-    color: #8B8B8B; 
+    color: hsl(var(--c-text-body) / 0.6);
     opacity: 1; 
+  }
+  
+  label {
+    color: hsl(var(--c-text-heading));
   }
   
   /* Remove any opacity filters from form sections */
