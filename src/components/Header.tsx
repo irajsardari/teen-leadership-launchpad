@@ -43,7 +43,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-[1000] w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-sm">
+    <header className="sticky top-0 z-[1000] w-full border-b bg-tma-cream/95 backdrop-blur supports-[backdrop-filter]:bg-tma-cream/80 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -55,7 +55,7 @@ const Header = () => {
                 className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
               />
             </div>
-            <span className="text-lg sm:text-xl font-semibold text-[#003A5D] font-inter hidden xs:block tracking-wide">
+            <span className="text-lg sm:text-xl font-semibold text-tma-blue font-inter hidden xs:block tracking-wide">
               TMA Academy
             </span>
           </Link>
@@ -69,12 +69,12 @@ const Header = () => {
                     item.href === "/insights" ? "/insights#voices-top" : item.href}
                 className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group whitespace-nowrap ${
                   isActive(item.href)
-                    ? "text-[#F28C28] font-semibold"
-                    : "text-[#003A5D] hover:text-[#F28C28]"
+                    ? "text-tma-orange font-semibold"
+                    : "text-tma-blue hover:text-tma-orange"
                 }`}
               >
                 {item.name}
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-[#F28C28] transition-all duration-400 ease-out ${
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-tma-orange transition-all duration-400 ease-out ${
                   isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
                 }`} />
               </Link>
@@ -82,7 +82,7 @@ const Header = () => {
             
             <div className="flex items-center space-x-4 ml-8 pl-6 border-l border-gray-200">
               <Button 
-                className="bg-tma-accent-green hover:bg-tma-accent-green/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg hover:shadow-tma-accent-green/25 rounded-lg px-5 py-2 min-h-[44px]" 
+                className="bg-tma-blue hover:bg-tma-blue/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg rounded-lg px-5 py-2 min-h-[44px]" 
                 size="sm" 
                 asChild>
                 <Link to="/learning-portal">
@@ -111,14 +111,14 @@ const Header = () => {
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : (
-                    <Button 
-                      variant="outline"
-                      className="border-[#F28C28] text-[#F28C28] hover:bg-[#F28C28] hover:text-white font-inter font-medium transition-all duration-300 rounded-lg px-5 py-2" 
-                      size="sm" 
-                      onClick={() => setIsAuthModalOpen(true)}
-                    >
-                      Sign In
-                    </Button>
+                      <Button 
+                        variant="outline"
+                        className="border-tma-orange text-tma-orange hover:bg-tma-orange hover:text-white font-inter font-medium transition-all duration-300 rounded-lg px-5 py-2" 
+                        size="sm" 
+                        onClick={() => setIsAuthModalOpen(true)}
+                      >
+                        Sign In
+                      </Button>
                   )}
                 </>
               )}

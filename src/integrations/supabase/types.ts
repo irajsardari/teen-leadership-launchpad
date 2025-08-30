@@ -1518,6 +1518,10 @@ export type Database = {
         }
         Returns: string
       }
+      ultimate_security_check: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       user_owns_challenger_record: {
         Args: { record_user_id: string }
         Returns: boolean

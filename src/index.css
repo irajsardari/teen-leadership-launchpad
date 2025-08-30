@@ -370,16 +370,28 @@
     opacity: 1; 
   }
   
-  /* Fix Pack v1 - Form fields (solid borders, not translucent) */
+  /* TMA Form Styles - Fix Contact Page Faded Fields */
   input, select, textarea {
-    background: #fff; 
-    border: 1px solid rgba(0,0,0,.15); 
+    background: hsl(var(--tma-white));
+    border: 1px solid #D6D9DE;
     color: hsl(var(--tma-text));
+    transition: all 0.2s ease;
   }
   
-  input::placeholder { 
+  input:focus, select:focus, textarea:focus {
+    border-color: hsl(var(--tma-teal));
+    box-shadow: 0 0 0 3px hsl(var(--tma-teal) / 0.15);
+    outline: none;
+  }
+  
+  input::placeholder, textarea::placeholder { 
     color: #8B8B8B; 
     opacity: 1; 
+  }
+  
+  /* Remove any opacity filters from form sections */
+  .contact-form-section {
+    opacity: 1 !important;
   }
   
   /* Fix Pack v1 - Grid for home tiles */
