@@ -1309,6 +1309,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      cleanup_old_audit_logs: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       cleanup_sensitive_data: {
         Args: Record<PropertyKey, never>
         Returns: undefined
@@ -1516,6 +1520,10 @@ export type Database = {
       }
       validate_user_data_access: {
         Args: { record_user_id: string; table_name: string }
+        Returns: boolean
+      }
+      verify_admin_access: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
       verify_confidential_access: {
