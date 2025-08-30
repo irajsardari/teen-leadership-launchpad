@@ -163,13 +163,12 @@ const ContactPage = () => {
                       placeholder="Please provide details about your inquiry..."
                       required 
                     />
-                  </div>
-                  
-                  <div className="text-center">
-                    <Button variant="hero" size="lg" type="submit">
-                      Send Message
-                    </Button>
-                  </div>
+                        </div>
+                        <div className="text-center">
+                          <button type="submit" className="bg-tma-orange text-white px-6 py-3 rounded-lg hover:bg-tma-orange/90 transition-all duration-300 font-medium">
+                            Send Message
+                          </button>
+                        </div>
                 </form>
               </CardContent>
             </Card>

@@ -4,48 +4,42 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 64% 29%;
-    --card: 0 0% 100%;
-    --card-foreground: 220 64% 29%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 64% 29%;
-    --primary: 220 64% 29%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 220 64% 29%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 20%;
-    --accent: 28 88% 56%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 67% 42%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
-    --ring: 220 64% 29%;
-    --radius: 0.5rem;
-    
-    /* Fix Pack v1 - Single Source of Truth Color Tokens */
+    /* TMA OFFICIAL Brand Identity Manual Colors - EXACT HEX COMPLIANCE */
     --tma-teal: 179 100% 21%;            /* #006D6C - Primary Teal */
-    --tma-blue: 207 100% 18%;            /* #003A5D - Dark Blue */
+    --tma-blue: 207 100% 18%;            /* #003A5D - Dark Blue */  
     --tma-orange: 29 85% 56%;            /* #F28C28 - Highlight Orange */
     --tma-yellow: 41 93% 64%;            /* #FDB940 - Accent Yellow */
     --tma-cream: 35 22% 94%;             /* #FAF5EF - Soft Cream */
-    --tma-text: 0 0% 11%;                /* #1D1D1D - Dark Text */
+    --tma-text: 0 0% 11%;                /* #1D1D1D - Body text */
+    --tma-white: 0 0% 100%;              /* #FFFFFF */
 
-    --surface: var(--tma-cream);
-    --text-primary: var(--tma-text);
-    --text-strong: var(--tma-blue);
+    /* Elevations */
+    --tma-card-bg: 0 0% 100%;            /* #FFFFFF */
+    --tma-card-shadow: 0 8px 16px rgba(0,0,0,.08);
+    --tma-radius-lg: 16px;
+    --tma-radius-md: 12px;
 
-    --btn-primary-bg: var(--tma-orange);
-    --btn-primary-fg: 0 0% 100%;
-    --btn-secondary-bg: 0 0% 100%;
-    --btn-secondary-fg: var(--tma-blue);
-    --btn-disabled-bg: 0 0% 91%;
-    --btn-disabled-fg: 0 0% 60%;
-
-    --card-bg: 0 0% 100%;
-    --card-stroke: 0 0% 0% / 0.08;
+    /* Shadcn compatibility layer */
+    --background: var(--tma-cream);
+    --foreground: var(--tma-text);
+    --card: var(--tma-card-bg);
+    --card-foreground: var(--tma-text);
+    --popover: var(--tma-card-bg);
+    --popover-foreground: var(--tma-text);
+    --primary: var(--tma-teal);
+    --primary-foreground: var(--tma-white);
+    --secondary: var(--tma-orange);
+    --secondary-foreground: var(--tma-white);
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: var(--tma-yellow);
+    --accent-foreground: var(--tma-text);
+    --destructive: 0 67% 42%;
+    --destructive-foreground: var(--tma-white);
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: var(--tma-teal);
+    --radius: 0.5rem;
     
     /* Design system aliases */
     --tma-primary: 179 100% 21%;         /* Primary Teal */
@@ -104,7 +98,8 @@
   }
   
   body {
-    @apply bg-background text-foreground;
+    background: hsl(var(--tma-cream));
+    color: hsl(var(--tma-text));
     font-size: 16px;
     line-height: 1.5;
   }
@@ -302,16 +297,44 @@
     font-weight: 400;
   }
   
-  /* Fix Pack v1 - Responsive Typography */
+  /* TMA Brand Typography */
   h1 { 
     font-size: clamp(28px, 4.5vw, 48px); 
     line-height: 1.15; 
-    color: hsl(var(--text-strong));
+    color: hsl(var(--tma-blue));
   }
   
   h2 { 
     font-size: clamp(22px, 3.2vw, 32px); 
-    color: hsl(var(--text-strong));
+    color: hsl(var(--tma-blue));
+  }
+  
+  h3 {
+    color: hsl(var(--tma-blue));
+  }
+  
+  /* Primary button style using TMA tokens */
+  .btn-tma-primary {
+    background: hsl(var(--tma-orange));
+    color: hsl(var(--tma-white));
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-tma-primary:hover {
+    filter: brightness(0.92);
+  }
+  
+  /* Secondary button style using TMA tokens */
+  .btn-tma-secondary {
+    background: hsl(var(--tma-blue));
+    color: hsl(var(--tma-white));
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-tma-secondary:hover {
+    filter: brightness(0.92);
   }
   
   /* Fix Pack v1 - Target scroll offset */

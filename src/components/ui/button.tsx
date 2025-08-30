@@ -10,28 +10,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        primary: "btn--primary",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border-2 border-tma-teal text-tma-teal bg-transparent hover:bg-tma-teal hover:text-white",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        primary: "bg-tma-orange text-tma-white hover:bg-tma-orange/90 shadow-lg",
+        secondary: "bg-tma-blue text-tma-white hover:bg-tma-blue/90 shadow-lg",
+        hero: "bg-tma-orange text-tma-white hover:bg-tma-orange/90 shadow-xl",
+        cta: "bg-tma-teal text-tma-white hover:bg-tma-teal/90 shadow-lg",
+        "cta-teal": "bg-tma-teal text-tma-white hover:bg-tma-teal/90 shadow-lg",
+        "cta-outline": "border-2 border-tma-teal text-tma-teal bg-tma-white hover:bg-tma-teal hover:text-tma-white",
+        accent: "bg-tma-yellow text-tma-text hover:bg-tma-yellow/90",
+        gold: "bg-tma-yellow text-tma-text hover:bg-tma-yellow/90 shadow-lg",
+        continue: "bg-tma-teal text-tma-white hover:bg-tma-teal/90 shadow-lg min-h-[44px]",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline: "border-2 border-tma-teal text-tma-teal bg-tma-white hover:bg-tma-teal hover:text-tma-white",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-tma-coral text-white hover:bg-tma-coral/90 transform hover:scale-105 shadow-[var(--shadow-button)]",
-        accent: "bg-tma-teal text-white hover:bg-tma-teal-light transform hover:scale-105",
-        gold: "bg-tma-gold text-tma-navy hover:bg-tma-gold/90 shadow-[var(--shadow-gold)]",
-        lemon: "bg-tma-lemon text-tma-navy hover:bg-tma-lemon/90",
-        "outline-hero": "border-2 border-tma-blue text-tma-blue bg-transparent hover:bg-tma-blue hover:text-white",
-        "modern-primary": "btn-modern-primary text-white font-bold",
-        "modern-accent": "btn-modern-accent text-white font-bold",
-        "glass": "glass-card backdrop-blur-lg border-white/30 text-white hover:bg-white/20",
-        // High contrast CTA variants for better accessibility
-        "cta": "bg-[hsl(var(--cta-blue))] text-white hover:bg-[hsl(var(--cta-blue-dark))] focus:bg-[hsl(var(--cta-blue-dark))] active:bg-[hsl(var(--cta-blue-dark))] disabled:bg-[hsl(var(--cta-blue))]/50 disabled:text-white/70 shadow-[var(--shadow-cta-blue)] hover:shadow-[var(--shadow-cta-blue-hover)] transform hover:scale-105 transition-all duration-200 font-semibold",
-        "cta-teal": "bg-[hsl(var(--cta-teal))] text-white hover:bg-[hsl(var(--cta-teal-dark))] focus:bg-[hsl(var(--cta-teal-dark))] active:bg-[hsl(var(--cta-teal-dark))] disabled:bg-[hsl(var(--cta-teal))]/50 disabled:text-white/70 shadow-[var(--shadow-cta-teal)] hover:shadow-[var(--shadow-cta-teal-hover)] transform hover:scale-105 transition-all duration-200 font-semibold",
-        "cta-outline": "border-2 border-[hsl(var(--cta-blue))] text-[hsl(var(--cta-blue))] bg-white hover:bg-[hsl(var(--cta-blue))] hover:text-white focus:bg-[hsl(var(--cta-blue))] focus:text-white active:bg-[hsl(var(--cta-blue-dark))] active:text-white disabled:border-[hsl(var(--cta-blue))]/50 disabled:text-[hsl(var(--cta-blue))]/50 shadow-[var(--shadow-cta-blue)] hover:shadow-[var(--shadow-cta-blue-hover)] transform hover:scale-105 transition-all duration-200 font-semibold",
-        "continue": "bg-[hsl(var(--cta-success))] text-white hover:bg-[hsl(var(--cta-success-dark))] focus:bg-[hsl(var(--cta-success-dark))] active:bg-[hsl(var(--cta-success-dark))] disabled:bg-[hsl(var(--cta-success))]/50 disabled:text-white/70 shadow-[0_4px_15px_-3px_hsl(var(--cta-success)/0.4)] hover:shadow-[0_8px_25px_-5px_hsl(var(--cta-success)/0.5)] transform hover:scale-105 transition-all duration-200 font-semibold min-h-[44px]",
       },
       size: {
         default: "h-10 px-4 py-2",

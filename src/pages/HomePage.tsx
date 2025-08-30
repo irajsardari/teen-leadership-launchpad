@@ -95,7 +95,7 @@ const HomePage = () => {
           className="absolute inset-0 bg-cover bg-center transform scale-105"
           style={{ backgroundImage: `url(${heroImage})` }}
         ></div>
-        <div className="absolute inset-0 bg-tma-navy/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/30"></div>
         
         {/* Floating Elements */}
         <div className="absolute top-20 left-10 w-32 h-32 bg-tma-orange/20 rounded-full blur-xl floating"></div>
@@ -166,17 +166,17 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 section-tma-background">
+      <section className="py-20 bg-tma-cream">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center group">
-                <div className="tma-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-4">
+                <div className="bg-tma-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500">
                   <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-tma-blue rounded-2xl sm:rounded-3xl mb-4 sm:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-500">
                     <stat.icon className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
                   </div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-tma-blue mb-2 sm:mb-3 animate-counter">{stat.value}</div>
-                  <div className="text-tma-dark-gray font-bold text-sm sm:text-base lg:text-lg font-inter">{stat.label}</div>
+                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-tma-blue mb-2 sm:mb-3">{stat.value}</div>
+                  <div className="text-tma-text font-bold text-sm sm:text-base lg:text-lg font-inter opacity-75">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -240,14 +240,14 @@ const HomePage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12">
             {levels.map((level, index) => (
               <div key={index} className="group">
-                <div className="level-card flex flex-col h-full overflow-hidden">
-                  <div className="flex-1 p-4 sm:p-6 lg:p-8">
-                    <div className="flex flex-col items-center space-y-3 sm:space-y-4 text-center">
-                      <div className="age-badge">
+                <div className="bg-tma-blue text-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500">
+                  <div className="flex-1 text-center">
+                    <div className="flex flex-col items-center space-y-3 sm:space-y-4">
+                      <div className="bg-tma-orange text-white px-4 py-2 rounded-full font-semibold text-sm">
                         {level.title.match(/\(Ages (\d+-\d+)\)/)?.[1]}
                       </div>
-                      <h3 className="text-lg sm:text-xl lg:text-2xl">{level.title.split(' (')[0]}</h3>
-                      <p className="text-sm sm:text-base lg:text-lg leading-relaxed">{level.description}</p>
+                      <h3 className="text-white text-lg sm:text-xl lg:text-2xl font-bold">{level.title.split(' (')[0]}</h3>
+                      <p className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">{level.description}</p>
                     </div>
                   </div>
                 </div>
@@ -329,7 +329,7 @@ const HomePage = () => {
             <Button 
               size="lg" 
               variant="primary"
-              className="font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px]"
+              className="font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px] bg-tma-orange text-white hover:bg-tma-orange/90"
             >
               <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">📖</span>
               Download Full Curriculum PDF

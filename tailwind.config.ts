@@ -69,18 +69,12 @@ export default {
 				tma: {
 					// TMA OFFICIAL Brand Identity Manual Colors - EXACT HEX COMPLIANCE
 					'teal': 'hsl(var(--tma-teal))',              // #006D6C - Primary Teal
-					'navy': 'hsl(var(--tma-navy))',              // #003A5D - Dark Blue
+					'blue': 'hsl(var(--tma-blue))',              // #003A5D - Dark Blue
 					'orange': 'hsl(var(--tma-orange))',          // #F28C28 - Highlight Orange
 					'yellow': 'hsl(var(--tma-yellow))',          // #FDB940 - Accent Yellow
 					'cream': 'hsl(var(--tma-cream))',            // #FAF5EF - Soft Cream
-					'dark-text': 'hsl(var(--tma-dark-text))',    // #1D1D1D - Dark Text
-					
-					// Design system aliases
-					'primary': 'hsl(var(--tma-teal))',           // Primary Teal
-					'secondary': 'hsl(var(--tma-orange))',       // Highlight Orange
-					'accent': 'hsl(var(--tma-yellow))',          // Accent Yellow
-					'background': 'hsl(var(--tma-cream))',       // Soft Cream
-					'text': 'hsl(var(--tma-dark-text))',         // Dark Text
+					'text': 'hsl(var(--tma-text))',              // #1D1D1D - Dark Text
+					'white': 'hsl(var(--tma-white))',            // #FFFFFF - White
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -94,9 +88,9 @@ export default {
 				}
 			},
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				lg: 'var(--tma-radius-lg)',
+				md: 'var(--tma-radius-md)',
+				sm: 'calc(var(--tma-radius-md) - 4px)'
 			},
 			keyframes: {
 				'accordion-down': {
