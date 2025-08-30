@@ -27,8 +27,9 @@ export default {
 				'2xl': '1536px',
 			},
 			fontFamily: {
-				sans: ["Open Sans", "sans-serif"],
+				sans: ["Inter", "sans-serif"],
 				inter: ["Inter", "sans-serif"],
+				poppins: ["Poppins", "sans-serif"],
 				montserrat: ["Montserrat", "sans-serif"],
 				'open-sans': ["Open Sans", "sans-serif"],
 			},
@@ -67,14 +68,13 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				tma: {
-					// TMA Brand Colors
-					'teal': '#006D6C',              // Primary Teal
-					'blue': '#003A5D',              // Dark Blue
-					'orange': '#F28C28',            // Highlight Orange
-					'yellow': '#FDB940',            // Accent Yellow
-					'cream': '#FAF5EF',             // Soft Cream
-					'text': '#1D1D1D',              // Dark Text
-					'footer': '#005856',            // Footer Background
+					'teal': 'var(--tma-teal)',
+					'blue': 'var(--tma-blue)', 
+					'orange': 'var(--tma-orange)',
+					'yellow': 'var(--tma-yellow)',
+					'cream': 'var(--tma-cream)',
+					'text': 'var(--tma-text)',
+					'muted': 'var(--tma-muted)',
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

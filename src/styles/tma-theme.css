@@ -1,0 +1,10 @@
+/* TMA Brand Colors - Single Source of Truth */
+:root {
+  --tma-teal: #006D6C;
+  --tma-blue: #003A5D;
+  --tma-orange: #F28C28;
+  --tma-yellow: #FDB940;
+  --tma-cream: #FAF5EF;
+  --tma-text: #1D1D1D;
+  --tma-muted: #EAE7E2;
+}

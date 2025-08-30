@@ -1,41 +1,42 @@
+@import './styles/tma-theme.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Core brand colors - single source of truth */
-    --tma-teal: 179 100% 21%;            /* #006D6C - Primary Teal */
-    --tma-blue: 207 100% 18%;            /* #003A5D - Dark Blue */
-    --tma-orange: 29 85% 56%;            /* #F28C28 - Highlight Orange */
-    --tma-yellow: 41 93% 64%;            /* #FDB940 - Accent Yellow */
-    --tma-cream: 35 22% 94%;             /* #FAF5EF - Soft Cream (bg) */
-    --tma-text: 0 0% 11%;                /* #1D1D1D - Body text */
+    /* Convert brand colors to HSL for Tailwind */
+    --tma-teal-hsl: 179 100% 21%;            
+    --tma-blue-hsl: 207 100% 18%;            
+    --tma-orange-hsl: 29 85% 56%;            
+    --tma-yellow-hsl: 41 93% 64%;            
+    --tma-cream-hsl: 35 22% 94%;             
+    --tma-text-hsl: 0 0% 11%;                
+    --tma-muted-hsl: 35 22% 88%;
 
     /* Semantic colors (use these in components) */
-    --c-bg-page: var(--tma-cream);
-    --c-bg-card: 0 0% 100%;              /* #FFFFFF */
-    --c-bg-footer: 180 100% 19%;         /* #005856 - Teal at 90% toward blue for depth */
-    --c-text-body: var(--tma-text);
-    --c-text-heading: var(--tma-blue);
-    --c-text-invert: 0 0% 100%;          /* #FFFFFF */
+    --c-bg-page: var(--tma-cream-hsl);
+    --c-bg-card: 0 0% 100%;              
+    --c-bg-footer: var(--tma-teal-hsl);         
+    --c-text-body: var(--tma-text-hsl);
+    --c-text-heading: var(--tma-blue-hsl);
+    --c-text-invert: 0 0% 100%;          
 
-    --c-primary: var(--tma-teal);
-    --c-primary-600: 180 100% 18%;       /* #005957 - hover */
-    --c-primary-700: 180 100% 14%;       /* #004746 - active */
+    --c-primary: var(--tma-teal-hsl);
+    --c-primary-600: 179 100% 18%;       
+    --c-primary-700: 179 100% 14%;       
 
-    --c-accent: var(--tma-orange);
-    --c-accent-600: 29 76% 50%;          /* #DB7B22 - hover */
-    --c-accent-700: 29 70% 42%;          /* #B8661B - active */
+    --c-accent: var(--tma-orange-hsl);
+    --c-accent-600: 29 76% 50%;          
+    --c-accent-700: 29 70% 42%;          
 
-    --c-info: var(--tma-blue);
+    --c-info: var(--tma-blue-hsl);
 
-    --c-border: 35 22% 88%;              /* #E7E0D9 - 1px lines on cream */
-    --c-muted: 35 22% 92%;               /* #F3EEE8 - subtle panel bg on cream */
+    --c-border: var(--tma-muted-hsl);              
+    --c-muted: 35 22% 92%;               
 
-    /* Gradients (hero/section overlays) */
-    --g-hero-blue: linear-gradient(90deg, hsl(var(--tma-blue)) 0%, hsl(var(--tma-blue)) 100%);
-    --g-hero-teal: linear-gradient(90deg, hsl(var(--c-bg-footer)) 0%, hsl(var(--c-bg-footer)) 100%);
+    /* Standard hero gradient */
+    --g-hero-standard: linear-gradient(135deg, rgba(0,109,108,0.94) 0%, rgba(0,58,93,0.92) 100%);
 
     /* Shadcn compatibility layer */
     --background: var(--c-bg-page);
@@ -92,10 +93,11 @@
   }
   
   body {
-    background: hsl(var(--tma-cream));
-    color: hsl(var(--tma-text));
-    font-size: 16px;
-    line-height: 1.5;
+    background: var(--tma-cream);
+    color: var(--tma-text);
+    font-size: 18px;
+    line-height: 1.55;
+    font-family: 'Inter', sans-serif;
   }
   
   html {
@@ -159,7 +161,7 @@
     bottom: 0;
     width: 100%;
     max-width: 100%;
-    background: hsl(var(--c-bg-card));
+    background: white;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     z-index: 1100;
@@ -174,31 +176,39 @@
   
   /* Header / nav */
   .header { 
-    background: hsl(var(--c-bg-card)); 
+    background: white; 
   }
   
   .nav-link { 
-    color: hsl(var(--c-text-heading)); 
+    color: var(--tma-blue); 
   }
   
   .nav-link.active { 
-    border-bottom: 2px solid hsl(var(--c-accent)); 
+    border-bottom: 2px solid var(--tma-orange); 
   }
 
-  /* Primary action (teal) */
+  /* Primary button (teal bg / cream text) */
   .btn-primary {
-    background: hsl(var(--c-primary));
-    color: hsl(var(--c-text-invert));
+    background: var(--tma-teal);
+    color: var(--tma-cream);
     border: none;
     transition: all 0.2s ease;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 12px 24px;
   }
   
   .btn-primary:hover { 
-    background: hsl(var(--c-primary-600)); 
+    background: hsl(179 100% 18%); 
   }
   
   .btn-primary:active { 
-    background: hsl(var(--c-primary-700)); 
+    background: hsl(179 100% 14%); 
+  }
+  
+  .btn-primary:focus { 
+    box-shadow: 0 0 0 3px hsl(179 100% 21% / 0.3);
+    outline: none;
   }
   
   .btn-primary:disabled { 
@@ -206,203 +216,166 @@
     cursor: not-allowed; 
   }
 
-  /* Accent action (orange) – use sparingly: Apply/Enroll/CTA only */
-  .btn-accent {
-    background: hsl(var(--c-accent));
-    color: hsl(var(--c-text-invert));
-    border: none;
-    transition: all 0.2s ease;
-  }
-  
-  .btn-accent:hover { 
-    background: hsl(var(--c-accent-600)); 
-  }
-  
-  .btn-accent:active { 
-    background: hsl(var(--c-accent-700)); 
-  }
-
-  /* Outline (nav Sign In) */
+  /* Secondary button (blue outline) */
   .btn-outline {
     background: transparent;
-    color: hsl(var(--c-primary));
-    border: 1px solid hsl(var(--c-primary));
+    color: var(--tma-blue);
+    border: 1px solid var(--tma-blue);
     transition: all 0.2s ease;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 12px 24px;
   }
   
   .btn-outline:hover { 
-    background: hsl(var(--c-primary) / 0.1); 
+    background: hsl(207 100% 18% / 0.1); 
   }
   
-  /* Hero overlays – remove gradients that shift color left/right */
-  .hero--blue::before { 
+  .btn-outline:focus { 
+    box-shadow: 0 0 0 3px hsl(207 100% 18% / 0.3);
+    outline: none;
+  }
+
+  /* Accent/CTA button (orange bg / white text) */
+  .btn-accent {
+    background: var(--tma-orange);
+    color: white;
+    border: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 12px 24px;
+  }
+  
+  .btn-accent:hover { 
+    background: hsl(29 76% 50%); 
+  }
+  
+  .btn-accent:active { 
+    background: hsl(29 70% 42%); 
+  }
+  
+  .btn-accent:focus { 
+    box-shadow: 0 0 0 3px hsl(29 85% 56% / 0.3);
+    outline: none;
+  }
+
+  /* Hero standard gradient overlay */
+  .hero-standard::before { 
     content: ""; 
     position: absolute; 
     inset: 0; 
-    background: var(--g-hero-blue); 
-    opacity: 0.55; 
-    pointer-events: none;
-  }
-  
-  .hero--teal::before { 
-    content: ""; 
-    position: absolute; 
-    inset: 0; 
-    background: var(--g-hero-teal); 
-    opacity: 0.55; 
+    background: var(--g-hero-standard); 
     pointer-events: none;
   }
 
-  /* Feature cards (Levels 1–4, stats) */
+  /* Card styling - consistent design */
   .card { 
-    background: hsl(var(--c-bg-card)); 
-    border: 1px solid hsl(var(--c-border)); 
+    background: white; 
+    border: 1px solid var(--tma-muted); 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 24px;
     transition: all 0.2s ease;
   }
   
-  .card .title { 
-    color: hsl(var(--c-text-heading)); 
+  .card .title, .card h3 { 
+    color: var(--tma-blue); 
   }
 
-  /* Footer – single, consistent shade */
+  /* Icon chips - blue background with white icons */
+  .icon-chip {
+    background: var(--tma-blue);
+    color: white;
+    border-radius: 8px;
+    padding: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Footer – consistent teal background */
   .footer { 
-    background: hsl(var(--c-bg-footer)); 
-    color: hsl(var(--c-text-invert)); 
+    background: var(--tma-teal); 
+    color: white; 
   }
   
   .footer a { 
-    color: hsl(220 27% 90%); /* #E6F7F6 - readable links on teal */
+    color: rgba(255, 255, 255, 0.9);
   }
   
   .footer .btn-accent { 
-    background: hsl(var(--c-accent)); 
+    background: var(--tma-orange); 
   }
 
-  /* Typography */
+  /* Typography - Poppins headings, Inter body */
   h1 { 
-    font-size: clamp(28px, 4.5vw, 48px); 
-    line-height: 1.15; 
-    color: hsl(var(--c-text-heading));
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(32px, 5vw, 48px); 
+    line-height: 1.17; 
+    color: var(--tma-blue);
+    font-weight: 600;
   }
   
   h2 { 
-    font-size: clamp(22px, 3.2vw, 32px); 
-    color: hsl(var(--c-text-heading));
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(24px, 4vw, 36px); 
+    line-height: 1.22;
+    color: var(--tma-blue);
+    font-weight: 600;
   }
   
   h3 {
-    color: hsl(var(--c-text-heading));
-  }
-  
-  /* Fix Pack v1 - Target scroll offset */
-  :target { 
-    scroll-margin-top: 80px; 
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(20px, 3vw, 28px);
+    line-height: 1.29;
+    color: var(--tma-blue);
+    font-weight: 600;
   }
 
-  /* Fix Pack v1 - Button System (Fix white/disabled look) */
-  .btn--primary {
-    background: hsl(var(--btn-primary-bg));
-    color: hsl(var(--btn-primary-fg));
-    box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  /* Body text */
+  body, p, .body-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--tma-text);
   }
-  
-  .btn--primary:hover { 
-    filter: brightness(0.95); 
-  }
-  
-  .btn--primary:disabled { 
-    background: hsl(var(--btn-disabled-bg)); 
-    color: hsl(var(--btn-disabled-fg)); 
-    box-shadow: none; 
-  }
-  
-  /* Fix Pack v1 - Cards/feature tiles */
-  .card { 
-    background: hsl(var(--card-bg)); 
-    border: 1px solid hsl(var(--card-stroke)); 
-  }
-  
-  .card h3, .card p { 
-    color: hsl(var(--text-strong)); 
-    opacity: 1; 
-  }
-  
-  /* Form styles - Contact page fixes */
+
+  /* Form styles */
   input, select, textarea {
-    background: hsl(var(--c-bg-card));
-    border: 1px solid hsl(var(--c-border));
-    color: hsl(var(--c-text-body));
+    background: white;
+    border: 1px solid var(--tma-muted);
+    color: var(--tma-text);
     transition: all 0.2s ease;
   }
   
   input:focus, select:focus, textarea:focus {
-    border-color: hsl(var(--c-primary));
-    box-shadow: 0 0 0 3px hsl(var(--c-primary) / 0.25);
+    border-color: var(--tma-teal);
+    box-shadow: 0 0 0 3px hsl(179 100% 21% / 0.25);
     outline: none;
   }
   
   input::placeholder, textarea::placeholder { 
-    color: hsl(var(--c-text-body) / 0.6);
+    color: hsl(0 0% 11% / 0.6);
     opacity: 1; 
   }
   
   label {
-    color: hsl(var(--c-text-heading));
+    color: var(--tma-blue);
+    font-weight: 500;
   }
-  
-  /* Remove any opacity filters from form sections */
-  .contact-form-section {
-    opacity: 1 !important;
-  }
-  
-  /* Fix Pack v1 - Grid for home tiles */
-  .features { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 20px; 
-  }
-  
-  @media (max-width: 1024px) { 
-    .features { 
-      grid-template-columns: repeat(2, 1fr); 
-    } 
-  }
-  
-  @media (max-width: 640px) { 
-    .features { 
-      grid-template-columns: 1fr; 
-    } 
-  }
-  
-  /* Fix Pack v1 - Section headers (fix faded look) */
-  .section h1, .section h2 { 
-    color: hsl(var(--tma-blue)); 
-  }
-  
-  .lead { 
-    color: hsl(var(--tma-blue)); 
-    opacity: 1; 
-  }
-  
-  /* Fix Pack v1 - Hero overlays (CRITICAL: pointer-events none to prevent tap blocking) */
-  .hero::before { 
-    content: ""; 
-    position: absolute; 
-    inset: 0; 
-    background: rgba(0,0,0,0.15);
-    pointer-events: none; /* CRITICAL: prevents blocking taps on header/menu */
-  }
-  
+
+  /* Hero positioning */
   .hero { 
     position: relative; 
   }
-  
-  /* Fix Pack v1 - Brand line quote styling */
+
+  /* Brand quote styling */
   .quote {
-    background: hsl(var(--card-bg));
-    border-left: 6px solid hsl(var(--tma-orange));
+    background: white;
+    border-left: 6px solid var(--tma-orange);
     padding: 16px 20px;
-    color: hsl(var(--tma-blue));
+    color: var(--tma-blue);
     font-weight: 600;
   }
 }
