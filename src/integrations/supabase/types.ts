@@ -1325,8 +1325,16 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      create_safeguarding_session: {
+        Args: { access_reason: string }
+        Returns: string
+      }
       emergency_revoke_safeguarding_access: {
         Args: { target_user_id: string }
+        Returns: undefined
+      }
+      emergency_safeguarding_lockdown: {
+        Args: { reason: string }
         Returns: undefined
       }
       flag_parental_consent_required: {
@@ -1530,6 +1538,10 @@ export type Database = {
         }
         Returns: string
       }
+      test_safeguarding_security: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
       ultimate_security_check: {
         Args: Record<PropertyKey, never>
         Returns: boolean
@@ -1580,6 +1592,10 @@ export type Database = {
       }
       verify_safeguarding_access_maximum_security: {
         Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      verify_safeguarding_admin_access: {
+        Args: { verification_reason: string }
         Returns: boolean
       }
       verify_safeguarding_session_security: {
