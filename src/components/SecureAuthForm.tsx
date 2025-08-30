@@ -10,6 +10,8 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { RateLimiter, AuthSecurity, InputSecurity } from '@/utils/security';
 import { SecurePasswordInput } from './SecurePasswordInput';
+import { PasswordStrengthValidator } from './PasswordStrengthValidator';
+import { SessionTimeoutWarning } from './SessionTimeoutWarning';
 
 const signUpSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters'),
@@ -276,6 +278,17 @@ export const SecureAuthForm: React.FC<SecureAuthFormProps> = ({
               />
             )}
             
+            {isSignUp && (
+              <div className="mt-4">
+                <PasswordStrengthValidator 
+                  password={password}
+                  onValidityChange={(isValid) => {
+                    // Update form validation state if needed
+                  }}
+                />
+              </div>
+            )}
+            
             <Button 
               type="submit" 
               className="w-full" 
@@ -297,6 +310,9 @@ export const SecureAuthForm: React.FC<SecureAuthFormProps> = ({
             )}
           </form>
         </Form>
+        
+        {/* Session timeout warning for admin users */}
+        <SessionTimeoutWarning />
       </CardContent>
     </Card>
   );
