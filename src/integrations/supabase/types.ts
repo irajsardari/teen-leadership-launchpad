@@ -1526,6 +1526,10 @@ export type Database = {
         Args: { p_input: string; p_max_length?: number; p_type?: string }
         Returns: Json
       }
+      validate_table_security: {
+        Args: { table_name: string }
+        Returns: Json
+      }
       validate_user_data_access: {
         Args: { record_user_id: string; table_name: string }
         Returns: boolean
