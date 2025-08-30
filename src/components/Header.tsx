@@ -14,16 +14,19 @@ import {
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Handle body scroll locking for mobile menu
+  // Handle body scroll locking for mobile menu - Enhanced
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add('nav-open');
+      document.documentElement.classList.add('no-scroll');
     } else {
       document.body.classList.remove('nav-open');
+      document.documentElement.classList.remove('no-scroll');
     }
 
     return () => {
       document.body.classList.remove('nav-open');
+      document.documentElement.classList.remove('no-scroll');
     };
   }, [isMenuOpen]);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);

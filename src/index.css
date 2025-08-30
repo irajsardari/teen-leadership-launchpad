@@ -108,7 +108,12 @@
     scroll-behavior: smooth;
   }
   
-  /* Mobile body scroll lock - Enhanced */
+  /* Mobile body scroll lock - Enhanced + Robust */
+  html.no-scroll, html.no-scroll body {
+    overflow: hidden;
+    height: 100%;
+  }
+  
   body.nav-open {
     overflow: hidden;
     touch-action: none;
@@ -147,7 +152,7 @@
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 1090; /* below menu but above content */
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
   }
@@ -163,9 +168,9 @@
     background: hsl(var(--tma-neutral-light));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    z-index: 1001;
+    z-index: 1100; /* above backdrop and header */
     transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.25s ease;
     overscroll-behavior: contain;
   }
   
@@ -423,12 +428,13 @@
     opacity: 1; 
   }
   
-  /* Fix Pack v1 - Hero overlays (not on container) */
+  /* Fix Pack v1 - Hero overlays (CRITICAL: pointer-events none to prevent tap blocking) */
   .hero::before { 
     content: ""; 
     position: absolute; 
     inset: 0; 
-    background: rgba(0,0,0,0.15); 
+    background: rgba(0,0,0,0.15);
+    pointer-events: none; /* CRITICAL: prevents blocking taps on header/menu */
   }
   
   .hero { 
