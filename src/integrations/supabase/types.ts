@@ -1427,12 +1427,20 @@ export type Database = {
         Args: { check_user_id?: string }
         Returns: boolean
       }
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       is_resource_owned_by_user: {
         Args: { res_id: string; user_id: string }
         Returns: boolean
       }
       is_resource_shared_with_user: {
         Args: { res_id: string; user_id: string }
+        Returns: boolean
+      }
+      is_safeguarding: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
       is_teacher_of_course: {

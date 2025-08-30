@@ -126,7 +126,8 @@ const HomePage = () => {
 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-2xl mx-auto">
   <Button 
     size="lg" 
-    className="btn-tma-primary font-inter font-black text-lg sm:text-xl px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl transition-all duration-500 group relative overflow-hidden w-full sm:w-auto" 
+    variant="primary"
+    className="font-inter font-black text-lg sm:text-xl px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl transition-all duration-500 group relative overflow-hidden w-full sm:w-auto" 
     asChild
   >
     <Link to="/apply" className="flex items-center justify-center relative z-10">
@@ -137,7 +138,8 @@ const HomePage = () => {
   </Button>
   <Button 
     size="lg" 
-    className="btn-tma-secondary font-inter font-bold text-lg sm:text-xl px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl transition-all duration-500 group w-full sm:w-auto" 
+    variant="secondary"
+    className="font-inter font-bold text-lg sm:text-xl px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl transition-all duration-500 group w-full sm:w-auto" 
     asChild
   >
     <Link to="/curriculum" className="flex items-center justify-center">
@@ -178,6 +180,17 @@ const HomePage = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Fix Pack v1 - Brand Line Quote */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="quote">
+              "We are not just teaching leadership—we're cultivating a generation of confident, purpose-driven teens ready to lead in life, school, and society."
+            </div>
           </div>
         </div>
       </section>
@@ -245,7 +258,8 @@ const HomePage = () => {
           <div className="text-center px-4 sm:px-0">
             <Button 
               size="lg" 
-              className="btn-tma-primary font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px]"
+              variant="primary"
+              className="font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px]"
               asChild
             >
               <Link to="/curriculum" className="flex items-center justify-center">
@@ -314,10 +328,11 @@ const HomePage = () => {
           <div className="text-center px-4 sm:px-0">
             <Button 
               size="lg" 
-              className="btn-tma-primary font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px]"
+              variant="primary"
+              className="font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px]"
             >
               <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">📖</span>
-              View Full Curriculum PDF
+              Download Full Curriculum PDF
               <ArrowRight className="ml-3 sm:ml-4 h-6 w-6 sm:h-7 sm:w-7 transition-transform group-hover:translate-x-2" />
             </Button>
           </div>
