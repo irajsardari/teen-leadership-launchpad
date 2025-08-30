@@ -1402,6 +1402,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      get_security_status: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
       get_teacher_application_secure: {
         Args: { application_id: string }
         Returns: {
@@ -1430,6 +1434,10 @@ export type Database = {
       has_safeguarding_access: {
         Args: { check_user_id?: string }
         Returns: boolean
+      }
+      invalidate_user_sessions: {
+        Args: { target_user_id: string }
+        Returns: undefined
       }
       is_admin: {
         Args: Record<PropertyKey, never>
@@ -1534,6 +1542,10 @@ export type Database = {
         Args: { p_input: string; p_max_length?: number; p_type?: string }
         Returns: Json
       }
+      validate_password_strength: {
+        Args: { password: string }
+        Returns: Json
+      }
       validate_table_security: {
         Args: { table_name: string }
         Returns: Json
@@ -1543,6 +1555,10 @@ export type Database = {
         Returns: boolean
       }
       verify_admin_access: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      verify_admin_with_mfa: {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
