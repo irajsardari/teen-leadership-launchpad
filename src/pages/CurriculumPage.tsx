@@ -123,41 +123,19 @@ const CurriculumPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section id="curriculum-top" className="py-20 bg-gradient-to-br from-tma-blue via-tma-teal to-tma-blue relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section id="curriculum-top" className="py-20 bg-tma-teal">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <div className="flex items-center justify-center space-x-3 mb-8">
-              <img 
-                src="/src/assets/tma-official-logo.png" 
-                alt="TMA Academy" 
-                className="h-16 w-auto"
-                loading="lazy"
-              />
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-2">
-                  TMA Academy
-                </h1>
-                <p className="text-xl text-white/90 font-semibold mb-2">
-                  Teenagers Management Academy
-                </p>
-                <p className="text-2xl text-tma-orange font-bold">
-                  Future Ready Leaders
-                </p>
-              </div>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-tma-yellow">
-              Complete Curriculum Overview
-            </h2>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              TMA Curriculum Overview
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 mb-8">
+              TMA — Teenagers Management Academy<br />
+              Future Ready Leaders<br /><br />
               A comprehensive 8-year, 24-term program for ages 10–18 designed to develop 
-              complete leadership and life skills through our innovative challenger journey.
+              complete leadership and life skills
             </p>
-            <Button 
-              variant="accent" 
-              size="lg" 
-              className="bg-gradient-to-r from-tma-orange to-tma-yellow hover:from-tma-yellow hover:to-tma-orange text-white font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-            >
+            <Button variant="accent" size="lg" className="bg-white text-tma-blue hover:bg-gray-100">
               <Download className="mr-2 h-5 w-5" />
               Download Full Curriculum PDF
             </Button>

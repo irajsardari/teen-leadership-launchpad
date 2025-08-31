@@ -111,29 +111,15 @@ const TeachWithTMAPage = () => {
         <script type="application/ld+json">{JSON.stringify(orgAndJobJsonLd)}</script>
       </Helmet>
 
-      <header className="bg-gradient-to-br from-tma-blue via-tma-teal to-tma-blue relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 relative">
+      <header className="section-gradient">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <div className="flex items-center space-x-3 mb-8">
-                <img 
-                  src="/src/assets/tma-official-logo.png" 
-                  alt="TMA Academy" 
-                  className="h-12 w-auto"
-                  loading="lazy"
-                />
-                <div>
-                  <h2 className="text-2xl font-bold text-white">TMA Academy</h2>
-                  <p className="text-lg text-white/90">Teenagers Management Academy</p>
-                  <p className="text-xl text-tma-orange font-bold">Future Ready Leaders</p>
-                </div>
-              </div>
-              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-6">
+              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gradient-primary">
                 Inspire the Next Generation of Leaders
               </h1>
-              <p className="mt-6 text-lg leading-relaxed text-white/90">
-                Join the first academy of its kind in the world — guide young minds (ages 10–18) in leadership, management, and life skills.
+              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+                Join Teenagers Management Academy (TMA) — the first academy of its kind in the world — and guide young minds (ages 10–18) in leadership, management, and life skills.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button asChild variant="cta-teal" size="lg">

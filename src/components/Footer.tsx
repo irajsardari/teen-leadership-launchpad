@@ -117,19 +117,14 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="glass-card-modern mt-16 p-6 rounded-2xl">
-          <div className="flex flex-col items-center text-center space-y-4">
-            <p className="text-white/90 font-medium text-sm leading-relaxed max-w-4xl">
-              TMA (Teenagers Management and Leadership Academy) is an officially registered trademark in the Sultanate of Oman, under Registration Number: 185581. No part of this website — including its text, visuals, curriculum content, or digital materials — may be copied, reproduced, distributed, or used in any form without prior written permission from TMA.
+          <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p className="text-white/80 font-medium">
+              &copy; 2025 TMA Academy. Shaping tomorrow's leaders today.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 text-center">
-              <p className="text-white/80 font-medium">
-                &copy; 2025 TMA Academy. Shaping tomorrow's leaders today.
-              </p>
-              <p className="text-white/70 flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
-                P.O. Box 2643 Ruwi, Sultanate of Oman
-              </p>
-            </div>
+            <p className="text-white/70 mt-2 md:mt-0 flex items-center gap-2">
+              <MapPin className="h-4 w-4" />
+              P.O. Box 2643 Ruwi, Sultanate of Oman
+            </p>
           </div>
         </div>
       </div>

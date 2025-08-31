@@ -15,10 +15,9 @@ interface ListenPlayerProps {
 
 const SPEED_OPTIONS = [
   { value: 0.75, label: '0.75×' },
-  { value: 1.0, label: '1.0× Normal' },
+  { value: 1.0, label: '1.0×' },
   { value: 1.25, label: '1.25×' },
-  { value: 1.5, label: '1.5× Faster' },
-  { value: 2.0, label: '2.0× Speed' }
+  { value: 1.5, label: '1.5×' }
 ];
 
 const TRANSLATIONS = {
@@ -211,7 +210,7 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
   return (
     <TTSErrorBoundary>
       <div 
-        className={`bg-gradient-to-br from-tma-blue/5 via-tma-cream to-tma-teal/5 border-2 border-tma-orange/30 rounded-2xl p-6 space-y-6 shadow-2xl backdrop-blur-sm ${className}`}
+        className={`bg-gradient-to-br from-white via-tma-cream to-white border-2 border-tma-blue/20 rounded-2xl p-6 space-y-6 shadow-xl ${className}`}
         data-tts-player
       >
       {/* Premium Header */}
@@ -238,18 +237,18 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
           onClick={handlePlayPause}
           variant="default"
           size="lg"
-          className="flex items-center gap-4 bg-gradient-to-r from-tma-orange to-tma-yellow hover:from-tma-yellow hover:to-tma-orange text-white font-black px-12 py-6 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 border-2 border-white/30"
+          className="flex items-center gap-3 bg-gradient-to-r from-tma-blue to-tma-teal hover:from-tma-teal hover:to-tma-blue text-white font-bold px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
           aria-label={speech.isPlaying ? t.pause : speech.isPaused ? t.resume : t.listen}
           disabled={isDisabled}
         >
-          <div className="w-12 h-12 flex items-center justify-center bg-white/20 rounded-full">
+          <div className="w-8 h-8 flex items-center justify-center">
             {speech.isPlaying ? (
-              <Pause className="h-8 w-8" />
+              <Pause className="h-6 w-6" />
             ) : (
-              <Play className="h-8 w-8 ml-1" />
+              <Play className="h-6 w-6" />
             )}
           </div>
-          <span className="text-xl tracking-wide">
+          <span className="text-lg">
             {speech.isPlaying ? t.pause : speech.isPaused ? 'Ready to Listen' : t.listen}
           </span>
         </Button>
