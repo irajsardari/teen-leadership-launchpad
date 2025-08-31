@@ -25,8 +25,8 @@ const HomePage = () => {
       icon: "🌍",
       description: "Self-awareness, curiosity, discipline, teamwork",
       badge: "Explorer Badge",
-      color: "from-purple-400 to-pink-400",
-      hoverColor: "hover:from-purple-500 hover:to-pink-500",
+      color: "from-[#006D6C] to-[#003A5D]",
+      hoverColor: "hover:from-[#006D6C]/90 hover:to-[#003A5D]/90",
       skills: ["🧠 Self-Discovery", "🤝 Teamwork", "📚 Study Skills"]
     },
     {
@@ -35,8 +35,8 @@ const HomePage = () => {
       icon: "🔧",
       description: "Communication, collaboration, creativity, leadership",
       badge: "Builder Badge", 
-      color: "from-blue-400 to-cyan-400",
-      hoverColor: "hover:from-blue-500 hover:to-cyan-500",
+      color: "from-[#F28C28] to-[#FDB940]",
+      hoverColor: "hover:from-[#F28C28]/90 hover:to-[#FDB940]/90",
       skills: ["🗣️ Communication", "🎨 Creativity", "👥 Leadership"]
     },
     {
@@ -45,8 +45,8 @@ const HomePage = () => {
       icon: "💡",
       description: "Critical thinking, problem-solving, resilience, innovation",
       badge: "Innovator Badge",
-      color: "from-emerald-400 to-teal-400", 
-      hoverColor: "hover:from-emerald-500 hover:to-teal-500",
+      color: "from-[#003A5D] to-[#006D6C]", 
+      hoverColor: "hover:from-[#003A5D]/90 hover:to-[#006D6C]/90",
       skills: ["🧩 Problem Solving", "💪 Resilience", "🚀 Innovation"]
     },
     {
@@ -55,17 +55,17 @@ const HomePage = () => {
       icon: "🧭", 
       description: "Strategy, leadership ethics, financial literacy, global citizenship",
       badge: "Pathfinder Badge",
-      color: "from-orange-400 to-yellow-400",
-      hoverColor: "hover:from-orange-500 hover:to-yellow-500", 
+      color: "from-[#FDB940] to-[#F28C28]",
+      hoverColor: "hover:from-[#FDB940]/90 hover:to-[#F28C28]/90", 
       skills: ["📈 Strategy", "💰 Finance", "🌍 Global Impact"]
     }
   ];
 
   const blogCategories = [
-    { name: "Leadership", icon: "👑", color: "bg-purple-100 text-purple-800" },
-    { name: "Psychology", icon: "🧠", color: "bg-blue-100 text-blue-800" },
-    { name: "Money", icon: "💰", color: "bg-green-100 text-green-800" },
-    { name: "Digital Life", icon: "🌐", color: "bg-orange-100 text-orange-800" }
+    { name: "Leadership", icon: "👑", color: "bg-[#006D6C]/10 text-[#006D6C] border border-[#006D6C]/20" },
+    { name: "Psychology", icon: "🧠", color: "bg-[#003A5D]/10 text-[#003A5D] border border-[#003A5D]/20" },
+    { name: "Money", icon: "💰", color: "bg-[#F28C28]/10 text-[#F28C28] border border-[#F28C28]/20" },
+    { name: "Digital Life", icon: "🌐", color: "bg-[#FDB940]/10 text-[#FDB940] border border-[#FDB940]/20" }
   ];
 
   const graduationAward = {
@@ -123,18 +123,22 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Bold Modern Hero Section */}
+      {/* Premium TMA Brand Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse"></div>
+        {/* Official TMA Brand Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#006D6C] via-[#004B5C] to-[#003A5D]">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.03%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse"></div>
+          {/* Premium mesh gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent"></div>
         </div>
         
-        {/* Floating Elements */}
+        {/* Sophisticated Floating Elements with Brand Colors */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-[10%] w-96 h-96 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-[15%] w-80 h-80 bg-gradient-to-r from-pink-400/20 to-purple-500/20 rounded-full blur-3xl animate-float-delayed"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-orange-400/10 to-yellow-400/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-20 left-[10%] w-96 h-96 bg-gradient-to-r from-[#F28C28]/20 to-[#FDB940]/15 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-[15%] w-80 h-80 bg-gradient-to-r from-[#006D6C]/25 to-[#003A5D]/20 rounded-full blur-3xl animate-float-delayed"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-[#F28C28]/8 to-[#FDB940]/6 rounded-full blur-3xl animate-pulse"></div>
+          {/* Additional premium light effects */}
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/[0.02] via-transparent to-white/[0.01]"></div>
         </div>
         
         {/* Hero Content */}
@@ -150,12 +154,12 @@ const HomePage = () => {
               </span>
             </div>
             
-            {/* Main Hero Title */}
+            {/* Main Hero Title with TMA Brand Colors */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight">
-              <span className="block bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent animate-fade-in">
+              <span className="block bg-gradient-to-r from-white via-[#FAF5EF] to-white bg-clip-text text-transparent animate-fade-in">
                 Learn. Lead.
               </span>
-              <span className="block bg-gradient-to-r from-orange-300 via-pink-300 to-purple-300 bg-clip-text text-transparent animate-fade-in-delayed">
+              <span className="block bg-gradient-to-r from-[#F28C28] via-[#FDB940] to-[#F28C28] bg-clip-text text-transparent animate-fade-in-delayed">
                 Change the World
               </span>
               <span className="block text-3xl md:text-4xl mt-4 text-white/90 font-normal animate-fade-in-slow">
@@ -168,11 +172,11 @@ const HomePage = () => {
               From Teenagers to Trailblazers — Master leadership, emotional intelligence, and life skills that turn dreams into reality
             </p>
             
-            {/* CTA Buttons */}
+            {/* Premium TMA Brand CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-fade-in-slowest">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-12 py-6 text-lg font-bold rounded-2xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-300 animate-pulse-glow"
+                className="bg-[#F28C28] hover:bg-[#F28C28]/90 text-white px-12 py-6 text-lg font-bold rounded-2xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-300"
                 asChild
               >
                 <Link to="/apply" className="flex items-center gap-3">
@@ -194,7 +198,7 @@ const HomePage = () => {
               </Button>
             </div>
 
-            {/* Gamification Element - Reading Streak */}
+            {/* Premium Gamification Element - Reading Streak */}
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto border border-white/20">
               <div className="flex items-center justify-center gap-3">
                 <div className="text-2xl">🔥</div>
@@ -202,7 +206,7 @@ const HomePage = () => {
                   <div className="text-sm opacity-75">Reading Streak</div>
                   <div className="text-xl font-bold">{streakCount}/10 Leadership Articles</div>
                 </div>
-                <div className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                <div className="bg-[#F28C28] text-white px-3 py-1 rounded-full text-sm font-bold">
                   Keep Going!
                 </div>
               </div>
@@ -310,44 +314,44 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Gamified Journey Overview */}
-      <section className="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
+      {/* Premium Gamified Journey Overview with TMA Brand Colors */}
+      <section className="py-20 bg-gradient-to-br from-[#FAF5EF] to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-black text-[#003A5D] mb-6">
               Your Learning Journey 🎮
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-[#1D1D1D]/80 max-w-3xl mx-auto">
               Complete challenges, earn badges, and unlock new levels as you grow from explorer to leader
             </p>
           </div>
 
-          {/* Progress Tracker */}
+          {/* Premium Progress Tracker */}
           <div className="max-w-4xl mx-auto mb-16">
-            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+            <div className="bg-white rounded-3xl p-8 shadow-xl border border-[#006D6C]/10">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">Your Progress</h3>
+                <h3 className="text-2xl font-bold text-[#003A5D]">Your Progress</h3>
                 <div className="flex items-center gap-2">
-                  <Zap className="h-5 w-5 text-yellow-500" />
-                  <span className="text-lg font-bold text-gray-700">Level 2: Builder</span>
+                  <Zap className="h-5 w-5 text-[#FDB940]" />
+                  <span className="text-lg font-bold text-[#1D1D1D]">Level 2: Builder</span>
                 </div>
               </div>
               
-              {/* Progress Bar */}
+              {/* TMA Brand Progress Bar */}
               <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
-                <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-4 rounded-full" style={{width: '65%'}}></div>
+                <div className="bg-gradient-to-r from-[#006D6C] to-[#F28C28] h-4 rounded-full" style={{width: '65%'}}></div>
               </div>
               
-              <div className="flex justify-between text-sm text-gray-600 mb-6">
+              <div className="flex justify-between text-sm text-[#1D1D1D]/70 mb-6">
                 <span>13/20 Challenges Complete</span>
                 <span>Next: Communication Badge</span>
               </div>
 
-              {/* Mini Badge Collection */}
+              {/* Premium Badge Collection with TMA Colors */}
               <div className="flex gap-4 justify-center">
                 {['🌍 Explorer', '🔧 Builder', '💡 Locked', '🧭 Locked'].map((badge, index) => (
                   <div key={index} className={`px-4 py-2 rounded-full text-sm font-bold ${
-                    index < 2 ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-400'
+                    index < 2 ? 'bg-[#006D6C]/10 text-[#006D6C] border border-[#006D6C]/20' : 'bg-gray-100 text-gray-400'
                   }`}>
                     {badge}
                   </div>
@@ -356,25 +360,25 @@ const HomePage = () => {
             </div>
           </div>
 
-          {/* Final CTA */}
+          {/* Premium Final CTA with TMA Brand */}
           <div className="text-center">
-            <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+            <Button asChild size="lg" className="bg-[#F28C28] hover:bg-[#F28C28]/90 text-white px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
               <Link to="/apply" className="flex items-center gap-3">
                 <Star className="h-6 w-6" />
                 Begin Your Adventure
                 <ArrowRight className="h-6 w-6" />
               </Link>
             </Button>
-            <p className="text-gray-600 mt-4">Join 1,000+ teenagers already on their leadership journey</p>
+            <p className="text-[#1D1D1D]/70 mt-4">Join 1,000+ teenagers already on their leadership journey</p>
           </div>
         </div>
       </section>
 
-      {/* What Students Learn */}
-      <section id="curriculum" className="py-20">
+      {/* What Students Learn - Premium TMA Brand */}
+      <section id="curriculum" className="py-20 bg-[#FAF5EF]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-tma-blue mb-6 font-inter">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#003A5D] mb-6 font-inter">
               What Students Learn
             </h2>
           </div>
@@ -382,15 +386,15 @@ const HomePage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
             {learningAreas.map((area, index) => (
               <div key={index} className="group">
-                 <div className="tma-card border-2 border-tma-blue/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 h-full hover:scale-105 transition-all duration-500">
+                 <div className="bg-white border-2 border-[#006D6C]/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 h-full hover:scale-105 transition-all duration-500 shadow-lg">
                   <CardHeader className="pb-6 sm:pb-8">
-                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-tma-blue rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 text-4xl sm:text-5xl shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#003A5D] rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 text-4xl sm:text-5xl shadow-lg group-hover:shadow-2xl transition-all duration-500">
                       {area.icon}
                     </div>
-                    <CardTitle className="text-tma-blue font-inter text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 font-black leading-tight">{area.title}</CardTitle>
+                    <CardTitle className="text-[#003A5D] font-inter text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 font-black leading-tight">{area.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-tma-dark-gray font-inter leading-relaxed text-base sm:text-lg font-medium">{area.description}</p>
+                    <p className="text-[#1D1D1D] font-inter leading-relaxed text-base sm:text-lg font-medium">{area.description}</p>
                   </CardContent>
                 </div>
               </div>
@@ -400,8 +404,7 @@ const HomePage = () => {
           <div className="text-center px-4 sm:px-0">
             <Button 
               size="lg" 
-              variant="primary"
-              className="font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px] bg-tma-orange text-white hover:bg-tma-orange/90"
+              className="font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px] bg-[#F28C28] text-white hover:bg-[#F28C28]/90"
             >
               <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">📖</span>
               Download Full Curriculum PDF
