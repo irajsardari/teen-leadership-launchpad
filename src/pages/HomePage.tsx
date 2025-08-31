@@ -155,7 +155,27 @@ const HomePage = () => {
             </div>
             
             {/* Main Hero Title with TMA Brand Colors */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight">
+            <div className="flex items-center space-x-3 mb-8">
+              <img 
+                src="/src/assets/tma-official-logo.png" 
+                alt="TMA Academy" 
+                className="h-12 w-auto"
+                loading="lazy"
+              />
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+                  TMA Academy
+                </h1>
+                <p className="text-xl text-white/90 font-semibold mb-2">
+                  Teenagers Management Academy
+                </p>
+                <p className="text-2xl text-tma-orange font-bold">
+                  Future Ready Leaders
+                </p>
+              </div>
+            </div>
+            
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight">
               <span className="block bg-gradient-to-r from-white via-[#FAF5EF] to-white bg-clip-text text-transparent animate-fade-in">
                 Learn. Lead.
               </span>
@@ -165,7 +185,7 @@ const HomePage = () => {
               <span className="block text-3xl md:text-4xl mt-4 text-white/90 font-normal animate-fade-in-slow">
                 🚀
               </span>
-            </h1>
+            </h2>
             
             {/* Subtitle */}
             <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium animate-fade-in-slower">
@@ -369,7 +389,7 @@ const HomePage = () => {
                 <ArrowRight className="h-6 w-6" />
               </Link>
             </Button>
-            <p className="text-[#1D1D1D]/70 mt-4">Join 1,000+ teenagers already on their leadership journey</p>
+            <p className="text-[#1D1D1D]/70 mt-4">Ready to unlock your potential? Start today!</p>
           </div>
         </div>
       </section>
