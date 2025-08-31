@@ -61,30 +61,6 @@ const HomePage = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah M.",
-      age: 16,
-      quote: "TMA taught me to speak up confidently and lead my school projects! 💪",
-      level: "Pathfinder",
-      avatar: "👩‍🎓"
-    },
-    {
-      name: "Alex K.", 
-      age: 14,
-      quote: "I went from shy to presenting in front of 100+ people! 🎤",
-      level: "Innovator", 
-      avatar: "🧑‍💻"
-    },
-    {
-      name: "Maya L.",
-      age: 12, 
-      quote: "Now I help my friends solve problems and work as a team! 🤝",
-      level: "Builder",
-      avatar: "👩‍🎨"
-    }
-  ];
-
   const blogCategories = [
     { name: "Leadership", icon: "👑", color: "bg-purple-100 text-purple-800" },
     { name: "Psychology", icon: "🧠", color: "bg-blue-100 text-blue-800" },
@@ -292,45 +268,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Student Testimonials Carousel */}
-      <section className="py-20 bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              Why Students Love TMA 💙
-            </h2>
-            <p className="text-xl text-white/80">Real stories from real changemakers</p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
-              <div className="text-center">
-                <div className="text-6xl mb-4">{testimonials[currentTestimonial].avatar}</div>
-                <blockquote className="text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed">
-                  "{testimonials[currentTestimonial].quote}"
-                </blockquote>
-                <div className="text-white/80">
-                  <div className="font-bold text-lg">{testimonials[currentTestimonial].name}</div>
-                  <div className="text-sm">Age {testimonials[currentTestimonial].age} • {testimonials[currentTestimonial].level}</div>
-                </div>
-              </div>
-              
-              {/* Carousel Controls */}
-              <div className="flex justify-center gap-2 mt-8">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentTestimonial ? 'bg-white scale-125' : 'bg-white/30 hover:bg-white/50'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Student Testimonials Carousel - REMOVED */}
+      {/* Testimonials section removed as requested - fake content placeholder */}
 
       {/* Modern Blog/Voices Feed */}
       <section className="py-20 bg-white">
@@ -357,56 +296,13 @@ const HomePage = () => {
             ))}
           </div>
 
-          {/* Blog Preview Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {[
-              {
-                title: "How I Built Confidence in 30 Days",
-                author: "Sarah M.",
-                category: "Leadership",
-                readTime: "5 min read",
-                image: "👩‍🎓",
-                excerpt: "From shy introvert to confident speaker..."
-              },
-              {
-                title: "The Psychology of Teenage Success",
-                author: "Dr. Iraj",
-                category: "Psychology", 
-                readTime: "8 min read",
-                image: "🧠",
-                excerpt: "Understanding the teenage mind for better leadership..."
-              },
-              {
-                title: "My First Business at Age 15",
-                author: "Alex K.",
-                category: "Money",
-                readTime: "6 min read", 
-                image: "🚀",
-                excerpt: "How TMA taught me to turn ideas into reality..."
-              }
-            ].map((post, index) => (
-              <div key={index} className="group cursor-pointer">
-                <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                  <div className="text-4xl mb-4 text-center">{post.image}</div>
-                  <div className="text-sm text-gray-500 mb-2">{post.category} • {post.readTime}</div>
-                  <h3 className="font-bold text-xl text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-500">by {post.author}</span>
-                    <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
+          {/* Real TMA Articles Preview */}
           <div className="text-center">
-            <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-bold">
-              <Link to="/blog" className="flex items-center gap-2">
+            <p className="text-gray-600 mb-8">Coming soon: Real stories and insights from our TMA community</p>
+            <Button asChild className="bg-[#006D6C] hover:bg-[#006D6C]/90 text-white px-8 py-4 rounded-2xl font-bold">
+              <Link to="/voices" className="flex items-center gap-2">
                 <BookOpen className="h-5 w-5" />
-                Read All Stories
+                Visit TMA Voices
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>

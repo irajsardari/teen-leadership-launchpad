@@ -5,9 +5,9 @@ import tmaLogo from "@/assets/tma-official-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-br from-tma-blue via-tma-teal to-tma-orange text-white overflow-hidden">
+    <footer className="relative bg-[#003A5D] text-white overflow-hidden">
       {/* Animated Glass Background */}
-      <div className="absolute inset-0 opacity-30">
+      <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse"></div>
         <div className="absolute top-0 left-1/4 w-2 h-2 bg-white/20 rounded-full floating"></div>
         <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-white/30 rounded-full floating" style={{animationDelay: '2s'}}></div>
@@ -19,9 +19,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="glass-card-modern p-2 rounded-xl">
-                <img src={tmaLogo} alt="TMA Academy" className="h-8 w-auto" />
-              </div>
+              <img src={tmaLogo} alt="TMA Academy" className="h-8 w-auto" />
               <span className="text-2xl font-bold gradient-text">TMA Academy</span>
             </div>
             <p className="text-white/90 leading-relaxed text-lg">

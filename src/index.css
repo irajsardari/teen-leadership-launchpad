@@ -6,12 +6,12 @@
 @layer base {
   :root {
     /* Convert brand colors to HSL for Tailwind */
-    --tma-teal-hsl: 174 100% 29%;            
-    --tma-blue-hsl: 216 54% 24%;            
-    --tma-orange-hsl: 32 95% 54%;            
-    --tma-yellow-hsl: 41 93% 64%;            
-    --tma-cream-hsl: 0 0% 98%;             
-    --tma-text-hsl: 0 0% 13%;                
+    --tma-teal-hsl: 179 100% 21%;            
+    --tma-blue-hsl: 209 100% 18%;            
+    --tma-orange-hsl: 33 89% 56%;            
+    --tma-yellow-hsl: 41 97% 63%;            
+    --tma-cream-hsl: 33 50% 96%;             
+    --tma-text-hsl: 0 0% 11%;                
     --tma-muted-hsl: 0 0% 88%;
 
     /* Semantic colors (use these in components) */
@@ -23,20 +23,20 @@
     --c-text-invert: 0 0% 100%;          
 
     --c-primary: var(--tma-teal-hsl);
-    --c-primary-600: 174 100% 25%;       
-    --c-primary-700: 174 100% 20%;
+    --c-primary-600: 179 100% 17%;       
+    --c-primary-700: 179 100% 14%;
 
     --c-accent: var(--tma-orange-hsl);
-    --c-accent-600: 32 95% 48%;          
-    --c-accent-700: 32 95% 42%;
+    --c-accent-600: 33 89% 50%;          
+    --c-accent-700: 33 89% 44%;
 
     --c-info: var(--tma-blue-hsl);
 
     --c-border: var(--tma-muted-hsl);              
-    --c-muted: 35 22% 92%;               
+    --c-muted: 33 25% 94%;               
 
     /* Standard hero gradient */
-    --g-hero-standard: linear-gradient(135deg, rgba(0,150,136,0.94) 0%, rgba(28,49,94,0.92) 100%);
+    --g-hero-standard: linear-gradient(135deg, rgba(0,109,108,0.94) 0%, rgba(0,58,93,0.92) 100%);
 
     /* Shadcn compatibility layer */
     --background: var(--c-bg-page);
@@ -158,15 +158,15 @@
   }
   
   .btn-primary:hover { 
-    background: hsl(174 100% 25%); 
+    background: hsl(179 100% 17%); 
   }
   
   .btn-primary:active { 
-    background: hsl(174 100% 20%); 
+    background: hsl(179 100% 14%); 
   }
   
   .btn-primary:focus { 
-    box-shadow: 0 0 0 3px hsl(174 100% 29% / 0.3);
+    box-shadow: 0 0 0 3px hsl(179 100% 21% / 0.3);
     outline: none;
   }
   
@@ -187,11 +187,11 @@
   }
   
   .btn-outline:hover { 
-    background: hsl(216 54% 24% / 0.1); 
+    background: hsl(209 100% 18% / 0.1); 
   }
   
   .btn-outline:focus { 
-    box-shadow: 0 0 0 3px hsl(216 54% 24% / 0.3);
+    box-shadow: 0 0 0 3px hsl(209 100% 18% / 0.3);
     outline: none;
   }
 
@@ -207,15 +207,15 @@
   }
   
   .btn-accent:hover { 
-    background: hsl(32 95% 48%); 
+    background: hsl(33 89% 50%); 
   }
   
   .btn-accent:active { 
-    background: hsl(32 95% 42%); 
+    background: hsl(33 89% 44%); 
   }
   
   .btn-accent:focus { 
-    box-shadow: 0 0 0 3px hsl(32 95% 54% / 0.3);
+    box-shadow: 0 0 0 3px hsl(33 89% 56% / 0.3);
     outline: none;
   }
 
@@ -310,12 +310,12 @@
   
   input:focus, select:focus, textarea:focus {
     border-color: var(--tma-teal);
-    box-shadow: 0 0 0 3px hsl(174 100% 29% / 0.25);
+    box-shadow: 0 0 0 3px hsl(179 100% 21% / 0.25);
     outline: none;
   }
   
   input::placeholder, textarea::placeholder { 
-    color: hsl(0 0% 13% / 0.6);
+    color: hsl(0 0% 11% / 0.6);
     opacity: 1; 
   }
 
