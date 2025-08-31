@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
@@ -13,25 +13,51 @@ import {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Handle body scroll locking for mobile menu - Enhanced
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.classList.add('nav-open');
-      document.documentElement.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('nav-open');
-      document.documentElement.classList.remove('no-scroll');
-    }
-
-    return () => {
-      document.body.classList.remove('nav-open');
-      document.documentElement.classList.remove('no-scroll');
-    };
-  }, [isMenuOpen]);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const location = useLocation();
   const { user, isLoading, signOut } = useAuth();
+
+  // Callback to close menu - prevents recreating function on every render
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  // Handle body scroll locking with iOS-safe cleanup
+  useEffect(() => {
+    if (isMenuOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.touchAction = 'none';
+      
+      return () => {
+        document.body.style.overflow = originalStyle;
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.touchAction = '';
+      };
+    }
+  }, [isMenuOpen]);
+
+  // Always close menu on route change
+  useEffect(() => {
+    closeMenu();
+  }, [location.pathname, closeMenu]);
+
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [isMenuOpen, closeMenu]);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -137,12 +163,12 @@ const Header = () => {
                     item.href === "/insights" ? "/insights#voices-top" : item.href}
                 className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group ${
                   isActive(item.href)
-                    ? "text-[#F28C28] font-semibold"
-                    : "text-[#003A5D] hover:text-[#F28C28]"
+                    ? "text-tma-orange font-semibold"
+                    : "text-tma-blue hover:text-tma-orange"
                 }`}
               >
                 {item.name}
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-[#F28C28] transition-all duration-400 ease-out ${
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-tma-orange transition-all duration-400 ease-out ${
                   isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
                 }`} />
               </Link>
@@ -151,7 +177,7 @@ const Header = () => {
             {!isLoading && !user && (
               <Button 
                 variant="outline"
-                className="border-tma-secondary-orange text-tma-secondary-orange hover:bg-tma-secondary-orange hover:text-white font-inter font-medium transition-all duration-300 rounded-lg ml-3 min-h-[44px]" 
+                className="border-tma-orange text-tma-orange hover:bg-tma-orange hover:text-white font-inter font-medium transition-all duration-300 rounded-lg ml-3 min-h-[44px]" 
                 size="sm" 
                 onClick={() => setIsAuthModalOpen(true)}>
                 Sign In
@@ -165,75 +191,96 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="hover:bg-tma-neutral-bg transition-colors duration-200 h-10 w-10 min-w-[44px] min-h-[44px] text-tma-navy-text"
+              className="hover:bg-gray-100 transition-colors duration-200 h-10 w-10 min-w-[44px] min-h-[44px] text-tma-blue"
               aria-label="Toggle navigation menu"
               aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <>
-            {/* Mobile menu backdrop */}
-            {isMenuOpen && (
-              <div 
-                className="mobile-nav-backdrop lg:hidden"
-                onClick={() => setIsMenuOpen(false)}
-                aria-hidden="true"
-              />
-            )}
+        {/* Mobile Navigation - iOS Safe Implementation */}
+        <div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden={!isMenuOpen}
+          className={`
+            fixed inset-0 z-[100] lg:hidden transition-all duration-300 ease-in-out
+            ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+          `}
+        >
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={closeMenu}
+            aria-hidden="true"
+          />
           
-          {/* Mobile menu panel */}
-          <div className={`mobile-nav-panel lg:hidden ${isMenuOpen ? 'open' : ''}`}>
-            <div className="flex items-center justify-between p-4 border-b border-tma-neutral-bg">
+          {/* Menu Panel */}
+          <nav
+            className={`
+              absolute right-0 top-0 h-[100dvh] w-[85vw] max-w-[360px]
+              bg-white shadow-xl transition-transform duration-300 ease-in-out
+              ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+              overflow-y-auto overscroll-contain
+            `}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-100">
               <div className="flex items-center space-x-2">
                 <img 
                   src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
                   alt="TMA Academy Logo" 
                   className="w-8 h-8 object-contain"
                 />
-                <span className="text-lg font-semibold text-tma-navy-text font-inter">
+                <span className="text-lg font-semibold text-tma-blue font-inter">
                   TMA Academy
                 </span>
               </div>
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setIsMenuOpen(false)}
-                className="h-10 w-10 min-h-[44px] min-w-[44px] hover:bg-tma-neutral-bg text-tma-navy-text"
+                onClick={closeMenu}
+                className="h-10 w-10 min-h-[44px] min-w-[44px] hover:bg-gray-100 text-tma-blue"
                 aria-label="Close menu"
               >
                 <X className="h-6 w-6" />
               </Button>
             </div>
             
+            {/* Navigation Links */}
             <div className="px-4 pt-4 pb-6 space-y-2">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : 
                       item.href === "/insights" ? "/insights#voices-top" : item.href}
-                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 font-inter min-h-[44px] flex items-center ${
-                    isActive(item.href)
-                      ? "text-white bg-tma-primary-blue"
-                      : "text-tma-navy-text hover:text-tma-primary-blue hover:bg-tma-neutral-bg"
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
+                  className={`
+                    block px-4 py-3 rounded-lg text-base font-medium 
+                    transition-all duration-200 font-inter min-h-[44px] 
+                    flex items-center
+                    ${isActive(item.href)
+                      ? "text-white bg-tma-blue"
+                      : "text-tma-blue hover:text-tma-orange hover:bg-gray-50"
+                    }
+                  `}
+                  onClick={closeMenu}
                 >
                   {item.name}
                 </Link>
               ))}
               
-              {/* Mobile CTA buttons - non-sticky */}
-              <div className="cta-buttons px-1 py-2 space-y-3 pt-4 border-t border-tma-neutral-bg mt-3">
+              {/* Mobile CTA buttons */}
+              <div className="px-1 py-2 space-y-3 pt-4 border-t border-gray-100 mt-3">
                 <Button 
-                  className="bg-tma-accent-green hover:bg-tma-accent-green/90 text-white font-inter w-full transition-all duration-300 min-h-[44px]"
+                  className="bg-tma-blue hover:bg-tma-blue/90 text-white font-inter w-full transition-all duration-300 min-h-[44px]"
                   size="sm" 
                   asChild
                 >
-                  <Link to="/learning-portal" onClick={() => setIsMenuOpen(false)}>
+                  <Link to="/learning-portal" onClick={closeMenu}>
                     Learning Portal
                   </Link>
                 </Button>
@@ -243,16 +290,16 @@ const Header = () => {
                   <>
                     {user ? (
                       <div className="space-y-2">
-                        <div className="text-sm text-tma-navy-text px-3 py-1 font-medium">
+                        <div className="text-sm text-tma-blue px-3 py-1 font-medium">
                           {user.user_metadata?.full_name || user.email}
                         </div>
                         <Button 
                           variant="outline" 
                           size="sm" 
-                          className="w-full transition-all duration-300 min-h-[44px] border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+                          className="w-full transition-all duration-300 min-h-[44px] border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
                           onClick={() => {
                             signOut();
-                            setIsMenuOpen(false);
+                            closeMenu();
                           }}
                         >
                           <LogOut className="h-4 w-4 mr-2" />
@@ -261,11 +308,11 @@ const Header = () => {
                       </div>
                     ) : (
                       <Button 
-                        className="bg-tma-secondary-orange hover:bg-tma-secondary-orange/90 text-white font-inter w-full shadow-lg transition-all duration-300 min-h-[44px]"
+                        className="bg-tma-orange hover:bg-tma-orange/90 text-white font-inter w-full shadow-lg transition-all duration-300 min-h-[44px]"
                         size="sm" 
                         onClick={() => {
                           setIsAuthModalOpen(true);
-                          setIsMenuOpen(false);
+                          closeMenu();
                         }}
                       >
                         Sign In
@@ -275,8 +322,8 @@ const Header = () => {
                 )}
               </div>
             </div>
-          </div>
-        </>
+          </nav>
+        </div>
       </div>
       
       <AuthModal 

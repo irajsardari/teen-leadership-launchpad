@@ -104,19 +104,7 @@
     scroll-behavior: smooth;
   }
   
-  /* Mobile body scroll lock - Enhanced + Robust */
-  html.no-scroll, html.no-scroll body {
-    overflow: hidden;
-    height: 100%;
-  }
-  
-  body.nav-open {
-    overflow: hidden;
-    touch-action: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-  }
+  /* Removed old mobile scroll lock - now handled in React component */
   
   /* Anchor scroll offset for fixed header */
   section[id], div[id] {
@@ -143,36 +131,7 @@
 }
 
 @layer components {
-  /* Mobile navigation backdrop */
-  .mobile-nav-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1090;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
-  
-  /* Mobile navigation panel */
-  .mobile-nav-panel {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    max-width: 100%;
-    background: white;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    z-index: 1100;
-    transform: translateX(100%);
-    transition: transform 0.25s ease;
-    overscroll-behavior: contain;
-  }
-  
-  .mobile-nav-panel.open {
-    transform: translateX(0);
-  }
+  /* Removed old mobile nav styles - now handled inline in React component */
   
   /* Header / nav */
   .header { 
