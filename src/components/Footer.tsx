@@ -4,48 +4,57 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="bg-gradient-to-br from-tma-teal via-tma-blue to-tma-teal text-white relative overflow-hidden">
+      {/* Modern Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-10 left-[10%] w-64 h-64 bg-white rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-[15%] w-80 h-80 bg-tma-orange rounded-full blur-3xl" />
+      </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 lg:gap-8">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-4 mb-6">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 overflow-hidden">
+          {/* Premium Brand Section */}
+          <div className="space-y-6">
+            <div className="flex items-center space-x-4 mb-8">
+              <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-2xl border border-white/30 overflow-hidden">
                 <img 
                   src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
                   alt="TMA - Teenagers Management and Leadership Academy - Future Ready Leaders" 
-                  className="w-14 h-14 object-contain"
+                  className="w-16 h-16 object-contain"
                 />
               </div>
               <div>
-                <span className="text-xl font-bold text-white">TMA — Teenagers Management Academy</span>
-                <p className="text-sm text-tma-gold font-semibold mt-1">Future Ready Leaders</p>
+                <span className="text-2xl font-black text-white">TMA — Teenagers Management Academy</span>
+                <p className="text-base text-tma-yellow font-bold mt-1 flex items-center gap-2">
+                  <span>🌟</span>
+                  <span>Future Ready Leaders</span>
+                  <span>🌟</span>
+                </p>
               </div>
             </div>
-            <p className="text-gray-300 text-sm">
+            <p className="text-white/80 text-base leading-relaxed">
               The world's first comprehensive academy for pre-teens and teenagers (ages 10-18) dedicated to leadership and life readiness.
             </p>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-tma-gold" />
+            <div className="space-y-3 text-base">
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-tma-orange" />
                 <a 
                   href="mailto:info@teenmanagement.com"
-                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors"
+                  className="text-white/80 hover:text-tma-orange transition-colors font-medium"
                   aria-label="Email TMA at info@teenmanagement.com"
                 >
                   info@teenmanagement.com
                 </a>
               </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-tma-gold" />
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-tma-orange" />
                 <a 
                   href="https://wa.me/96899668948" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors flex items-center space-x-1"
+                  className="text-white/80 hover:text-tma-orange transition-colors flex items-center space-x-2 font-medium"
                 >
                   <span>WhatsApp: +968-99668948</span>
-                  <ExternalLink className="h-3 w-3" />
+                  <ExternalLink className="h-4 w-4" />
                 </a>
               </div>
               <div className="flex items-center space-x-2">
@@ -154,18 +163,24 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* CTA */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Get Started</h3>
-            <p className="text-primary-foreground/70 text-sm">
+          {/* Premium CTA Section */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-black text-white">Get Started</h3>
+            <p className="text-white/80 leading-relaxed">
               Ready to empower your pre-teen or teenager with essential life skills?
             </p>
-            <div className="space-y-3">
-              <Button variant="hero" size="sm" className="w-full" asChild>
-                <Link to="/apply">Apply Now</Link>
+            <div className="space-y-4">
+              <Button variant="accent" className="w-full font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all" asChild>
+                <Link to="/apply" className="flex items-center justify-center gap-2">
+                  <span>🚀</span>
+                  Apply Now
+                </Link>
               </Button>
-              <Button variant="gold" size="sm" className="w-full" asChild>
-                <Link to="/contact">Contact Us</Link>
+              <Button variant="outline" className="w-full font-bold py-3 rounded-xl bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20" asChild>
+                <Link to="/contact" className="flex items-center justify-center gap-2">
+                  <span>💬</span>
+                  Contact Us
+                </Link>
               </Button>
             </div>
           </div>

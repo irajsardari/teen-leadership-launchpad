@@ -210,69 +210,93 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
   return (
     <TTSErrorBoundary>
       <div 
-        className={`bg-muted/30 border border-border/50 rounded-xl p-4 space-y-4 ${className}`}
+        className={`bg-gradient-to-br from-white via-tma-cream to-white border-2 border-tma-blue/20 rounded-2xl p-6 space-y-6 shadow-xl ${className}`}
         data-tts-player
       >
-      {/* Main Controls */}
-      <div className="flex items-center gap-4">
+      {/* Premium Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-gradient-to-br from-tma-blue to-tma-teal rounded-xl flex items-center justify-center shadow-lg">
+            <Volume2 className="h-6 w-6 text-white" />
+          </div>
+          <div>
+            <h3 className="font-bold text-tma-blue">Studio Quality Voice</h3>
+            <p className="text-sm text-tma-text/70">Listen to this article</p>
+          </div>
+        </div>
+        {speech.duration > 0 && (
+          <div className="text-right">
+            <div className="text-2xl font-black text-tma-blue">{formatTime(speech.currentPosition)} / {formatTime(speech.duration)}</div>
+          </div>
+        )}
+      </div>
+
+      {/* Main Play Button */}
+      <div className="flex items-center justify-center">
         <Button
           onClick={handlePlayPause}
           variant="default"
-          size="sm"
-          className="flex items-center gap-2 bg-tma-blue hover:bg-tma-blue/90"
+          size="lg"
+          className="flex items-center gap-3 bg-gradient-to-r from-tma-blue to-tma-teal hover:from-tma-teal hover:to-tma-blue text-white font-bold px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
           aria-label={speech.isPlaying ? t.pause : speech.isPaused ? t.resume : t.listen}
           disabled={isDisabled}
         >
-          {speech.isPlaying ? (
-            <Pause className="h-4 w-4" />
-          ) : (
-            <Play className="h-4 w-4" />
-          )}
-          <span className="text-sm font-medium">
-            {speech.isPlaying ? t.pause : speech.isPaused ? t.resume : t.listen}
+          <div className="w-8 h-8 flex items-center justify-center">
+            {speech.isPlaying ? (
+              <Pause className="h-6 w-6" />
+            ) : (
+              <Play className="h-6 w-6" />
+            )}
+          </div>
+          <span className="text-lg">
+            {speech.isPlaying ? t.pause : speech.isPaused ? 'Ready to Listen' : t.listen}
           </span>
         </Button>
+      </div>
 
-        {showResumeText && !isDisabled && (
-          <span className="text-xs text-muted-foreground italic">
+      {/* Status Messages */}
+      {showResumeText && !isDisabled && (
+        <div className="text-center">
+          <span className="text-sm text-tma-blue font-medium bg-tma-blue/10 px-4 py-2 rounded-full">
             {t.resumeWhere}
           </span>
-        )}
+        </div>
+      )}
 
-        {isDisabled && (
-          <span className="text-xs text-muted-foreground italic">
-            Loading article content...
+      {isDisabled && (
+        <div className="text-center">
+          <span className="text-sm text-tma-text/70 bg-tma-cream px-4 py-2 rounded-full">
+            Preparing studio-quality audio (~30-45s)
           </span>
-        )}
-
-        <div className="flex items-center gap-2 ml-auto">
-          <Volume2 className="h-4 w-4 text-muted-foreground" />
+          <p className="text-xs text-tma-text/50 mt-2">Generating high-quality voice. This takes a moment first time.</p>
         </div>
-      </div>
+      )}
 
-      {/* Progress Bar */}
-      <div className="space-y-2">
-        <Slider
-          value={[speech.currentPosition]}
-          max={speech.duration}
-          step={1000}
-          onValueChange={handleProgressChange}
-          className="w-full"
-          aria-label="Audio progress"
-        />
-        <div className="flex justify-between text-xs text-muted-foreground">
-          <span>{formatTime(speech.currentPosition)}</span>
-          <span>{formatTime(speech.duration)}</span>
+      {/* Premium Progress Bar */}
+      {speech.duration > 0 && (
+        <div className="space-y-3">
+          <Slider
+            value={[speech.currentPosition]}
+            max={speech.duration}
+            step={1000}
+            onValueChange={handleProgressChange}
+            className="w-full [&_[data-orientation=horizontal]]:h-3 [&_[role=slider]]:w-6 [&_[role=slider]]:h-6 [&_[role=slider]]:bg-tma-blue [&_[role=slider]]:border-2 [&_[role=slider]]:border-white [&_[role=slider]]:shadow-lg"
+            aria-label="Audio progress"
+          />
+          <div className="flex justify-between text-sm font-medium text-tma-blue">
+            <span>{formatTime(speech.currentPosition)}</span>
+            <span>{formatTime(speech.duration)}</span>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Additional Controls */}
-      <div className="flex items-center gap-4 pt-2 border-t border-border/30">
+      {/* Premium Controls */}
+      <div className="flex items-center justify-between pt-4 border-t border-tma-blue/20">
         {/* Speed Control */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground">{t.speed}</span>
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium text-tma-blue">{t.speed}</span>
           <Select value={speech.rate.toString()} onValueChange={handleSpeedChange}>
-            <SelectTrigger className="w-20 h-8 text-xs">
+            <SelectTrigger className="w-24 h-10 text-sm border-tma-blue/30 rounded-xl">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -287,20 +311,20 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
 
         {/* Voice Selector - Only show if multiple voices available */}
         {speech.availableVoices.length > 1 && (
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">{t.voice}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-medium text-tma-blue">{t.voice}</span>
             <Select 
               value={speech.selectedVoice || ''} 
               onValueChange={handleVoiceChange}
             >
-              <SelectTrigger className="w-32 h-8 text-xs">
+              <SelectTrigger className="w-40 h-10 text-sm border-tma-blue/30 rounded-xl">
                 <SelectValue placeholder="Default" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="">Default</SelectItem>
                 {speech.availableVoices
                   .filter(voice => voice.lang.startsWith(language) || voice.lang.startsWith('en'))
-                  .slice(0, 5) // Limit to first 5 relevant voices
+                  .slice(0, 5)
                   .map((voice) => (
                     <SelectItem key={voice.voiceURI} value={voice.voiceURI}>
                       {voice.name.length > 20 ? voice.name.substring(0, 20) + '...' : voice.name}
@@ -314,13 +338,13 @@ export const ListenPlayer = ({ content, slug, className = '' }: ListenPlayerProp
         {/* Reset button */}
         <Button
           onClick={() => speech.seek(0)}
-          variant="ghost"
+          variant="outline"
           size="sm"
-          className="h-8 w-8 p-0"
+          className="h-10 w-10 p-0 border-tma-blue/30 rounded-xl hover:bg-tma-blue/10"
           title="Reset to beginning"
           aria-label="Reset to beginning"
         >
-          <RotateCcw className="h-3 w-3" />
+          <RotateCcw className="h-4 w-4 text-tma-blue" />
         </Button>
       </div>
       </div>
