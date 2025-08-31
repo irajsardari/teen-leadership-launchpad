@@ -238,35 +238,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Impact Statistics */}
-      <section className="py-20 bg-gradient-to-r from-tma-blue to-tma-teal">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-inter">
-              Our Global Impact
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2 font-inter">1000+</div>
-              <div className="text-blue-100 font-inter">Students Empowered</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2 font-inter">25+</div>
-              <div className="text-blue-100 font-inter">Countries Reached</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2 font-inter">8</div>
-              <div className="text-blue-100 font-inter">Year Curriculum</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2 font-inter">4.9/5</div>
-              <div className="text-blue-100 font-inter">Student Satisfaction</div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Legal Information */}
       <section className="py-12 bg-muted/20">
