@@ -88,14 +88,13 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Modern Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-tma-blue via-tma-teal to-tma-blue">
-        {/* Animated Background */}
+      {/* Modern Glass Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-tma">
+        {/* Background Image with Glass Effect */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          className="absolute inset-0 bg-cover bg-center bg-fixed opacity-20"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-tma-blue/95 via-tma-teal/90 to-tma-blue/95 backdrop-blur-[2px]" />
         
         {/* Modern Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -107,74 +106,56 @@ const HomePage = () => {
         {/* Premium Glass Content Container */}
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10">
           <div className="max-w-6xl mx-auto text-center">
-            {/* World's First Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-8 animate-fade-in">
-              <span className="text-tma-yellow mr-2">🌟</span>
-              <span className="text-white font-semibold text-sm">World's First Comprehensive Academy</span>
-            </div>
             
-            {/* Main Hero Content */}
-            <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-12 mb-8 shadow-2xl">
-              <h1 className="text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black mb-6 leading-tight tracking-tight">
-                <span className="block text-white mb-2">Where Future</span>
-                <span className="block">
-                  <span className="text-tma-teal">CEOs</span>,{' '}
-                  <span className="text-tma-yellow">Creators</span> &{' '}
-                  <span className="text-tma-orange">Changemakers</span>
+            {/* Main Glass Hero Content */}
+            <div className="glass-card-modern rounded-3xl p-10 max-w-4xl mx-auto text-center">
+              <div className="mb-8">
+                <span className="glass-button text-white px-6 py-3 rounded-full text-sm font-medium">
+                  ✨ World's First Comprehensive Academy
                 </span>
-                <span className="block text-white mt-2">Begin</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight gradient-text">
+                Where Future
+                <br />
+                <span className="bg-gradient-to-r from-orange-200 to-orange-100 bg-clip-text text-transparent">Creators</span> &{" "}
+                <span className="bg-gradient-to-r from-blue-200 to-cyan-100 bg-clip-text text-transparent">Changemakers</span>
+                <br />
+                Begin
               </h1>
               
-              <div className="mb-8">
-                <h2 className="text-2xl lg:text-4xl font-black text-white mb-4">
-                  TMA — Teenagers Management Academy
-                </h2>
-                <div className="flex items-center justify-center gap-2 text-tma-yellow font-bold text-lg lg:text-xl mb-6">
-                  <span>🚀</span>
-                  <span>Future Ready Leaders</span>
-                  <span>🚀</span>
-                </div>
-                <p className="text-lg lg:text-2xl max-w-4xl mx-auto text-white/90 font-medium leading-relaxed">
-                  The world's <span className="font-black text-tma-yellow">first comprehensive academy</span> for pre-teens and teenagers (ages 10–18) dedicated to leadership, emotional intelligence, and life mastery.
-                </p>
+              <p className="text-xl md:text-2xl text-white/95 mb-10 leading-relaxed max-w-3xl mx-auto font-medium">
+                TMA — The world's first academy dedicated to empowering teenagers with essential life skills, leadership training, and future-ready education
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                <Button
+                  size="lg"
+                  className="glass-button bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white px-10 py-5 text-lg font-bold rounded-2xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-300"
+                  asChild
+                >
+                  <Link to="/apply">🚀 Start Your Journey</Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="glass-button text-white px-10 py-5 text-lg font-bold rounded-2xl border-2 border-white/30 hover:border-white/50"
+                  asChild
+                >
+                  <Link to="/contact">💫 Discover More</Link>
+                </Button>
               </div>
             </div>
             
-            {/* Premium CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-3xl mx-auto">
-              <Button 
-                size="lg" 
-                variant="accent"
-                className="font-black text-xl px-12 py-8 rounded-2xl transition-all duration-500 group relative overflow-hidden w-full sm:w-auto shadow-2xl hover:shadow-tma-orange/25 hover:scale-105 min-h-[64px]" 
-                asChild
-              >
-                <Link to="/apply" className="flex items-center justify-center relative z-10">
-                  <span className="mr-4 text-2xl">🚀</span>
-                  Start Your Journey
-                  <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="font-bold text-xl px-12 py-8 rounded-2xl transition-all duration-500 group w-full sm:w-auto bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 hover:scale-105 min-h-[64px]" 
-                asChild
-              >
-                <Link to="/curriculum" className="flex items-center justify-center">
-                  <span className="mr-4 text-2xl">📚</span>
-                  Explore Curriculum
-                  <ArrowRight className="ml-4 h-7 w-7 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-            </div>
 
+            
             {/* Key Value Proposition */}
-            <div className="mt-8 max-w-5xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 lg:p-8">
-                <div className="flex items-start gap-4">
-                  <div className="text-3xl lg:text-4xl">💰</div>
-                  <p className="text-lg lg:text-xl leading-relaxed font-semibold text-white">
-                    Earning money is important — <span className="font-black text-tma-orange text-xl lg:text-2xl">but managing and growing money</span> is the skill that builds long-term independence.
+            <div className="mt-12 max-w-5xl mx-auto">
+              <div className="glass-card-modern rounded-2xl p-8">
+                <div className="flex items-start gap-6">
+                  <div className="text-4xl">💎</div>
+                  <p className="text-xl leading-relaxed font-semibold text-white">
+                    Earning money is important — <span className="font-black text-orange-300 text-2xl">but managing and growing wealth</span> is the skill that builds generational impact.
                   </p>
                 </div>
               </div>

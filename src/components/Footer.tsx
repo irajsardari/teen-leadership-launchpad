@@ -1,195 +1,133 @@
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin, ExternalLink, Instagram, Youtube, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import tmaLogo from "@/assets/tma-official-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-tma-teal via-tma-blue to-tma-teal text-white relative overflow-hidden">
-      {/* Modern Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-[10%] w-64 h-64 bg-white rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-[15%] w-80 h-80 bg-tma-orange rounded-full blur-3xl" />
+    <footer className="relative bg-gradient-to-br from-purple-600 via-blue-600 to-teal-500 text-white overflow-hidden">
+      {/* Animated Glass Background */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse"></div>
+        <div className="absolute top-0 left-1/4 w-2 h-2 bg-white/20 rounded-full floating"></div>
+        <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-white/30 rounded-full floating" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-white/25 rounded-full floating" style={{animationDelay: '4s'}}></div>
       </div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 lg:gap-8">
-          {/* Premium Brand Section */}
+      
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand Section */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-2xl border border-white/30 overflow-hidden">
-                <img 
-                  src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
-                  alt="TMA - Teenagers Management and Leadership Academy - Future Ready Leaders" 
-                  className="w-16 h-16 object-contain"
-                />
+            <div className="flex items-center space-x-3">
+              <div className="glass-card-modern p-2 rounded-xl">
+                <img src={tmaLogo} alt="TMA Academy" className="h-8 w-auto" />
               </div>
-              <div>
-                <span className="text-2xl font-black text-white">TMA — Teenagers Management Academy</span>
-                <p className="text-base text-tma-yellow font-bold mt-1 flex items-center gap-2">
-                  <span>🌟</span>
-                  <span>Future Ready Leaders</span>
-                  <span>🌟</span>
-                </p>
-              </div>
+              <span className="text-2xl font-bold gradient-text">TMA Academy</span>
             </div>
-            <p className="text-white/80 text-base leading-relaxed">
-              The world's first comprehensive academy for pre-teens and teenagers (ages 10-18) dedicated to leadership and life readiness.
+            <p className="text-white/90 leading-relaxed text-lg">
+              The world's first comprehensive academy empowering teenagers with essential life skills and future-ready leadership.
             </p>
-            <div className="space-y-3 text-base">
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-tma-orange" />
-                <a 
-                  href="mailto:info@teenmanagement.com"
-                  className="text-white/80 hover:text-tma-orange transition-colors font-medium"
-                  aria-label="Email TMA at info@teenmanagement.com"
-                >
-                  info@teenmanagement.com
-                </a>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-tma-orange" />
-                <a 
-                  href="https://wa.me/96899668948" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-tma-orange transition-colors flex items-center space-x-2 font-medium"
-                >
-                  <span>WhatsApp: +968-99668948</span>
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-tma-gold" />
-                <span>P.O. Box 2643 Ruwi, Sultanate of Oman</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-tma-gold">📱</span>
-                <a 
-                  href="https://instagram.com/tmaleaders" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors flex items-center space-x-1"
-                >
-                  <span>Instagram: @tmaleaders</span>
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-tma-gold">📺</span>
-                <a 
-                  href="https://youtube.com/@teenmanagement.academy" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors flex items-center space-x-1"
-                >
-                  <span>YouTube: @teenmanagement.academy</span>
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              </div>
+            <div className="flex space-x-4">
+              <a 
+                href="https://instagram.com/tmaleaders" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="glass-button p-3 rounded-xl text-white/80 hover:text-white transition-all hover:scale-110"
+                aria-label="Follow us on Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://youtube.com/@teenmanagement.academy" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="glass-button p-3 rounded-xl text-white/80 hover:text-white transition-all hover:scale-110"
+                aria-label="Subscribe to our YouTube channel"
+              >
+                <Youtube className="h-5 w-5" />
+              </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/about" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/founder" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Our Founder
-                </Link>
-              </li>
-              <li>
-                <Link to="/curriculum" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Curriculum
-                </Link>
-              </li>
-              <li>
-                <Link to="/voices" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Voices
-                </Link>
-              </li>
-              <li>
-                <Link to="/age-groups" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Age Groups
-                </Link>
-              </li>
-              <li>
-                <Link to="/apply" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Apply Now
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* For Parents & Teachers */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Resources</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/parents-teachers" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Parents & Teachers
-                </Link>
-              </li>
-              <li>
-                <Link to="/curriculum" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Download Brochure
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Contact Support
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy" className="text-primary-foreground/70 hover:text-tma-gold transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="https://tma.academy/portal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary-foreground/70 hover:text-tma-gold transition-colors flex items-center space-x-1"
-                >
-                  <span>Learning Portal</span>
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Premium CTA Section */}
           <div className="space-y-6">
-            <h3 className="text-xl font-black text-white">Get Started</h3>
-            <p className="text-white/80 leading-relaxed">
-              Ready to empower your pre-teen or teenager with essential life skills?
+            <h3 className="text-xl font-bold bg-gradient-to-r from-orange-300 to-yellow-300 bg-clip-text text-transparent">
+              Explore
+            </h3>
+            <ul className="space-y-3">
+              <li><Link to="/about" className="text-white/80 hover:text-white transition-all hover:translate-x-2 block">About Our Mission</Link></li>
+              <li><Link to="/curriculum" className="text-white/80 hover:text-white transition-all hover:translate-x-2 block">Curriculum</Link></li>
+              <li><Link to="/voices" className="text-white/80 hover:text-white transition-all hover:translate-x-2 block">Student Success</Link></li>
+              <li><Link to="/teachers" className="text-white/80 hover:text-white transition-all hover:translate-x-2 block">For Educators</Link></li>
+              <li><Link to="/faq" className="text-white/80 hover:text-white transition-all hover:translate-x-2 block">FAQ</Link></li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
+              Connect
+            </h3>
+            <ul className="space-y-3">
+              <li><a href="mailto:info@teenmanagement.com" className="text-white/80 hover:text-white transition-all flex items-center gap-3 group">
+                <div className="glass-button p-2 rounded-lg group-hover:scale-110 transition-transform">
+                  <Mail className="h-4 w-4" />
+                </div>
+                Get Support
+              </a></li>
+              <li><a href="https://wa.me/96899668948" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-all flex items-center gap-3 group">
+                <div className="glass-button p-2 rounded-lg group-hover:scale-110 transition-transform">
+                  <MessageCircle className="h-4 w-4" />
+                </div>
+                WhatsApp Chat
+              </a></li>
+              <li><Link to="/privacy-policy" className="text-white/80 hover:text-white transition-all hover:translate-x-2 block">Privacy Policy</Link></li>
+              <li><a href="/portal" className="text-white/80 hover:text-white transition-all flex items-center gap-3 group">
+                <div className="glass-button p-2 rounded-lg group-hover:scale-110 transition-transform">
+                  <ExternalLink className="h-4 w-4" />
+                </div>
+                Learning Portal
+              </a></li>
+            </ul>
+          </div>
+
+          {/* CTA Section */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-green-300 to-emerald-300 bg-clip-text text-transparent">
+              Start Today
+            </h3>
+            <p className="text-white/90 leading-relaxed">
+              Ready to unlock your teenager's potential? Join the future of education.
             </p>
-            <div className="space-y-4">
-              <Button variant="accent" className="w-full font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all" asChild>
-                <Link to="/apply" className="flex items-center justify-center gap-2">
-                  <span>🚀</span>
-                  Apply Now
-                </Link>
+            <div className="flex flex-col space-y-4">
+              <Button 
+                asChild
+                className="glass-button bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-xl border-0 transform hover:scale-105 transition-all duration-300"
+              >
+                <Link to="/apply">🚀 Apply Now</Link>
               </Button>
-              <Button variant="outline" className="w-full font-bold py-3 rounded-xl bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20" asChild>
-                <Link to="/contact" className="flex items-center justify-center gap-2">
-                  <span>💬</span>
-                  Contact Us
-                </Link>
+              <Button 
+                variant="outline"
+                asChild
+                className="glass-button text-white border-2 border-white/30 hover:border-white/50 py-3 px-6 rounded-xl font-semibold"
+              >
+                <Link to="/contact">💬 Let's Talk</Link>
               </Button>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm sm:text-base text-primary-foreground/70 space-y-3 px-4 sm:px-0">
-          <p>&copy; 2025 <span className="font-bold">TMA®</span> — All rights reserved.</p>
-          <p className="leading-relaxed"><span className="font-bold">TMA</span> (Teenagers Management and Leadership Academy) is an officially registered trademark in the Sultanate of Oman, under Registration Number: 185581.</p>
-          <p className="leading-relaxed">No part of this website — including its text, visuals, curriculum content, or digital materials — may be copied, reproduced, distributed, or used in any form without prior written permission from <span className="font-bold">TMA</span>.</p>
+        {/* Bottom Bar */}
+        <div className="glass-card-modern mt-16 p-6 rounded-2xl">
+          <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p className="text-white/80 font-medium">
+              &copy; 2024 TMA Academy. Shaping tomorrow's leaders today.
+            </p>
+            <p className="text-white/70 mt-2 md:mt-0 flex items-center gap-2">
+              <MapPin className="h-4 w-4" />
+              P.O. Box 2643 Ruwi, Sultanate of Oman
+            </p>
+          </div>
         </div>
       </div>
     </footer>
