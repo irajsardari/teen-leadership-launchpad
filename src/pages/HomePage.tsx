@@ -1,36 +1,95 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Users, BookOpen, Target, Star, Award, Globe, GraduationCap } from "lucide-react";
+import { ArrowRight, Users, BookOpen, Target, Star, Award, Globe, GraduationCap, Play, ChevronRight, Sparkles, Trophy, Zap, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import heroImage from "@/assets/hero-teenagers.jpg";
 
 const HomePage = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [streakCount, setStreakCount] = useState(0);
+
+  useEffect(() => {
+    // Animate streak counter
+    const timer = setInterval(() => {
+      setStreakCount(prev => prev < 7 ? prev + 1 : prev);
+    }, 200);
+    return () => clearInterval(timer);
+  }, []);
+
   const levels = [
     {
-      title: "Level 1: Explorers (Ages 10–11)",
-      description: "Self-awareness, curiosity, discipline, teamwork.",
+      title: "Explorer",
+      age: "Ages 10-11",
+      icon: "🌍",
+      description: "Self-awareness, curiosity, discipline, teamwork",
       badge: "Explorer Badge",
-      color: "from-tma-teal to-tma-navy"
+      color: "from-purple-400 to-pink-400",
+      hoverColor: "hover:from-purple-500 hover:to-pink-500",
+      skills: ["🧠 Self-Discovery", "🤝 Teamwork", "📚 Study Skills"]
     },
     {
-      title: "Level 2: Builders (Ages 12–13)",
-      description: "Communication, collaboration, creativity, leadership.",
-      badge: "Builder Badge",
-      color: "from-tma-navy to-tma-teal"
+      title: "Builder", 
+      age: "Ages 12-13",
+      icon: "🔧",
+      description: "Communication, collaboration, creativity, leadership",
+      badge: "Builder Badge", 
+      color: "from-blue-400 to-cyan-400",
+      hoverColor: "hover:from-blue-500 hover:to-cyan-500",
+      skills: ["🗣️ Communication", "🎨 Creativity", "👥 Leadership"]
     },
     {
-      title: "Level 3: Innovators (Ages 14–15)", 
-      description: "Critical thinking, problem-solving, resilience, innovation.",
+      title: "Innovator",
+      age: "Ages 14-15", 
+      icon: "💡",
+      description: "Critical thinking, problem-solving, resilience, innovation",
       badge: "Innovator Badge",
-      color: "from-tma-teal to-tma-navy"
+      color: "from-emerald-400 to-teal-400", 
+      hoverColor: "hover:from-emerald-500 hover:to-teal-500",
+      skills: ["🧩 Problem Solving", "💪 Resilience", "🚀 Innovation"]
     },
     {
-      title: "Level 4: Pathfinders (Ages 16–17)",
-      description: "Strategy, leadership ethics, financial literacy, global citizenship.",
+      title: "Pathfinder",
+      age: "Ages 16-17",
+      icon: "🧭", 
+      description: "Strategy, leadership ethics, financial literacy, global citizenship",
       badge: "Pathfinder Badge",
-      color: "from-tma-orange to-tma-yellow"
+      color: "from-orange-400 to-yellow-400",
+      hoverColor: "hover:from-orange-500 hover:to-yellow-500", 
+      skills: ["📈 Strategy", "💰 Finance", "🌍 Global Impact"]
     }
+  ];
+
+  const testimonials = [
+    {
+      name: "Sarah M.",
+      age: 16,
+      quote: "TMA taught me to speak up confidently and lead my school projects! 💪",
+      level: "Pathfinder",
+      avatar: "👩‍🎓"
+    },
+    {
+      name: "Alex K.", 
+      age: 14,
+      quote: "I went from shy to presenting in front of 100+ people! 🎤",
+      level: "Innovator", 
+      avatar: "🧑‍💻"
+    },
+    {
+      name: "Maya L.",
+      age: 12, 
+      quote: "Now I help my friends solve problems and work as a team! 🤝",
+      level: "Builder",
+      avatar: "👩‍🎨"
+    }
+  ];
+
+  const blogCategories = [
+    { name: "Leadership", icon: "👑", color: "bg-purple-100 text-purple-800" },
+    { name: "Psychology", icon: "🧠", color: "bg-blue-100 text-blue-800" },
+    { name: "Money", icon: "💰", color: "bg-green-100 text-green-800" },
+    { name: "Digital Life", icon: "🌐", color: "bg-orange-100 text-orange-800" }
   ];
 
   const graduationAward = {
@@ -88,75 +147,87 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Modern Glass Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-tma">
-        {/* Background Image with Glass Effect */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-fixed opacity-20"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
-        
-        {/* Modern Floating Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-[10%] w-72 h-72 bg-tma-orange/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
-          <div className="absolute bottom-20 right-[15%] w-96 h-96 bg-tma-yellow/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }} />
-          <div className="absolute top-1/2 left-[20%] w-48 h-48 bg-white/5 rounded-full blur-2xl animate-pulse" style={{ animationDuration: '8s', animationDelay: '4s' }} />
+      {/* Bold Modern Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse"></div>
         </div>
         
-        {/* Premium Glass Content Container */}
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-[10%] w-96 h-96 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-[15%] w-80 h-80 bg-gradient-to-r from-pink-400/20 to-purple-500/20 rounded-full blur-3xl animate-float-delayed"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-orange-400/10 to-yellow-400/10 rounded-full blur-3xl animate-pulse"></div>
+        </div>
+        
+        {/* Hero Content */}
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10">
           <div className="max-w-6xl mx-auto text-center">
             
-            {/* Main Glass Hero Content */}
-            <div className="glass-card-modern rounded-3xl p-10 max-w-4xl mx-auto text-center">
-              <div className="mb-8">
-                <span className="glass-button text-white px-6 py-3 rounded-full text-sm font-medium">
-                  ✨ World's First Comprehensive Academy
-                </span>
-              </div>
-              
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight gradient-text">
-                Where Future
-                <br />
-                <span className="bg-gradient-to-r from-orange-200 to-orange-100 bg-clip-text text-transparent">Creators</span> &{" "}
-                <span className="bg-gradient-to-r from-blue-200 to-cyan-100 bg-clip-text text-transparent">Changemakers</span>
-                <br />
-                Begin
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-white/95 mb-10 leading-relaxed max-w-3xl mx-auto font-medium">
-                TMA — The world's first academy dedicated to empowering teenagers with essential life skills, leadership training, and future-ready education
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Button
-                  size="lg"
-                  className="glass-button bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white px-10 py-5 text-lg font-bold rounded-2xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-300"
-                  asChild
-                >
-                  <Link to="/apply">🚀 Start Your Journey</Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="glass-button text-white px-10 py-5 text-lg font-bold rounded-2xl border-2 border-white/30 hover:border-white/50"
-                  asChild
-                >
-                  <Link to="/contact">💫 Discover More</Link>
-                </Button>
-              </div>
+            {/* Announcement Badge */}
+            <div className="mb-8 animate-bounce-gentle">
+              <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-full text-sm font-medium border border-white/20">
+                <Sparkles className="h-4 w-4" />
+                World's First Teen Leadership Academy
+                <Sparkles className="h-4 w-4" />
+              </span>
             </div>
             
-
+            {/* Main Hero Title */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight">
+              <span className="block bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent animate-fade-in">
+                Learn. Lead.
+              </span>
+              <span className="block bg-gradient-to-r from-orange-300 via-pink-300 to-purple-300 bg-clip-text text-transparent animate-fade-in-delayed">
+                Change the World
+              </span>
+              <span className="block text-3xl md:text-4xl mt-4 text-white/90 font-normal animate-fade-in-slow">
+                🚀
+              </span>
+            </h1>
             
-            {/* Key Value Proposition */}
-            <div className="mt-12 max-w-5xl mx-auto">
-              <div className="glass-card-modern rounded-2xl p-8">
-                <div className="flex items-start gap-6">
-                  <div className="text-4xl">💎</div>
-                  <p className="text-xl leading-relaxed font-semibold text-white">
-                    Earning money is important — <span className="font-black text-orange-300 text-2xl">but managing and growing wealth</span> is the skill that builds generational impact.
-                  </p>
+            {/* Subtitle */}
+            <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium animate-fade-in-slower">
+              From Teenagers to Trailblazers — Master leadership, emotional intelligence, and life skills that turn dreams into reality
+            </p>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-fade-in-slowest">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-12 py-6 text-lg font-bold rounded-2xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-300 animate-pulse-glow"
+                asChild
+              >
+                <Link to="/apply" className="flex items-center gap-3">
+                  <Play className="h-5 w-5" />
+                  Start Your Journey
+                  <ChevronRight className="h-5 w-5" />
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="bg-white/10 backdrop-blur-md text-white px-12 py-6 text-lg font-bold rounded-2xl border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+                asChild
+              >
+                <Link to="/curriculum" className="flex items-center gap-3">
+                  <BookOpen className="h-5 w-5" />
+                  Explore Curriculum
+                </Link>
+              </Button>
+            </div>
+
+            {/* Gamification Element - Reading Streak */}
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto border border-white/20">
+              <div className="flex items-center justify-center gap-3">
+                <div className="text-2xl">🔥</div>
+                <div className="text-white">
+                  <div className="text-sm opacity-75">Reading Streak</div>
+                  <div className="text-xl font-bold">{streakCount}/10 Leadership Articles</div>
+                </div>
+                <div className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                  Keep Going!
                 </div>
               </div>
             </div>
@@ -164,135 +235,241 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-tma-cream">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="bg-tma-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500">
-                  <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-tma-blue rounded-2xl sm:rounded-3xl mb-4 sm:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-500">
-                    <stat.icon className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
-                  </div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-tma-blue mb-2 sm:mb-3">{stat.value}</div>
-                  <div className="text-tma-text font-bold text-sm sm:text-base lg:text-lg font-inter opacity-75">{stat.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Fix Pack v1 - Brand Line Quote */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="quote">
-              "We are not just teaching leadership—we're cultivating a generation of confident, purpose-driven teens ready to lead in life, school, and society."
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What Is TMA Section */}
-      <section id="what-is-tma" className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-tma-beige/30 to-background"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-5xl mx-auto text-center">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-tma-blue mb-8 sm:mb-12 lg:mb-16 font-inter leading-tight">
-                What Is TMA?
-              </h2>
-            <div className="tma-card rounded-3xl p-12 lg:p-16 space-y-10">
-              <div className="text-xl md:text-2xl space-y-8 font-inter">
-                <p className="text-3xl md:text-4xl font-black text-tma-blue">
-                  🌟 TMA is the world's <span className="text-tma-green font-black">first academy</span> fully dedicated to teenage leadership and life readiness.
-                </p>
-                <p className="text-2xl md:text-3xl leading-relaxed text-tma-dark-gray">
-                  Our program combines <span className="font-black text-tma-green text-3xl">management</span>, <span className="font-black text-tma-orange text-3xl">emotional intelligence</span>, <span className="font-black text-tma-blue text-3xl">strategy</span>, entrepreneurship, and digital literacy — empowering youth to lead with confidence in school, career, and life.
-                </p>
-                <div className="bg-tma-white border-2 border-tma-orange/30 rounded-3xl p-8 shadow-[var(--shadow-card)]">
-                  <p className="text-3xl md:text-4xl font-black text-tma-blue leading-relaxed">
-                    💡 "We don't just prepare students to pass exams. We prepare them to lead their lives."
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Structure Section - Simplified Teaser */}
-      <section id="challenger-journey" className="py-20 bg-gradient-to-b from-background to-background/50">
+      {/* Interactive Level Cards Section */}
+      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-3xl md:text-4xl font-bold text-tma-blue mb-6 font-inter">
-              TMA Challenger Journey
-            </h1>
-            <div className="bg-tma-neutral-gray border border-tma-blue/20 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
-              <h3 className="text-xl font-semibold text-tma-blue mb-2">Total: 8 Years | Ages 10–18 | 24 Terms</h3>
-              <p className="text-tma-dark-gray">
-                4 Levels + Future-Ready Leader Award. All participants are TMA Challengers — future-ready leaders in training.
-              </p>
-            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+              Choose Your Adventure 🎯
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Four epic levels designed to transform you from curious explorer to confident leader
+            </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {levels.map((level, index) => (
-              <div key={index} className="group">
-                <div className="bg-tma-blue text-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500">
-                  <div className="flex-1 text-center">
-                    <div className="flex flex-col items-center space-y-3 sm:space-y-4">
-                      <div className="bg-tma-orange text-white px-4 py-2 rounded-full font-semibold text-sm">
-                        {level.title.match(/\(Ages (\d+-\d+)\)/)?.[1]}
+              <div key={index} className="group cursor-pointer">
+                <div className={`relative bg-gradient-to-br ${level.color} ${level.hoverColor} rounded-3xl p-8 text-white transform hover:scale-105 hover:-rotate-1 transition-all duration-500 shadow-lg hover:shadow-2xl`}>
+                  
+                  {/* Level Icon */}
+                  <div className="text-6xl mb-4 text-center animate-bounce-gentle">
+                    {level.icon}
+                  </div>
+                  
+                  {/* Level Title */}
+                  <h3 className="text-2xl font-black text-center mb-2">{level.title}</h3>
+                  <div className="text-center text-white/80 text-sm font-medium mb-4 bg-white/20 rounded-full px-3 py-1 inline-block">
+                    {level.age}
+                  </div>
+                  
+                  {/* Skills List */}
+                  <div className="space-y-2 mb-6">
+                    {level.skills.map((skill, skillIndex) => (
+                      <div key={skillIndex} className="text-sm bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm">
+                        {skill}
                       </div>
-                      <h3 className="text-white text-lg sm:text-xl lg:text-2xl font-bold">{level.title.split(' (')[0]}</h3>
-                      <p className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">{level.description}</p>
+                    ))}
+                  </div>
+                  
+                  {/* Badge */}
+                  <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 text-center">
+                    <Trophy className="h-5 w-5 mx-auto mb-1" />
+                    <div className="text-xs font-bold">{level.badge}</div>
+                  </div>
+                  
+                  {/* Hover Effect */}
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-center justify-center">
+                    <div className="text-center">
+                      <ChevronRight className="h-8 w-8 mx-auto mb-2 animate-bounce" />
+                      <div className="text-sm font-bold">Explore Level</div>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Student Testimonials Carousel */}
+      <section className="py-20 bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+              Why Students Love TMA 💙
+            </h2>
+            <p className="text-xl text-white/80">Real stories from real changemakers</p>
+          </div>
           
-          <div className="text-center px-4 sm:px-0">
-            <Button 
-              size="lg" 
-              variant="primary"
-              className="font-inter font-black px-8 sm:px-12 lg:px-16 py-6 sm:py-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl group w-full sm:w-auto max-w-md sm:max-w-none min-h-[44px] min-w-[44px]"
-              asChild
-            >
-              <Link to="/curriculum" className="flex items-center justify-center">
-                <span className="mr-3 sm:mr-4 text-xl sm:text-2xl">📚</span>
-                See Full Curriculum
-                <ArrowRight className="ml-3 sm:ml-4 h-6 w-6 sm:h-7 sm:w-7 transition-transform group-hover:translate-x-2" />
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
+              <div className="text-center">
+                <div className="text-6xl mb-4">{testimonials[currentTestimonial].avatar}</div>
+                <blockquote className="text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed">
+                  "{testimonials[currentTestimonial].quote}"
+                </blockquote>
+                <div className="text-white/80">
+                  <div className="font-bold text-lg">{testimonials[currentTestimonial].name}</div>
+                  <div className="text-sm">Age {testimonials[currentTestimonial].age} • {testimonials[currentTestimonial].level}</div>
+                </div>
+              </div>
+              
+              {/* Carousel Controls */}
+              <div className="flex justify-center gap-2 mt-8">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial ? 'bg-white scale-125' : 'bg-white/30 hover:bg-white/50'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Modern Blog/Voices Feed */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+              Voices from Our Community 📝
+            </h2>
+            <p className="text-xl text-gray-600">
+              Stories, insights, and inspiration from the next generation of leaders
+            </p>
+          </div>
+
+          {/* Category Filters */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {blogCategories.map((category, index) => (
+              <button
+                key={index}
+                className={`${category.color} px-6 py-3 rounded-full font-bold text-sm hover:scale-105 transition-all duration-300 flex items-center gap-2`}
+              >
+                <span>{category.icon}</span>
+                {category.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Blog Preview Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {[
+              {
+                title: "How I Built Confidence in 30 Days",
+                author: "Sarah M.",
+                category: "Leadership",
+                readTime: "5 min read",
+                image: "👩‍🎓",
+                excerpt: "From shy introvert to confident speaker..."
+              },
+              {
+                title: "The Psychology of Teenage Success",
+                author: "Dr. Iraj",
+                category: "Psychology", 
+                readTime: "8 min read",
+                image: "🧠",
+                excerpt: "Understanding the teenage mind for better leadership..."
+              },
+              {
+                title: "My First Business at Age 15",
+                author: "Alex K.",
+                category: "Money",
+                readTime: "6 min read", 
+                image: "🚀",
+                excerpt: "How TMA taught me to turn ideas into reality..."
+              }
+            ].map((post, index) => (
+              <div key={index} className="group cursor-pointer">
+                <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="text-4xl mb-4 text-center">{post.image}</div>
+                  <div className="text-sm text-gray-500 mb-2">{post.category} • {post.readTime}</div>
+                  <h3 className="font-bold text-xl text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-500">by {post.author}</span>
+                    <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-bold">
+              <Link to="/blog" className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5" />
+                Read All Stories
+                <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
           </div>
-          
-          {/* Future-Ready Leader Award Section */}
-          <div className="mt-16">
-            <Card className="border-2 border-tma-orange/30 shadow-[var(--shadow-card)] bg-tma-neutral-gray">
-              <CardContent className="p-12 text-center">
-                <div className="inline-flex items-center justify-center w-24 h-24 bg-tma-orange rounded-full mb-8 shadow-lg">
-                  <Award className="h-12 w-12 text-white" />
-                </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-tma-blue mb-6 font-inter">
-                  {graduationAward.title}
-                </h3>
-                <p className="text-xl text-tma-dark-gray font-inter mb-8 leading-relaxed max-w-3xl mx-auto">
-                  {graduationAward.description}
-                </p>
-                <Badge variant="secondary" className="bg-tma-orange text-white border-2 border-tma-orange font-bold text-xl p-4 rounded-2xl">
-                  🎓 {graduationAward.badge}
-                </Badge>
-              </CardContent>
-            </Card>
-          </div>
-          
-          <div className="text-center mt-8">
-            <p className="text-xl font-semibold text-tma-blue font-inter italic">
-              "4 Levels + Future-Ready Leader Award — A Complete Leadership Journey"
+        </div>
+      </section>
+
+      {/* Gamified Journey Overview */}
+      <section className="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+              Your Learning Journey 🎮
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Complete challenges, earn badges, and unlock new levels as you grow from explorer to leader
             </p>
+          </div>
+
+          {/* Progress Tracker */}
+          <div className="max-w-4xl mx-auto mb-16">
+            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold text-gray-900">Your Progress</h3>
+                <div className="flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-yellow-500" />
+                  <span className="text-lg font-bold text-gray-700">Level 2: Builder</span>
+                </div>
+              </div>
+              
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
+                <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-4 rounded-full" style={{width: '65%'}}></div>
+              </div>
+              
+              <div className="flex justify-between text-sm text-gray-600 mb-6">
+                <span>13/20 Challenges Complete</span>
+                <span>Next: Communication Badge</span>
+              </div>
+
+              {/* Mini Badge Collection */}
+              <div className="flex gap-4 justify-center">
+                {['🌍 Explorer', '🔧 Builder', '💡 Locked', '🧭 Locked'].map((badge, index) => (
+                  <div key={index} className={`px-4 py-2 rounded-full text-sm font-bold ${
+                    index < 2 ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-400'
+                  }`}>
+                    {badge}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Final CTA */}
+          <div className="text-center">
+            <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+              <Link to="/apply" className="flex items-center gap-3">
+                <Star className="h-6 w-6" />
+                Begin Your Adventure
+                <ArrowRight className="h-6 w-6" />
+              </Link>
+            </Button>
+            <p className="text-gray-600 mt-4">Join 1,000+ teenagers already on their leadership journey</p>
           </div>
         </div>
       </section>
