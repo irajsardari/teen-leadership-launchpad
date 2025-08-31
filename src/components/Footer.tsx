@@ -5,7 +5,7 @@ import tmaLogo from "@/assets/tma-official-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-br from-purple-600 via-blue-600 to-teal-500 text-white overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-tma-blue via-tma-teal to-tma-orange text-white overflow-hidden">
       {/* Animated Glass Background */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse"></div>
@@ -51,7 +51,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="space-y-6">
-            <h3 className="text-xl font-bold bg-gradient-to-r from-orange-300 to-yellow-300 bg-clip-text text-transparent">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-tma-orange to-tma-yellow bg-clip-text text-transparent">
               Explore
             </h3>
             <ul className="space-y-3">
@@ -65,7 +65,7 @@ const Footer = () => {
 
           {/* Resources */}
           <div className="space-y-6">
-            <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-tma-teal to-tma-blue bg-clip-text text-transparent">
               Connect
             </h3>
             <ul className="space-y-3">
@@ -93,7 +93,7 @@ const Footer = () => {
 
           {/* CTA Section */}
           <div className="space-y-6">
-            <h3 className="text-xl font-bold bg-gradient-to-r from-green-300 to-emerald-300 bg-clip-text text-transparent">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-tma-orange to-tma-teal bg-clip-text text-transparent">
               Start Today
             </h3>
             <p className="text-white/90 leading-relaxed">
@@ -102,7 +102,7 @@ const Footer = () => {
             <div className="flex flex-col space-y-4">
               <Button 
                 asChild
-                className="glass-button bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-xl border-0 transform hover:scale-105 transition-all duration-300"
+                className="glass-button bg-gradient-to-r from-tma-orange to-tma-yellow hover:from-tma-orange hover:to-tma-orange text-white font-bold py-3 px-6 rounded-xl border-0 transform hover:scale-105 transition-all duration-300"
               >
                 <Link to="/apply">🚀 Apply Now</Link>
               </Button>
@@ -121,7 +121,7 @@ const Footer = () => {
         <div className="glass-card-modern mt-16 p-6 rounded-2xl">
           <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <p className="text-white/80 font-medium">
-              &copy; 2024 TMA Academy. Shaping tomorrow's leaders today.
+              &copy; 2025 TMA Academy. Shaping tomorrow's leaders today.
             </p>
             <p className="text-white/70 mt-2 md:mt-0 flex items-center gap-2">
               <MapPin className="h-4 w-4" />
