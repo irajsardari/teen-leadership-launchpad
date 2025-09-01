@@ -1341,6 +1341,14 @@ export type Database = {
         Args: { reason: string }
         Returns: undefined
       }
+      emergency_security_lockdown: {
+        Args: { lockdown_reason: string }
+        Returns: undefined
+      }
+      final_security_validation: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       flag_parental_consent_required: {
         Args: Record<PropertyKey, never>
         Returns: undefined
