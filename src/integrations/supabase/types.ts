@@ -1539,6 +1539,10 @@ export type Database = {
         Args: { _email: string; _role: string }
         Returns: undefined
       }
+      simple_is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       submit_parental_consent: {
         Args: {
           p_child_user_id: string
