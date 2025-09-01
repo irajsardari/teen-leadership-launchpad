@@ -1463,6 +1463,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      is_admin_user: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       is_resource_owned_by_user: {
         Args: { res_id: string; user_id: string }
         Returns: boolean
