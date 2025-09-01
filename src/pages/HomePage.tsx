@@ -179,7 +179,7 @@ const HomePage = () => {
                 className="bg-[#F28C28] hover:bg-[#F28C28]/90 text-white px-12 py-6 text-lg font-bold rounded-2xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-300"
                 asChild
               >
-                <Link to="/apply" className="flex items-center gap-3">
+                <Link to="/auth" className="flex items-center gap-3">
                   <Play className="h-5 w-5" />
                   Start Your Journey
                   <ChevronRight className="h-5 w-5" />
@@ -363,7 +363,7 @@ const HomePage = () => {
           {/* Premium Final CTA with TMA Brand */}
           <div className="text-center">
             <Button asChild size="lg" className="bg-[#F28C28] hover:bg-[#F28C28]/90 text-white px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
-              <Link to="/apply" className="flex items-center gap-3">
+              <Link to="/auth" className="flex items-center gap-3">
                 <Star className="h-6 w-6" />
                 Begin Your Adventure
                 <ArrowRight className="h-6 w-6" />

@@ -66,7 +66,7 @@ const App = () => (
                 <Route path="/challenger" element={<ChallengerPage />} />
 <Route path="/learning-portal" element={<LearningPortalPage />} />
 <Route path="/portal-info" element={<PortalPage />} />
-<Route path="/portal" element={<PortalLoginPage />} />
+<Route path="/portal" element={<PortalPage />} />
 <Route path="/portal-login" element={<TeacherPortalPage />} />
 <Route path="/portal/dashboard" element={<PortalDashboardPage />} />
 <Route path="/portal/teacher" element={<TeacherDashboardPage />} />
