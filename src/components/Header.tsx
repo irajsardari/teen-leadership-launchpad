@@ -72,19 +72,19 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-[1000] w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-sm">
+    <header className="sticky top-0 z-[1000] w-full border-b bg-tma-cream/95 backdrop-blur supports-[backdrop-filter]:bg-tma-cream/80 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 sm:space-x-3 hover:opacity-90 transition-opacity duration-200">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center overflow-hidden">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-tma-blue/20 overflow-hidden hover:shadow-lg transition-shadow duration-200">
               <img 
                 src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
                 alt="TMA Academy - Teenagers Management and Leadership Academy Logo" 
-                className="w-10 h-10 sm:w-12 sm:h-12 object-contain hover:scale-105 transition-transform duration-200"
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
               />
             </div>
-            <span className="text-lg sm:text-xl font-semibold text-secondary font-inter hidden xs:block tracking-wide">
+            <span className="text-lg sm:text-xl font-semibold text-tma-blue font-inter hidden xs:block tracking-wide">
               TMA Academy
             </span>
           </Link>
@@ -98,20 +98,20 @@ const Header = () => {
                     item.href === "/insights" ? "/insights#voices-top" : item.href}
                 className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group whitespace-nowrap ${
                   isActive(item.href)
-                    ? "text-accent font-semibold"
-                    : "text-secondary hover:text-accent"
+                    ? "text-tma-orange font-semibold"
+                    : "text-tma-blue hover:text-tma-orange"
                 }`}
               >
                 {item.name}
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-400 ease-out ${
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-tma-orange transition-all duration-400 ease-out ${
                   isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
                 }`} />
               </Link>
             ))}
             
-            <div className="flex items-center space-x-4 ml-8 pl-6 border-l border-border">
+            <div className="flex items-center space-x-4 ml-8 pl-6 border-l border-gray-200">
               <Button 
-                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-inter font-medium transition-all duration-300 hover:shadow-lg rounded-lg px-5 py-2 min-h-[44px]" 
+                className="bg-tma-blue hover:bg-tma-blue/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg rounded-lg px-5 py-2 min-h-[44px]" 
                 size="sm" 
                 asChild>
                 <Link to="/learning-portal">
@@ -125,7 +125,7 @@ const Header = () => {
                   {user ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-primary/5 transition-colors duration-200">
+                        <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-[#006D6C]/5 transition-colors duration-200">
                           <User className="h-4 w-4" />
                           <span className="hidden xl:inline text-sm">
                             {user.user_metadata?.full_name || user.email}
@@ -142,7 +142,7 @@ const Header = () => {
                   ) : (
                       <Button 
                         variant="outline"
-                        className="border-accent text-accent hover:bg-accent hover:text-accent-foreground font-inter font-medium transition-all duration-300 rounded-lg px-5 py-2" 
+                        className="border-tma-orange text-tma-orange hover:bg-tma-orange hover:text-white font-inter font-medium transition-all duration-300 rounded-lg px-5 py-2" 
                         size="sm" 
                         onClick={() => setIsAuthModalOpen(true)}
                       >
@@ -191,7 +191,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="hover:bg-muted/10 transition-colors duration-200 h-10 w-10 min-w-[44px] min-h-[44px] text-secondary"
+              className="hover:bg-gray-100 transition-colors duration-200 h-10 w-10 min-w-[44px] min-h-[44px] text-tma-blue"
               aria-label="Toggle navigation menu"
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -229,14 +229,14 @@ const Header = () => {
             `}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-border/30">
+            <div className="flex items-center justify-between p-4 border-b border-gray-100">
               <div className="flex items-center space-x-2">
                 <img 
                   src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
                   alt="TMA Academy Logo" 
                   className="w-8 h-8 object-contain"
                 />
-                <span className="text-lg font-semibold text-secondary font-inter">
+                <span className="text-lg font-semibold text-tma-blue font-inter">
                   TMA Academy
                 </span>
               </div>
@@ -244,7 +244,7 @@ const Header = () => {
                 variant="ghost"
                 size="icon"
                 onClick={closeMenu}
-                className="h-10 w-10 min-h-[44px] min-w-[44px] hover:bg-muted/10 text-secondary"
+                className="h-10 w-10 min-h-[44px] min-w-[44px] hover:bg-gray-100 text-tma-blue"
                 aria-label="Close menu"
               >
                 <X className="h-6 w-6" />

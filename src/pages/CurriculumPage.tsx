@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Download, BookOpen, Users, Clock, Target, Award, ArrowRight, Sparkles, Trophy, Globe } from "lucide-react";
+import { Download, BookOpen, Users, Clock, Target, Award, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CurriculumPage = () => {
   const curriculumLevels = [
     {
       level: "Explorers",
-      badge: "Explorer Badge", 
+      badge: "Explorer Badge",
       years: "Years 1-2",
       ages: "10-11",
       terms: 6,
       focus: "Self-awareness, curiosity, discipline, teamwork.",
       subjects: [
         "Self-Awareness & Confidence",
-        "Curiosity & Discovery", 
+        "Curiosity & Discovery",
         "Discipline & Healthy Habits",
         "Foundational Communication",
         "Teamwork & Friendship",
@@ -23,13 +23,12 @@ const CurriculumPage = () => {
         "Emotion Recognition",
         "Goal Setting for Beginners"
       ],
-      color: "from-primary to-primary/80",
-      icon: Sparkles
+      color: "from-green-500 to-teal-500"
     },
     {
       level: "Builders",
       badge: "Builder Badge",
-      years: "Years 3-4", 
+      years: "Years 3-4",
       ages: "12-13",
       terms: 6,
       focus: "Communication, collaboration, creativity, leadership.",
@@ -43,14 +42,13 @@ const CurriculumPage = () => {
         "Team Building",
         "Creative Problem-Solving"
       ],
-      color: "from-secondary to-secondary/80",
-      icon: Users
+      color: "from-blue-500 to-teal-500"
     },
     {
-      level: "Innovators",
+      level: "Innovators", 
       badge: "Innovator Badge",
       years: "Years 5-6",
-      ages: "14-15", 
+      ages: "14-15",
       terms: 6,
       focus: "Critical thinking, problem-solving, resilience, innovation.",
       subjects: [
@@ -63,8 +61,7 @@ const CurriculumPage = () => {
         "Public Speaking & Persuasion",
         "Entrepreneurial Mindset"
       ],
-      color: "from-accent to-accent/80",
-      icon: Target
+      color: "from-teal-500 to-blue-600"
     },
     {
       level: "Pathfinders",
@@ -83,8 +80,7 @@ const CurriculumPage = () => {
         "Mentorship & Coaching",
         "Future Planning & Vision"
       ],
-      color: "from-muted to-muted/80",
-      icon: Globe
+      color: "from-blue-600 to-indigo-600"
     }
   ];
 
@@ -98,272 +94,186 @@ const CurriculumPage = () => {
       "10-Year Life Vision Plan",
       "Community Impact Initiative"
     ],
-    color: "from-primary via-accent to-secondary"
+    color: "from-tma-gold to-tma-teal"
   };
 
   const features = [
     {
       icon: Clock,
       title: "Flexible Scheduling",
-      description: "Learn at your own pace with 24/7 access to materials",
-      color: "from-primary/10 to-primary/20"
+      description: "Learn at your own pace with 24/7 access to materials"
     },
     {
       icon: Users,
-      title: "Interactive Learning", 
-      description: "Group projects, discussions, and peer-to-peer learning",
-      color: "from-secondary/10 to-secondary/20"
+      title: "Interactive Learning",
+      description: "Group projects, discussions, and peer-to-peer learning"
     },
     {
       icon: Target,
       title: "Practical Application",
-      description: "Real-world scenarios and hands-on projects",
-      color: "from-accent/10 to-accent/20"
+      description: "Real-world scenarios and hands-on projects"
     },
     {
       icon: Award,
       title: "Certification",
-      description: "Receive certificates upon completion of each level",
-      color: "from-muted/10 to-muted/20"
+      description: "Receive certificates upon completion of each level"
     }
   ];
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Enhanced Visuals */}
-      <section id="curriculum-top" className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent opacity-95"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.05)_50%,transparent_75%)] animate-pulse"></div>
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full mb-8 border border-white/20">
-              <BookOpen className="h-5 w-5 text-white" />
-              <span className="text-white font-medium">8-Year Comprehensive Program</span>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white leading-tight">
-              TMA Curriculum
-              <span className="block text-3xl md:text-4xl font-medium text-white/90 mt-4">
-                Future Ready Leaders
-              </span>
+      {/* Hero Section */}
+      <section id="curriculum-top" className="py-20 bg-tma-teal">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              TMA Curriculum Overview
             </h1>
-            
-            <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/90 mb-8">
+              TMA — Teenagers Management Academy<br />
+              Future Ready Leaders<br /><br />
               A comprehensive 8-year, 24-term program for ages 10–18 designed to develop 
-              complete leadership and life skills through innovative, age-appropriate learning
+              complete leadership and life skills
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <Download className="mr-2 h-5 w-5" />
-                Download Full Curriculum PDF
-              </Button>
-              <div className="flex items-center gap-2 text-white/80">
-                <Trophy className="h-4 w-4" />
-                <span className="text-sm font-medium">Globally Recognized Program</span>
-              </div>
-            </div>
+            <Button variant="accent" size="lg" className="bg-white text-tma-blue hover:bg-gray-100">
+              <Download className="mr-2 h-5 w-5" />
+              Download Full Curriculum PDF
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Program Overview with Enhanced Design */}
-      <section className="py-24 bg-gradient-to-b from-background to-muted/20">
+      {/* Program Overview */}
+      <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-primary font-medium text-sm">The TMA Journey</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-8 leading-tight">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
               TMA Challenger Journey
             </h2>
-            
-            <div className="bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 rounded-3xl p-8 mb-8 max-w-4xl mx-auto border border-primary/10">
-              <div className="flex flex-wrap justify-center items-center gap-8 mb-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">8</div>
-                  <div className="text-sm text-foreground/70">Years</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-accent">10-18</div>
-                  <div className="text-sm text-foreground/70">Age Range</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-secondary">24</div>
-                  <div className="text-sm text-foreground/70">Terms</div>
-                </div>
-              </div>
-              <p className="text-lg text-foreground/80 leading-relaxed">
-                4 Progressive Levels + Future-Ready Leader Award. All participants are TMA Challengers — future-ready leaders in training.
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6 mb-8 max-w-3xl mx-auto">
+              <h3 className="text-xl font-semibold text-primary mb-2">Total: 8 Years | Ages 10–18 | 24 Terms</h3>
+              <p className="text-foreground/80">
+                4 Levels + Future-Ready Leader Award. All participants are TMA Challengers — future-ready leaders in training.
               </p>
             </div>
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-12">
             {curriculumLevels.map((level, index) => (
-              <Card key={index} className="border-none shadow-[var(--shadow-elegant)] overflow-hidden hover:shadow-[var(--shadow-glow)] transition-all duration-500 cursor-pointer group bg-gradient-to-br from-background to-muted/10">
-                <div className={`h-3 bg-gradient-to-r ${level.color}`}></div>
-                <div className="grid lg:grid-cols-12 gap-8 p-10">
-                  {/* Level Info */}
-                  <div className="lg:col-span-4">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className={`p-3 rounded-xl bg-gradient-to-br ${level.color}`}>
-                        <level.icon className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <Badge variant="secondary" className="mb-2">
-                          {level.years} • Ages {level.ages}
-                        </Badge>
-                      </div>
+              <Card key={index} className="border-none shadow-[var(--shadow-card)] overflow-hidden hover:shadow-[var(--shadow-elegant)] transition-all duration-300 cursor-pointer group">
+                <div className={`h-2 bg-gradient-to-r ${level.color}`}></div>
+                <div className="grid lg:grid-cols-3 gap-8 p-8">
+                  <div className="lg:col-span-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Badge variant="secondary" className="text-sm">
+                        {level.years}
+                      </Badge>
+                      <Badge variant="outline" className="text-sm">
+                        Ages {level.ages}
+                      </Badge>
                     </div>
-                    
-                    <h3 className="text-3xl font-bold text-foreground mb-6 leading-tight">
-                      {level.level}
-                      <span className="block text-lg font-medium text-foreground/70 mt-2">
-                        Level
-                      </span>
+                    <h3 className="text-2xl font-bold text-tma-navy mb-4">
+                      {level.level} Level
                     </h3>
                     
-                    {/* Enhanced Badge Section */}
-                    <div className="mb-8 p-6 bg-gradient-to-br from-muted/20 to-background rounded-2xl border border-border/50">
-                      <div className="flex items-center gap-3 mb-4">
-                        <img 
-                          src="/src/assets/tma-badge-per-term-solid.svg" 
-                          alt="Per Term Badge" 
-                          className="w-8 h-8"
-                          loading="lazy"
-                        />
-                        <div>
-                          <p className="font-semibold text-foreground text-sm">
-                            Per Term Investment
-                          </p>
-                          <p className="text-xs text-foreground/60">
-                            10 Sessions • Affordable Pricing
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <p className="text-sm text-foreground/70 mb-3">
-                        Duration: {level.level === 'Explorers' ? '45–50 min per session' : '70 min per session'}
+                    {/* Badge */}
+                    <div className="mb-4">
+                      <img 
+                        src="/src/assets/tma-badge-per-term-solid.svg" 
+                        alt="Per Term • 10 Sessions" 
+                        className="term-badge mb-3"
+                        loading="lazy"
+                      />
+                      <p className="text-sm font-semibold text-tma-navy mb-2">
+                        Affordable investment per term. Exact fee is shared during registration.
                       </p>
-                      <p className="text-xs text-foreground/60 italic">
-                        Final fees confirmed during registration based on program format and cohort availability.
+                      <p className="text-sm text-tma-gray mb-3">
+                        Duration: {level.level === 'Explorers' ? '45–50 min per session • 10 sessions per term' : '70 min per session • 10 sessions per term'}
+                      </p>
+                      <p className="note">
+                        Final fees are confirmed during registration based on program format and cohort availability.
                       </p>
                     </div>
                     
-                    <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-4 mb-6">
-                      <p className="text-foreground font-semibold">
-                        {level.focus}
-                      </p>
-                    </div>
-                    
-                    <div className="flex items-center text-foreground/70 mb-6">
-                      <BookOpen className="h-5 w-5 mr-3 text-primary" />
-                      <span className="font-medium">{level.terms} comprehensive terms</span>
+                    <p className="text-tma-blue font-semibold mb-4">
+                      {level.focus}
+                    </p>
+                    <div className="flex items-center text-tma-gray mb-4">
+                      <BookOpen className="h-4 w-4 mr-2" />
+                      <span>{level.terms} terms</span>
                     </div>
                   </div>
                   
-                  {/* Subjects Grid */}
-                  <div className="lg:col-span-8">
-                    <h4 className="text-xl font-semibold text-foreground mb-8 flex items-center gap-2">
-                      <Target className="h-5 w-5 text-accent" />
-                      Core Learning Subjects
+                  <div className="lg:col-span-2">
+                    <h4 className="text-lg font-semibold text-tma-navy mb-4">
+                      Core Subjects
                     </h4>
-                    
-                    <div className="grid md:grid-cols-2 gap-4 mb-8">
+                    <div className="grid md:grid-cols-2 gap-3 mb-6">
                       {level.subjects.map((subject, subjectIndex) => (
-                        <div key={subjectIndex} className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-muted/10 to-background border border-border/30 hover:border-primary/20 transition-all duration-300">
-                          <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-sm text-foreground/80 font-medium">{subject}</span>
+                        <div key={subjectIndex} className="flex items-center text-sm text-tma-gray">
+                          <div className="w-2 h-2 bg-tma-teal rounded-full mr-3 flex-shrink-0"></div>
+                          {subject}
                         </div>
                       ))}
                     </div>
-                    
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Button 
-                        className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                        size="lg"
-                        asChild
-                      >
-                        <Link to="/apply">
-                          <ArrowRight className="mr-2 h-4 w-4" />
-                          Register for {level.level}
-                        </Link>
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="lg"
-                        className="border-primary/20 text-primary hover:bg-primary/5"
-                        asChild
-                      >
-                        <Link to="#fees-faq">
-                          Learn About Fees
-                        </Link>
-                      </Button>
+                    <div className="space-y-3">
+                      <Link to="/apply" className="register-btn w-full text-center no-underline block">
+                        Register for {level.level}
+                      </Link>
+                      <a href="#fees-faq" className="ask-fees block text-center">
+                        Ask About Fees
+                      </a>
                     </div>
                   </div>
                 </div>
               </Card>
             ))}
 
-            {/* Enhanced Future-Ready Leader Award */}
-            <Card className="border-none shadow-[var(--shadow-glow)] overflow-hidden bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 border-2 border-primary/20 relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 opacity-50"></div>
-              <div className={`h-3 bg-gradient-to-r ${graduationAward.color}`}></div>
-              
-              <div className="p-12 relative z-10">
-                <div className="text-center mb-12">
-                  <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-primary via-accent to-secondary rounded-full mb-8 shadow-2xl animate-pulse">
-                    <Trophy className="h-12 w-12 text-white" />
+            {/* Future-Ready Leader Award */}
+            <Card className="border-none shadow-[var(--shadow-elegant)] overflow-hidden bg-gradient-to-br from-tma-gold/10 via-background to-tma-teal/10 border-2 border-tma-gold/30">
+              <div className={`h-2 bg-gradient-to-r ${graduationAward.color}`}></div>
+              <div className="p-8">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-tma-gold to-tma-teal rounded-full mb-6 shadow-lg">
+                    <Award className="h-10 w-10 text-white" />
                   </div>
-                  
-                  <h3 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+                  <h3 className="text-3xl font-bold text-tma-navy mb-4">
                     🎓 {graduationAward.title}
                   </h3>
-                  
-                  <Badge className="mb-6 bg-gradient-to-r from-primary/20 to-accent/20 text-foreground border-2 border-primary/30 font-bold text-xl px-6 py-3 rounded-2xl">
-                    Age {graduationAward.age} • Graduation Excellence
+                  <Badge variant="secondary" className="mb-4 bg-gradient-to-r from-tma-gold/20 to-tma-teal/20 text-tma-navy border-2 border-tma-gold/40 font-bold text-lg p-3 rounded-2xl">
+                    Age {graduationAward.age}
                   </Badge>
-                  
-                  <p className="text-xl text-foreground/80 font-semibold leading-relaxed mb-8 max-w-3xl mx-auto">
+                  <p className="text-tma-blue font-semibold text-lg mb-6">
                     {graduationAward.description}
                   </p>
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="bg-background/80 backdrop-blur-sm rounded-2xl p-8 border border-border/50">
-                    <h4 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
-                      <Award className="h-5 w-5 text-primary" />
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-lg font-semibold text-tma-navy mb-4">
                       Capstone Requirements
                     </h4>
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       {graduationAward.subjects.map((subject, subjectIndex) => (
-                        <div key={subjectIndex} className="flex items-center gap-3">
-                          <div className="w-3 h-3 bg-gradient-to-r from-primary to-accent rounded-full flex-shrink-0"></div>
-                          <span className="text-sm text-foreground/80 font-medium">{subject}</span>
+                        <div key={subjectIndex} className="flex items-center text-sm text-tma-gray">
+                          <div className="w-2 h-2 bg-tma-gold rounded-full mr-3 flex-shrink-0"></div>
+                          {subject}
                         </div>
                       ))}
                     </div>
                   </div>
-                  
-                  <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-8 border border-primary/20">
-                    <h4 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                      <Globe className="h-5 w-5 text-accent" />
+                  <div className="bg-tma-light/50 rounded-lg p-6">
+                    <h4 className="text-lg font-semibold text-tma-navy mb-3">
                       Global Recognition
                     </h4>
-                    <p className="text-sm text-foreground/70 mb-6 leading-relaxed">
+                    <p className="text-sm text-tma-gray mb-4">
                       This award holds the same prestige as internationally recognized certificates like IELTS or TOEFL in their respective fields.
                     </p>
                     <Button 
-                      className="w-full bg-gradient-to-r from-primary via-accent to-secondary text-white hover:opacity-90 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
-                      size="lg"
+                      className="w-full bg-gradient-to-r from-tma-gold to-tma-teal text-white hover:opacity-90 transition-all duration-300"
                       asChild
                     >
                       <Link to="/apply#register">
-                        <Trophy className="mr-2 h-4 w-4" />
                         Begin Your Journey
                       </Link>
                     </Button>
@@ -375,35 +285,30 @@ const CurriculumPage = () => {
         </div>
       </section>
 
-      {/* Enhanced Learning Features */}
-      <section className="py-24 bg-gradient-to-b from-muted/20 to-background">
+      {/* Learning Features */}
+      <section className="py-20 bg-tma-light">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-6">
-              <Target className="h-4 w-4 text-accent" />
-              <span className="text-accent font-medium text-sm">Learning Experience</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8">
-              How We Deliver Excellence
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-tma-navy mb-6">
+              Learning Experience
             </h2>
-            <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-tma-gray max-w-3xl mx-auto">
               Our innovative approach combines theory with practice to ensure 
-              effective learning and real-world skill application.
+              effective learning and skill application.
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="border-none shadow-[var(--shadow-card)] text-center hover:shadow-[var(--shadow-elegant)] transition-all duration-300 transform hover:scale-105 group bg-gradient-to-br from-background to-muted/10">
-                <CardHeader className="pb-4">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300`}>
-                    <feature.icon className="h-8 w-8 text-primary" />
+              <Card key={index} className="border-none shadow-[var(--shadow-card)] text-center">
+                <CardHeader>
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-tma-blue to-tma-teal rounded-full mb-4">
+                    <feature.icon className="h-6 w-6 text-white" />
                   </div>
-                  <CardTitle className="text-foreground text-xl">{feature.title}</CardTitle>
+                  <CardTitle className="text-tma-navy">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/70 leading-relaxed">{feature.description}</p>
+                  <p className="text-tma-gray">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
