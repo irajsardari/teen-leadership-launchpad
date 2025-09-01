@@ -1492,6 +1492,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      maximum_security_check: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       secure_confidential_access_check: {
         Args: Record<PropertyKey, never>
         Returns: boolean
