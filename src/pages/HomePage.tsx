@@ -155,7 +155,7 @@ const HomePage = () => {
             </div>
             
             {/* Main Hero Title with TMA Brand Colors */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
               <span className="block bg-gradient-to-r from-white via-[#FAF5EF] to-white bg-clip-text text-transparent animate-fade-in">
                 Learn. Lead.
               </span>
@@ -166,6 +166,13 @@ const HomePage = () => {
                 🚀
               </span>
             </h1>
+            
+            {/* TMA Slogan */}
+            <div className="mb-8 animate-fade-in-delayed">
+              <h2 className="text-2xl md:text-3xl font-bold text-white/95 tracking-wide">
+                Future Ready Leaders
+              </h2>
+            </div>
             
             {/* Subtitle */}
             <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium animate-fade-in-slower">
