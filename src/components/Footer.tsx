@@ -24,7 +24,7 @@ const Footer = () => {
                 alt="TMA Academy - Teenagers Management and Leadership Academy Logo" 
                 className="w-8 h-8 object-contain"
               />
-              <span className="text-2xl font-bold gradient-text">TMA Academy</span>
+              <span className="text-2xl font-bold text-white">TMA Academy</span>
             </div>
             <p className="text-white/90 leading-relaxed text-lg">
               The world's first comprehensive academy empowering teenagers with essential life skills and future-ready leadership.
