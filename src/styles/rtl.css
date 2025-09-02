@@ -25,34 +25,60 @@
 /* Language selector styles */
 .lang-selector {
   display: flex;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 0.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: hsl(var(--muted));
+  border-radius: 0.75rem;
+  border: 1px solid hsl(var(--border));
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .lang-selector button {
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
   border: none;
   background: transparent;
-  color: inherit;
+  color: hsl(var(--muted-foreground));
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s ease;
   white-space: nowrap;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  isolation: isolate;
 }
 
 .lang-selector button:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
 }
 
 .lang-selector button.active {
-  background: white;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-  color: hsl(var(--primary));
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 2px 4px 0 hsl(var(--primary) / 0.3);
+}
+
+.lang-selector button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Ensure proper text direction for each language button */
+.lang-selector button[data-lang="ar"],
+.lang-selector button[data-lang="fa"] {
+  direction: rtl;
+  unicode-bidi: embed;
+}
+
+.lang-selector button[data-lang="en"] {
+  direction: ltr;
+  unicode-bidi: embed;
 }
 
 /* RTL-specific popover adjustments */

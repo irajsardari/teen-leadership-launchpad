@@ -101,31 +101,60 @@ Return ONLY valid JSON in this exact format:
 Text to translate:
 ${text}`;
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${openaiApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-4.1-2025-04-14',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert educational translator specializing in teenager leadership and psychology terms. Always return valid JSON only.'
+    // Retry logic for rate limiting
+    let response;
+    let retries = 3;
+    
+    while (retries > 0) {
+      try {
+        response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${openaiApiKey}`,
+            'Content-Type': 'application/json',
           },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        max_tokens: 200,
-        temperature: 0.2
-      }),
-    });
+          body: JSON.stringify({
+            model: 'gpt-4o-mini', // Use faster, more reliable model
+            messages: [
+              {
+                role: 'system',
+                content: 'You are an expert educational translator specializing in teenager leadership and psychology terms. Always return valid JSON only.'
+              },
+              {
+                role: 'user',
+                content: prompt
+              }
+            ],
+            max_tokens: 200,
+            temperature: 0.2
+          }),
+        });
 
-    if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.status}`);
+        if (response.ok) {
+          break; // Success, exit retry loop
+        }
+        
+        if (response.status === 429) {
+          // Rate limit - wait and retry
+          retries--;
+          if (retries > 0) {
+            const waitTime = Math.pow(2, 3 - retries) * 1000; // Exponential backoff
+            console.log(`Rate limited, retrying in ${waitTime}ms. Retries left: ${retries}`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
+            continue;
+          }
+        }
+        
+        throw new Error(`OpenAI API error: ${response.status}`);
+      } catch (error) {
+        if (retries === 1) {
+          throw error; // Last retry failed
+        }
+        retries--;
+        const waitTime = Math.pow(2, 3 - retries) * 1000;
+        console.log(`Request failed, retrying in ${waitTime}ms. Retries left: ${retries}`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
     }
 
     const data = await response.json();

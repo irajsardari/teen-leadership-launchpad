@@ -142,24 +142,28 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
           {/* Language Selector */}
           <div className="lang-selector">
             <button
+              data-lang="en"
               onClick={() => handleLanguageSwitch('en')}
               className={currentLang === 'en' ? 'active' : ''}
+              disabled={isTranslating}
             >
               EN
             </button>
             <button
+              data-lang="ar"
               onClick={() => handleLanguageSwitch('ar')}
               className={currentLang === 'ar' ? 'active' : ''}
-              disabled={isTranslating && currentLang === 'ar'}
+              disabled={isTranslating}
             >
-              {isTranslating && currentLang === 'ar' ? <Loader2 className="w-3 h-3 animate-spin" /> : 'AR'}
+              {isTranslating ? <Loader2 className="w-3 h-3 animate-spin" /> : 'AR'}
             </button>
             <button
+              data-lang="fa"
               onClick={() => handleLanguageSwitch('fa')}
               className={currentLang === 'fa' ? 'active' : ''}
-              disabled={isTranslating && currentLang === 'fa'}
+              disabled={isTranslating}
             >
-              {isTranslating && currentLang === 'fa' ? <Loader2 className="w-3 h-3 animate-spin" /> : 'FA'}
+              {isTranslating ? <Loader2 className="w-3 h-3 animate-spin" /> : 'FA'}
             </button>
           </div>
 

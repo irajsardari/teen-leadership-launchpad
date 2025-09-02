@@ -259,26 +259,38 @@ const DictionaryPage: React.FC = () => {
             <Card className="dictionary-term">
               <CardHeader>
                 {/* Language Selector */}
-                <div className="lang-selector mb-4">
+                <div className="lang-selector mb-6">
                   <button
+                    data-lang="en"
                     onClick={() => handleLanguageSwitch('en')}
                     className={currentLang === 'en' ? 'active' : ''}
+                    disabled={isTranslating}
                   >
                     English
                   </button>
                   <button
+                    data-lang="ar"
                     onClick={() => handleLanguageSwitch('ar')}
                     className={currentLang === 'ar' ? 'active' : ''}
-                    disabled={isTranslating && currentLang === 'ar'}
+                    disabled={isTranslating}
                   >
-                    {isTranslating && currentLang === 'ar' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'العربية'}
+                    {isTranslating && currentLang === 'ar' ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      'العربية'
+                    )}
                   </button>
                   <button
+                    data-lang="fa"
                     onClick={() => handleLanguageSwitch('fa')}
                     className={currentLang === 'fa' ? 'active' : ''}
-                    disabled={isTranslating && currentLang === 'fa'}
+                    disabled={isTranslating}
                   >
-                    {isTranslating && currentLang === 'fa' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'فارسی'}
+                    {isTranslating && currentLang === 'fa' ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      'فارسی'
+                    )}
                   </button>
                 </div>
 
