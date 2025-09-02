@@ -12,6 +12,11 @@ interface DictionaryTermProps {
   translations?: {
     ar?: { term: string; short_def: string };
     fa?: { term: string; short_def: string };
+    es?: { term: string; short_def: string };
+    fr?: { term: string; short_def: string };
+    de?: { term: string; short_def: string };
+    tr?: { term: string; short_def: string };
+    ur?: { term: string; short_def: string };
   };
   children: React.ReactNode;
 }
@@ -24,7 +29,7 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
   translations,
   children
 }) => {
-  const [currentLang, setCurrentLang] = useState<'en' | 'ar' | 'fa'>('en');
+  const [currentLang, setCurrentLang] = useState<'en' | 'ar' | 'fa' | 'es' | 'fr' | 'de' | 'tr' | 'ur'>('en');
   const [isOpen, setIsOpen] = useState(false);
 
   const getCurrentTranslation = () => {
@@ -38,6 +43,36 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
       return {
         term: translations.fa.term,
         definition: translations.fa.short_def
+      };
+    }
+    if (currentLang === 'es' && translations?.es) {
+      return {
+        term: translations.es.term,
+        definition: translations.es.short_def
+      };
+    }
+    if (currentLang === 'fr' && translations?.fr) {
+      return {
+        term: translations.fr.term,
+        definition: translations.fr.short_def
+      };
+    }
+    if (currentLang === 'de' && translations?.de) {
+      return {
+        term: translations.de.term,
+        definition: translations.de.short_def
+      };
+    }
+    if (currentLang === 'tr' && translations?.tr) {
+      return {
+        term: translations.tr.term,
+        definition: translations.tr.short_def
+      };
+    }
+    if (currentLang === 'ur' && translations?.ur) {
+      return {
+        term: translations.ur.term,
+        definition: translations.ur.short_def
       };
     }
     return { term, definition: definition || 'Definition coming soon' };
@@ -100,8 +135,8 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
                 </Badge>
               )}
             </div>
-            {(translations?.ar || translations?.fa) && (
-              <div className="flex gap-1 ml-2">
+            {(translations?.ar || translations?.fa || translations?.es || translations?.fr || translations?.de || translations?.tr || translations?.ur) && (
+              <div className="flex flex-wrap gap-1 ml-2">
                 <Button
                   variant={currentLang === 'en' ? 'default' : 'ghost'}
                   size="sm"
@@ -128,6 +163,56 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
                     className="px-2 py-1 h-6 text-xs"
                   >
                     FA
+                  </Button>
+                )}
+                {translations?.es && (
+                  <Button
+                    variant={currentLang === 'es' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setCurrentLang('es')}
+                    className="px-2 py-1 h-6 text-xs"
+                  >
+                    ES
+                  </Button>
+                )}
+                {translations?.fr && (
+                  <Button
+                    variant={currentLang === 'fr' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setCurrentLang('fr')}
+                    className="px-2 py-1 h-6 text-xs"
+                  >
+                    FR
+                  </Button>
+                )}
+                {translations?.de && (
+                  <Button
+                    variant={currentLang === 'de' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setCurrentLang('de')}
+                    className="px-2 py-1 h-6 text-xs"
+                  >
+                    DE
+                  </Button>
+                )}
+                {translations?.tr && (
+                  <Button
+                    variant={currentLang === 'tr' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setCurrentLang('tr')}
+                    className="px-2 py-1 h-6 text-xs"
+                  >
+                    TR
+                  </Button>
+                )}
+                {translations?.ur && (
+                  <Button
+                    variant={currentLang === 'ur' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setCurrentLang('ur')}
+                    className="px-2 py-1 h-6 text-xs"
+                  >
+                    UR
                   </Button>
                 )}
               </div>

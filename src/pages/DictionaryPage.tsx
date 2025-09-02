@@ -260,19 +260,64 @@ const DictionaryPage: React.FC = () => {
                     <div className="space-y-2">
                       {term.translations.ar && (
                         <div className="p-3 border rounded">
-                          <div className="text-sm font-medium text-muted-foreground">Arabic</div>
-                          <div className="font-medium">{term.translations.ar.term}</div>
-                          <div className="text-sm text-muted-foreground">
+                          <div className="text-sm font-medium text-muted-foreground">Arabic (العربية)</div>
+                          <div className="font-medium" dir="rtl">{term.translations.ar.term}</div>
+                          <div className="text-sm text-muted-foreground" dir="rtl">
                             {term.translations.ar.short_def}
                           </div>
                         </div>
                       )}
                       {term.translations.fa && (
                         <div className="p-3 border rounded">
-                          <div className="text-sm font-medium text-muted-foreground">Persian</div>
-                          <div className="font-medium">{term.translations.fa.term}</div>
-                          <div className="text-sm text-muted-foreground">
+                          <div className="text-sm font-medium text-muted-foreground">Persian (فارسی)</div>
+                          <div className="font-medium" dir="rtl">{term.translations.fa.term}</div>
+                          <div className="text-sm text-muted-foreground" dir="rtl">
                             {term.translations.fa.short_def}
+                          </div>
+                        </div>
+                      )}
+                      {term.translations.es && (
+                        <div className="p-3 border rounded">
+                          <div className="text-sm font-medium text-muted-foreground">Spanish (Español)</div>
+                          <div className="font-medium">{term.translations.es.term}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {term.translations.es.short_def}
+                          </div>
+                        </div>
+                      )}
+                      {term.translations.fr && (
+                        <div className="p-3 border rounded">
+                          <div className="text-sm font-medium text-muted-foreground">French (Français)</div>
+                          <div className="font-medium">{term.translations.fr.term}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {term.translations.fr.short_def}
+                          </div>
+                        </div>
+                      )}
+                      {term.translations.de && (
+                        <div className="p-3 border rounded">
+                          <div className="text-sm font-medium text-muted-foreground">German (Deutsch)</div>
+                          <div className="font-medium">{term.translations.de.term}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {term.translations.de.short_def}
+                          </div>
+                        </div>
+                      )}
+                      {term.translations.tr && (
+                        <div className="p-3 border rounded">
+                          <div className="text-sm font-medium text-muted-foreground">Turkish (Türkçe)</div>
+                          <div className="font-medium">{term.translations.tr.term}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {term.translations.tr.short_def}
+                          </div>
+                        </div>
+                      )}
+                      {term.translations.ur && (
+                        <div className="p-3 border rounded">
+                          <div className="text-sm font-medium text-muted-foreground">Urdu (اردو)</div>
+                          <div className="font-medium" dir="rtl">{term.translations.ur.term}</div>
+                          <div className="text-sm text-muted-foreground" dir="rtl">
+                            {term.translations.ur.short_def}
                           </div>
                         </div>
                       )}
