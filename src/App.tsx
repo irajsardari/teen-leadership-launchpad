@@ -31,6 +31,8 @@ import { AuthProvider } from "./hooks/useAuth";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 import AdminSecurityPage from "./pages/AdminSecurityPage";
+import DictionaryPage from "./pages/DictionaryPage";
+import AdminDictionaryPage from "./pages/AdminDictionaryPage";
 import ScrollManager from "./components/ScrollManager";
 import { SessionTimeoutProvider } from "./components/SessionTimeoutProvider";
 
@@ -76,6 +78,9 @@ const App = () => (
                 <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="/admin/applications" element={<AdminApplicationsPage />} />
                 <Route path="/admin/security" element={<AdminSecurityPage />} />
+                <Route path="/dictionary" element={<DictionaryPage />} />
+                <Route path="/dictionary/:slug" element={<DictionaryPage />} />
+                <Route path="/admin/dictionary" element={<AdminDictionaryPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
