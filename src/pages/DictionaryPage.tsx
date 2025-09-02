@@ -7,9 +7,17 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { BookOpen, Search, ExternalLink, ArrowLeft } from 'lucide-react';
+import { BookOpen, Search, ExternalLink, ArrowLeft, Loader2, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
+import { useLanguage } from '@/hooks/useLanguage';
+import { 
+  Lang, 
+  supportedLanguages, 
+  getTextDirection, 
+  getRTLClasses,
+  TranslationData 
+} from '@/utils/language';
 
 interface DictionaryTerm {
   id: string;
@@ -34,12 +42,15 @@ interface Content {
 
 const DictionaryPage: React.FC = () => {
   const { slug } = useParams<{ slug?: string }>();
+  const { currentLang, setLang, translate, isTranslating } = useLanguage();
   const [term, setTerm] = useState<DictionaryTerm | null>(null);
   const [allTerms, setAllTerms] = useState<DictionaryTerm[]>([]);
   const [relatedContent, setRelatedContent] = useState<Content[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
+  const [liveTranslation, setLiveTranslation] = useState<TranslationData | null>(null);
+  const [translationError, setTranslationError] = useState<string | null>(null);
 
   const categories = ['Management', 'Leadership', 'Psychology', 'Money', 'Digital Life', 'Study Skills'];
 
@@ -115,7 +126,7 @@ const DictionaryPage: React.FC = () => {
         .from('content')
         .select('id, title, slug, published_at')
         .eq('status', 'published')
-        .textSearch('body_text', termName)
+        .ilike('body_text', `%${termName}%`)
         .limit(5);
 
       if (!error && data) {
@@ -124,6 +135,64 @@ const DictionaryPage: React.FC = () => {
     } catch (error) {
       console.error('Failed to fetch related content:', error);
     }
+  };
+
+  // Handle language switching for individual terms
+  const handleLanguageSwitch = async (lang: Lang) => {
+    setLang(lang);
+    setTranslationError(null);
+
+    if (!term) return;
+
+    // For ar/fa, attempt translation if not available
+    if ((lang === 'ar' || lang === 'fa') && !term.translations?.[lang] && !liveTranslation) {
+      try {
+        const result = await translate(term.slug, lang);
+        if (result) {
+          setLiveTranslation(result);
+        } else {
+          setTranslationError('Translation failed');
+        }
+      } catch (error) {
+        console.error('Translation error:', error);
+        setTranslationError('Translation failed');
+      }
+    }
+  };
+
+  // Get current term display based on language
+  const getCurrentTermDisplay = () => {
+    if (!term) return { term: '', definition: '' };
+
+    if (currentLang === 'en') {
+      return { 
+        term: term.term, 
+        definition: term.long_def || term.short_def || ''
+      };
+    }
+
+    // Check live translation first
+    if (liveTranslation) {
+      return { 
+        term: liveTranslation.term, 
+        definition: liveTranslation.shortDef 
+      };
+    }
+
+    // Check cached translations
+    if ((currentLang === 'ar' || currentLang === 'fa') && term.translations?.[currentLang]) {
+      const cached = term.translations[currentLang];
+      return { 
+        term: cached.term, 
+        definition: cached.short_def 
+      };
+    }
+
+    // Fallback to English
+    return { 
+      term: term.term, 
+      definition: term.long_def || term.short_def || ''
+    };
   };
 
   const filteredTerms = allTerms.filter(term => {
@@ -147,60 +216,117 @@ const DictionaryPage: React.FC = () => {
 
   // Single term view
   if (slug && term) {
+    const { term: displayTerm, definition: displayDefinition } = getCurrentTermDisplay();
+    const textDirection = getTextDirection(currentLang);
+    const rtlClasses = getRTLClasses(currentLang);
+    const needsTranslation = (currentLang === 'ar' || currentLang === 'fa') && 
+      !term.translations?.[currentLang] && !liveTranslation;
+    const isLoading = needsTranslation && isTranslating;
+
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background" dir={textDirection}>
         <Helmet>
-          <title>{term.term} - TMA Dictionary</title>
-          <meta name="description" content={term.short_def} />
+          <title>{displayTerm} - TMA Dictionary</title>
+          <meta name="description" content={displayDefinition.substring(0, 160)} />
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "DefinedTerm",
               "name": term.term,
+              "alternateName": Object.values(term.translations || {}).map((t: any) => t.term),
               "description": term.short_def,
               "inDefinedTermSet": {
                 "@type": "DefinedTermSet",
-                "name": "TMA Academy Dictionary",
-                "description": "Comprehensive glossary of terms used in teenager management and leadership education"
-              },
-              "termCode": term.slug,
-              "url": `${window.location.origin}/dictionary/${term.slug}`
+                "name": "TMA Dictionary",
+                "description": "Teenager Management Academy educational terms"
+              }
             })}
           </script>
         </Helmet>
 
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 max-w-4xl">
+          {/* Navigation */}
           <div className="mb-6">
-            <Button variant="outline" asChild className="mb-4">
-              <Link to="/dictionary" className="flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" />
+            <Button variant="ghost" asChild className="mb-4">
+              <Link to="/dictionary" className={`flex items-center gap-2 ${currentLang === 'ar' || currentLang === 'fa' ? 'flex-row-reverse' : ''}`}>
+                <ArrowLeft className={`w-4 h-4 ${currentLang === 'ar' || currentLang === 'fa' ? 'flip-rtl' : ''}`} />
                 Back to Dictionary
               </Link>
             </Button>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <Card>
+          <div className={`space-y-6 ${rtlClasses}`}>
+            <Card className="dictionary-term">
               <CardHeader>
+                {/* Language Selector */}
+                <div className="lang-selector mb-4">
+                  <button
+                    onClick={() => handleLanguageSwitch('en')}
+                    className={currentLang === 'en' ? 'active' : ''}
+                  >
+                    English
+                  </button>
+                  <button
+                    onClick={() => handleLanguageSwitch('ar')}
+                    className={currentLang === 'ar' ? 'active' : ''}
+                    disabled={isTranslating && currentLang === 'ar'}
+                  >
+                    {isTranslating && currentLang === 'ar' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'العربية'}
+                  </button>
+                  <button
+                    onClick={() => handleLanguageSwitch('fa')}
+                    className={currentLang === 'fa' ? 'active' : ''}
+                    disabled={isTranslating && currentLang === 'fa'}
+                  >
+                    {isTranslating && currentLang === 'fa' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'فارسی'}
+                  </button>
+                </div>
+
                 <div className="flex items-start justify-between">
                   <div>
-                    <CardTitle className="text-3xl mb-4">{term.term}</CardTitle>
+                    <CardTitle className="text-3xl mb-2">
+                      {isLoading ? (
+                        <div className="translation-skeleton h-8 w-64 rounded"></div>
+                      ) : (
+                        displayTerm
+                      )}
+                    </CardTitle>
                     {term.category && (
-                      <Badge variant="secondary" className="mb-4">
+                      <Badge variant="secondary" className="mb-2">
                         {term.category}
                       </Badge>
                     )}
+                  </div>
+                  <div className="flex gap-2">
+                    <Badge variant="outline" className="flex items-center gap-1">
+                      <Globe className="w-3 h-3" />
+                      {supportedLanguages[currentLang].nativeName}
+                    </Badge>
                   </div>
                 </div>
               </CardHeader>
               
               <CardContent className="space-y-6">
-                <div>
+                <div className="definition">
                   <h3 className="text-lg font-semibold mb-2">Definition</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {term.long_def || term.short_def}
-                  </p>
+                  {isLoading ? (
+                    <div className="space-y-3">
+                      <div className="translation-skeleton h-4 w-full rounded"></div>
+                      <div className="translation-skeleton h-4 w-5/6 rounded"></div>
+                      <div className="translation-skeleton h-4 w-4/5 rounded"></div>
+                    </div>
+                  ) : (
+                    <p className="text-muted-foreground leading-relaxed">
+                      {displayDefinition}
+                    </p>
+                  )}
                 </div>
+
+                {translationError && (
+                  <div className="translation-error">
+                    Auto-translate failed. Showing English version.
+                  </div>
+                )}
 
                 {term.synonyms && term.synonyms.length > 0 && (
                   <div>
@@ -254,9 +380,10 @@ const DictionaryPage: React.FC = () => {
                   </div>
                 )}
 
+                {/* Show all available translations */}
                 {term.translations && Object.keys(term.translations).length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-2">Translations</h3>
+                    <h3 className="text-lg font-semibold mb-2">Other Languages</h3>
                     <div className="space-y-2">
                       {term.translations.ar && (
                         <div className="p-3 border rounded">
@@ -273,51 +400,6 @@ const DictionaryPage: React.FC = () => {
                           <div className="font-medium" dir="rtl">{term.translations.fa.term}</div>
                           <div className="text-sm text-muted-foreground" dir="rtl">
                             {term.translations.fa.short_def}
-                          </div>
-                        </div>
-                      )}
-                      {term.translations.es && (
-                        <div className="p-3 border rounded">
-                          <div className="text-sm font-medium text-muted-foreground">Spanish (Español)</div>
-                          <div className="font-medium">{term.translations.es.term}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {term.translations.es.short_def}
-                          </div>
-                        </div>
-                      )}
-                      {term.translations.fr && (
-                        <div className="p-3 border rounded">
-                          <div className="text-sm font-medium text-muted-foreground">French (Français)</div>
-                          <div className="font-medium">{term.translations.fr.term}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {term.translations.fr.short_def}
-                          </div>
-                        </div>
-                      )}
-                      {term.translations.de && (
-                        <div className="p-3 border rounded">
-                          <div className="text-sm font-medium text-muted-foreground">German (Deutsch)</div>
-                          <div className="font-medium">{term.translations.de.term}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {term.translations.de.short_def}
-                          </div>
-                        </div>
-                      )}
-                      {term.translations.tr && (
-                        <div className="p-3 border rounded">
-                          <div className="text-sm font-medium text-muted-foreground">Turkish (Türkçe)</div>
-                          <div className="font-medium">{term.translations.tr.term}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {term.translations.tr.short_def}
-                          </div>
-                        </div>
-                      )}
-                      {term.translations.ur && (
-                        <div className="p-3 border rounded">
-                          <div className="text-sm font-medium text-muted-foreground">Urdu (اردو)</div>
-                          <div className="font-medium" dir="rtl">{term.translations.ur.term}</div>
-                          <div className="text-sm text-muted-foreground" dir="rtl">
-                            {term.translations.ur.short_def}
                           </div>
                         </div>
                       )}

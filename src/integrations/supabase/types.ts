@@ -448,6 +448,7 @@ export type Database = {
           status: string | null
           synonyms: string[] | null
           term: string
+          translation_updated_at: string | null
           translations: Json | null
           updated_at: string
         }
@@ -465,6 +466,7 @@ export type Database = {
           status?: string | null
           synonyms?: string[] | null
           term: string
+          translation_updated_at?: string | null
           translations?: Json | null
           updated_at?: string
         }
@@ -482,6 +484,7 @@ export type Database = {
           status?: string | null
           synonyms?: string[] | null
           term?: string
+          translation_updated_at?: string | null
           translations?: Json | null
           updated_at?: string
         }
