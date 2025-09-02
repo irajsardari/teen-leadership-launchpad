@@ -139,24 +139,40 @@ const DictionaryPage: React.FC = () => {
 
   // Handle language switching for individual terms
   const handleLanguageSwitch = async (lang: Lang) => {
+    console.log(`Switching language to ${lang} for term:`, term?.slug);
     setLang(lang);
     setTranslationError(null);
 
-    if (!term) return;
+    if (!term) {
+      console.log('No term available for translation');
+      return;
+    }
+
+    // For English, just switch - no translation needed
+    if (lang === 'en') {
+      setLiveTranslation(null);
+      return;
+    }
 
     // For ar/fa, attempt translation if not available
     if ((lang === 'ar' || lang === 'fa') && !term.translations?.[lang] && !liveTranslation) {
+      console.log(`Attempting translation for ${term.slug} -> ${lang}`);
       try {
         const result = await translate(term.slug, lang);
         if (result) {
+          console.log('Translation successful:', result);
           setLiveTranslation(result);
         } else {
-          setTranslationError('Translation failed');
+          console.log('Translation returned null');
+          setTranslationError('Translation service temporarily unavailable');
         }
       } catch (error) {
         console.error('Translation error:', error);
-        setTranslationError('Translation failed');
+        setTranslationError('Translation service temporarily unavailable');
       }
+    } else if (term.translations?.[lang]) {
+      console.log('Using cached translation for', lang);
+      setLiveTranslation(null); // Clear live translation to use cached
     }
   };
 

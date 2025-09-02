@@ -220,11 +220,26 @@ ${text}`;
 
   } catch (error) {
     console.error('Error in translate-term function:', error);
+    console.error('Error details:', JSON.stringify(error, null, 2));
+    
+    // For rate limiting, return specific error code
+    if (error.message?.includes('429') || error.message?.includes('rate limit')) {
+      console.log('Rate limit hit, returning 429');
+      return new Response(JSON.stringify({ 
+        error: 'Rate limit exceeded',
+        message: 'Translation service temporarily unavailable due to rate limits',
+        code: 'RATE_LIMIT'
+      }), {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
     
     // Return 502 for client fallback as specified
     return new Response(JSON.stringify({ 
       error: 'Translation failed',
-      message: error.message 
+      message: error.message,
+      stack: error.stack 
     }), {
       status: 502,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

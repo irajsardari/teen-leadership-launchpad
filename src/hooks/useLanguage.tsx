@@ -35,15 +35,29 @@ export const useLanguage = (): UseLanguageReturn => {
     setIsTranslating(true);
     
     try {
+      console.log(`Requesting translation for ${slug} -> ${lang}`);
+      
       const { data, error } = await supabase.functions.invoke('translate-term', {
         body: { slug, lang }
       });
 
+      console.log('Translation response:', { data, error });
+
       if (error) {
-        console.error('Translation error:', error);
+        console.error('Supabase function error:', error);
+        // Check if it's a rate limit error
+        if (error.message?.includes('rate limit') || error.context?.status === 429) {
+          console.log('Rate limit detected, will retry later');
+        }
         return null;
       }
 
+      if (!data) {
+        console.error('No data returned from translation function');
+        return null;
+      }
+
+      console.log('Translation successful:', data);
       return {
         term: data.term,
         shortDef: data.shortDef,
@@ -51,7 +65,7 @@ export const useLanguage = (): UseLanguageReturn => {
         updatedAt: new Date().toISOString()
       };
     } catch (error) {
-      console.error('Translation failed:', error);
+      console.error('Translation request failed:', error);
       return null;
     } finally {
       setIsTranslating(false);
