@@ -97,9 +97,79 @@ export const useTranslation = () => {
     }
   };
 
+  const addManualTranslation = async (
+    termSlug: string, 
+    language: 'ar' | 'fa', 
+    translatedTerm: string, 
+    translatedDefinition: string
+  ): Promise<boolean> => {
+    try {
+      // First get the current term
+      const { data: term, error: fetchError } = await supabase
+        .from('dictionary')
+        .select('*')
+        .eq('slug', termSlug)
+        .single();
+
+      if (fetchError || !term) {
+        toast({
+          title: 'Error',
+          description: 'Term not found',
+          variant: 'destructive',
+        });
+        return false;
+      }
+
+      // Update the translations
+      const currentTranslations = (term.translations as Record<string, any>) || {};
+      const updatedTranslations = {
+        ...currentTranslations,
+        [language]: {
+          term: translatedTerm,
+          shortDef: translatedDefinition,
+          updatedAt: new Date().toISOString(),
+          source: 'human'
+        }
+      };
+
+      const { error: updateError } = await supabase
+        .from('dictionary')
+        .update({ 
+          translations: updatedTranslations,
+          translation_updated_at: new Date().toISOString()
+        })
+        .eq('id', term.id);
+
+      if (updateError) {
+        toast({
+          title: 'Update Failed',
+          description: updateError.message,
+          variant: 'destructive',
+        });
+        return false;
+      }
+
+      toast({
+        title: 'Translation Added',
+        description: `Successfully added ${language} translation for "${term.term}"`,
+        variant: 'default',
+      });
+
+      return true;
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      });
+      return false;
+    }
+  };
+
   return {
     translateSingleTerm,
     translateAllTerms,
+    addManualTranslation,
     isTranslating,
     progress
   };

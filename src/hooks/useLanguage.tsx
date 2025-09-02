@@ -48,6 +48,12 @@ export const useLanguage = (): UseLanguageReturn => {
         // Check if it's a rate limit error
         if (error.message?.includes('rate limit') || error.context?.status === 429) {
           console.log('Rate limit detected, will retry later');
+          return null; // Will show "Translation not available yet" message
+        }
+        // Check for other API errors
+        if (error.context?.status === 502) {
+          console.log('Translation service temporarily unavailable');
+          return null; // Will show "Translation not available yet" message  
         }
         return null;
       }

@@ -158,15 +158,26 @@ ${text}`;
     }
 
     const data = await response.json();
+    console.log('OpenAI API response:', JSON.stringify(data, null, 2));
+    
+    if (!data || !data.choices || !Array.isArray(data.choices) || data.choices.length === 0) {
+      console.error('Invalid OpenAI response structure:', data);
+      throw new Error('Invalid API response structure received');
+    }
+    
     const content = data.choices[0]?.message?.content?.trim();
     
     if (!content) {
+      console.error('No content in OpenAI response:', data.choices[0]);
       throw new Error('No translation content received');
     }
 
     let translation;
     try {
       translation = JSON.parse(content);
+      if (!translation.term || !translation.shortDef) {
+        throw new Error('Translation missing required fields');
+      }
     } catch (parseError) {
       console.error('Failed to parse translation response:', content);
       throw new Error('Invalid translation format received');

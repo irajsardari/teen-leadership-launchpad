@@ -164,11 +164,11 @@ const DictionaryPage: React.FC = () => {
           setLiveTranslation(result);
         } else {
           console.log('Translation returned null');
-          setTranslationError('Translation service temporarily unavailable');
+          setTranslationError('Translation not available yet. Please check again soon.');
         }
       } catch (error) {
         console.error('Translation error:', error);
-        setTranslationError('Translation service temporarily unavailable');
+        setTranslationError('Translation not available yet. Please check again soon.');
       }
     } else if (term.translations?.[lang]) {
       console.log('Using cached translation for', lang);
