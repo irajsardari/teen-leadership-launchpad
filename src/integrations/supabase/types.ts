@@ -252,6 +252,54 @@ export type Database = {
           },
         ]
       }
+      content: {
+        Row: {
+          author_id: string | null
+          auto_indexed_at: string | null
+          body_html: string
+          body_text: string
+          categories: string[] | null
+          created_at: string
+          id: string
+          published_at: string | null
+          slug: string
+          status: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          auto_indexed_at?: string | null
+          body_html: string
+          body_text: string
+          categories?: string[] | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          auto_indexed_at?: string | null
+          body_html?: string
+          body_text?: string
+          categories?: string[] | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       course_sessions: {
         Row: {
           course_id: string
@@ -384,6 +432,113 @@ export type Database = {
           table_name?: string
         }
         Relationships: []
+      }
+      dictionary: {
+        Row: {
+          category: string | null
+          context: string | null
+          created_at: string
+          created_from_content_id: string | null
+          frequency: number | null
+          id: string
+          long_def: string | null
+          related: string[] | null
+          short_def: string | null
+          slug: string
+          status: string | null
+          synonyms: string[] | null
+          term: string
+          translations: Json | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          context?: string | null
+          created_at?: string
+          created_from_content_id?: string | null
+          frequency?: number | null
+          id?: string
+          long_def?: string | null
+          related?: string[] | null
+          short_def?: string | null
+          slug: string
+          status?: string | null
+          synonyms?: string[] | null
+          term: string
+          translations?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          context?: string | null
+          created_at?: string
+          created_from_content_id?: string | null
+          frequency?: number | null
+          id?: string
+          long_def?: string | null
+          related?: string[] | null
+          short_def?: string | null
+          slug?: string
+          status?: string | null
+          synonyms?: string[] | null
+          term?: string
+          translations?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dictionary_created_from_content_id_fkey"
+            columns: ["created_from_content_id"]
+            isOneToOne: false
+            referencedRelation: "content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dictionary_analytics: {
+        Row: {
+          content_id: string | null
+          created_at: string
+          event_type: string
+          from_article: boolean | null
+          id: string
+          metadata: Json | null
+          term_id: string | null
+        }
+        Insert: {
+          content_id?: string | null
+          created_at?: string
+          event_type: string
+          from_article?: boolean | null
+          id?: string
+          metadata?: Json | null
+          term_id?: string | null
+        }
+        Update: {
+          content_id?: string | null
+          created_at?: string
+          event_type?: string
+          from_article?: boolean | null
+          id?: string
+          metadata?: Json | null
+          term_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dictionary_analytics_content_id_fkey"
+            columns: ["content_id"]
+            isOneToOne: false
+            referencedRelation: "content"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dictionary_analytics_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "dictionary"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       enrollments: {
         Row: {
