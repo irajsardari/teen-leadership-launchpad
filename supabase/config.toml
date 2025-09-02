@@ -17,3 +17,6 @@ verify_jwt = false
 
 [functions.process-content]
 verify_jwt = false
+
+[functions.translate-dictionary]
+verify_jwt = false

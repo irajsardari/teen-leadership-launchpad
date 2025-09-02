@@ -9,8 +9,9 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
-import { BookOpen, CheckCircle, Clock, AlertCircle, Plus, Search, Filter } from 'lucide-react';
+import { BookOpen, CheckCircle, Clock, AlertCircle, Plus, Search, Filter, Languages, Loader2, Globe } from 'lucide-react';
 import { AuthGuard } from '@/components/AuthGuard';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface DictionaryTerm {
   id: string;
@@ -39,6 +40,7 @@ const AdminDictionaryPage: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [filterCategory, setFilterCategory] = useState<string>('all');
 
+  const { translateSingleTerm, translateAllTerms, isTranslating, progress } = useTranslation();
   const categories = ['Management', 'Leadership', 'Psychology', 'Money', 'Digital Life', 'Study Skills'];
 
   useEffect(() => {
@@ -199,11 +201,12 @@ const AdminDictionaryPage: React.FC = () => {
           </div>
 
           <Tabs defaultValue="terms" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="terms">All Terms ({terms.length})</TabsTrigger>
               <TabsTrigger value="review">
                 Needs Review ({terms.filter(t => t.status === 'needs_review').length})
               </TabsTrigger>
+              <TabsTrigger value="translations">Translations</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
 
@@ -300,19 +303,47 @@ const AdminDictionaryPage: React.FC = () => {
                             </p>
                           )}
                         </div>
-                        
-                        {term.status === 'needs_review' && (
-                          <Button
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handlePublishTerm(term.id);
-                            }}
-                            className="ml-4"
-                          >
-                            Quick Publish
-                          </Button>
-                        )}
+                         
+                         {term.status === 'needs_review' && (
+                           <Button
+                             size="sm"
+                             onClick={(e) => {
+                               e.stopPropagation();
+                               handlePublishTerm(term.id);
+                             }}
+                             className="ml-4"
+                           >
+                             Quick Publish
+                           </Button>
+                         )}
+
+                         {term.status === 'published' && (
+                           <div className="ml-4 flex gap-2">
+                             <Badge variant="outline" className="flex items-center gap-1">
+                               <Globe className="w-3 h-3" />
+                               {term.translations && Object.keys(term.translations).length > 0 
+                                 ? `${Object.keys(term.translations).length} languages`
+                                 : 'No translations'
+                               }
+                             </Badge>
+                             <Button
+                               size="sm"
+                               variant="outline"
+                               onClick={(e) => {
+                                 e.stopPropagation();
+                                 translateSingleTerm(term.id);
+                               }}
+                               disabled={isTranslating}
+                             >
+                               {isTranslating ? (
+                                 <Loader2 className="w-4 h-4 animate-spin" />
+                               ) : (
+                                 <Languages className="w-4 h-4" />
+                               )}
+                               Translate
+                             </Button>
+                           </div>
+                         )}
                       </div>
                     ))}
                     
@@ -369,6 +400,140 @@ const AdminDictionaryPage: React.FC = () => {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="translations" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Languages className="w-5 h-5" />
+                    Translation Management
+                  </CardTitle>
+                  <p className="text-muted-foreground">
+                    Automatically translate dictionary terms to Arabic, Persian, Spanish, French, German, Turkish, and Urdu.
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {/* Batch Translation */}
+                  <div className="p-4 border rounded-lg">
+                    <h3 className="font-semibold mb-2">Batch Translation</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Translate all published terms that don't have translations yet.
+                    </p>
+                    <Button
+                      onClick={translateAllTerms}
+                      disabled={isTranslating}
+                      className="flex items-center gap-2"
+                    >
+                      {isTranslating ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Languages className="w-4 h-4" />
+                      )}
+                      {isTranslating ? 'Translating...' : 'Translate All Terms'}
+                    </Button>
+                  </div>
+
+                  {/* Translation Progress */}
+                  {progress && (
+                    <div className="p-4 border rounded-lg bg-muted/50">
+                      <h3 className="font-semibold mb-2">Last Translation Results</h3>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div>
+                          <div className="font-medium">Processed</div>
+                          <div className="text-2xl font-bold text-blue-600">{progress.processed}</div>
+                        </div>
+                        <div>
+                          <div className="font-medium">Translated</div>
+                          <div className="text-2xl font-bold text-green-600">{progress.translated}</div>
+                        </div>
+                        <div>
+                          <div className="font-medium">Skipped</div>
+                          <div className="text-2xl font-bold text-yellow-600">{progress.skipped}</div>
+                        </div>
+                        <div>
+                          <div className="font-medium">Errors</div>
+                          <div className="text-2xl font-bold text-red-600">{progress.errors}</div>
+                        </div>
+                      </div>
+                      <div className="mt-3 text-xs text-muted-foreground">
+                        Languages: {progress.languages.join(', ').toUpperCase()}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Translation Status Overview */}
+                  <div className="p-4 border rounded-lg">
+                    <h3 className="font-semibold mb-4">Translation Status</h3>
+                    <div className="space-y-2">
+                      {terms.filter(t => t.status === 'published').map((term) => {
+                        const translationCount = term.translations ? Object.keys(term.translations).length : 0;
+                        const isFullyTranslated = translationCount === 7; // All 7 languages
+                        
+                        return (
+                          <div key={term.id} className="flex items-center justify-between p-2 border rounded text-sm">
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium">{term.term}</span>
+                              <Badge variant={isFullyTranslated ? 'default' : 'secondary'}>
+                                {translationCount}/7 languages
+                              </Badge>
+                            </div>
+                            {!isFullyTranslated && (
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => translateSingleTerm(term.id)}
+                                disabled={isTranslating}
+                              >
+                                {isTranslating ? (
+                                  <Loader2 className="w-3 h-3 animate-spin" />
+                                ) : (
+                                  <Languages className="w-3 h-3" />
+                                )}
+                              </Button>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Supported Languages */}
+                  <div className="p-4 border rounded-lg">
+                    <h3 className="font-semibold mb-4">Supported Languages</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs bg-muted px-1 rounded">AR</span>
+                        <span>Arabic (العربية)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs bg-muted px-1 rounded">FA</span>
+                        <span>Persian (فارسی)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs bg-muted px-1 rounded">ES</span>
+                        <span>Spanish (Español)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs bg-muted px-1 rounded">FR</span>
+                        <span>French (Français)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs bg-muted px-1 rounded">DE</span>
+                        <span>German (Deutsch)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs bg-muted px-1 rounded">TR</span>
+                        <span>Turkish (Türkçe)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs bg-muted px-1 rounded">UR</span>
+                        <span>Urdu (اردو)</span>
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
