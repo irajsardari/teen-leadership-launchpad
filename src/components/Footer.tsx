@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, ExternalLink, Instagram, Youtube, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import tmaLogo from "@/assets/tma-official-logo.png";
+// Using same logo as header for consistency
 
 const Footer = () => {
   return (
@@ -19,7 +19,11 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <img src={tmaLogo} alt="TMA Academy" className="h-8 w-auto" />
+              <img 
+                src="/lovable-uploads/fc2e671f-8b1e-4540-a554-140cadbf1d9e.png" 
+                alt="TMA Academy - Teenagers Management and Leadership Academy Logo" 
+                className="w-8 h-8 object-contain"
+              />
               <span className="text-2xl font-bold gradient-text">TMA Academy</span>
             </div>
             <p className="text-white/90 leading-relaxed text-lg">

@@ -126,7 +126,7 @@ const HomePage = () => {
       {/* Premium TMA Brand Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Official TMA Brand Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#006D6C] via-[#004B5C] to-[#003A5D]">
+        <div className="absolute inset-0 bg-gradient-to-br from-tma-teal via-tma-blue to-tma-blue">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.03%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse"></div>
           {/* Premium mesh gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent"></div>
@@ -134,9 +134,9 @@ const HomePage = () => {
         
         {/* Sophisticated Floating Elements with Brand Colors */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-[10%] w-96 h-96 bg-gradient-to-r from-[#F28C28]/20 to-[#FDB940]/15 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-[15%] w-80 h-80 bg-gradient-to-r from-[#006D6C]/25 to-[#003A5D]/20 rounded-full blur-3xl animate-float-delayed"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-[#F28C28]/8 to-[#FDB940]/6 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-20 left-[10%] w-96 h-96 bg-gradient-to-r from-tma-orange/20 to-tma-yellow/15 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-[15%] w-80 h-80 bg-gradient-to-r from-tma-teal/25 to-tma-blue/20 rounded-full blur-3xl animate-float-delayed"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-tma-orange/8 to-tma-yellow/6 rounded-full blur-3xl animate-pulse"></div>
           {/* Additional premium light effects */}
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/[0.02] via-transparent to-white/[0.01]"></div>
         </div>
@@ -156,10 +156,10 @@ const HomePage = () => {
             
             {/* Main Hero Title with TMA Brand Colors */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
-              <span className="block bg-gradient-to-r from-white via-[#FAF5EF] to-white bg-clip-text text-transparent animate-fade-in">
+              <span className="block bg-gradient-to-r from-white via-tma-cream to-white bg-clip-text text-transparent animate-fade-in">
                 Learn. Lead.
               </span>
-              <span className="block bg-gradient-to-r from-[#F28C28] via-[#FDB940] to-[#F28C28] bg-clip-text text-transparent animate-fade-in-delayed">
+              <span className="block bg-gradient-to-r from-tma-orange via-tma-yellow to-tma-orange bg-clip-text text-transparent animate-fade-in-delayed">
                 Change the World
               </span>
               <span className="block text-3xl md:text-4xl mt-4 text-white/90 font-normal animate-fade-in-slow">
@@ -183,7 +183,7 @@ const HomePage = () => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-fade-in-slowest">
               <Button
                 size="lg"
-                className="bg-[#F28C28] hover:bg-[#F28C28]/90 text-white px-12 py-6 text-lg font-bold rounded-2xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-300"
+                className="bg-tma-orange hover:bg-tma-orange/90 text-white px-12 py-6 text-lg font-bold rounded-2xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-300"
                 asChild
               >
                 <Link to="/auth" className="flex items-center gap-3">
@@ -213,7 +213,7 @@ const HomePage = () => {
                   <div className="text-sm opacity-75">Reading Streak</div>
                   <div className="text-xl font-bold">{streakCount}/10 Leadership Articles</div>
                 </div>
-                <div className="bg-[#F28C28] text-white px-3 py-1 rounded-full text-sm font-bold">
+                <div className="bg-tma-orange text-white px-3 py-1 rounded-full text-sm font-bold">
                   Keep Going!
                 </div>
               </div>
