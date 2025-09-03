@@ -9,9 +9,10 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
-import { BookOpen, CheckCircle, Clock, AlertCircle, Plus, Search, Filter, Languages, Loader2, Globe } from 'lucide-react';
+import { BookOpen, CheckCircle, Clock, AlertCircle, Plus, Search, Filter, Languages, Loader2, Globe, Upload } from 'lucide-react';
 import { AuthGuard } from '@/components/AuthGuard';
 import { useTranslation } from '@/hooks/useTranslation';
+import LexiconBulkImport from '@/components/admin/LexiconBulkImport';
 
 interface DictionaryTerm {
   id: string;

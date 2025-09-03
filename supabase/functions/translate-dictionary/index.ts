@@ -168,9 +168,10 @@ async function translateTerm(
   definition: string,
   targetLangCode: string,
   targetLangName: string,
-  openaiApiKey: string
+  openaiApiKey: string,
+  retries = 3
 ): Promise<{ term: string; short_def: string }> {
-  const prompt = `You are a professional educational translator specializing in teenager management and leadership terms.
+  const prompt = `You are a professional educational translator specializing in management, leadership, psychology, and entrepreneurship terms.
 
 Translate the following educational term and its definition to ${targetLangName}:
 
@@ -182,6 +183,7 @@ Requirements:
 2. Keep the definition concise but clear (under 240 characters)
 3. Ensure terminology is suitable for teenagers and educators
 4. For Arabic, Persian, and Urdu: use proper script and direction
+5. Use academic and professional language appropriate for an encyclopedia
 
 Respond in valid JSON format:
 {
@@ -189,44 +191,83 @@ Respond in valid JSON format:
   "short_def": "translated definition in ${targetLangName}"
 }`;
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${openaiApiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'gpt-4.1-2025-04-14',
-      messages: [
-        {
-          role: 'system',
-          content: 'You are an expert educational translator. Always respond with valid JSON only.'
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      console.log(`Translation attempt ${attempt} for "${term}" to ${targetLangName}`);
+      
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json',
         },
-        {
-          role: 'user',
-          content: prompt
+        body: JSON.stringify({
+          model: 'gpt-5-2025-08-07',
+          messages: [
+            {
+              role: 'system',
+              content: 'You are an expert educational translator specializing in management, leadership, and psychology. Always respond with valid JSON only.'
+            },
+            {
+              role: 'user',
+              content: prompt
+            }
+          ],
+          max_completion_tokens: 350
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`OpenAI API error (attempt ${attempt}):`, response.status, errorText);
+        
+        if (attempt === retries) {
+          throw new Error(`OpenAI API error: ${response.status} - ${errorText}`);
         }
-      ],
-      max_tokens: 300,
-      temperature: 0.3
-    }),
-  });
+        
+        // Wait before retry (exponential backoff)
+        await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+        continue;
+      }
 
-  if (!response.ok) {
-    throw new Error(`OpenAI API error: ${response.status}`);
+      const data = await response.json();
+      const content = data.choices[0]?.message?.content?.trim();
+      
+      if (!content) {
+        console.error(`No content received (attempt ${attempt})`);
+        if (attempt === retries) {
+          throw new Error('No translation content received after all retries');
+        }
+        continue;
+      }
+
+      try {
+        const parsed = JSON.parse(content);
+        
+        // Validate the response structure
+        if (!parsed.term || !parsed.short_def) {
+          throw new Error('Invalid response structure');
+        }
+        
+        console.log(`Successfully translated "${term}" to ${targetLangName}`);
+        return parsed;
+      } catch (parseError) {
+        console.error(`Parse error (attempt ${attempt}):`, content);
+        if (attempt === retries) {
+          throw new Error(`Invalid translation format received: ${content}`);
+        }
+      }
+      
+    } catch (error) {
+      console.error(`Translation error (attempt ${attempt}):`, error);
+      if (attempt === retries) {
+        throw error;
+      }
+      
+      // Wait before retry
+      await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+    }
   }
-
-  const data = await response.json();
-  const content = data.choices[0]?.message?.content?.trim();
   
-  if (!content) {
-    throw new Error('No translation content received');
-  }
-
-  try {
-    return JSON.parse(content);
-  } catch (parseError) {
-    console.error('Failed to parse translation response:', content);
-    throw new Error('Invalid translation format received');
-  }
+  throw new Error('Translation failed after all retries');
 }
