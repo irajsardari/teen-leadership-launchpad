@@ -1636,6 +1636,17 @@ export type Database = {
         }
         Returns: string
       }
+      grant_safeguarding_permission: {
+        Args: {
+          safeguarding_role?: Database["public"]["Enums"]["safeguarding_role"]
+          target_email: string
+        }
+        Returns: string
+      }
+      has_emergency_safeguarding_access: {
+        Args: { check_user_id?: string }
+        Returns: boolean
+      }
       has_safeguarding_access: {
         Args: { check_user_id?: string }
         Returns: boolean
