@@ -15,7 +15,17 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   showLabels = true,
   className = ''
 }) => {
-  const { currentLang, setLang, supportedLanguages, isTranslating } = useLanguage();
+  const { currentLang, setLang, isTranslating } = useLanguage();
+  
+  // Default supported languages if not loaded from database yet
+  const supportedLanguages = [
+    { language_code: 'en', language_name: 'English', native_name: 'English', direction: 'ltr', flag_emoji: '🇺🇸', is_active: true },
+    { language_code: 'ar', language_name: 'Arabic', native_name: 'العربية', direction: 'rtl', flag_emoji: '🇸🇦', is_active: true },
+    { language_code: 'fa', language_name: 'Persian', native_name: 'فارسی', direction: 'rtl', flag_emoji: '🇮🇷', is_active: true },
+    { language_code: 'es', language_name: 'Spanish', native_name: 'Español', direction: 'ltr', flag_emoji: '🇪🇸', is_active: true },
+    { language_code: 'fr', language_name: 'French', native_name: 'Français', direction: 'ltr', flag_emoji: '🇫🇷', is_active: true },
+    { language_code: 'de', language_name: 'German', native_name: 'Deutsch', direction: 'ltr', flag_emoji: '🇩🇪', is_active: true }
+  ];
 
   const currentLanguage = supportedLanguages.find(lang => lang.language_code === currentLang);
 

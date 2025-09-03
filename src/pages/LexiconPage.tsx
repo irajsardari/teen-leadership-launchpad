@@ -12,12 +12,12 @@ import { Link } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import { useLanguage } from '@/hooks/useLanguage';
 import { 
-  Lang, 
-  supportedLanguages, 
   getTextDirection, 
   getRTLClasses,
   TranslationData 
 } from '@/utils/language';
+import LanguageSelector from '@/components/LanguageSelector';
+import LexiconSearch, { SearchFilters } from '@/components/LexiconSearch';
 
 interface LexiconTerm {
   id: string;
@@ -53,11 +53,16 @@ const LexiconPage: React.FC = () => {
   const { currentLang, setLang, translate, isTranslating } = useLanguage();
   const [term, setTerm] = useState<LexiconTerm | null>(null);
   const [allTerms, setAllTerms] = useState<LexiconTerm[]>([]);
+  const [filteredTerms, setFilteredTerms] = useState<LexiconTerm[]>([]);
   const [relatedContent, setRelatedContent] = useState<Content[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategory, setFilterCategory] = useState('all');
-  const [filterTag, setFilterTag] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filters, setFilters] = useState<SearchFilters>({
+    category: 'all',
+    disciplineTag: 'all',
+    difficulty: 'all',
+    verified: false
+  });
   const [liveTranslation, setLiveTranslation] = useState<TranslationData | null>(null);
   const [translationError, setTranslationError] = useState<string | null>(null);
 
@@ -148,8 +153,56 @@ const LexiconPage: React.FC = () => {
     }
   };
 
+  // Apply filters to terms
+  useEffect(() => {
+    let filtered = allTerms;
+
+    // Apply search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(term => 
+        term.term.toLowerCase().includes(query) ||
+        term.short_def?.toLowerCase().includes(query) ||
+        term.discipline_tags?.some(tag => tag.toLowerCase().includes(query))
+      );
+    }
+
+    // Apply category filter
+    if (filters.category !== 'all') {
+      filtered = filtered.filter(term => term.category === filters.category);
+    }
+
+    // Apply discipline tag filter
+    if (filters.disciplineTag !== 'all') {
+      filtered = filtered.filter(term => 
+        term.discipline_tags?.includes(filters.disciplineTag)
+      );
+    }
+
+    // Apply difficulty filter
+    if (filters.difficulty !== 'all') {
+      if (filters.difficulty === '1-3') {
+        filtered = filtered.filter(term => (term.difficulty_score || 5) <= 3);
+      } else if (filters.difficulty === '4-6') {
+        filtered = filtered.filter(term => {
+          const score = term.difficulty_score || 5;
+          return score >= 4 && score <= 6;
+        });
+      } else if (filters.difficulty === '7-10') {
+        filtered = filtered.filter(term => (term.difficulty_score || 5) >= 7);
+      }
+    }
+
+    // Apply verified filter
+    if (filters.verified) {
+      filtered = filtered.filter(term => term.verification_status === 'verified');
+    }
+
+    setFilteredTerms(filtered);
+  }, [allTerms, searchQuery, filters]);
+
   // Handle language switching for individual terms
-  const handleLanguageSwitch = async (lang: Lang) => {
+  const handleLanguageSwitch = async (lang: string) => {
     setLang(lang);
     setTranslationError(null);
 
