@@ -114,7 +114,7 @@ ${text}`;
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            model: 'gpt-4o-mini', // Use faster, more reliable model
+            model: 'gpt-5-2025-08-07', // Use latest GPT-5 model for better translations
             messages: [
               {
                 role: 'system',
@@ -125,8 +125,7 @@ ${text}`;
                 content: prompt
               }
             ],
-            max_tokens: 200,
-            temperature: 0.2
+            max_completion_tokens: 200,
           }),
         });
 

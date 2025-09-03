@@ -202,12 +202,13 @@ const AdminDictionaryPage: React.FC = () => {
           </div>
 
           <Tabs defaultValue="terms" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-5">
               <TabsTrigger value="terms">All Terms ({terms.length})</TabsTrigger>
               <TabsTrigger value="review">
                 Needs Review ({terms.filter(t => t.status === 'needs_review').length})
               </TabsTrigger>
               <TabsTrigger value="translations">Translations</TabsTrigger>
+              <TabsTrigger value="bulk-import">Bulk Import</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
 
