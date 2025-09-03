@@ -35,7 +35,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         {supportedLanguages.slice(0, 6).map((lang) => (
           <button
             key={lang.language_code}
-            onClick={() => setLang(lang.language_code)}
+            onClick={() => setLang(lang.language_code as any)}
             disabled={isTranslating}
             className={`
               flex items-center gap-2 px-3 py-2 rounded-lg border transition-all
