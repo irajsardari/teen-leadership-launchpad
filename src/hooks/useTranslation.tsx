@@ -40,20 +40,13 @@ export const useTranslation = () => {
         });
         return false;
       } else {
-        toast({
-          title: 'Translation Failed',
-          description: 'Unable to generate translations for this term.',
-          variant: 'destructive',
-        });
+        // Silent fallback - no error message shown to user
+        console.log('Translation unavailable, falling back to English');
         return false;
       }
     } catch (error: any) {
-      console.error('Translation error:', error);
-      toast({
-        title: 'Translation Error',
-        description: error.message || 'Failed to translate term',
-        variant: 'destructive',
-      });
+      // Silent fallback - no error message shown to user
+      console.log('Translation unavailable, falling back to English:', error);
       return false;
     } finally {
       setIsTranslating(false);
