@@ -26,7 +26,7 @@ import ReactMarkdown from "react-markdown";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { BlogFeedback } from "@/components/BlogFeedback";
 import { ListenPlayer } from "@/components/voices/ListenPlayer";
-import ElevenLabsPlayer from "@/components/voices/ElevenLabsPlayer";
+import ModernElevenLabsPlayer from "@/components/voices/ModernElevenLabsPlayer";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -259,7 +259,7 @@ const BlogPostPage = () => {
                     hasContent: !!post.content 
                   });
                   return isVoices && (
-                    <ElevenLabsPlayer 
+                    <ModernElevenLabsPlayer 
                       content={post.content}
                       slug={post.slug}
                       className="mt-6"
