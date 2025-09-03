@@ -608,6 +608,18 @@ const DictionaryPage: React.FC = () => {
             </p>
           </div>
         )}
+
+        {/* Enhanced Term Details Modal */}
+        {selectedTerm && (
+          <TermDetailsModal
+            term={selectedTerm}
+            isOpen={showModal}
+            onClose={() => {
+              setShowModal(false);
+              setSelectedTerm(null);
+            }}
+          />
+        )}
       </div>
     </div>
   );
