@@ -226,31 +226,38 @@ const LexiconPage: React.FC = () => {
   const handleLanguageSwitch = async (lang: Lang) => {
     setLang(lang);
     setTranslationError(null);
+    setLiveTranslation(null); // Reset live translation
 
+    // Always return to English immediately without showing errors
     if (!term || lang === 'en') {
-      setLiveTranslation(null);
       return;
     }
 
-    if ((lang === 'ar' || lang === 'fa') && !term.translations?.[lang] && !liveTranslation) {
+    // For non-English languages, attempt translation
+    if ((lang === 'ar' || lang === 'fa')) {
+      // First check if we have cached translations
+      if (term.translations?.[lang]) {
+        return; // Use cached translation
+      }
+      
+      // Attempt live translation silently
       try {
         const result = await translate(term.slug, lang);
         if (result) {
           setLiveTranslation(result);
-        } else {
-          setTranslationError('Translation not available yet.');
         }
+        // If translation fails, we simply stay in English - no error shown
       } catch (error) {
-        setTranslationError('Translation not available yet.');
+        // Silent fail - stay in English view
+        console.log(`Translation not available for ${lang}, staying in English`);
       }
-    } else if (term.translations?.[lang]) {
-      setLiveTranslation(null);
     }
   };
 
   const getCurrentTermDisplay = () => {
-    if (!term) return { term: '', definition: '' };
+    if (!term) return { term: '', definition: '', phonetic: '' };
 
+    // Always try to display in the selected language, fallback to English gracefully
     if (currentLang === 'en') {
       return { 
         term: term.term, 
@@ -259,7 +266,8 @@ const LexiconPage: React.FC = () => {
       };
     }
 
-    if (liveTranslation) {
+    // For non-English languages, try live translation first, then cached, then fallback to English
+    if (liveTranslation && (currentLang === 'ar' || currentLang === 'fa')) {
       return { 
         term: liveTranslation.term, 
         definition: liveTranslation.shortDef,
@@ -270,12 +278,13 @@ const LexiconPage: React.FC = () => {
     if ((currentLang === 'ar' || currentLang === 'fa') && term.translations?.[currentLang]) {
       const cached = term.translations[currentLang];
       return { 
-        term: cached.term, 
-        definition: cached.shortDef || cached.short_def,
+        term: cached.term || cached.translated_term, 
+        definition: cached.shortDef || cached.short_def || cached.definition,
         phonetic: currentLang === 'ar' ? term.phonetic_ar : term.phonetic_fa
       };
     }
 
+    // Graceful fallback to English - no error message
     return { 
       term: term.term, 
       definition: term.long_def || term.short_def || '',
@@ -483,11 +492,7 @@ const LexiconPage: React.FC = () => {
                   </div>
                 )}
 
-                {translationError && (
-                  <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
-                    <p className="text-yellow-800">{translationError}</p>
-                  </div>
-                )}
+                {/* Remove the translation error display completely since we fallback gracefully */}
               </CardContent>
             </Card>
 
