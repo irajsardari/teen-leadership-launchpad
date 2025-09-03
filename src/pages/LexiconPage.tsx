@@ -424,11 +424,11 @@ const LexiconPage: React.FC = () => {
                     <BookOpen className="w-5 h-5" />
                     Definition
                   </h3>
-                  <div className="bg-muted/20 p-6 rounded-lg border-l-4 border-primary">
-                    <p className="text-foreground leading-relaxed text-lg">
-                      {displayDefinition}
-                    </p>
-                  </div>
+                   <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-8 rounded-xl border border-primary/20 shadow-sm">
+                     <p className="text-foreground leading-relaxed text-lg font-medium line-height-7">
+                       {displayDefinition}
+                     </p>
+                   </div>
                 </div>
 
                 {/* Examples */}
@@ -438,11 +438,17 @@ const LexiconPage: React.FC = () => {
                       Practical Examples
                     </h3>
                     <div className="space-y-3">
-                      {term.examples.map((example, index) => (
-                        <div key={index} className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
-                          <p className="italic text-blue-900">"{example}"</p>
-                        </div>
-                      ))}
+                       {term.examples.map((example, index) => (
+                         <div key={index} className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-blue-400 shadow-sm">
+                           <div className="flex items-start gap-3">
+                             <span className="text-blue-600 font-bold text-lg leading-none">"</span>
+                             <p className="italic text-blue-900 font-medium leading-relaxed text-base">
+                               {example}
+                             </p>
+                             <span className="text-blue-600 font-bold text-lg leading-none">"</span>
+                           </div>
+                         </div>
+                       ))}
                     </div>
                   </div>
                 )}
@@ -478,19 +484,34 @@ const LexiconPage: React.FC = () => {
                   </div>
                 )}
 
-                {/* Usage Statistics */}
-                {term.usage_count && (
-                  <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4" />
-                      <span>{term.usage_count} views</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      <span>Updated {new Date(term.updated_at).toLocaleDateString()}</span>
-                    </div>
-                  </div>
-                )}
+                 {/* Academic Metadata */}
+                 <div className="bg-muted/10 p-6 rounded-xl border border-muted/30">
+                   <h4 className="text-lg font-semibold mb-4 text-primary">Academic Information</h4>
+                   <div className="grid md:grid-cols-2 gap-4 text-sm">
+                     {term.usage_count && (
+                       <div className="flex items-center gap-2 text-muted-foreground">
+                         <TrendingUp className="w-4 h-4" />
+                         <span><strong>{term.usage_count}</strong> academic references</span>
+                       </div>
+                     )}
+                     <div className="flex items-center gap-2 text-muted-foreground">
+                       <Clock className="w-4 h-4" />
+                       <span>Last reviewed: <strong>{new Date(term.updated_at).toLocaleDateString()}</strong></span>
+                     </div>
+                     {term.sources && term.sources.length > 0 && (
+                       <div className="flex items-center gap-2 text-muted-foreground">
+                         <BookOpen className="w-4 h-4" />
+                         <span><strong>{term.sources.length}</strong> source(s) cited</span>
+                       </div>
+                     )}
+                     {term.verification_status === 'verified' && (
+                       <div className="flex items-center gap-2 text-green-600">
+                         <CheckCircle className="w-4 h-4" />
+                         <span><strong>Academically verified</strong></span>
+                       </div>
+                     )}
+                   </div>
+                 </div>
 
                 {/* Remove the translation error display completely since we fallback gracefully */}
               </CardContent>
@@ -547,22 +568,26 @@ const LexiconPage: React.FC = () => {
           
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Your comprehensive multilingual reference for management, leadership, psychology, 
-            entrepreneurship, and related disciplines. Discover thousands of professionally 
-            curated terms with expert definitions and practical examples.
+            entrepreneurship, and related disciplines. Access thousands of professionally 
+            curated terms with expert definitions, phonetic guides, and practical examples—all 
+            verified by TMA Academy's academic standards.
           </p>
           
           <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <Badge variant="outline">{allTerms.length}+</Badge>
-              <span>Professional Terms</span>
+              <Badge variant="outline" className="bg-primary/5 border-primary/30">{allTerms.length}+</Badge>
+              <span className="font-medium">Academic Terms</span>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="outline">{Object.keys(supportedLanguages).length}</Badge>
-              <span>Languages</span>
+              <Badge variant="outline" className="bg-green-50 border-green-200">{Object.keys(supportedLanguages).length}</Badge>
+              <span className="font-medium">Languages</span>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="outline">Verified</Badge>
-              <span>by Experts</span>
+              <Badge variant="outline" className="bg-blue-50 border-blue-200">
+                <CheckCircle className="w-3 h-3 mr-1" />
+                TMA Verified
+              </Badge>
+              <span className="font-medium">by Experts</span>
             </div>
           </div>
         </div>

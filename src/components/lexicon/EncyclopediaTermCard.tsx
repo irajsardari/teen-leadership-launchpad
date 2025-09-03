@@ -146,15 +146,17 @@ const EncyclopediaTermCard: React.FC<EncyclopediaTermCardProps> = ({
         </div>
 
         {/* Definition */}
-        <div className="space-y-2">
-          <p className="text-foreground leading-relaxed">
-            {term.short_def}
-          </p>
+        <div className="space-y-3">
+          <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-4 rounded-xl border border-primary/20 shadow-sm">
+            <p className="text-foreground leading-relaxed font-medium">
+              {term.short_def}
+            </p>
+          </div>
           
           {term.examples && term.examples.length > 0 && (
-            <div className="bg-muted/30 p-3 rounded-lg">
-              <p className="text-sm text-muted-foreground mb-1 font-medium">Example:</p>
-              <p className="text-sm italic">"{term.examples[0]}"</p>
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-xl border-l-4 border-blue-400 shadow-sm">
+              <p className="text-xs text-blue-600 mb-2 font-semibold uppercase tracking-wide">Academic Example</p>
+              <p className="text-sm italic text-blue-900 font-medium">"{term.examples[0]}"</p>
             </div>
           )}
         </div>
