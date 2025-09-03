@@ -43,32 +43,27 @@ export const useLanguage = (): UseLanguageReturn => {
 
       console.log('Translation response:', { data, error });
 
+      // Handle all errors gracefully - return null to fallback to English silently
       if (error) {
-        console.error('Supabase function error:', error);
-        // Silently fail for any translation errors
-        return null;
+        console.log('Translation service error, falling back to English:', error.message);
+        return null; // Silent fallback to English
       }
 
-      if (!data) {
-        console.log('No data returned from translation function');
-        return null;
-      }
-
-      // Check if this indicates we should fall back
-      if (data.fallback) {
-        console.log('Translation service indicated fallback to English');
-        return null;
+      if (!data || data.fallback || data.error) {
+        console.log('Translation not available, falling back to English');
+        return null; // Silent fallback to English
       }
 
       console.log('Translation successful:', data);
       return {
         term: data.term,
         shortDef: data.shortDef,
-        source: data.source,
+        source: data.source || 'ai',
         updatedAt: new Date().toISOString()
       };
     } catch (error) {
-      console.log('Translation request failed, falling back to English:', error);
+      // All translation errors should be silent - just fallback to English
+      console.log('Translation request failed silently, falling back to English:', error);
       return null;
     } finally {
       setIsTranslating(false);
