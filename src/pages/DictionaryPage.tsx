@@ -149,42 +149,35 @@ const DictionaryPage: React.FC = () => {
     }
   };
 
-  // Handle language switching for individual terms
+  // Handle language switching with graceful fallback
   const handleLanguageSwitch = async (lang: Lang) => {
-    console.log(`Switching language to ${lang} for term:`, term?.slug);
     setLang(lang);
     setTranslationError(null);
+    setLiveTranslation(null);
 
-    if (!term) {
-      console.log('No term available for translation');
+    // Always return to English immediately without showing errors
+    if (!term || lang === 'en') {
       return;
     }
 
-    // For English, just switch - no translation needed
-    if (lang === 'en') {
-      setLiveTranslation(null);
-      return;
-    }
-
-    // For ar/fa, attempt translation if not available
-    if ((lang === 'ar' || lang === 'fa') && !term.translations?.[lang] && !liveTranslation) {
-      console.log(`Attempting translation for ${term.slug} -> ${lang}`);
+    // For non-English languages, attempt translation silently
+    if ((lang === 'ar' || lang === 'fa')) {
+      // First check if we have cached translations
+      if (term.translations?.[lang]) {
+        return; // Use cached translation
+      }
+      
+      // Attempt live translation silently - no error messages shown to user
       try {
         const result = await translate(term.slug, lang);
         if (result) {
-          console.log('Translation successful:', result);
           setLiveTranslation(result);
-        } else {
-          console.log('Translation returned null');
-          setTranslationError('Translation not available yet. Please check again soon.');
         }
+        // If translation fails, we simply stay in English - no error shown
       } catch (error) {
-        console.error('Translation error:', error);
-        setTranslationError('Translation not available yet. Please check again soon.');
+        // Silent fail - stay in English view
+        console.log(`Translation not available for ${lang}, staying in English`);
       }
-    } else if (term.translations?.[lang]) {
-      console.log('Using cached translation for', lang);
-      setLiveTranslation(null); // Clear live translation to use cached
     }
   };
 
@@ -362,11 +355,7 @@ const DictionaryPage: React.FC = () => {
                   )}
                 </div>
 
-                {translationError && (
-                  <div className="translation-error">
-                    Auto-translate failed. Showing English version.
-                  </div>
-                )}
+                {/* Removed translation error display - graceful fallback to English */}
 
                 {term.synonyms && term.synonyms.length > 0 && (
                   <div>

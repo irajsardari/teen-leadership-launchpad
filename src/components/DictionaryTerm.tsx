@@ -198,11 +198,7 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
             )}
           </div>
 
-          {translationError && (
-            <div className="translation-error">
-              Auto-translate failed. Showing English version.
-            </div>
-          )}
+          {/* Removed translation error display - graceful fallback to English */}
           
           <div className="flex items-center justify-between pt-2 border-t">
             <Button
