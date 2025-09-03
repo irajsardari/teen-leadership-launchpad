@@ -29,6 +29,14 @@ interface DictionaryTerm {
   synonyms: string[];
   related: string[];
   translations: any;
+  phonetic_en?: string;
+  phonetic_ar?: string;
+  phonetic_fa?: string;
+  examples?: string[];
+  discipline_tags?: string[];
+  sources?: string[];
+  verification_status?: string;
+  usage_count?: number;
   created_at: string;
   updated_at: string;
 }
@@ -52,7 +60,7 @@ const DictionaryPage: React.FC = () => {
   const [liveTranslation, setLiveTranslation] = useState<TranslationData | null>(null);
   const [translationError, setTranslationError] = useState<string | null>(null);
 
-  const categories = ['Management', 'Leadership', 'Psychology', 'Money', 'Digital Life', 'Study Skills'];
+  const categories = ['Management', 'Leadership', 'Psychology', 'Finance', 'Digital Life', 'Study Skills', 'Communication', 'Sociology', 'Philosophy', 'Ethics'];
 
   useEffect(() => {
     if (slug) {
@@ -242,7 +250,7 @@ const DictionaryPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-background" dir={textDirection}>
         <Helmet>
-          <title>{displayTerm} - TMA Dictionary</title>
+          <title>{displayTerm} - TMA Lexicon</title>
           <meta name="description" content={displayDefinition.substring(0, 160)} />
           <script type="application/ld+json">
             {JSON.stringify({
@@ -253,8 +261,8 @@ const DictionaryPage: React.FC = () => {
               "description": term.short_def,
               "inDefinedTermSet": {
                 "@type": "DefinedTermSet",
-                "name": "TMA Dictionary",
-                "description": "Teenager Management Academy educational terms"
+                "name": "TMA Lexicon",
+                "description": "Comprehensive encyclopedia of management, leadership, and psychology terms for teenagers"
               }
             })}
           </script>
@@ -266,7 +274,7 @@ const DictionaryPage: React.FC = () => {
             <Button variant="ghost" asChild className="mb-4">
               <Link to="/dictionary" className={`flex items-center gap-2 ${currentLang === 'ar' || currentLang === 'fa' ? 'flex-row-reverse' : ''}`}>
                 <ArrowLeft className={`w-4 h-4 ${currentLang === 'ar' || currentLang === 'fa' ? 'flip-rtl' : ''}`} />
-                Back to Dictionary
+                Back to TMA Lexicon
               </Link>
             </Button>
           </div>
@@ -446,45 +454,89 @@ const DictionaryPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>TMA Dictionary - Teenagers Management Academy</title>
+        <title>TMA Lexicon - Teenagers Management Academy</title>
         <meta 
           name="description" 
-          content="Comprehensive dictionary of terms used in teenager management and leadership education at TMA Academy." 
+          content="The comprehensive TMA Lexicon - Encyclopedia of management, leadership, psychology and entrepreneurship terms for teenagers. Trusted knowledge in multiple languages." 
         />
+        <meta name="keywords" content="teenagers, management, leadership, psychology, dictionary, lexicon, multilingual, education" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            "name": "TMA Lexicon",
+            "description": "Comprehensive encyclopedia of management, leadership, and psychology terms for teenagers",
+            "provider": {
+              "@type": "Organization",
+              "name": "Teenagers Management Academy"
+            }
+          })}
+        </script>
       </Helmet>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">TMA Dictionary</h1>
-          <p className="text-xl text-muted-foreground">
-            Explore key terms and concepts in teenager management and leadership education.
+        <div className="mb-8 text-center">
+          <div className="flex items-center justify-center mb-6">
+            <div className="bg-gradient-to-r from-tma-blue to-tma-orange p-4 rounded-full shadow-lg">
+              <BookOpen className="w-8 h-8 text-white" />
+            </div>
+          </div>
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-tma-blue to-tma-orange bg-clip-text text-transparent">
+            TMA Lexicon
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Your comprehensive encyclopedia of management, leadership, psychology, and entrepreneurship. 
+            Designed specifically for teenagers with multilingual support and real-world examples.
           </p>
+          <div className="flex flex-wrap justify-center gap-2 mt-4">
+            <Badge variant="outline" className="bg-tma-cream">🇺🇸 English</Badge>
+            <Badge variant="outline" className="bg-tma-cream">🇸🇦 العربية</Badge>
+            <Badge variant="outline" className="bg-tma-cream">🇮🇷 فارسی</Badge>
+          </div>
         </div>
 
-        <Card className="mb-6">
+        <Card className="mb-6 bg-gradient-to-r from-tma-cream to-white border-tma-blue/20">
           <CardContent className="p-6">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-3 h-4 w-4 text-tma-blue" />
                 <Input
-                  placeholder="Search terms..."
+                  placeholder="Search the TMA Lexicon..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 border-tma-blue/30 focus:border-tma-orange"
                 />
               </div>
               
               <Select value={filterCategory} onValueChange={setFilterCategory}>
-                <SelectTrigger className="w-full sm:w-48">
-                  <SelectValue placeholder="All categories" />
+                <SelectTrigger className="w-full sm:w-48 border-tma-blue/30">
+                  <SelectValue placeholder="All disciplines" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
+                  <SelectItem value="all">All Disciplines</SelectItem>
                   {categories.map(category => (
                     <SelectItem key={category} value={category}>{category}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+            </div>
+            
+            {/* Stats Display */}
+            <div className="mt-4 pt-4 border-t border-tma-blue/10">
+              <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-tma-blue rounded-full"></div>
+                  {allTerms.length} total terms
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-tma-orange rounded-full"></div>
+                  {categories.length} disciplines
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  3 languages supported
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -493,28 +545,53 @@ const DictionaryPage: React.FC = () => {
           {filteredTerms.map((term) => (
             <Card 
               key={term.id} 
-              className="hover:shadow-lg transition-shadow cursor-pointer"
+              className="hover:shadow-lg hover:border-tma-orange/30 transition-all duration-300 cursor-pointer group"
             >
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-lg font-semibold">{term.term}</h3>
-                  {term.category && (
-                    <Badge variant="secondary" className="text-xs">
-                      {term.category}
-                    </Badge>
-                  )}
+                  <h3 className="text-lg font-semibold group-hover:text-tma-orange transition-colors">
+                    {term.term}
+                  </h3>
+                  <div className="flex flex-col items-end gap-1">
+                    {term.category && (
+                      <Badge variant="secondary" className="text-xs bg-tma-blue/10 text-tma-blue">
+                        {term.category}
+                      </Badge>
+                    )}
+                    {term.verification_status === 'verified' && (
+                      <Badge variant="outline" className="text-xs border-green-500 text-green-600">
+                        ✓ Verified
+                      </Badge>
+                    )}
+                  </div>
                 </div>
                 
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed line-clamp-3">
                   {term.short_def}
                 </p>
                 
-                <Button variant="outline" size="sm" asChild>
+                {/* Discipline Tags */}
+                {term.discipline_tags && term.discipline_tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {term.discipline_tags.slice(0, 3).map((tag, index) => (
+                      <Badge key={index} variant="outline" className="text-xs bg-tma-cream">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+                
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  asChild
+                  className="w-full group-hover:bg-tma-orange group-hover:text-white group-hover:border-tma-orange transition-all"
+                >
                   <Link 
                     to={`/dictionary/${term.slug}`}
                     className="flex items-center gap-1"
                   >
-                    Learn More <ExternalLink className="w-3 h-3" />
+                    Explore Definition <ExternalLink className="w-3 h-3" />
                   </Link>
                 </Button>
               </CardContent>

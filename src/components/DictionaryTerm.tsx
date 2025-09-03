@@ -224,7 +224,7 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
             </Button>
             
             <span className="text-xs text-muted-foreground">
-              TMA Dictionary
+              TMA Lexicon
             </span>
           </div>
         </div>
