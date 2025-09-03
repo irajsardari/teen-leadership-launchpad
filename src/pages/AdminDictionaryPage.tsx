@@ -571,6 +571,10 @@ const AdminDictionaryPage: React.FC = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+
+            <TabsContent value="bulk-import" className="space-y-6">
+              <LexiconBulkImport />
+            </TabsContent>
           </Tabs>
 
           {/* Term Edit Modal/Form - This would be enhanced with a proper modal */}

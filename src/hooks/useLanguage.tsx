@@ -45,21 +45,18 @@ export const useLanguage = (): UseLanguageReturn => {
 
       if (error) {
         console.error('Supabase function error:', error);
-        // Check if it's a rate limit error
-        if (error.message?.includes('rate limit') || error.context?.status === 429) {
-          console.log('Rate limit detected, will retry later');
-          return null; // Will show "Translation not available yet" message
-        }
-        // Check for other API errors
-        if (error.context?.status === 502) {
-          console.log('Translation service temporarily unavailable');
-          return null; // Will show "Translation not available yet" message  
-        }
+        // Silently fail for any translation errors
         return null;
       }
 
       if (!data) {
-        console.error('No data returned from translation function');
+        console.log('No data returned from translation function');
+        return null;
+      }
+
+      // Check if this indicates we should fall back
+      if (data.fallback) {
+        console.log('Translation service indicated fallback to English');
         return null;
       }
 
@@ -71,7 +68,7 @@ export const useLanguage = (): UseLanguageReturn => {
         updatedAt: new Date().toISOString()
       };
     } catch (error) {
-      console.error('Translation request failed:', error);
+      console.log('Translation request failed, falling back to English:', error);
       return null;
     } finally {
       setIsTranslating(false);

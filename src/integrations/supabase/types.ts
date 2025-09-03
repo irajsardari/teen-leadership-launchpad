@@ -435,11 +435,15 @@ export type Database = {
       }
       dictionary: {
         Row: {
+          age_appropriateness: string | null
+          ai_generated: boolean | null
           category: string | null
+          complexity_level: string | null
           context: string | null
           contributor_id: string | null
           created_at: string
           created_from_content_id: string | null
+          difficulty_score: number | null
           discipline_tags: string[] | null
           examples: string[] | null
           frequency: number | null
@@ -462,11 +466,15 @@ export type Database = {
           verification_status: string | null
         }
         Insert: {
+          age_appropriateness?: string | null
+          ai_generated?: boolean | null
           category?: string | null
+          complexity_level?: string | null
           context?: string | null
           contributor_id?: string | null
           created_at?: string
           created_from_content_id?: string | null
+          difficulty_score?: number | null
           discipline_tags?: string[] | null
           examples?: string[] | null
           frequency?: number | null
@@ -489,11 +497,15 @@ export type Database = {
           verification_status?: string | null
         }
         Update: {
+          age_appropriateness?: string | null
+          ai_generated?: boolean | null
           category?: string | null
+          complexity_level?: string | null
           context?: string | null
           contributor_id?: string | null
           created_at?: string
           created_from_content_id?: string | null
+          difficulty_score?: number | null
           discipline_tags?: string[] | null
           examples?: string[] | null
           frequency?: number | null
@@ -614,6 +626,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      lexicon_imports: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          error_log: string[] | null
+          failed_imports: number | null
+          filename: string
+          id: string
+          import_status: string
+          successful_imports: number | null
+          total_terms: number | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          error_log?: string[] | null
+          failed_imports?: number | null
+          filename: string
+          id?: string
+          import_status?: string
+          successful_imports?: number | null
+          total_terms?: number | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          error_log?: string[] | null
+          failed_imports?: number | null
+          filename?: string
+          id?: string
+          import_status?: string
+          successful_imports?: number | null
+          total_terms?: number | null
+          uploaded_by?: string | null
+        }
+        Relationships: []
       }
       materials: {
         Row: {
