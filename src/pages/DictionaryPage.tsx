@@ -200,7 +200,7 @@ const DictionaryPage: React.FC = () => {
       const cached = term.translations[currentLang];
       return { 
         term: cached.term, 
-        definition: cached.short_def 
+        definition: cached.shortDef || cached.short_def 
       };
     }
 
@@ -417,18 +417,18 @@ const DictionaryPage: React.FC = () => {
                         <div className="p-3 border rounded">
                           <div className="text-sm font-medium text-muted-foreground">Arabic (العربية)</div>
                           <div className="font-medium" dir="rtl">{term.translations.ar.term}</div>
-                          <div className="text-sm text-muted-foreground" dir="rtl">
-                            {term.translations.ar.short_def}
-                          </div>
+                           <div className="text-sm text-muted-foreground" dir="rtl">
+                             {term.translations.ar.shortDef || term.translations.ar.short_def}
+                           </div>
                         </div>
                       )}
                       {term.translations.fa && (
                         <div className="p-3 border rounded">
                           <div className="text-sm font-medium text-muted-foreground">Persian (فارسی)</div>
                           <div className="font-medium" dir="rtl">{term.translations.fa.term}</div>
-                          <div className="text-sm text-muted-foreground" dir="rtl">
-                            {term.translations.fa.short_def}
-                          </div>
+                           <div className="text-sm text-muted-foreground" dir="rtl">
+                             {term.translations.fa.shortDef || term.translations.fa.short_def}
+                           </div>
                         </div>
                       )}
                     </div>
