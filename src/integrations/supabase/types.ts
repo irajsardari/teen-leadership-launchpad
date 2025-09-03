@@ -437,56 +437,83 @@ export type Database = {
         Row: {
           category: string | null
           context: string | null
+          contributor_id: string | null
           created_at: string
           created_from_content_id: string | null
+          discipline_tags: string[] | null
+          examples: string[] | null
           frequency: number | null
           id: string
           long_def: string | null
+          phonetic_ar: string | null
+          phonetic_en: string | null
+          phonetic_fa: string | null
           related: string[] | null
           short_def: string | null
           slug: string
+          sources: string[] | null
           status: string | null
           synonyms: string[] | null
           term: string
           translation_updated_at: string | null
           translations: Json | null
           updated_at: string
+          usage_count: number | null
+          verification_status: string | null
         }
         Insert: {
           category?: string | null
           context?: string | null
+          contributor_id?: string | null
           created_at?: string
           created_from_content_id?: string | null
+          discipline_tags?: string[] | null
+          examples?: string[] | null
           frequency?: number | null
           id?: string
           long_def?: string | null
+          phonetic_ar?: string | null
+          phonetic_en?: string | null
+          phonetic_fa?: string | null
           related?: string[] | null
           short_def?: string | null
           slug: string
+          sources?: string[] | null
           status?: string | null
           synonyms?: string[] | null
           term: string
           translation_updated_at?: string | null
           translations?: Json | null
           updated_at?: string
+          usage_count?: number | null
+          verification_status?: string | null
         }
         Update: {
           category?: string | null
           context?: string | null
+          contributor_id?: string | null
           created_at?: string
           created_from_content_id?: string | null
+          discipline_tags?: string[] | null
+          examples?: string[] | null
           frequency?: number | null
           id?: string
           long_def?: string | null
+          phonetic_ar?: string | null
+          phonetic_en?: string | null
+          phonetic_fa?: string | null
           related?: string[] | null
           short_def?: string | null
           slug?: string
+          sources?: string[] | null
           status?: string | null
           synonyms?: string[] | null
           term?: string
           translation_updated_at?: string | null
           translations?: Json | null
           updated_at?: string
+          usage_count?: number | null
+          verification_status?: string | null
         }
         Relationships: [
           {
