@@ -11,6 +11,8 @@ import { BookOpen, Search, ExternalLink, ArrowLeft, Loader2, Globe } from 'lucid
 import { Link } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import { useLanguage } from '@/hooks/useLanguage';
+import { EnhancedTermCard } from '@/components/EnhancedTermCard';
+import { TermDetailsModal } from '@/components/TermDetailsModal';
 import { 
   Lang, 
   supportedLanguages, 
@@ -57,6 +59,8 @@ const DictionaryPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
+  const [selectedTerm, setSelectedTerm] = useState<DictionaryTerm | null>(null);
+  const [showModal, setShowModal] = useState(false);
   const [liveTranslation, setLiveTranslation] = useState<TranslationData | null>(null);
   const [translationError, setTranslationError] = useState<string | null>(null);
 
