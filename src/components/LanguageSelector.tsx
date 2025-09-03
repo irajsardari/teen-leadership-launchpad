@@ -3,6 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Globe, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import { Lang } from '@/utils/language';
 
 interface LanguageSelectorProps {
   variant?: 'default' | 'compact' | 'buttons';
