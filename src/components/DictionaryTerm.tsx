@@ -40,7 +40,7 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
   const { currentLang, setLang, translate, isTranslating } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [liveTranslations, setLiveTranslations] = useState<Partial<Record<Lang, TranslationData>>>({});
-  const [translationError, setTranslationError] = useState<string | null>(null);
+  // Removed translationError state - using silent fallback only
 
   // Get current translation based on active language
   const getCurrentTranslation = () => {    
@@ -64,10 +64,10 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
     return { term, definition: definition || 'Definition coming soon' };
   };
 
-  // Handle language switching
+  // Handle language switching with silent fallback
   const handleLanguageSwitch = async (lang: Lang) => {
     setLang(lang);
-    setTranslationError(null);
+    // No error state needed - silent fallback only
 
     // Only attempt translation for Arabic and Persian (supported by API)
     if ((lang === 'ar' || lang === 'fa') && !liveTranslations[lang] && !translations?.[lang]) {
@@ -78,12 +78,11 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
             ...prev,
             [lang]: result
           }));
-        } else {
-          setTranslationError('Translation failed');
         }
+        // Silent fallback to English if translation fails - no error shown
       } catch (error) {
-        console.error('Translation error:', error);
-        setTranslationError('Translation failed');
+        // Silent fallback to English - no error shown to user
+        console.log(`Translation not available for ${lang}, showing English version`);
       }
     }
   };

@@ -65,7 +65,7 @@ const LexiconPage: React.FC = () => {
     verified: false
   });
   const [liveTranslation, setLiveTranslation] = useState<TranslationData | null>(null);
-  const [translationError, setTranslationError] = useState<string | null>(null);
+  // Removed translationError state - using silent fallback only
 
   const categories = ['Management', 'Leadership', 'Psychology', 'Finance', 'Digital Life', 'Study Skills', 'Communication', 'Sociology', 'Philosophy', 'Ethics'];
 
@@ -225,7 +225,6 @@ const LexiconPage: React.FC = () => {
 
   const handleLanguageSwitch = async (lang: Lang) => {
     setLang(lang);
-    setTranslationError(null);
     setLiveTranslation(null); // Reset live translation
 
     // Always return to English immediately without showing errors
