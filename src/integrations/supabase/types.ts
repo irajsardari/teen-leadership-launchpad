@@ -437,20 +437,30 @@ export type Database = {
         Row: {
           age_appropriateness: string | null
           ai_generated: boolean | null
+          ai_generated_metadata: Json | null
           category: string | null
           complexity_level: string | null
           context: string | null
           contributor_id: string | null
           created_at: string
           created_from_content_id: string | null
+          definition_ar: string | null
+          definition_en: string | null
+          definition_fa: string | null
           difficulty_score: number | null
           discipline_tags: string[] | null
+          example_ar: string | null
+          example_en: string | null
+          example_fa: string | null
           examples: string[] | null
           frequency: number | null
           id: string
+          last_ai_update: string | null
           long_def: string | null
           phonetic_ar: string | null
+          phonetic_ar_new: string | null
           phonetic_en: string | null
+          phonetic_en_new: string | null
           phonetic_fa: string | null
           related: string[] | null
           short_def: string | null
@@ -468,20 +478,30 @@ export type Database = {
         Insert: {
           age_appropriateness?: string | null
           ai_generated?: boolean | null
+          ai_generated_metadata?: Json | null
           category?: string | null
           complexity_level?: string | null
           context?: string | null
           contributor_id?: string | null
           created_at?: string
           created_from_content_id?: string | null
+          definition_ar?: string | null
+          definition_en?: string | null
+          definition_fa?: string | null
           difficulty_score?: number | null
           discipline_tags?: string[] | null
+          example_ar?: string | null
+          example_en?: string | null
+          example_fa?: string | null
           examples?: string[] | null
           frequency?: number | null
           id?: string
+          last_ai_update?: string | null
           long_def?: string | null
           phonetic_ar?: string | null
+          phonetic_ar_new?: string | null
           phonetic_en?: string | null
+          phonetic_en_new?: string | null
           phonetic_fa?: string | null
           related?: string[] | null
           short_def?: string | null
@@ -499,20 +519,30 @@ export type Database = {
         Update: {
           age_appropriateness?: string | null
           ai_generated?: boolean | null
+          ai_generated_metadata?: Json | null
           category?: string | null
           complexity_level?: string | null
           context?: string | null
           contributor_id?: string | null
           created_at?: string
           created_from_content_id?: string | null
+          definition_ar?: string | null
+          definition_en?: string | null
+          definition_fa?: string | null
           difficulty_score?: number | null
           discipline_tags?: string[] | null
+          example_ar?: string | null
+          example_en?: string | null
+          example_fa?: string | null
           examples?: string[] | null
           frequency?: number | null
           id?: string
+          last_ai_update?: string | null
           long_def?: string | null
           phonetic_ar?: string | null
+          phonetic_ar_new?: string | null
           phonetic_en?: string | null
+          phonetic_en_new?: string | null
           phonetic_fa?: string | null
           related?: string[] | null
           short_def?: string | null
@@ -626,6 +656,87 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      lexicon_categories: {
+        Row: {
+          color: string | null
+          created_at: string | null
+          description: string | null
+          icon: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      lexicon_generation_queue: {
+        Row: {
+          category: string | null
+          completed_at: string | null
+          created_at: string | null
+          error_message: string | null
+          generated_data: Json | null
+          id: string
+          priority: number | null
+          requested_at: string | null
+          requested_by: string | null
+          started_at: string | null
+          status: string | null
+          term: string
+          updated_at: string | null
+        }
+        Insert: {
+          category?: string | null
+          completed_at?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          generated_data?: Json | null
+          id?: string
+          priority?: number | null
+          requested_at?: string | null
+          requested_by?: string | null
+          started_at?: string | null
+          status?: string | null
+          term: string
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string | null
+          completed_at?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          generated_data?: Json | null
+          id?: string
+          priority?: number | null
+          requested_at?: string | null
+          requested_by?: string | null
+          started_at?: string | null
+          status?: string | null
+          term?: string
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       lexicon_imports: {
         Row: {
