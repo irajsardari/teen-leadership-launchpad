@@ -4,6 +4,7 @@ import knowYourselfBanner from "@/assets/know-yourself-teen-mirror-reflection.jp
 import mentalHealthBanner from "@/assets/mental-health-two-wings-connection.jpg";
 import digitalAwarenessBanner from "@/assets/digital-awareness-classroom.jpg";
 import resilienceBanner from "@/assets/resilience-teen-rising-up.jpg";
+import overcomingChallengesBanner from "@/assets/overcoming-challenges-teen-climbing.jpg";
 import legacyBanner from "@/assets/legacy-teen-future-reflection.jpg";
 import legacyMirrorBanner from "@/assets/legacy-teen-mirror-reflection.jpg";
 import heroTeenagers from "@/assets/hero-teenagers.jpg";
@@ -311,7 +312,7 @@ Your actions will already have answered that question.
     author: "Dr. Iraj Sardari Baf",
     authorId: "dr-iraj-sardari-baf",
     date: "2025-07-10",
-    featuredImage: resilienceBanner,
+    featuredImage: overcomingChallengesBanner,
     excerpt: "Failure isn't the end — it's the start of growth. This article explores how consistency, skill-building, and resilience help teenagers turn setbacks into stepping stones.",
     content: `# We Fall. We Learn. We Rise.
 
