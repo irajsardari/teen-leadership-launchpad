@@ -62,6 +62,8 @@ const DictionaryPage: React.FC = () => {
   const [selectedTerm, setSelectedTerm] = useState<DictionaryTerm | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [liveTranslation, setLiveTranslation] = useState<TranslationData | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generationMessage, setGenerationMessage] = useState('');
   // Removed translationError state - using silent fallback only
 
   const categories = ['Management', 'Leadership', 'Psychology', 'Finance', 'Digital Life', 'Study Skills', 'Communication', 'Sociology', 'Philosophy', 'Ethics'];
@@ -84,7 +86,18 @@ const DictionaryPage: React.FC = () => {
         .eq('status', 'published')
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching term:', error);
+        
+        // If term not found, try on-demand generation
+        if (error.code === 'PGRST116') {
+          await tryOnDemandGeneration();
+        } else {
+          throw error;
+        }
+        return;
+      }
+      
       setTerm(data);
 
       // Fetch related content
@@ -106,6 +119,48 @@ const DictionaryPage: React.FC = () => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const tryOnDemandGeneration = async () => {
+    if (!slug || isGenerating) return;
+
+    try {
+      setIsGenerating(true);
+      setGenerationMessage('🔍 Term not found. Generating definition using AI...');
+
+      // Convert slug to proper term name
+      const termName = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      
+      const { data, error } = await supabase.functions.invoke('on-demand-lexicon', {
+        body: {
+          term: termName,
+          category: 'General',
+          language: currentLang
+        }
+      });
+
+      if (data?.success) {
+        if (data.found_existing) {
+          setTerm(data.term);
+          setGenerationMessage('✅ Found existing term!');
+          setTimeout(() => setGenerationMessage(''), 3000);
+        } else if (data.generated) {
+          setTerm(data.term);
+          setGenerationMessage('✅ Term successfully generated using AI!');
+          setTimeout(() => setGenerationMessage(''), 5000);
+        }
+      } else {
+        setGenerationMessage(
+          data?.fallback_message || 
+          `Term "${termName}" not found in our lexicon. Try searching for a related term or contact support.`
+        );
+      }
+    } catch (error: any) {
+      console.error('On-demand generation error:', error);
+      setGenerationMessage('Unable to generate term definition. Please try again later or search for a related term.');
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -223,12 +278,14 @@ const DictionaryPage: React.FC = () => {
     return matchesSearch && matchesCategory;
   });
 
-  if (loading) {
+  if (loading || isGenerating) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <BookOpen className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
-          <p className="text-muted-foreground">Loading dictionary...</p>
+          <p className="text-muted-foreground">
+            {isGenerating ? generationMessage : 'Loading dictionary...'}
+          </p>
         </div>
       </div>
     );

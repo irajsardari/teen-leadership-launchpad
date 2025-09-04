@@ -9,10 +9,11 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
-import { BookOpen, CheckCircle, Clock, AlertCircle, Plus, Search, Filter, Languages, Loader2, Globe, Upload } from 'lucide-react';
+import { BookOpen, CheckCircle, Clock, AlertCircle, Plus, Search, Filter, Languages, Loader2, Globe, Upload, Brain } from 'lucide-react';
 import { AuthGuard } from '@/components/AuthGuard';
 import { useTranslation } from '@/hooks/useTranslation';
 import LexiconBulkImport from '@/components/admin/LexiconBulkImport';
+import AILexiconManager from '@/components/admin/AILexiconManager';
 
 interface DictionaryTerm {
   id: string;
@@ -195,14 +196,18 @@ const AdminDictionaryPage: React.FC = () => {
 
         <div className="container mx-auto px-4 py-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Dictionary Administration</h1>
+            <h1 className="text-3xl font-bold mb-2">AI-Powered Lexicon Administration</h1>
             <p className="text-muted-foreground">
-              Manage dictionary terms, review auto-generated drafts, and publish definitions.
+              Manage the AI-powered TMA Lexicon with automated generation, multilingual support, and intelligent term expansion.
             </p>
           </div>
 
-          <Tabs defaultValue="terms" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-5">
+          <Tabs defaultValue="ai-lexicon" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-6">
+              <TabsTrigger value="ai-lexicon" className="flex items-center gap-2">
+                <Brain className="w-4 h-4" />
+                AI Lexicon
+              </TabsTrigger>
               <TabsTrigger value="terms">All Terms ({terms.length})</TabsTrigger>
               <TabsTrigger value="review">
                 Needs Review ({terms.filter(t => t.status === 'needs_review').length})
@@ -211,6 +216,10 @@ const AdminDictionaryPage: React.FC = () => {
               <TabsTrigger value="bulk-import">Bulk Import</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
+
+            <TabsContent value="ai-lexicon" className="space-y-6">
+              <AILexiconManager />
+            </TabsContent>
 
             <TabsContent value="terms" className="space-y-6">
               <Card>
