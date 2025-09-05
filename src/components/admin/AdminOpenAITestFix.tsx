@@ -195,6 +195,9 @@ export function AdminOpenAITestFix() {
                     {result.request_id && result.request_id !== 'unknown' && (
                       <p><strong>Request ID:</strong> {result.request_id}</p>
                     )}
+                    {result.error_type && (
+                      <p><strong>Error Type:</strong> {result.error_type}</p>
+                    )}
                   </>
                 )}
               </div>

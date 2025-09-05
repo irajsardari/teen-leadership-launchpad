@@ -12,17 +12,25 @@ serve(async (req) => {
   }
 
   try {
+    console.log('🚀 Starting OpenAI API connection test...');
+    
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
     
+    console.log('🔑 Checking API key availability...');
     if (!openAIApiKey) {
+      console.error('❌ OpenAI API key not found in environment');
       return new Response(JSON.stringify({ 
         success: false, 
-        error: 'OpenAI API key not configured in Supabase secrets' 
+        error: 'OpenAI API key not configured in Supabase secrets',
+        status_code: 500,
+        request_id: 'no-key-' + Date.now()
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+    
+    console.log('✅ API key found, length:', openAIApiKey.length);
 
     console.log('Testing OpenAI API connection...');
     console.log('API Key length:', openAIApiKey.length);
@@ -55,22 +63,28 @@ serve(async (req) => {
     console.log('OpenAI Response Body:', responseText);
 
     if (!response.ok) {
+      console.error('❌ OpenAI API call failed with status:', response.status);
+      
       let errorDetails = {
         status: response.status,
         statusText: response.statusText,
-        body: responseText
+        body: responseText,
+        request_id: response.headers.get('x-request-id') || 'unknown'
       };
       
       try {
         const errorObj = JSON.parse(responseText);
         errorDetails.parsedError = errorObj;
+        console.error('📄 OpenAI Error Details:', errorObj);
       } catch (e) {
-        // Response is not JSON
+        console.error('🔍 Response is not JSON, raw body:', responseText);
       }
 
       return new Response(JSON.stringify({
         success: false,
         error: 'OpenAI API connection failed',
+        status_code: response.status,
+        request_id: errorDetails.request_id,
         details: errorDetails
       }), {
         status: 200,
@@ -78,9 +92,13 @@ serve(async (req) => {
       });
     }
 
+    console.log('✅ OpenAI API call successful');
     const aiResponse = JSON.parse(responseText);
     
     const content = aiResponse.choices?.[0]?.message?.content;
+    const requestId = response.headers.get('x-request-id') || 'success-' + Date.now();
+    
+    console.log('🎉 Test completed successfully, request ID:', requestId);
     
     return new Response(JSON.stringify({
       success: true,
@@ -89,17 +107,26 @@ serve(async (req) => {
       response: content || 'No response content',
       model: 'gpt-4.1-2025-04-14',
       usage: aiResponse.usage,
+      request_id: requestId,
       recommendation: 'Using Chat Completions API for lexicon generation'
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
 
   } catch (error) {
-    console.error('Error testing OpenAI connection:', error);
+    console.error('💥 Unexpected error in test function:', error);
+    const errorId = 'error-' + Date.now();
+    
     return new Response(JSON.stringify({
       success: false,
       error: 'Connection test failed',
-      details: error.message
+      error_type: 'exception',
+      request_id: errorId,
+      details: {
+        message: error.message,
+        name: error.name,
+        stack: error.stack
+      }
     }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
