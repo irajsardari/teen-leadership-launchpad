@@ -13,7 +13,7 @@ import { BookOpen, CheckCircle, Clock, AlertCircle, Plus, Search, Filter, Langua
 import { AuthGuard } from '@/components/AuthGuard';
 import { useTranslation } from '@/hooks/useTranslation';
 import LexiconBulkImport from '@/components/admin/LexiconBulkImport';
-import AILexiconManager from '@/components/admin/AILexiconManager';
+import WorldReferenceLexiconManager from '@/components/admin/WorldReferenceLexiconManager';
 
 interface DictionaryTerm {
   id: string;
@@ -218,7 +218,7 @@ const AdminDictionaryPage: React.FC = () => {
             </TabsList>
 
             <TabsContent value="ai-lexicon" className="space-y-6">
-              <AILexiconManager />
+              <WorldReferenceLexiconManager />
             </TabsContent>
 
             <TabsContent value="terms" className="space-y-6">

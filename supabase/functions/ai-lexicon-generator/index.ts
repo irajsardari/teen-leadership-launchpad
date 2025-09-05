@@ -19,13 +19,25 @@ interface GeneratedTerm {
   phonetic_en: string;
   phonetic_ar: string;
   category: string;
+  subcategory?: string;
   definition_en: string;
   definition_ar: string;
-  definition_fa?: string;
+  etymology?: string;
+  key_theorists?: string[];
+  historical_context?: string;
+  practical_applications?: string[];
   example_en: string;
   example_ar: string;
-  example_fa?: string;
+  related_terms?: string[];
+  antonyms?: string[];
+  industry_applications?: string[];
+  measurement_methods?: string[];
+  common_misconceptions?: string[];
+  contemporary_relevance?: string;
+  academic_sources?: string[];
   tags: string[];
+  difficulty_level?: string;
+  executive_summary?: string;
 }
 
 serve(async (req) => {
@@ -64,50 +76,72 @@ serve(async (req) => {
       });
     }
 
-    // Create enhanced AI prompt for comprehensive term generation
-    const systemPrompt = `You are an expert lexicographer creating comprehensive definitions for a management and leadership encyclopedia. 
+    // Create world-class management reference AI prompt
+    const systemPrompt = `You are a distinguished lexicographer and management scholar creating the definitive world reference encyclopedia for management and leadership terminology. 
 
-Your task is to generate detailed, accurate, and educational definitions for terms related to:
-- Management & Leadership
-- Psychology & Behavioral Science  
-- Finance & Economics
-- Entrepreneurship & Business
-- Communication & Strategy
-- Technology & Innovation
+Your expertise spans:
+- Classical & Modern Management Theory (Taylor, Fayol, Drucker, Porter, Kotter)
+- Organizational Psychology & Behavioral Science
+- Strategic Management & Corporate Strategy  
+- Leadership Theory & Executive Development
+- Financial Management & Corporate Finance
+- Entrepreneurship & Innovation Management
+- Digital Transformation & Technology Leadership
+- Operations Management & Supply Chain
+- Human Resource Management & Organizational Development
+- Change Management & Organizational Culture
 
-For each term, provide:
-1. Accurate phonetic spellings in both English and Arabic
-2. Clear, concise definitions suitable for teenagers and young adults
-3. Practical examples that relate to real-world scenarios
-4. Relevant tags for categorization
+Create authoritative, scholarly entries that serve as the global standard reference. Each entry must be:
+- Academically rigorous with historical context
+- Practically applicable for modern organizations
+- Cross-referenced with related concepts
+- Suitable for executives, students, and researchers
 
 Return ONLY valid JSON with no additional text or formatting.`;
 
-    const userPrompt = `Generate a comprehensive lexicon entry for the term "${term}" in the category "${category}".
+    const userPrompt = `Generate a world-class reference entry for "${term}" in ${category}.
 
-Include:
-- English phonetic spelling (IPA or simplified)
-- Arabic phonetic transliteration 
-- Clear definition in English (100-200 words)
-- Clear definition in Arabic (100-200 words)
-- Practical example sentence in English
-- Practical example sentence in Arabic
-- 3-5 relevant tags for search and categorization
+Create a comprehensive entry with:
+
+1. **Academic Foundation**: Historical development, key theorists, foundational literature
+2. **Precise Definition**: Multiple contextual definitions (corporate, startup, academic, consulting)
+3. **Etymology & Evolution**: Word origins, how meaning evolved over time
+4. **Cross-References**: Related terms, antonyms, hierarchical relationships
+5. **Practical Applications**: Real-world usage in different organizational contexts
+6. **Industry Variations**: How the term applies differently across industries
+7. **Contemporary Relevance**: Modern adaptations, digital age implications
+8. **Measurement & Assessment**: How this concept is evaluated or measured
+9. **Common Misconceptions**: Frequent misunderstandings or misapplications
+10. **Future Outlook**: Emerging trends and evolution of the concept
 
 Format as JSON:
 {
   "term": "${term}",
-  "phonetic_en": "phonetic spelling",
-  "phonetic_ar": "Arabic transliteration", 
+  "phonetic_en": "IPA phonetic spelling",
+  "phonetic_ar": "Arabic transliteration",
   "category": "${category}",
-  "definition_en": "English definition",
-  "definition_ar": "Arabic definition",
-  "example_en": "English example sentence",
-  "example_ar": "Arabic example sentence", 
-  "tags": ["tag1", "tag2", "tag3"]
+  "subcategory": "specific subcategory",
+  "definition_en": "Comprehensive English definition (200-400 words)",
+  "definition_ar": "Comprehensive Arabic definition (200-400 words)",
+  "etymology": "Word origin and historical development",
+  "key_theorists": ["theorist1", "theorist2", "theorist3"],
+  "historical_context": "How this concept developed in management theory",
+  "practical_applications": ["application1", "application2", "application3"],
+  "example_en": "Professional example in business context",
+  "example_ar": "Professional example in Arabic",
+  "related_terms": ["term1", "term2", "term3"],
+  "antonyms": ["opposite1", "opposite2"],
+  "industry_applications": ["industry1: specific use", "industry2: specific use"],
+  "measurement_methods": ["how it's measured or assessed"],
+  "common_misconceptions": ["misconception and correction"],
+  "contemporary_relevance": "Modern applications and digital age adaptations",
+  "academic_sources": ["reference1", "reference2", "reference3"],
+  "tags": ["tag1", "tag2", "tag3", "tag4", "tag5"],
+  "difficulty_level": "beginner/intermediate/advanced",
+  "executive_summary": "One-sentence key insight for busy executives"
 }`;
 
-    console.log('Calling OpenAI API for term generation...');
+    console.log('Calling OpenAI API for world-class term generation...');
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -116,13 +150,12 @@ Format as JSON:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4.1-2025-04-14',
+        model: 'gpt-5-2025-08-07',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
         ],
-        max_tokens: 1500,
-        temperature: 0.3,
+        max_completion_tokens: 3000,
       }),
     });
 
@@ -152,7 +185,7 @@ Format as JSON:
       .replace(/\s+/g, '-')
       .trim();
 
-    // Prepare data for database insertion
+    // Prepare comprehensive data for database insertion
     const lexiconEntry = {
       term: generatedTerm.term,
       slug: slug,
@@ -164,15 +197,30 @@ Format as JSON:
       example_en: generatedTerm.example_en,
       example_ar: generatedTerm.example_ar,
       tags: generatedTerm.tags || [],
-      discipline_tags: [generatedTerm.category],
+      discipline_tags: [generatedTerm.category, generatedTerm.subcategory].filter(Boolean),
+      synonyms: generatedTerm.related_terms || [],
+      related: generatedTerm.related_terms || [],
       status: 'published',
       ai_generated: true,
-      verification_status: 'pending',
+      verification_status: 'ai_enhanced',
+      complexity_level: generatedTerm.difficulty_level || 'intermediate',
       ai_generated_metadata: {
         generated_at: new Date().toISOString(),
-        model: 'gpt-4.1-2025-04-14',
+        model: 'gpt-5-2025-08-07',
         languages: languages,
-        generation_version: '1.0'
+        generation_version: '2.0_world_reference',
+        etymology: generatedTerm.etymology,
+        key_theorists: generatedTerm.key_theorists,
+        historical_context: generatedTerm.historical_context,
+        practical_applications: generatedTerm.practical_applications,
+        antonyms: generatedTerm.antonyms,
+        industry_applications: generatedTerm.industry_applications,
+        measurement_methods: generatedTerm.measurement_methods,
+        common_misconceptions: generatedTerm.common_misconceptions,
+        contemporary_relevance: generatedTerm.contemporary_relevance,
+        academic_sources: generatedTerm.academic_sources,
+        executive_summary: generatedTerm.executive_summary,
+        subcategory: generatedTerm.subcategory
       },
       last_ai_update: new Date().toISOString()
     };

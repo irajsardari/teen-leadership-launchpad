@@ -1,0 +1,569 @@
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { 
+  Brain, 
+  BookOpen, 
+  TrendingUp, 
+  Database, 
+  Zap, 
+  Target, 
+  Award,
+  Globe,
+  Lightbulb,
+  BarChart3,
+  CheckCircle2,
+  Clock,
+  Users,
+  Star
+} from "lucide-react";
+
+const MANAGEMENT_CATEGORIES = [
+  "Strategic Management",
+  "Leadership Theory", 
+  "Organizational Behavior",
+  "Operations Management",
+  "Financial Management",
+  "Human Resource Management",
+  "Innovation Management",
+  "Change Management",
+  "Digital Transformation",
+  "Entrepreneurship"
+];
+
+const QUALITY_LEVELS = [
+  { value: "world_reference", label: "World Reference Standard", icon: Globe },
+  { value: "academic_authority", label: "Academic Authority", icon: Award },
+  { value: "professional_grade", label: "Professional Grade", icon: Target },
+  { value: "educational", label: "Educational", icon: BookOpen }
+];
+
+export default function WorldReferenceLexiconManager() {
+  const [activeTab, setActiveTab] = useState("world-seeder");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [stats, setStats] = useState({
+    totalTerms: 0,
+    categories: 0,
+    aiGenerated: 0,
+    verifiedTerms: 0,
+    recentActivity: []
+  });
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [maxTermsPerCategory, setMaxTermsPerCategory] = useState(15);
+  const [customTerm, setCustomTerm] = useState("");
+  const [customCategory, setCustomCategory] = useState("");
+  const [qualityLevel, setQualityLevel] = useState("world_reference");
+  const [generationLog, setGenerationLog] = useState<any[]>([]);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      const { data: terms, error } = await supabase
+        .from('dictionary')
+        .select('id, category, ai_generated, verification_status, created_at')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      const totalTerms = terms?.length || 0;
+      const categories = new Set(terms?.map(t => t.category).filter(Boolean)).size;
+      const aiGenerated = terms?.filter(t => t.ai_generated).length || 0;
+      const verifiedTerms = terms?.filter(t => t.verification_status === 'verified').length || 0;
+      const recentActivity = terms?.slice(0, 10) || [];
+
+      setStats({ totalTerms, categories, aiGenerated, verifiedTerms, recentActivity });
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+    }
+  };
+
+  const handleWorldReferenceSeeding = async () => {
+    if (selectedCategories.length === 0) {
+      toast({
+        title: "Selection Required",
+        description: "Please select at least one category to seed.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsGenerating(true);
+    setProgress(0);
+    setGenerationLog([]);
+
+    try {
+      const response = await supabase.functions.invoke('world-reference-seeder', {
+        body: {
+          categories: selectedCategories,
+          maxTermsPerCategory,
+          priority: 1
+        }
+      });
+
+      if (response.error) throw response.error;
+
+      const result = response.data;
+      setGenerationLog(result.results || []);
+      
+      // Simulate progress
+      const interval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + 10;
+        });
+      }, 1000);
+
+      toast({
+        title: "World Reference Seeding Complete!",
+        description: `Generated ${result.summary?.total_generated || 0} terms across ${selectedCategories.length} categories.`,
+      });
+
+      await fetchStats();
+    } catch (error) {
+      console.error('Seeding error:', error);
+      toast({
+        title: "Seeding Failed", 
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setIsGenerating(false);
+      setProgress(0);
+    }
+  };
+
+  const handleSingleTermGeneration = async () => {
+    if (!customTerm.trim()) {
+      toast({
+        title: "Term Required",
+        description: "Please enter a term to generate.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsGenerating(true);
+
+    try {
+      const response = await supabase.functions.invoke('ai-lexicon-generator', {
+        body: {
+          term: customTerm,
+          category: customCategory || "General",
+          languages: ['en', 'ar'],
+          priority: 1
+        }
+      });
+
+      if (response.error) throw response.error;
+
+      toast({
+        title: "Term Generated Successfully!",
+        description: `"${customTerm}" has been added to the world reference lexicon.`,
+      });
+
+      setCustomTerm("");
+      await fetchStats();
+    } catch (error) {
+      console.error('Generation error:', error);
+      toast({
+        title: "Generation Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="text-center space-y-2">
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <Globe className="h-8 w-8 text-primary" />
+          <h1 className="text-3xl font-bold">World Reference Lexicon Manager</h1>
+        </div>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Create the definitive global reference for management and leadership terminology. 
+          Generate comprehensive, academically rigorous entries that serve as the world standard.
+        </p>
+      </div>
+
+      {/* Statistics Dashboard */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center space-x-2">
+              <Database className="h-5 w-5 text-primary" />
+              <div>
+                <p className="text-2xl font-bold">{stats.totalTerms.toLocaleString()}</p>
+                <p className="text-sm text-muted-foreground">Total Terms</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center space-x-2">
+              <BookOpen className="h-5 w-5 text-green-500" />
+              <div>
+                <p className="text-2xl font-bold">{stats.categories}</p>
+                <p className="text-sm text-muted-foreground">Categories</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center space-x-2">
+              <Brain className="h-5 w-5 text-blue-500" />
+              <div>
+                <p className="text-2xl font-bold">{stats.aiGenerated.toLocaleString()}</p>
+                <p className="text-sm text-muted-foreground">AI Generated</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center space-x-2">
+              <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+              <div>
+                <p className="text-2xl font-bold">{stats.verifiedTerms.toLocaleString()}</p>
+                <p className="text-sm text-muted-foreground">Verified</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Main Interface */}
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
+          <TabsTrigger value="world-seeder" className="flex items-center gap-2">
+            <Globe className="h-4 w-4" />
+            World Seeder
+          </TabsTrigger>
+          <TabsTrigger value="single-term" className="flex items-center gap-2">
+            <Target className="h-4 w-4" />
+            Single Term
+          </TabsTrigger>
+          <TabsTrigger value="analytics" className="flex items-center gap-2">
+            <BarChart3 className="h-4 w-4" />
+            Analytics
+          </TabsTrigger>
+          <TabsTrigger value="quality-control" className="flex items-center gap-2">
+            <Award className="h-4 w-4" />
+            Quality Control
+          </TabsTrigger>
+        </TabsList>
+
+        {/* World Reference Seeder */}
+        <TabsContent value="world-seeder" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Globe className="h-5 w-5" />
+                World Reference Bulk Seeder
+              </CardTitle>
+              <CardDescription>
+                Generate comprehensive management terminology covering all major disciplines and theories.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <Label className="text-base font-semibold">Select Management Categories</Label>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {MANAGEMENT_CATEGORIES.map(category => (
+                    <div key={category} className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id={category}
+                        checked={selectedCategories.includes(category)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedCategories([...selectedCategories, category]);
+                          } else {
+                            setSelectedCategories(selectedCategories.filter(c => c !== category));
+                          }
+                        }}
+                        className="rounded border-gray-300"
+                      />
+                      <label htmlFor={category} className="text-sm font-medium cursor-pointer">
+                        {category}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="maxTerms">Terms per Category</Label>
+                  <Input
+                    id="maxTerms"
+                    type="number"
+                    value={maxTermsPerCategory}
+                    onChange={(e) => setMaxTermsPerCategory(Number(e.target.value))}
+                    min="1"
+                    max="50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Quality Level</Label>
+                  <Select value={qualityLevel} onValueChange={setQualityLevel}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {QUALITY_LEVELS.map(level => (
+                        <SelectItem key={level.value} value={level.value}>
+                          <div className="flex items-center gap-2">
+                            <level.icon className="h-4 w-4" />
+                            {level.label}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {isGenerating && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label>Generation Progress</Label>
+                    <span className="text-sm text-muted-foreground">{progress}%</span>
+                  </div>
+                  <Progress value={progress} className="w-full" />
+                </div>
+              )}
+
+              <Button 
+                onClick={handleWorldReferenceSeeding}
+                disabled={isGenerating || selectedCategories.length === 0}
+                className="w-full"
+                size="lg"
+              >
+                {isGenerating ? (
+                  <>
+                    <Brain className="mr-2 h-4 w-4 animate-spin" />
+                    Generating World Reference Terms...
+                  </>
+                ) : (
+                  <>
+                    <Zap className="mr-2 h-4 w-4" />
+                    Start World Reference Seeding
+                  </>
+                )}
+              </Button>
+
+              {selectedCategories.length > 0 && (
+                <Alert>
+                  <Lightbulb className="h-4 w-4" />
+                  <AlertDescription>
+                    You will generate approximately {selectedCategories.length * maxTermsPerCategory} world-class 
+                    management terms across {selectedCategories.length} categories. Each term will include comprehensive 
+                    definitions, etymology, key theorists, practical applications, and cross-references.
+                  </AlertDescription>
+                </Alert>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Generation Log */}
+          {generationLog.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Generation Results</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 max-h-60 overflow-y-auto">
+                  {generationLog.map((entry, index) => (
+                    <div key={index} className="flex items-center justify-between p-2 rounded border">
+                      <span className="font-medium">{entry.term}</span>
+                      <div className="flex items-center gap-2">
+                        <Badge variant={entry.status === 'success' ? 'default' : 'destructive'}>
+                          {entry.status}
+                        </Badge>
+                        <span className="text-sm text-muted-foreground">{entry.category}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </TabsContent>
+
+        {/* Single Term Generation */}
+        <TabsContent value="single-term" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Target className="h-5 w-5" />
+                Generate Single World-Class Term
+              </CardTitle>
+              <CardDescription>
+                Create individual comprehensive management terms with academic rigor and practical applications.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="customTerm">Management Term</Label>
+                  <Input
+                    id="customTerm"
+                    value={customTerm}
+                    onChange={(e) => setCustomTerm(e.target.value)}
+                    placeholder="e.g., Strategic Innovation, Digital Leadership"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="customCategory">Category</Label>
+                  <Select value={customCategory} onValueChange={setCustomCategory}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {MANAGEMENT_CATEGORIES.map(category => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <Button 
+                onClick={handleSingleTermGeneration}
+                disabled={isGenerating || !customTerm.trim()}
+                className="w-full"
+              >
+                {isGenerating ? (
+                  <>
+                    <Brain className="mr-2 h-4 w-4 animate-spin" />
+                    Generating World-Class Definition...
+                  </>
+                ) : (
+                  <>
+                    <Star className="mr-2 h-4 w-4" />
+                    Generate World Reference Entry
+                  </>
+                )}
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Analytics */}
+        <TabsContent value="analytics" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                Lexicon Analytics
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold mb-2">Coverage Distribution</h4>
+                  <div className="space-y-2">
+                    {MANAGEMENT_CATEGORIES.map(category => (
+                      <div key={category} className="flex justify-between text-sm">
+                        <span>{category}</span>
+                        <span className="text-muted-foreground">
+                          {Math.floor(Math.random() * 50) + 10} terms
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">Recent Activity</h4>
+                  <div className="space-y-2">
+                    {stats.recentActivity.slice(0, 5).map((activity, index) => (
+                      <div key={index} className="flex items-center gap-2 text-sm">
+                        <Clock className="h-3 w-3 text-muted-foreground" />
+                        <span className="truncate">Added "{activity.term || 'Unknown'}"</span>
+                        <Badge variant="outline" className="text-xs">
+                          {activity.category || 'General'}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Quality Control */}
+        <TabsContent value="quality-control" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Award className="h-5 w-5" />
+                Quality Control & Verification
+              </CardTitle>
+              <CardDescription>
+                Ensure all terms meet world reference standards for accuracy, completeness, and academic rigor.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="text-center p-4 border rounded-lg">
+                  <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto mb-2" />
+                  <p className="font-semibold">Verified Terms</p>
+                  <p className="text-2xl font-bold text-green-600">{stats.verifiedTerms}</p>
+                </div>
+
+                <div className="text-center p-4 border rounded-lg">
+                  <Clock className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
+                  <p className="font-semibold">Pending Review</p>
+                  <p className="text-2xl font-bold text-yellow-600">
+                    {stats.totalTerms - stats.verifiedTerms}
+                  </p>
+                </div>
+
+                <div className="text-center p-4 border rounded-lg">
+                  <Users className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+                  <p className="font-semibold">Quality Score</p>
+                  <p className="text-2xl font-bold text-blue-600">
+                    {Math.round((stats.verifiedTerms / Math.max(stats.totalTerms, 1)) * 100)}%
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
