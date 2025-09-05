@@ -8,6 +8,20 @@ const corsHeaders = {
 };
 
 // World's Most Comprehensive Management Reference Terms
+// Category mapping to match database constraints
+const CATEGORY_MAPPING = {
+  "Strategic Management": "Management",
+  "Leadership Theory": "Leadership", 
+  "Organizational Behavior": "Psychology",
+  "Operations Management": "Management",
+  "Financial Management": "Money",
+  "Human Resource Management": "Management",
+  "Innovation Management": "Management",
+  "Change Management": "Management",
+  "Digital Transformation": "Digital Life",
+  "Entrepreneurship": "Management"
+};
+
 const WORLD_REFERENCE_TERMS = {
   "Strategic Management": [
     "Porter's Five Forces", "Blue Ocean Strategy", "SWOT Analysis", "Balanced Scorecard", 
@@ -181,11 +195,15 @@ serve(async (req) => {
 
               console.log(`Generating term: "${term}" (category: ${category}, attempt: ${retryCount + 1}/${maxRetries + 1})`);
               
+              // Map category to allowed database values
+              const mappedCategory = CATEGORY_MAPPING[category] || category;
+              console.log(`Mapping category "${category}" → "${mappedCategory}"`);
+              
               // Generate using our enhanced AI function with direct call to avoid recursion issues
               const generationResponse = await supabase.functions.invoke('ai-lexicon-generator-with-retry', {
                 body: {
                   term: term,
-                  category: category,
+                  category: mappedCategory,
                   languages: ['en', 'ar'],
                   priority: priority
                 }
