@@ -31,6 +31,7 @@ import { AuthProvider } from "./hooks/useAuth";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import AdminApplicationsPage from "./pages/AdminApplicationsPage";
 import AdminSecurityPage from "./pages/AdminSecurityPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 import DictionaryPage from "./pages/DictionaryPage";
 import AdminDictionaryPage from "./pages/AdminDictionaryPage";
 import ScrollManager from "./components/ScrollManager";
@@ -76,6 +77,7 @@ const App = () => (
                 <Route path="/portal/course/:courseId/session/:sessionId" element={<CourseStructurePage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/admin" element={<AdminDashboardPage />} />
                 <Route path="/admin/applications" element={<AdminApplicationsPage />} />
                 <Route path="/admin/security" element={<AdminSecurityPage />} />
                 <Route path="/dictionary" element={<DictionaryPage />} />
