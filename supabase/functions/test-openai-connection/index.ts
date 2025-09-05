@@ -19,7 +19,7 @@ serve(async (req) => {
         success: false, 
         error: 'OpenAI API key not configured in Supabase secrets' 
       }), {
-        status: 400,
+        status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
@@ -73,7 +73,7 @@ serve(async (req) => {
         error: 'OpenAI API connection failed',
         details: errorDetails
       }), {
-        status: response.status,
+        status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
@@ -101,7 +101,7 @@ serve(async (req) => {
       error: 'Connection test failed',
       details: error.message
     }), {
-      status: 500,
+      status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
