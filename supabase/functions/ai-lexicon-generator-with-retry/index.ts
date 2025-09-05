@@ -40,13 +40,19 @@ interface GeneratedTerm {
   executive_summary?: string;
 }
 
-// Exponential backoff retry function for quota handling
-async function callOpenAIWithRetry(openAIApiKey: string, requestBody: any, maxRetries = 3): Promise<any> {
+// Exponential backoff retry function for quota handling with better rate limiting
+async function callOpenAIWithRetry(openAIApiKey: string, requestBody: any, maxRetries = 4): Promise<any> {
+  // Use more cost-effective model for better rate limits
+  if (requestBody.model === 'gpt-4.1-2025-04-14') {
+    requestBody.model = 'gpt-4o-mini';
+    console.log('🔄 Switched to gpt-4o-mini for better rate limits');
+  }
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     const requestStartTime = Date.now();
     
     try {
-      console.log(`OpenAI API Attempt ${attempt}/${maxRetries} - Model: ${requestBody.model}`);
+      console.log(`🚀 OpenAI API Attempt ${attempt}/${maxRetries} - Model: ${requestBody.model}`);
       
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -62,7 +68,7 @@ async function callOpenAIWithRetry(openAIApiKey: string, requestBody: any, maxRe
       
       if (response.ok) {
         const result = await response.json();
-        console.log(`OpenAI Success - Attempt ${attempt}, Request ID: ${requestId}, Duration: ${duration}ms, Tokens: ${result.usage?.total_tokens || 'unknown'}`);
+        console.log(`✅ OpenAI Success - Attempt ${attempt}, Request ID: ${requestId}, Duration: ${duration}ms, Tokens: ${result.usage?.total_tokens || 'unknown'}`);
         return { success: true, data: result, requestId, duration, attempt };
       }
 
@@ -94,10 +100,12 @@ async function callOpenAIWithRetry(openAIApiKey: string, requestBody: any, maxRe
         };
       }
 
-      // Retry with exponential backoff for quota/rate limit errors
+      // Retry with longer exponential backoff for rate limit/quota errors
       if ((isQuotaError || isRateLimitError) && attempt < maxRetries) {
-        const backoffDelay = Math.min(1000 * Math.pow(2, attempt - 1), 10000); // Max 10 seconds
-        console.log(`Quota/Rate limit error. Retrying in ${backoffDelay}ms...`);
+        // More aggressive backoff for 429 errors - start at 5 seconds, max 60 seconds
+        const baseDelay = isRateLimitError ? 5000 : 2000; // 5s for rate limits, 2s for quota
+        const backoffDelay = Math.min(baseDelay * Math.pow(2, attempt - 1), 60000);
+        console.log(`⏳ Rate/Quota limit error (${response.status}). Retrying in ${backoffDelay/1000}s... (attempt ${attempt}/${maxRetries})`);
         await new Promise(resolve => setTimeout(resolve, backoffDelay));
         continue;
       }

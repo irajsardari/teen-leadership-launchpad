@@ -221,8 +221,10 @@ serve(async (req) => {
                                        error.message?.includes('504');
               
               if (retryCount <= maxRetries && isRetryableError) {
-                const backoffTime = Math.pow(2, retryCount) * 1000; // Exponential backoff: 2s, 4s, 8s
-                console.log(`⚠️  Retrying ${term} in ${backoffTime/1000}s (attempt ${retryCount}/${maxRetries}) - ${error.message}`);
+                // More aggressive backoff for 429 errors
+                const baseDelay = error.message?.includes('429') ? 8000 : 2000; // 8s for 429s, 2s for others
+                const backoffTime = Math.min(baseDelay * Math.pow(2, retryCount - 1), 120000); // Max 2 minutes
+                console.log(`⚠️  Enhanced retry for ${term} in ${backoffTime/1000}s (attempt ${retryCount}/${maxRetries}) - ${error.message}`);
                 await new Promise(resolve => setTimeout(resolve, backoffTime));
               } else {
                 totalErrors++;
@@ -247,10 +249,10 @@ serve(async (req) => {
             }
           }
 
-          // Rate limiting: wait 1 second between successful requests
-          if (success) {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-          }
+          // Enhanced rate limiting: wait 3-5 seconds between requests to avoid 429s
+          const randomDelay = 3000 + Math.random() * 2000; // 3-5 seconds
+          console.log(`💤 Rate limiting: waiting ${Math.round(randomDelay/1000)}s before next request...`);
+          await new Promise(resolve => setTimeout(resolve, randomDelay));
         }
         
         // Wait 2 seconds between batches
