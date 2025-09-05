@@ -110,9 +110,12 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Link to={redirectTo}>
+            <Link to="/auth">
               <Button className="w-full">Sign In</Button>
             </Link>
+            <p className="text-xs text-center text-muted-foreground mt-2">
+              If you believe this is an error, contact support.
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -131,13 +134,19 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-sm text-muted-foreground text-center">
+            <div className="text-sm text-muted-foreground text-center space-y-2">
               <p>Current role: {profile?.role || 'Unknown'}</p>
               <p>User: {profile?.full_name || user.email}</p>
+              <p>User ID: {user.id}</p>
             </div>
-            <Link to="/" className="mt-4 block">
-              <Button variant="outline" className="w-full">Go Home</Button>
-            </Link>
+            <div className="mt-4 space-y-2">
+              <Link to="/auth" className="block">
+                <Button className="w-full">Sign In Again</Button>
+              </Link>
+              <Link to="/" className="block">
+                <Button variant="outline" className="w-full">Go Home</Button>
+              </Link>
+            </div>
           </CardContent>
         </Card>
       </div>
