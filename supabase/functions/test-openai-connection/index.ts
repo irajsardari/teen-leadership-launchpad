@@ -12,123 +12,125 @@ serve(async (req) => {
   }
 
   try {
-    console.log('🚀 Starting OpenAI API connection test...');
+    console.log('🚀 Starting OpenAI API connection test with environment variable...');
     
-    const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
+    // Use environment variable as requested
+    const apiKey = Deno.env.get("OPENAI_API_KEY");
     
     console.log('🔑 Checking API key availability...');
-    if (!openAIApiKey) {
+    if (!apiKey) {
       console.error('❌ OpenAI API key not found in environment');
       return new Response(JSON.stringify({ 
         success: false, 
-        error: 'OpenAI API key not configured in Supabase secrets',
+        error: 'OpenAI API key not configured - please set OPENAI_API_KEY in Supabase Edge Functions secrets',
+        error_type: 'missing_api_key',
         status_code: 500,
-        request_id: 'no-key-' + Date.now()
+        request_id: 'no-key-' + Date.now(),
+        environment_check: 'FAILED: OPENAI_API_KEY environment variable not found'
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
     
-    console.log('✅ API key found, length:', openAIApiKey.length);
+    console.log('✅ API key found from environment variable, length:', apiKey.length);
+    console.log('🔗 API Key prefix:', apiKey.substring(0, 7) + '...');
 
-    console.log('Testing OpenAI API connection...');
-    console.log('API Key length:', openAIApiKey.length);
-    console.log('API Key prefix:', openAIApiKey.substring(0, 10) + '...');
-
-    // Test with Chat Completions API (the correct endpoint)
-    console.log('Testing Chat Completions API...');
+    // Simple health check with sample completion as requested
+    console.log('🧪 Running health check with sample completion...');
+    const startTime = Date.now();
     
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${openAIApiKey}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini', // Use more cost-effective model with better rate limits
-        messages: [
-          { role: 'user', content: 'Say "OpenAI API connection test successful"' }
-        ],
-        max_tokens: 50, // Use max_tokens for legacy models
+        model: "gpt-4.1-mini-2025-04-14",
+        messages: [{ role: "user", content: "Hello, test connection." }],
+        max_completion_tokens: 50,
       }),
     });
     
-    const apiType = 'chat_completions';
-
-    const responseText = await response.text();
+    const duration = Date.now() - startTime;
     
-    console.log('OpenAI Response Status:', response.status);
-    console.log('OpenAI Response Headers:', Object.fromEntries(response.headers.entries()));
-    console.log('OpenAI Response Body:', responseText);
-
-    if (!response.ok) {
-      console.error('❌ OpenAI API call failed with status:', response.status);
+    if (response.ok) {
+      const data = await response.json();
       
-      let errorDetails = {
-        status: response.status,
-        statusText: response.statusText,
-        body: responseText,
-        request_id: response.headers.get('x-request-id') || 'unknown'
-      };
+      console.log('✅ OpenAI API connection successful! Duration:', duration + 'ms');
+      console.log('📊 Usage:', JSON.stringify(data.usage));
       
-      let errorMessage = 'OpenAI API connection failed';
-      let errorType = 'api_error';
+      // Log the response content as requested in the health check
+      const responseContent = data.choices?.[0]?.message?.content || 'No response content';
+      console.log(responseContent);
       
-      try {
-        const errorObj = JSON.parse(responseText);
-        errorDetails.parsedError = errorObj;
-        console.error('📄 OpenAI Error Details:', errorObj);
-        
-        // Handle specific error types
-        if (errorObj.error?.type === 'insufficient_quota' || errorObj.error?.code === 'insufficient_quota') {
-          errorMessage = 'OpenAI API quota exceeded. Please check your OpenAI account billing and usage limits.';
-          errorType = 'quota_exceeded';
-        } else if (response.status === 401) {
-          errorMessage = 'Invalid OpenAI API key. Please check your API key configuration.';
-          errorType = 'invalid_api_key';
-        } else if (response.status === 429) {
-          errorMessage = 'OpenAI API rate limit exceeded. Please wait and try again.';
-          errorType = 'rate_limit_exceeded';
-        }
-      } catch (e) {
-        console.error('🔍 Response is not JSON, raw body:', responseText);
-      }
-
       return new Response(JSON.stringify({
-        success: false,
-        error: errorMessage,
-        error_type: errorType,
-        status_code: response.status,
-        request_id: errorDetails.request_id,
-        details: errorDetails,
-        actionable: errorType === 'quota_exceeded' ? 'Check OpenAI billing dashboard and add credits' : 
-                   errorType === 'invalid_api_key' ? 'Verify API key is correct and has proper permissions' :
-                   'Wait a few minutes and try again'
+        success: true,
+        message: 'OpenAI API connection successful - environment variable properly configured',
+        response: responseContent,
+        model: "gpt-4.1-mini-2025-04-14",
+        duration_ms: duration,
+        usage: data.usage,
+        request_id: data.id || response.headers.get('x-request-id') || 'success-' + Date.now(),
+        environment_check: 'SUCCESS: OPENAI_API_KEY environment variable found and working',
+        deployment_status: 'Ready for all environments (production, staging, local)'
       }), {
-        status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+    // Handle error responses
+    const responseText = await response.text();
+    
+    console.log('❌ OpenAI Response Status:', response.status);
+    console.log('📋 OpenAI Response Headers:', Object.fromEntries(response.headers.entries()));
+    console.log('📄 OpenAI Response Body:', responseText);
 
-    console.log('✅ OpenAI API call successful');
-    const aiResponse = JSON.parse(responseText);
+    let errorDetails = {
+      status: response.status,
+      statusText: response.statusText,
+      body: responseText,
+      request_id: response.headers.get('x-request-id') || 'error-' + Date.now(),
+      duration_ms: duration
+    };
     
-    const content = aiResponse.choices?.[0]?.message?.content;
-    const requestId = response.headers.get('x-request-id') || 'success-' + Date.now();
+    let errorMessage = 'OpenAI API connection failed';
+    let errorType = 'api_error';
     
-    console.log('🎉 Test completed successfully, request ID:', requestId);
-    
+    try {
+      const errorObj = JSON.parse(responseText);
+      errorDetails.parsedError = errorObj;
+      console.error('📄 Parsed OpenAI Error:', errorObj);
+      
+      // Handle specific error types with actionable advice
+      if (errorObj.error?.type === 'insufficient_quota' || errorObj.error?.code === 'insufficient_quota') {
+        errorMessage = 'OpenAI API quota exceeded. Your API key has reached its usage limits.';
+        errorType = 'quota_exceeded';
+      } else if (response.status === 401) {
+        errorMessage = 'Invalid OpenAI API key. Please verify your API key is correct.';
+        errorType = 'invalid_api_key';
+      } else if (response.status === 429) {
+        errorMessage = 'OpenAI API rate limit exceeded. Please wait and try again.';
+        errorType = 'rate_limit_exceeded';
+      }
+    } catch (e) {
+      console.error('🔍 Response is not JSON, raw body:', responseText);
+    }
+
     return new Response(JSON.stringify({
-      success: true,
-      message: `OpenAI API connection successful via ${apiType}!`,
-      api_type: apiType,
-      response: content || 'No response content',
-      model: 'gpt-4o-mini',
-      usage: aiResponse.usage,
-      request_id: requestId,
-      recommendation: 'Using Chat Completions API for lexicon generation'
+      success: false,
+      error: errorMessage,
+      error_type: errorType,
+      status_code: response.status,
+      request_id: errorDetails.request_id,
+      duration_ms: duration,
+      details: errorDetails,
+      actionable_advice: errorType === 'quota_exceeded' ? 'Add credits to your OpenAI account at https://platform.openai.com/account/billing' : 
+                        errorType === 'invalid_api_key' ? 'Verify your API key at https://platform.openai.com/api-keys and update OPENAI_API_KEY secret' :
+                        'Wait a few minutes and try again',
+      environment_status: 'OPENAI_API_KEY environment variable found but API call failed'
     }), {
+      status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
 
