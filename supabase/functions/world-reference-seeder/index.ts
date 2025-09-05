@@ -188,13 +188,21 @@ serve(async (req) => {
             console.log(`✅ Generated: ${term}`);
           } else {
             totalErrors++;
+            const errorDetails = {
+              message: generationResult.error || 'Unknown error',
+              error_code: generationResult.error_code || 'unknown',
+              status_code: generationResult.status_code || 500,
+              request_id: generationResult.request_id || 'unknown'
+            };
+            
             results.push({
               term: term,
               category: category,
               status: 'error',
-              error: generationResult.error
+              error: errorDetails.message,
+              error_details: errorDetails
             });
-            console.log(`❌ Failed: ${term} - ${generationResult.error}`);
+            console.log(`❌ Failed: ${term} - ${errorDetails.message} (Code: ${errorDetails.error_code}, Status: ${errorDetails.status_code})`);
           }
 
           // Rate limiting: wait 1 second between requests
@@ -202,13 +210,20 @@ serve(async (req) => {
 
         } catch (error) {
           totalErrors++;
+          const errorInfo = {
+            message: error.message || 'Network or processing error',
+            type: error.name || 'UnknownError',
+            stack: error.stack?.split('\n').slice(0, 3).join('\n') || 'No stack trace'
+          };
+          
           results.push({
             term: term,
             category: category,
             status: 'error',
-            error: error.message
+            error: errorInfo.message,
+            error_details: errorInfo
           });
-          console.error(`Error generating ${term}:`, error);
+          console.error(`Network/Processing Error for ${term}:`, errorInfo);
         }
       }
 

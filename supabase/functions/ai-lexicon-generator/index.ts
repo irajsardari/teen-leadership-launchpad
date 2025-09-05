@@ -141,50 +141,61 @@ Format as JSON:
   "executive_summary": "One-sentence key insight for busy executives"
 }`;
 
-    console.log('Calling OpenAI API for world-class term generation...');
+    console.log('Calling OpenAI Responses API for world-class term generation...');
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    // Use the correct OpenAI Responses API endpoint and format
+    const response = await fetch('https://api.openai.com/v1/responses', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${openAIApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini', // Using stable model with better quota handling
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt }
-        ],
-        max_tokens: 3000,
-        temperature: 0.7,
+        model: 'gpt-4.1-mini',
+        input: `${systemPrompt}\n\n${userPrompt}`,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('OpenAI API error:', {
+      const errorDetails = {
         status: response.status,
         statusText: response.statusText,
         error: errorText,
-        headers: Object.fromEntries(response.headers.entries())
-      });
+        headers: Object.fromEntries(response.headers.entries()),
+        request_id: response.headers.get('x-request-id') || 'unknown'
+      };
       
-      // Parse error for better reporting
+      console.error('OpenAI Responses API error:', errorDetails);
+      
+      // Parse error for detailed reporting
       let errorMessage = `OpenAI API error: ${response.status}`;
+      let errorCode = 'unknown';
+      
       try {
         const errorObj = JSON.parse(errorText);
         if (errorObj.error?.message) {
           errorMessage = errorObj.error.message;
+          errorCode = errorObj.error?.code || errorObj.error?.type || 'api_error';
         }
       } catch (e) {
         errorMessage = errorText || errorMessage;
       }
       
-      throw new Error(errorMessage);
+      // Return structured error for better handling
+      throw new Error(JSON.stringify({
+        message: errorMessage,
+        code: errorCode,
+        status: response.status,
+        request_id: errorDetails.request_id,
+        full_details: errorDetails
+      }));
     }
 
     const aiResponse = await response.json();
-    const generatedContent = aiResponse.choices[0].message.content;
+    
+    // Handle Responses API format (different from Chat Completions)
+    const generatedContent = aiResponse.output || aiResponse.text || aiResponse.choices?.[0]?.message?.content;
 
     console.log('AI Response received:', generatedContent);
 
@@ -222,11 +233,12 @@ Format as JSON:
       ai_generated: true,
       verification_status: 'ai_enhanced',
       complexity_level: generatedTerm.difficulty_level || 'intermediate',
-      ai_generated_metadata: {
+        ai_generated_metadata: {
         generated_at: new Date().toISOString(),
-        model: 'gpt-5-2025-08-07',
+        model: 'gpt-4.1-mini',
+        api_endpoint: 'responses_api',
         languages: languages,
-        generation_version: '2.0_world_reference',
+        generation_version: '3.0_world_reference_responses_api',
         etymology: generatedTerm.etymology,
         key_theorists: generatedTerm.key_theorists,
         historical_context: generatedTerm.historical_context,
@@ -282,11 +294,24 @@ Format as JSON:
 
   } catch (error) {
     console.error('Error in ai-lexicon-generator:', error);
+    
+    // Try to parse structured error info
+    let errorInfo;
+    try {
+      errorInfo = JSON.parse(error.message);
+    } catch (e) {
+      errorInfo = { message: error.message };
+    }
+    
     return new Response(JSON.stringify({ 
       success: false, 
-      error: error.message 
+      error: errorInfo.message || error.message,
+      error_code: errorInfo.code || 'unknown',
+      status_code: errorInfo.status || 500,
+      request_id: errorInfo.request_id || 'unknown',
+      details: errorInfo.full_details || null
     }), {
-      status: 500,
+      status: errorInfo.status || 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }

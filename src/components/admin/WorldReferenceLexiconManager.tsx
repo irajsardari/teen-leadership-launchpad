@@ -107,6 +107,7 @@ export default function WorldReferenceLexiconManager() {
     setGenerationLog([]);
 
     try {
+      console.log('Starting world reference seeding...');
       const response = await supabase.functions.invoke('world-reference-seeder', {
         body: {
           categories: selectedCategories,
@@ -115,38 +116,54 @@ export default function WorldReferenceLexiconManager() {
         }
       });
 
-      if (response.error) throw response.error;
+      console.log('Seeder response:', response);
+
+      if (response.error) {
+        throw new Error(response.error.message || 'Edge function returned an error');
+      }
 
       const result = response.data;
-      setGenerationLog(result.results || []);
       
-      // Simulate progress
-      const interval = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            return 100;
-          }
-          return prev + 10;
-        });
-      }, 1000);
+      if (!result?.success) {
+        throw new Error(result?.error || 'Seeding operation failed');
+      }
 
+      setGenerationLog(result.results || []);
+      setProgress(100);
+      
+      const successCount = result.summary?.total_generated || 0;
+      const errorCount = result.summary?.total_errors || 0;
+      
       toast({
         title: "World Reference Seeding Complete!",
-        description: `Generated ${result.summary?.total_generated || 0} terms across ${selectedCategories.length} categories.`,
+        description: `Generated ${successCount} terms successfully. ${errorCount > 0 ? `${errorCount} errors occurred.` : ''}`,
+        variant: errorCount > 0 ? "destructive" : "default"
       });
 
       await fetchStats();
     } catch (error) {
       console.error('Seeding error:', error);
+      setProgress(0);
+      
+      // Enhanced error display
+      const errorMessage = error?.message || 'Unknown error occurred';
+      const isNetworkError = errorMessage.includes('fetch') || errorMessage.includes('network');
+      const isQuotaError = errorMessage.includes('quota') || errorMessage.includes('insufficient');
+      
+      let description = errorMessage;
+      if (isNetworkError) {
+        description = "Network connection failed. Please check your internet connection and try again.";
+      } else if (isQuotaError) {
+        description = "OpenAI API quota exceeded. Please check your billing settings and add credits.";
+      }
+      
       toast({
         title: "Seeding Failed", 
-        description: error.message,
+        description,
         variant: "destructive"
       });
     } finally {
       setIsGenerating(false);
-      setProgress(0);
     }
   };
 
@@ -163,6 +180,7 @@ export default function WorldReferenceLexiconManager() {
     setIsGenerating(true);
 
     try {
+      console.log('Generating single term:', customTerm);
       const response = await supabase.functions.invoke('ai-lexicon-generator', {
         body: {
           term: customTerm,
@@ -172,7 +190,24 @@ export default function WorldReferenceLexiconManager() {
         }
       });
 
-      if (response.error) throw response.error;
+      console.log('Single term response:', response);
+
+      if (response.error) {
+        throw new Error(response.error.message || 'Edge function returned an error');
+      }
+
+      const result = response.data;
+      
+      if (!result?.success) {
+        const errorDetails = {
+          message: result?.error || 'Generation failed',
+          code: result?.error_code || 'unknown',
+          status: result?.status_code || 500,
+          request_id: result?.request_id || 'unknown'
+        };
+        
+        throw new Error(`Generation failed: ${errorDetails.message} (Code: ${errorDetails.code}, Request ID: ${errorDetails.request_id})`);
+      }
 
       toast({
         title: "Term Generated Successfully!",
@@ -182,10 +217,22 @@ export default function WorldReferenceLexiconManager() {
       setCustomTerm("");
       await fetchStats();
     } catch (error) {
-      console.error('Generation error:', error);
+      console.error('Single term generation error:', error);
+      
+      const errorMessage = error?.message || 'Unknown error occurred';
+      const isQuotaError = errorMessage.includes('quota') || errorMessage.includes('insufficient');
+      const isApiError = errorMessage.includes('401') || errorMessage.includes('unauthorized');
+      
+      let description = errorMessage;
+      if (isQuotaError) {
+        description = "OpenAI API quota exceeded. Please add credits to your OpenAI account.";
+      } else if (isApiError) {
+        description = "OpenAI API key invalid or unauthorized. Please check your API key configuration.";
+      }
+      
       toast({
         title: "Generation Failed",
-        description: error.message,
+        description,
         variant: "destructive"
       });
     } finally {
@@ -393,26 +440,70 @@ export default function WorldReferenceLexiconManager() {
             </CardContent>
           </Card>
 
-          {/* Generation Log */}
+          {/* Generation Log with Enhanced Error Display */}
           {generationLog.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Generation Results</CardTitle>
+                <CardTitle className="flex items-center justify-between">
+                  Generation Results
+                  <div className="flex gap-2 text-sm">
+                    <Badge variant="outline" className="text-green-600">
+                      ✓ {generationLog.filter(e => e.status === 'success').length} Success
+                    </Badge>
+                    <Badge variant="outline" className="text-red-600">
+                      ✗ {generationLog.filter(e => e.status === 'error').length} Errors
+                    </Badge>
+                  </div>
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 max-h-60 overflow-y-auto">
                   {generationLog.map((entry, index) => (
-                    <div key={index} className="flex items-center justify-between p-2 rounded border">
-                      <span className="font-medium">{entry.term}</span>
-                      <div className="flex items-center gap-2">
-                        <Badge variant={entry.status === 'success' ? 'default' : 'destructive'}>
-                          {entry.status}
-                        </Badge>
-                        <span className="text-sm text-muted-foreground">{entry.category}</span>
+                    <div key={index} className="p-3 rounded border">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-medium">{entry.term}</span>
+                        <div className="flex items-center gap-2">
+                          <Badge variant={entry.status === 'success' ? 'default' : 'destructive'}>
+                            {entry.status}
+                          </Badge>
+                          <span className="text-sm text-muted-foreground">{entry.category}</span>
+                        </div>
                       </div>
+                      {entry.status === 'error' && entry.error && (
+                        <div className="mt-2 text-sm">
+                          <div className="text-red-600">{entry.error}</div>
+                          {entry.error_details && (
+                            <div className="text-xs text-muted-foreground mt-1">
+                              {entry.error_details.error_code && `Code: ${entry.error_details.error_code}`}
+                              {entry.error_details.status_code && ` | Status: ${entry.error_details.status_code}`}
+                              {entry.error_details.request_id && ` | Request ID: ${entry.error_details.request_id}`}
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
+                
+                {/* Retry Failed Terms Button */}
+                {generationLog.some(e => e.status === 'error') && (
+                  <div className="mt-4 pt-4 border-t">
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        // TODO: Implement retry functionality for failed terms
+                        toast({
+                          title: "Retry Functionality",
+                          description: "Retry failed terms functionality will be implemented in the next update.",
+                        });
+                      }}
+                      disabled={isGenerating}
+                    >
+                      <Target className="mr-2 h-4 w-4" />
+                      Retry Failed Terms ({generationLog.filter(e => e.status === 'error').length})
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           )}
