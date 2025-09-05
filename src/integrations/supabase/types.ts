@@ -1656,6 +1656,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      check_sensitive_access_rate_limit: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       child_consent_status: {
         Args: { p_child_user_id: string }
         Returns: {
@@ -1785,7 +1789,9 @@ export type Database = {
         Returns: Json
       }
       get_teacher_application_secure: {
-        Args: { application_id: string }
+        Args:
+          | { application_id: string }
+          | { application_id: string; include_sensitive?: boolean }
         Returns: {
           cover_letter: string
           created_at: string
@@ -1871,6 +1877,10 @@ export type Database = {
           p_resource_id?: string
           p_resource_type: string
         }
+        Returns: undefined
+      }
+      log_teacher_application_select_access: {
+        Args: { application_ids: string[] }
         Returns: undefined
       }
       maximum_security_check: {
