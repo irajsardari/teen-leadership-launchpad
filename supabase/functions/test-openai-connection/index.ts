@@ -28,42 +28,25 @@ serve(async (req) => {
     console.log('API Key length:', openAIApiKey.length);
     console.log('API Key prefix:', openAIApiKey.substring(0, 10) + '...');
 
-    // Test with both APIs - Responses API (primary) and Chat Completions (fallback)
-    console.log('Testing Responses API first...');
+    // Test with Chat Completions API (the correct endpoint)
+    console.log('Testing Chat Completions API...');
     
-    let response = await fetch('https://api.openai.com/v1/responses', {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${openAIApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4.1-mini',
-        input: 'Say "Responses API connection test successful"',
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'user', content: 'Say "OpenAI API connection test successful"' }
+        ],
+        max_tokens: 50,
       }),
     });
     
-    let apiType = 'responses';
-    
-    // Fallback to Chat Completions if Responses API fails
-    if (!response.ok) {
-      console.log('Responses API failed, trying Chat Completions...');
-      response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${openAIApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'gpt-4o-mini',
-          messages: [
-            { role: 'user', content: 'Say "Chat Completions API connection test successful"' }
-          ],
-          max_tokens: 50,
-        }),
-      });
-      apiType = 'chat_completions';
-    }
+    const apiType = 'chat_completions';
 
     const responseText = await response.text();
     
@@ -97,18 +80,16 @@ serve(async (req) => {
 
     const aiResponse = JSON.parse(responseText);
     
-    const content = apiType === 'responses' 
-      ? (aiResponse.output || aiResponse.text)
-      : (aiResponse.choices?.[0]?.message?.content);
+    const content = aiResponse.choices?.[0]?.message?.content;
     
     return new Response(JSON.stringify({
       success: true,
       message: `OpenAI API connection successful via ${apiType}!`,
       api_type: apiType,
       response: content || 'No response content',
-      model: apiType === 'responses' ? 'gpt-4.1-mini' : 'gpt-4o-mini',
+      model: 'gpt-4o-mini',
       usage: aiResponse.usage,
-      recommendation: apiType === 'responses' ? 'Use Responses API for lexicon generation' : 'Responses API unavailable, using Chat Completions'
+      recommendation: 'Using Chat Completions API for lexicon generation'
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

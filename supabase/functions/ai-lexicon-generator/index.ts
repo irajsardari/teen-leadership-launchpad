@@ -141,18 +141,23 @@ Format as JSON:
   "executive_summary": "One-sentence key insight for busy executives"
 }`;
 
-    console.log('Calling OpenAI Responses API for world-class term generation...');
+    console.log('Calling OpenAI Chat Completions API for world-class term generation...');
 
-    // Use the correct OpenAI Responses API endpoint and format
-    const response = await fetch('https://api.openai.com/v1/responses', {
+    // Use the standard OpenAI Chat Completions API
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${openAIApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4.1-mini',
-        input: `${systemPrompt}\n\n${userPrompt}`,
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        max_tokens: 3000,
+        temperature: 0.7,
       }),
     });
 
@@ -163,10 +168,10 @@ Format as JSON:
         statusText: response.statusText,
         error: errorText,
         headers: Object.fromEntries(response.headers.entries()),
-        request_id: response.headers.get('x-request-id') || 'unknown'
+        request_id: response.headers.get('x-request-id') || response.headers.get('openai-request-id') || 'unknown'
       };
       
-      console.error('OpenAI Responses API error:', errorDetails);
+      console.error('OpenAI Chat Completions API error:', errorDetails);
       
       // Parse error for detailed reporting
       let errorMessage = `OpenAI API error: ${response.status}`;
@@ -194,8 +199,8 @@ Format as JSON:
 
     const aiResponse = await response.json();
     
-    // Handle Responses API format (different from Chat Completions)
-    const generatedContent = aiResponse.output || aiResponse.text || aiResponse.choices?.[0]?.message?.content;
+    // Handle standard Chat Completions API format
+    const generatedContent = aiResponse.choices?.[0]?.message?.content;
 
     console.log('AI Response received:', generatedContent);
 
@@ -235,10 +240,10 @@ Format as JSON:
       complexity_level: generatedTerm.difficulty_level || 'intermediate',
         ai_generated_metadata: {
         generated_at: new Date().toISOString(),
-        model: 'gpt-4.1-mini',
-        api_endpoint: 'responses_api',
+        model: 'gpt-4o-mini',
+        api_endpoint: 'chat_completions',
         languages: languages,
-        generation_version: '3.0_world_reference_responses_api',
+        generation_version: '3.1_world_reference_chat_completions',
         etymology: generatedTerm.etymology,
         key_theorists: generatedTerm.key_theorists,
         historical_context: generatedTerm.historical_context,
