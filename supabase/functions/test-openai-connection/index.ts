@@ -14,10 +14,18 @@ serve(async (req) => {
   try {
     console.log('🚀 Starting OpenAI API connection test with environment variable...');
     
+    // Debug: List all available environment variables (without values for security)
+    const envVars = Object.keys(Deno.env.toObject()).filter(key => 
+      key.includes('OPENAI') || key.includes('API')
+    );
+    console.log('🔍 Available API-related environment variables:', envVars);
+    
     // Use environment variable as requested
     const apiKey = Deno.env.get("OPENAI_API_KEY");
     
     console.log('🔑 Checking API key availability...');
+    console.log('🔍 Environment variable name used: "OPENAI_API_KEY"');
+    
     if (!apiKey) {
       console.error('❌ OpenAI API key not found in environment');
       return new Response(JSON.stringify({ 
@@ -26,31 +34,72 @@ serve(async (req) => {
         error_type: 'missing_api_key',
         status_code: 500,
         request_id: 'no-key-' + Date.now(),
-        environment_check: 'FAILED: OPENAI_API_KEY environment variable not found'
+        environment_check: 'FAILED: OPENAI_API_KEY environment variable not found',
+        debug_info: {
+          expected_secret_name: 'OPENAI_API_KEY',
+          available_env_vars: envVars,
+          supabase_setup_url: 'https://supabase.com/dashboard/project/gedgcagidpheugikoyim/settings/functions'
+        }
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
     
-    console.log('✅ API key found from environment variable, length:', apiKey.length);
-    console.log('🔗 API Key prefix:', apiKey.substring(0, 7) + '...');
+    // Additional validation checks
+    const trimmedKey = apiKey.trim();
+    const hasValidPrefix = trimmedKey.startsWith('sk-');
+    const hasValidLength = trimmedKey.length >= 40;
+    
+    console.log('✅ API key found from environment variable');
+    console.log('📊 API key validation:');
+    console.log('  - Length:', trimmedKey.length);
+    console.log('  - Has sk- prefix:', hasValidPrefix);
+    console.log('  - Valid length (>=40):', hasValidLength);
+    console.log('  - Prefix:', trimmedKey.substring(0, 7) + '...');
+    
+    if (!hasValidPrefix || !hasValidLength) {
+      console.warn('⚠️  API key format looks suspicious');
+      return new Response(JSON.stringify({
+        success: false,
+        error: 'OpenAI API key format appears invalid',
+        error_type: 'invalid_api_key_format',
+        status_code: 400,
+        request_id: 'invalid-format-' + Date.now(),
+        debug_info: {
+          key_length: trimmedKey.length,
+          has_sk_prefix: hasValidPrefix,
+          expected_format: 'sk-proj-... or sk-...',
+          current_prefix: trimmedKey.substring(0, 7)
+        }
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
     // Simple health check with sample completion as requested
     console.log('🧪 Running health check with sample completion...');
     const startTime = Date.now();
     
+    const requestBody = {
+      model: "gpt-4.1-mini-2025-04-14",
+      messages: [{ role: "user", content: "Hello, test connection." }],
+      max_completion_tokens: 50,
+    };
+    
+    console.log('📡 Making request to OpenAI API...');
+    console.log('🎯 Endpoint: https://api.openai.com/v1/chat/completions');
+    console.log('🤖 Model:', requestBody.model);
+    console.log('💬 Test message:', requestBody.messages[0].content);
+    
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${trimmedKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        model: "gpt-4.1-mini-2025-04-14",
-        messages: [{ role: "user", content: "Hello, test connection." }],
-        max_completion_tokens: 50,
-      }),
+      body: JSON.stringify(requestBody),
     });
     
     const duration = Date.now() - startTime;
