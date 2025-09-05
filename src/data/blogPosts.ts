@@ -10,6 +10,7 @@ import legacyMirrorBanner from "@/assets/legacy-teen-mirror-reflection.jpg";
 import heroTeenagers from "@/assets/hero-teenagers.jpg";
 import voicesBestGiftGraduation from "@/assets/voices-best-gift-graduation.jpg";
 import finishingChangesEverything from "@/assets/finishing-changes-everything.jpg";
+import concentrationFocusAchievement from "@/assets/concentration-focus-achievement.jpg";
 export interface BlogPost {
   id: string;
   title: string;
@@ -30,6 +31,71 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: 'concentration-the-hidden-power-behind-every-achievement',
+    title: 'Concentration: The Hidden Power Behind Every Achievement',
+    author: 'Dr. Iraj Sardari Baf',
+    authorId: 'dr-iraj-sardari-baf',
+    date: '2025-09-05',
+    featuredImage: concentrationFocusAchievement,
+    excerpt: 'In a world full of distractions, concentration is your superpower. Without it, goals remain unfinished. With it, even ordinary actions can lead to extraordinary achievements.',
+    content: `# Concentration: The Hidden Power Behind Every Achievement
+
+We live in an age of constant distraction. Notifications, social media, and endless scrolling pull our minds in every direction. We start one task, then jump to another, then another — until the day ends and nothing is truly finished.
+
+The truth is simple: without concentration, you can do nothing well.
+
+## Why Concentration Matters
+
+Concentration is the secret behind every success story. Talent, dreams, and big goals are important — but without focus, they remain scattered energy.
+
+Think about a magnifying glass: the sun's rays are everywhere, but only when focused can they start a fire. Your energy is the same. Without concentration, it spreads thin. With concentration, it becomes unstoppable.
+
+## How Distractions Destroy Progress
+
+Distraction doesn't just waste time — it destroys confidence. Every time you let your attention wander:
+- You delay your work.
+- You lose momentum.
+- You end up procrastinating.
+
+This is why so many people start projects but never finish them. They don't lack intelligence or ability — they lack concentration.
+
+## The Link Between Concentration and Procrastination
+
+Procrastination isn't always about laziness. Often, it's about distraction. When you jump from one thing to another without finishing, you trick yourself into thinking you're busy, but in reality you're avoiding the hard focus needed to finish.
+
+Lack of concentration creates procrastination. And procrastination kills productivity.
+
+## Recipes for Stronger Concentration
+
+Here are simple, powerful steps to build your focus:
+
+1. **Plan Your Day.** Write down your top three tasks. Don't move on until they are finished.
+2. **Silence Distractions.** Put your phone away or use apps that block notifications while you work.
+3. **Practice Single-Tasking.** Train yourself to finish one thing before starting another.
+4. **Use Focus Techniques.** Try Pomodoro (25 minutes focus, 5 minutes break) or short meditations to reset your mind.
+5. **Track Your Focus.** At the end of each day, rate your concentration from 1–10. Over time, you'll see progress.
+
+## The Muscle of the Mind
+
+Concentration is like a muscle — the more you train it, the stronger it becomes. At first, it feels difficult. But with practice, your ability to focus will grow, and so will your results.
+
+When you learn to concentrate, even ordinary actions can create extraordinary achievements.
+
+## The Final Word
+
+In a world full of noise, concentration is your superpower. Without it, goals remain unfinished. With it, you can transform your plans into reality.
+
+So the next time distractions call your name, remember this: every great achievement begins with the power of focus.`,
+    slug: '/voices/concentration-the-hidden-power-behind-every-achievement',
+    seo: {
+      metaTitle: 'Concentration: The Hidden Power Behind Every Achievement | TMA Voices',
+      metaDescription: 'Distractions kill productivity and lead to procrastination. Discover why concentration is the hidden power behind success and how to build stronger focus in daily life.',
+      keywords: ['concentration', 'focus', 'productivity', 'teenagers', 'success', 'procrastination', 'distraction', 'achievement']
+    },
+    category: 'Personal Development',
+    tags: ['Focus & Productivity', 'TMA Voices', 'Personal Growth']
+  },
   {
     id: 'resilience-for-teenagers',
     title: '🌱 Resilience for Teenagers: Bounce Back, Learn, and Grow',
