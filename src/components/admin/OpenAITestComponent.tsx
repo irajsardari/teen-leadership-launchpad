@@ -15,15 +15,29 @@ export function OpenAITestComponent() {
     setResult(null);
     
     try {
+      console.log('Testing OpenAI API connection...');
       const { data, error } = await supabase.functions.invoke('test-openai-connection');
       
+      console.log('Edge function response:', { data, error });
+      
       if (error) {
-        throw error;
+        console.error('Edge function error:', error);
+        setResult({
+          success: false,
+          error: `Edge Function Error: ${error.message}`,
+          details: error
+        });
+        toast({
+          title: "Edge Function Error",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
       }
       
       setResult(data);
       
-      if (data.success) {
+      if (data?.success) {
         toast({
           title: "Connection Successful",
           description: "OpenAI API is working correctly",
@@ -31,19 +45,24 @@ export function OpenAITestComponent() {
       } else {
         toast({
           title: "Connection Failed",
-          description: data.error || "Unknown error",
+          description: data?.error || "Unknown error from OpenAI API",
           variant: "destructive",
         });
       }
     } catch (error) {
-      console.error('Test failed:', error);
+      console.error('Test failed with exception:', error);
       setResult({
         success: false,
-        error: error.message || 'Test failed'
+        error: `Test Exception: ${error.message || 'Unknown error'}`,
+        details: {
+          name: error.name,
+          message: error.message,
+          stack: error.stack
+        }
       });
       toast({
         title: "Test Failed",
-        description: "Could not test OpenAI connection",
+        description: `Could not test OpenAI connection: ${error.message}`,
         variant: "destructive",
       });
     } finally {
