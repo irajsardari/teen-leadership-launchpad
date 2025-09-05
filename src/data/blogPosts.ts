@@ -87,7 +87,7 @@ When you learn to concentrate, even ordinary actions can create extraordinary ac
 In a world full of noise, concentration is your superpower. Without it, goals remain unfinished. With it, you can transform your plans into reality.
 
 So the next time distractions call your name, remember this: every great achievement begins with the power of focus.`,
-    slug: '/voices/concentration-the-hidden-power-behind-every-achievement',
+    slug: 'concentration-the-hidden-power-behind-every-achievement',
     seo: {
       metaTitle: 'Concentration: The Hidden Power Behind Every Achievement | TMA Voices',
       metaDescription: 'Distractions kill productivity and lead to procrastination. Discover why concentration is the hidden power behind success and how to build stronger focus in daily life.',
