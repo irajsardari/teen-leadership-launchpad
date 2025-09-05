@@ -1656,6 +1656,17 @@ export type Database = {
         }
         Returns: boolean
       }
+      child_consent_status: {
+        Args: { p_child_user_id: string }
+        Returns: {
+          child_user_id: string
+          consent_date: string
+          consent_given: boolean
+          created_at: string
+          id: string
+          relationship: string
+        }[]
+      }
       cleanup_old_audit_logs: {
         Args: Record<PropertyKey, never>
         Returns: number
@@ -1974,6 +1985,10 @@ export type Database = {
       }
       verify_confidential_access_maximum_security: {
         Args: { p_access_reason?: string; p_record_id?: string }
+        Returns: boolean
+      }
+      verify_parental_consent_exists: {
+        Args: { p_child_user_id: string }
         Returns: boolean
       }
       verify_safeguarding_access_critical: {
