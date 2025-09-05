@@ -319,7 +319,6 @@ Format as JSON:
       phonetic_ar_new: generatedTerm.phonetic_ar,
       example_en: generatedTerm.example_en,
       example_ar: generatedTerm.example_ar,
-      tags: generatedTerm.tags || [],
       discipline_tags: [generatedTerm.category, generatedTerm.subcategory].filter(Boolean),
       synonyms: generatedTerm.related_terms || [],
       related: generatedTerm.related_terms || [],
