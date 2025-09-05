@@ -150,19 +150,37 @@ Format as JSON:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-5-2025-08-07',
+        model: 'gpt-4o-mini', // Using stable model with better quota handling
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
         ],
-        max_completion_tokens: 3000,
+        max_tokens: 3000,
+        temperature: 0.7,
       }),
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error('OpenAI API error:', error);
-      throw new Error(`OpenAI API error: ${response.status} - ${error}`);
+      const errorText = await response.text();
+      console.error('OpenAI API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText,
+        headers: Object.fromEntries(response.headers.entries())
+      });
+      
+      // Parse error for better reporting
+      let errorMessage = `OpenAI API error: ${response.status}`;
+      try {
+        const errorObj = JSON.parse(errorText);
+        if (errorObj.error?.message) {
+          errorMessage = errorObj.error.message;
+        }
+      } catch (e) {
+        errorMessage = errorText || errorMessage;
+      }
+      
+      throw new Error(errorMessage);
     }
 
     const aiResponse = await response.json();
