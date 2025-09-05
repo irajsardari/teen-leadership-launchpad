@@ -20,55 +20,6 @@ interface ApplicationRow {
 const AdminApplicationsPage = () => {
   const [rows, setRows] = useState<ApplicationRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const [checkingAuth, setCheckingAuth] = useState(true);
-  const { user, isLoading: authLoading } = useAuth();
-  const navigate = useNavigate();
-
-  // Check user role
-  useEffect(() => {
-    const checkUserRole = async () => {
-      if (authLoading) return;
-      
-      if (!user) {
-        toast.error("Please log in to access this page");
-        navigate('/auth');
-        return;
-      }
-
-      try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('id', user.id)
-          .single();
-
-        if (error) {
-          console.error('Error fetching user role:', error);
-          toast.error("Error checking permissions");
-          navigate('/');
-          return;
-        }
-
-        const role = data?.role;
-        setUserRole(role);
-
-        if (role !== 'admin') {
-          toast.error("Access denied. Admin privileges required.");
-          navigate('/');
-          return;
-        }
-      } catch (error) {
-        console.error('Error checking user role:', error);
-        toast.error("Error checking permissions");
-        navigate('/');
-      } finally {
-        setCheckingAuth(false);
-      }
-    };
-
-    checkUserRole();
-  }, [user, authLoading, navigate]);
 
   useEffect(() => {
     (async () => {
@@ -128,21 +79,6 @@ const AdminApplicationsPage = () => {
     }
   };
 
-  // Show loading while checking authentication
-  if (authLoading || checkingAuth) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-center items-center min-h-64">
-          <div>Checking permissions...</div>
-        </div>
-      </div>
-    );
-  }
-
-  // Don't render anything if user is not authorized (will be redirected)
-  if (!user || userRole !== 'admin') {
-    return null;
-  }
 
   return (
     <div className="container mx-auto px-4 py-8">
