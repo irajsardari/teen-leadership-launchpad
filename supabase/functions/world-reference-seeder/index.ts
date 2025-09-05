@@ -127,7 +127,7 @@ serve(async (req) => {
 
     const { 
       categories = Object.keys(WORLD_REFERENCE_TERMS), 
-      maxTermsPerCategory = 10,
+      maxTermsPerCategory = Math.min(10, 20),  // Limit to max 20 per batch
       priority = 1 
     } = await req.json();
 
@@ -146,84 +146,117 @@ serve(async (req) => {
       const terms = WORLD_REFERENCE_TERMS[category].slice(0, maxTermsPerCategory);
       console.log(`Processing ${terms.length} terms for category: ${category}`);
 
-      for (const term of terms) {
-        try {
-          // Check if term already exists
-          const { data: existing } = await supabase
-            .from('dictionary')
-            .select('id, term')
-            .eq('term', term)
-            .single();
-
-          if (existing) {
-            console.log(`Term "${term}" already exists, skipping...`);
-            continue;
-          }
-
-          // Generate using our enhanced AI function
-          const generationResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/ai-lexicon-generator`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${Deno.env.get('SUPABASE_ANON_KEY')}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              term: term,
-              category: category,
-              languages: ['en', 'ar'],
-              priority: priority
-            }),
-          });
-
-          const generationResult = await generationResponse.json();
-
-          if (generationResult.success) {
-            totalGenerated++;
-            results.push({
-              term: term,
-              category: category,
-              status: 'success',
-              id: generationResult.term?.id
-            });
-            console.log(`✅ Generated: ${term}`);
-          } else {
-            totalErrors++;
-            const errorDetails = {
-              message: generationResult.error || 'Unknown error',
-              error_code: generationResult.error_code || 'unknown',
-              status_code: generationResult.status_code || 500,
-              request_id: generationResult.request_id || 'unknown'
-            };
-            
-            results.push({
-              term: term,
-              category: category,
-              status: 'error',
-              error: errorDetails.message,
-              error_details: errorDetails
-            });
-            console.log(`❌ Failed: ${term} - ${errorDetails.message} (Code: ${errorDetails.error_code}, Status: ${errorDetails.status_code})`);
-          }
-
-          // Rate limiting: wait 1 second between requests
-          await new Promise(resolve => setTimeout(resolve, 1000));
-
-        } catch (error) {
-          totalErrors++;
-          const errorInfo = {
-            message: error.message || 'Network or processing error',
-            type: error.name || 'UnknownError',
-            stack: error.stack?.split('\n').slice(0, 3).join('\n') || 'No stack trace'
-          };
+      // Process terms in batches of ≤20
+      const batchSize = 20;
+      for (let i = 0; i < terms.length; i += batchSize) {
+        const batch = terms.slice(i, i + batchSize);
+        console.log(`Processing batch ${Math.floor(i/batchSize) + 1} of ${Math.ceil(terms.length/batchSize)} for ${category}: ${batch.length} terms`);
+        
+        for (const term of batch) {
+          let retryCount = 0;
+          const maxRetries = 3;
+          let success = false;
           
-          results.push({
-            term: term,
-            category: category,
-            status: 'error',
-            error: errorInfo.message,
-            error_details: errorInfo
-          });
-          console.error(`Network/Processing Error for ${term}:`, errorInfo);
+          while (retryCount <= maxRetries && !success) {
+            try {
+              // Check if term already exists
+              const { data: existing } = await supabase
+                .from('dictionary')
+                .select('id, term')
+                .eq('term', term)
+                .single();
+
+              if (existing) {
+                console.log(`Term "${term}" already exists, skipping...`);
+                results.push({
+                  term: term,
+                  category: category,
+                  status: 'skipped',
+                  reason: 'already_exists',
+                  existing_id: existing.id
+                });
+                success = true;
+                break;
+              }
+
+              console.log(`Generating term: "${term}" (category: ${category}, attempt: ${retryCount + 1}/${maxRetries + 1})`);
+              
+              // Generate using our enhanced AI function with direct call to avoid recursion issues
+              const generationResponse = await supabase.functions.invoke('ai-lexicon-generator', {
+                body: {
+                  term: term,
+                  category: category,
+                  languages: ['en', 'ar'],
+                  priority: priority
+                }
+              });
+
+              if (generationResponse.error) {
+                throw new Error(`Supabase function error: ${generationResponse.error.message}`);
+              }
+
+              const generationResult = generationResponse.data;
+
+              if (generationResult?.success) {
+                totalGenerated++;
+                results.push({
+                  term: term,
+                  category: category,
+                  status: 'success',
+                  id: generationResult.term?.id,
+                  attempt_count: retryCount + 1
+                });
+                console.log(`✅ Generated: ${term} (ID: ${generationResult.term?.id})`);
+                success = true;
+              } else {
+                throw new Error(generationResult?.error || 'Unknown generation error');
+              }
+
+            } catch (error) {
+              retryCount++;
+              const isRetryableError = error.message?.includes('429') || 
+                                       error.message?.includes('500') || 
+                                       error.message?.includes('502') || 
+                                       error.message?.includes('503') || 
+                                       error.message?.includes('504');
+              
+              if (retryCount <= maxRetries && isRetryableError) {
+                const backoffTime = Math.pow(2, retryCount) * 1000; // Exponential backoff: 2s, 4s, 8s
+                console.log(`⚠️  Retrying ${term} in ${backoffTime/1000}s (attempt ${retryCount}/${maxRetries}) - ${error.message}`);
+                await new Promise(resolve => setTimeout(resolve, backoffTime));
+              } else {
+                totalErrors++;
+                const errorInfo = {
+                  message: error.message || 'Unknown error',
+                  type: error.name || 'UnknownError',
+                  retry_count: retryCount,
+                  is_retryable: isRetryableError
+                };
+                
+                results.push({
+                  term: term,
+                  category: category,
+                  status: 'error',
+                  error: errorInfo.message,
+                  error_details: errorInfo,
+                  final_attempt: retryCount
+                });
+                console.error(`❌ Final failure for ${term} after ${retryCount} attempts: ${errorInfo.message}`);
+                break;
+              }
+            }
+          }
+
+          // Rate limiting: wait 1 second between successful requests
+          if (success) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+          }
+        }
+        
+        // Wait 2 seconds between batches
+        if (i + batchSize < terms.length) {
+          console.log(`Batch complete. Waiting 2s before next batch...`);
+          await new Promise(resolve => setTimeout(resolve, 2000));
         }
       }
 

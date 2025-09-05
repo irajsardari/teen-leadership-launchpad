@@ -38,11 +38,11 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4.1-2025-04-14',
         messages: [
           { role: 'user', content: 'Say "OpenAI API connection test successful"' }
         ],
-        max_tokens: 50,
+        max_completion_tokens: 50,
       }),
     });
     
@@ -87,7 +87,7 @@ serve(async (req) => {
       message: `OpenAI API connection successful via ${apiType}!`,
       api_type: apiType,
       response: content || 'No response content',
-      model: 'gpt-4o-mini',
+      model: 'gpt-4.1-2025-04-14',
       usage: aiResponse.usage,
       recommendation: 'Using Chat Completions API for lexicon generation'
     }), {

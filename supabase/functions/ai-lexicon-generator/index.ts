@@ -143,6 +143,12 @@ Format as JSON:
 
     console.log('Calling OpenAI Chat Completions API for world-class term generation...');
 
+    // Log request details (without secrets)
+    const requestStartTime = Date.now();
+    const promptSize = (systemPrompt + userPrompt).length;
+    console.log(`OpenAI Request - Model: gpt-4.1-2025-04-14, Prompt Size: ${promptSize} chars, Term: "${term}"`);
+    console.log(`Prompt Preview: ${userPrompt.substring(0, 200)}...`);
+
     // Use the standard OpenAI Chat Completions API
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -151,27 +157,33 @@ Format as JSON:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4.1-2025-04-14',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
         ],
-        max_tokens: 3000,
-        temperature: 0.7,
+        max_completion_tokens: 3000,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
+      const requestId = response.headers.get('x-request-id') || response.headers.get('openai-request-id') || 'unknown';
+      const duration = Date.now() - requestStartTime;
+      
       const errorDetails = {
         status: response.status,
         statusText: response.statusText,
         error: errorText,
         headers: Object.fromEntries(response.headers.entries()),
-        request_id: response.headers.get('x-request-id') || response.headers.get('openai-request-id') || 'unknown'
+        request_id: requestId,
+        duration_ms: duration,
+        term: term,
+        prompt_size: promptSize
       };
       
-      console.error('OpenAI Chat Completions API error:', errorDetails);
+      console.error(`OpenAI API Error - Status: ${response.status}, Request ID: ${requestId}, Duration: ${duration}ms`);
+      console.error(`Error Details:`, errorDetails);
       
       // Parse error for detailed reporting
       let errorMessage = `OpenAI API error: ${response.status}`;
@@ -192,12 +204,20 @@ Format as JSON:
         message: errorMessage,
         code: errorCode,
         status: response.status,
-        request_id: errorDetails.request_id,
+        request_id: requestId,
+        usage_tokens: aiResponse.usage?.total_tokens || 0,
+        duration_ms: duration,
         full_details: errorDetails
       }));
     }
 
     const aiResponse = await response.json();
+    const requestId = response.headers.get('x-request-id') || response.headers.get('openai-request-id') || 'unknown';
+    const duration = Date.now() - requestStartTime;
+    
+    // Log successful response
+    console.log(`OpenAI Success - Request ID: ${requestId}, Duration: ${duration}ms, Tokens: ${aiResponse.usage?.total_tokens || 'unknown'}`);
+    console.log(`Response Preview: ${aiResponse.choices?.[0]?.message?.content?.substring(0, 200)}...`);
     
     // Handle standard Chat Completions API format
     const generatedContent = aiResponse.choices?.[0]?.message?.content;
@@ -240,7 +260,7 @@ Format as JSON:
       complexity_level: generatedTerm.difficulty_level || 'intermediate',
         ai_generated_metadata: {
         generated_at: new Date().toISOString(),
-        model: 'gpt-4o-mini',
+        model: 'gpt-4.1-2025-04-14',
         api_endpoint: 'chat_completions',
         languages: languages,
         generation_version: '3.1_world_reference_chat_completions',
@@ -274,7 +294,7 @@ Format as JSON:
       throw new Error(`Database error: ${insertError.message}`);
     }
 
-    console.log('Successfully generated and saved term:', insertedTerm.id);
+    console.log(`Successfully generated and saved term: ${insertedTerm.id} for "${term}" (Duration: ${duration}ms, Tokens: ${aiResponse.usage?.total_tokens || 'unknown'})`);
 
     // Log analytics
     await supabase
