@@ -91,42 +91,42 @@ export function AdminOpenAITestFix() {
   };
 
   const getErrorTypeInfo = (result: any) => {
-    if (!result || result.success) return null;
+    if (!result?.error_type && !result?.status_code) return null;
     
-    const error = result.error || '';
-    const isQuotaError = error.includes('quota') || error.includes('insufficient');
-    const isAuthError = error.includes('unauthorized') || error.includes('authentication') || error.includes('not configured');
-    const isNetworkError = result.error_type === 'network_error';
-    
-    if (isQuotaError) {
+    if (result.error_type === 'quota_exceeded') {
       return {
-        type: 'quota',
-        title: 'Quota Exceeded',
-        description: 'Your OpenAI account has exceeded its usage quota. Add billing/credits to continue.',
-        actionable: true
+        title: "⚠️ OpenAI Quota Exceeded",
+        description: "Your OpenAI account has run out of credits. This is a billing issue, not a technical problem.",
+        actionable: true,
+        action: "Add credits to your OpenAI account at platform.openai.com/account/billing"
       };
-    } else if (isAuthError) {
+    } else if (result.error_type === 'invalid_api_key' || result.status_code === 401) {
       return {
-        type: 'auth',
-        title: 'Authentication Issue',
-        description: 'OpenAI API key is missing or invalid. Check Supabase Edge Function secrets.',
-        actionable: true
+        title: "🔑 Invalid API Key",
+        description: "The OpenAI API key is invalid or doesn't have proper permissions.",
+        actionable: true,
+        action: "Check your API key at platform.openai.com/account/api-keys"
       };
-    } else if (isNetworkError) {
+    } else if (result.error_type === 'rate_limit_exceeded') {
       return {
-        type: 'network',
-        title: 'Network Error',
-        description: 'Could not connect to OpenAI API. Check internet connection.',
+        title: "⏰ Rate Limit Exceeded",
+        description: "Too many requests sent too quickly. This usually resolves automatically.",
+        actionable: true,
+        action: "Wait 1-2 minutes and try again"
+      };
+    } else if (result.status_code >= 500) {
+      return {
+        title: "🔧 Server Error",
+        description: "OpenAI API is experiencing issues. Please try again later.",
+        actionable: false
+      };
+    } else {
+      return {
+        title: "🌐 Connection Error",
+        description: "Unable to connect to OpenAI API. Check your internet connection.",
         actionable: false
       };
     }
-    
-    return {
-      type: 'unknown',
-      title: 'Unknown Error',
-      description: 'An unexpected error occurred.',
-      actionable: false
-    };
   };
 
   return (
@@ -206,10 +206,23 @@ export function AdminOpenAITestFix() {
             {!result.success && (
               <>
                 {getErrorTypeInfo(result) && (
-                  <Alert>
+                  <Alert variant="destructive">
                     <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>
-                      <strong>{getErrorTypeInfo(result)?.title}:</strong> {getErrorTypeInfo(result)?.description}
+                    <AlertDescription className="space-y-2">
+                      <div>
+                        <strong>{getErrorTypeInfo(result)?.title}</strong>
+                      </div>
+                      <p>{getErrorTypeInfo(result)?.description}</p>
+                      {getErrorTypeInfo(result)?.actionable && getErrorTypeInfo(result)?.action && (
+                        <div className="bg-red-100 p-2 rounded border-l-4 border-red-500">
+                          <strong>Next Step:</strong> {getErrorTypeInfo(result)?.action}
+                        </div>
+                      )}
+                      {result.actionable && (
+                        <div className="bg-yellow-100 p-2 rounded border-l-4 border-yellow-500">
+                          <strong>Suggestion:</strong> {result.actionable}
+                        </div>
+                      )}
                     </AlertDescription>
                   </Alert>
                 )}

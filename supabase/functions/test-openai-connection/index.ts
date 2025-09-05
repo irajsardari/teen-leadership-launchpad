@@ -72,20 +72,39 @@ serve(async (req) => {
         request_id: response.headers.get('x-request-id') || 'unknown'
       };
       
+      let errorMessage = 'OpenAI API connection failed';
+      let errorType = 'api_error';
+      
       try {
         const errorObj = JSON.parse(responseText);
         errorDetails.parsedError = errorObj;
         console.error('📄 OpenAI Error Details:', errorObj);
+        
+        // Handle specific error types
+        if (errorObj.error?.type === 'insufficient_quota' || errorObj.error?.code === 'insufficient_quota') {
+          errorMessage = 'OpenAI API quota exceeded. Please check your OpenAI account billing and usage limits.';
+          errorType = 'quota_exceeded';
+        } else if (response.status === 401) {
+          errorMessage = 'Invalid OpenAI API key. Please check your API key configuration.';
+          errorType = 'invalid_api_key';
+        } else if (response.status === 429) {
+          errorMessage = 'OpenAI API rate limit exceeded. Please wait and try again.';
+          errorType = 'rate_limit_exceeded';
+        }
       } catch (e) {
         console.error('🔍 Response is not JSON, raw body:', responseText);
       }
 
       return new Response(JSON.stringify({
         success: false,
-        error: 'OpenAI API connection failed',
+        error: errorMessage,
+        error_type: errorType,
         status_code: response.status,
         request_id: errorDetails.request_id,
-        details: errorDetails
+        details: errorDetails,
+        actionable: errorType === 'quota_exceeded' ? 'Check OpenAI billing dashboard and add credits' : 
+                   errorType === 'invalid_api_key' ? 'Verify API key is correct and has proper permissions' :
+                   'Wait a few minutes and try again'
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
