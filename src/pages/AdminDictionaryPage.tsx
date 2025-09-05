@@ -15,6 +15,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 import LexiconBulkImport from '@/components/admin/LexiconBulkImport';
 import WorldReferenceLexiconManager from '@/components/admin/WorldReferenceLexiconManager';
 import { OpenAITestComponent } from '@/components/admin/OpenAITestComponent';
+import { AdminOpenAITestFix } from '@/components/admin/AdminOpenAITestFix';
 
 interface DictionaryTerm {
   id: string;
@@ -220,7 +221,7 @@ const AdminDictionaryPage: React.FC = () => {
 
             <TabsContent value="ai-lexicon" className="space-y-6">
         <div className="space-y-8">
-          <OpenAITestComponent />
+          <AdminOpenAITestFix />
           <WorldReferenceLexiconManager />
         </div>
             </TabsContent>

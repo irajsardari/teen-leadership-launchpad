@@ -278,7 +278,7 @@ Return JSON format:
         stack: error.stack?.split('\n').slice(0, 3).join('\n') || 'No stack trace'
       }
     }), {
-      status: 500,
+      status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }

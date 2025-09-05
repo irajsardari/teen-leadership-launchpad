@@ -182,7 +182,7 @@ serve(async (req) => {
               console.log(`Generating term: "${term}" (category: ${category}, attempt: ${retryCount + 1}/${maxRetries + 1})`);
               
               // Generate using our enhanced AI function with direct call to avoid recursion issues
-              const generationResponse = await supabase.functions.invoke('ai-lexicon-generator', {
+              const generationResponse = await supabase.functions.invoke('ai-lexicon-generator-with-retry', {
                 body: {
                   term: term,
                   category: category,
@@ -287,7 +287,7 @@ serve(async (req) => {
       success: false,
       error: error.message
     }), {
-      status: 500,
+      status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }

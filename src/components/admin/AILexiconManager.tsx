@@ -189,7 +189,7 @@ const AILexiconManager: React.FC = () => {
     try {
       setGeneratingTerm(true);
 
-      const { data, error } = await supabase.functions.invoke('ai-lexicon-generator', {
+      const { data, error } = await supabase.functions.invoke('ai-lexicon-generator-with-retry', {
         body: {
           term: newTerm.trim(),
           category: newTermCategory,

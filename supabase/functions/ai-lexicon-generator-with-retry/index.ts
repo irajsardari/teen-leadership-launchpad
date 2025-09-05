@@ -40,6 +40,101 @@ interface GeneratedTerm {
   executive_summary?: string;
 }
 
+// Exponential backoff retry function for quota handling
+async function callOpenAIWithRetry(openAIApiKey: string, requestBody: any, maxRetries = 3): Promise<any> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const requestStartTime = Date.now();
+    
+    try {
+      console.log(`OpenAI API Attempt ${attempt}/${maxRetries} - Model: ${requestBody.model}`);
+      
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openAIApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const duration = Date.now() - requestStartTime;
+      const requestId = response.headers.get('x-request-id') || response.headers.get('openai-request-id') || 'unknown';
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log(`OpenAI Success - Attempt ${attempt}, Request ID: ${requestId}, Duration: ${duration}ms, Tokens: ${result.usage?.total_tokens || 'unknown'}`);
+        return { success: true, data: result, requestId, duration, attempt };
+      }
+
+      // Handle different error types
+      const errorText = await response.text();
+      let errorObj;
+      try {
+        errorObj = JSON.parse(errorText);
+      } catch (e) {
+        errorObj = { error: { message: errorText } };
+      }
+
+      const isQuotaError = response.status === 429 || (errorObj.error?.code === 'insufficient_quota');
+      const isRateLimitError = response.status === 429 || (errorObj.error?.type === 'rate_limit_exceeded');
+      
+      console.error(`OpenAI API Error - Attempt ${attempt}, Status: ${response.status}, Request ID: ${requestId}, Duration: ${duration}ms`);
+      console.error(`Error Details:`, { status: response.status, error: errorObj.error?.message });
+
+      // Don't retry on certain errors
+      if (response.status === 401 || response.status === 403 || response.status === 400) {
+        return {
+          success: false,
+          error: errorObj.error?.message || 'API authentication or request error',
+          status: response.status,
+          requestId,
+          duration,
+          attempt,
+          retryable: false
+        };
+      }
+
+      // Retry with exponential backoff for quota/rate limit errors
+      if ((isQuotaError || isRateLimitError) && attempt < maxRetries) {
+        const backoffDelay = Math.min(1000 * Math.pow(2, attempt - 1), 10000); // Max 10 seconds
+        console.log(`Quota/Rate limit error. Retrying in ${backoffDelay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, backoffDelay));
+        continue;
+      }
+
+      // Final attempt failed
+      return {
+        success: false,
+        error: errorObj.error?.message || `API error: ${response.status}`,
+        status: response.status,
+        requestId,
+        duration,
+        attempt,
+        retryable: isQuotaError || isRateLimitError
+      };
+
+    } catch (networkError) {
+      const duration = Date.now() - requestStartTime;
+      console.error(`Network error on attempt ${attempt}:`, networkError);
+      
+      if (attempt < maxRetries) {
+        const backoffDelay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+        console.log(`Network error. Retrying in ${backoffDelay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, backoffDelay));
+        continue;
+      }
+      
+      return {
+        success: false,
+        error: `Network error: ${networkError.message}`,
+        duration,
+        attempt,
+        retryable: true
+      };
+    }
+  }
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -48,7 +143,13 @@ serve(async (req) => {
   try {
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
     if (!openAIApiKey) {
-      throw new Error('OpenAI API key not configured');
+      return new Response(JSON.stringify({
+        success: false,
+        error: 'OpenAI API key not configured in Supabase secrets'
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
     }
 
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
@@ -72,6 +173,7 @@ serve(async (req) => {
         error: 'Term already exists',
         existing: existing
       }), {
+        status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
@@ -141,91 +243,40 @@ Format as JSON:
   "executive_summary": "One-sentence key insight for busy executives"
 }`;
 
-    console.log('Calling OpenAI Chat Completions API for world-class term generation...');
-
-    // Log request details (without secrets)
-    const requestStartTime = Date.now();
     const promptSize = (systemPrompt + userPrompt).length;
     console.log(`OpenAI Request - Model: gpt-4.1-2025-04-14, Prompt Size: ${promptSize} chars, Term: "${term}"`);
     console.log(`Prompt Preview: ${userPrompt.substring(0, 200)}...`);
 
-    // Use the standard OpenAI Chat Completions API
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${openAIApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-4.1-2025-04-14',
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt }
-        ],
-        max_completion_tokens: 3000,
-      }),
+    // Call OpenAI with retry logic
+    const openAIResult = await callOpenAIWithRetry(openAIApiKey, {
+      model: 'gpt-4.1-2025-04-14',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt }
+      ],
+      max_completion_tokens: 3000,
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      const requestId = response.headers.get('x-request-id') || response.headers.get('openai-request-id') || 'unknown';
-      const duration = Date.now() - requestStartTime;
-      
-      const errorDetails = {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorText,
-        headers: Object.fromEntries(response.headers.entries()),
-        request_id: requestId,
-        duration_ms: duration,
-        term: term,
-        prompt_size: promptSize
-      };
-      
-      console.error(`OpenAI API Error - Status: ${response.status}, Request ID: ${requestId}, Duration: ${duration}ms`);
-      console.error(`Error Details:`, errorDetails);
-      
-      // Parse error for detailed reporting
-      let errorMessage = `OpenAI API error: ${response.status}`;
-      let errorCode = 'unknown';
-      
-      try {
-        const errorObj = JSON.parse(errorText);
-        if (errorObj.error?.message) {
-          errorMessage = errorObj.error.message;
-          errorCode = errorObj.error?.code || errorObj.error?.type || 'api_error';
-        }
-      } catch (e) {
-        errorMessage = errorText || errorMessage;
-      }
-      
-      // Return error response with 200 status for consistent handling
+    if (!openAIResult.success) {
       return new Response(JSON.stringify({
         success: false,
-        error: errorMessage,
-        error_code: errorCode,
-        status_code: response.status,
-        request_id: requestId,
-        duration_ms: duration,
-        details: errorDetails
+        error: openAIResult.error,
+        error_code: openAIResult.retryable ? 'quota_exceeded' : 'api_error',
+        status_code: openAIResult.status || 500,
+        request_id: openAIResult.requestId || 'unknown',
+        attempts: openAIResult.attempt,
+        retryable: openAIResult.retryable || false
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    const aiResponse = await response.json();
-    const requestId = response.headers.get('x-request-id') || response.headers.get('openai-request-id') || 'unknown';
-    const duration = Date.now() - requestStartTime;
-    
-    // Log successful response
-    console.log(`OpenAI Success - Request ID: ${requestId}, Duration: ${duration}ms, Tokens: ${aiResponse.usage?.total_tokens || 'unknown'}`);
+    const aiResponse = openAIResult.data;
     console.log(`Response Preview: ${aiResponse.choices?.[0]?.message?.content?.substring(0, 200)}...`);
     
     // Handle standard Chat Completions API format
     const generatedContent = aiResponse.choices?.[0]?.message?.content;
-
-    console.log('AI Response received:', generatedContent);
 
     // Parse the AI response
     let generatedTerm: GeneratedTerm;
@@ -233,7 +284,14 @@ Format as JSON:
       generatedTerm = JSON.parse(generatedContent);
     } catch (parseError) {
       console.error('Failed to parse AI response:', parseError);
-      throw new Error('Invalid AI response format');
+      return new Response(JSON.stringify({
+        success: false,
+        error: 'Invalid AI response format - could not parse JSON',
+        raw_response: generatedContent?.substring(0, 500) || 'No response content'
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
     }
 
     // Generate slug
@@ -261,12 +319,12 @@ Format as JSON:
       ai_generated: true,
       verification_status: 'ai_enhanced',
       complexity_level: generatedTerm.difficulty_level || 'intermediate',
-        ai_generated_metadata: {
+      ai_generated_metadata: {
         generated_at: new Date().toISOString(),
         model: 'gpt-4.1-2025-04-14',
         api_endpoint: 'chat_completions',
         languages: languages,
-        generation_version: '3.1_world_reference_chat_completions',
+        generation_version: '3.2_world_reference_with_retry',
         etymology: generatedTerm.etymology,
         key_theorists: generatedTerm.key_theorists,
         historical_context: generatedTerm.historical_context,
@@ -278,7 +336,10 @@ Format as JSON:
         contemporary_relevance: generatedTerm.contemporary_relevance,
         academic_sources: generatedTerm.academic_sources,
         executive_summary: generatedTerm.executive_summary,
-        subcategory: generatedTerm.subcategory
+        subcategory: generatedTerm.subcategory,
+        retry_attempts: openAIResult.attempt,
+        generation_duration_ms: openAIResult.duration,
+        request_id: openAIResult.requestId
       },
       last_ai_update: new Date().toISOString()
     };
@@ -294,10 +355,17 @@ Format as JSON:
 
     if (insertError) {
       console.error('Database insertion error:', insertError);
-      throw new Error(`Database error: ${insertError.message}`);
+      return new Response(JSON.stringify({
+        success: false,
+        error: `Database error: ${insertError.message}`,
+        error_code: 'database_error'
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
     }
 
-    console.log(`Successfully generated and saved term: ${insertedTerm.id} for "${term}" (Duration: ${duration}ms, Tokens: ${aiResponse.usage?.total_tokens || 'unknown'})`);
+    console.log(`Successfully generated and saved term: ${insertedTerm.id} for "${term}" (Duration: ${openAIResult.duration}ms, Tokens: ${aiResponse.usage?.total_tokens || 'unknown'}, Attempts: ${openAIResult.attempt})`);
 
     // Log analytics
     await supabase
@@ -308,36 +376,34 @@ Format as JSON:
         metadata: {
           category: generatedTerm.category,
           languages: languages,
-          generation_source: 'ai_lexicon_generator'
+          generation_source: 'ai_lexicon_generator_with_retry',
+          retry_attempts: openAIResult.attempt,
+          generation_duration_ms: openAIResult.duration,
+          request_id: openAIResult.requestId
         }
       });
 
     return new Response(JSON.stringify({
       success: true,
       term: insertedTerm,
-      generated_data: generatedTerm
+      generated_data: generatedTerm,
+      generation_stats: {
+        attempts: openAIResult.attempt,
+        duration_ms: openAIResult.duration,
+        tokens_used: aiResponse.usage?.total_tokens || 0,
+        request_id: openAIResult.requestId
+      }
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
 
   } catch (error) {
-    console.error('Error in ai-lexicon-generator:', error);
-    
-    // Try to parse structured error info
-    let errorInfo;
-    try {
-      errorInfo = JSON.parse(error.message);
-    } catch (e) {
-      errorInfo = { message: error.message };
-    }
+    console.error('Error in ai-lexicon-generator-with-retry:', error);
     
     return new Response(JSON.stringify({ 
       success: false, 
-      error: errorInfo.message || error.message,
-      error_code: errorInfo.code || 'unknown',
-      status_code: errorInfo.status || 500,
-      request_id: errorInfo.request_id || 'unknown',
-      details: errorInfo.full_details || null
+      error: error.message || 'Unknown error occurred',
+      error_code: 'internal_error'
     }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

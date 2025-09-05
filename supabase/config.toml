@@ -26,3 +26,36 @@ verify_jwt = false
 
 [functions.test-openai-connection]
 verify_jwt = false
+
+[functions.ai-lexicon-generator]
+verify_jwt = false
+
+[functions.ai-lexicon-generator-with-retry]
+verify_jwt = false
+
+[functions.world-reference-seeder]
+verify_jwt = false
+
+[functions.auto-translate-term]
+verify_jwt = false
+
+[functions.bulk-import-lexicon]
+verify_jwt = false
+
+[functions.on-demand-lexicon]
+verify_jwt = false
+
+[functions.bulk-lexicon-seeder]
+verify_jwt = false
+
+[functions.send-application-emails]
+verify_jwt = false
+
+[functions.send-teacher-application-emails]
+verify_jwt = false
+
+[functions.send-secure-emails]
+verify_jwt = false
+
+[functions.dynamic-translate]
+verify_jwt = false

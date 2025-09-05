@@ -181,7 +181,7 @@ export default function WorldReferenceLexiconManager() {
 
     try {
       console.log('Generating single term:', customTerm);
-      const response = await supabase.functions.invoke('ai-lexicon-generator', {
+      const response = await supabase.functions.invoke('ai-lexicon-generator-with-retry', {
         body: {
           term: customTerm,
           category: customCategory || "General",
