@@ -176,10 +176,16 @@ serve(async (req) => {
       .single();
 
     if (existing) {
+      console.log(`⚠️ Term "${term}" already exists in database with ID: ${existing.id}`);
       return new Response(JSON.stringify({ 
         success: false, 
-        error: 'Term already exists',
-        existing: existing
+        error: 'Term already exists in database',
+        skip_reason: 'duplicate_term',
+        existing: {
+          id: existing.id,
+          term: existing.term,
+          slug: existing.slug
+        }
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -255,7 +261,7 @@ Format as JSON:
     console.log(`OpenAI Request - Model: gpt-4.1-2025-04-14, Prompt Size: ${promptSize} chars, Term: "${term}"`);
     console.log(`Prompt Preview: ${userPrompt.substring(0, 200)}...`);
 
-    // Call OpenAI with retry logic
+    // Call OpenAI with retry logic - Force JSON response format
     const openAIResult = await callOpenAIWithRetry(openAIApiKey, {
       model: 'gpt-4.1-2025-04-14',
       messages: [
@@ -263,6 +269,7 @@ Format as JSON:
         { role: 'user', content: userPrompt }
       ],
       max_completion_tokens: 3000,
+      response_format: { type: "json_object" },
     });
 
     if (!openAIResult.success) {
@@ -286,20 +293,49 @@ Format as JSON:
     // Handle standard Chat Completions API format
     const generatedContent = aiResponse.choices?.[0]?.message?.content;
 
-    // Parse the AI response
+    // Parse the AI response with enhanced fallback handling
     let generatedTerm: GeneratedTerm;
     try {
+      // First attempt: direct JSON parse
       generatedTerm = JSON.parse(generatedContent);
+      console.log('✅ Successfully parsed AI response as JSON');
     } catch (parseError) {
-      console.error('Failed to parse AI response:', parseError);
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Invalid AI response format - could not parse JSON',
-        raw_response: generatedContent?.substring(0, 500) || 'No response content'
-      }), {
-        status: 200,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+      console.error('❌ Failed to parse AI response as JSON:', parseError);
+      console.error('🔍 Raw AI response for debugging:', generatedContent);
+      
+      // Try to extract JSON from markdown code blocks
+      let cleanedContent = generatedContent;
+      const jsonBlockMatch = generatedContent?.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
+      if (jsonBlockMatch) {
+        cleanedContent = jsonBlockMatch[1];
+        console.log('🔧 Attempting to parse extracted JSON from code block');
+        try {
+          generatedTerm = JSON.parse(cleanedContent);
+          console.log('✅ Successfully parsed JSON from code block');
+        } catch (secondParseError) {
+          console.error('❌ Failed to parse extracted JSON:', secondParseError);
+          return new Response(JSON.stringify({
+            success: false,
+            error: 'Invalid AI response format - could not parse JSON even after extraction',
+            raw_response: generatedContent?.substring(0, 1000) || 'No response content',
+            extraction_attempt: cleanedContent?.substring(0, 500) || 'No extracted content',
+            parse_errors: [parseError.message, secondParseError.message]
+          }), {
+            status: 200,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          });
+        }
+      } else {
+        return new Response(JSON.stringify({
+          success: false,
+          error: 'Invalid AI response format - could not parse JSON and no code block found',
+          raw_response: generatedContent?.substring(0, 1000) || 'No response content',
+          parse_error: parseError.message
+        }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
     }
 
     // Generate slug

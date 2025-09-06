@@ -214,28 +214,78 @@ serve(async (req) => {
                 console.log(`✅ Generated: ${term} (ID: ${generationResult.term?.id})`);
                 success = true;
               } else {
-                throw new Error(generationResult?.error || 'Unknown generation error');
+                // Categorize different types of failures for better reporting
+                const errorMessage = generationResult?.error || 'Unknown generation error';
+                const skipReason = generationResult?.skip_reason;
+                
+                if (skipReason === 'duplicate_term') {
+                  // This is a duplicate, not an error - just skip it
+                  results.push({
+                    term: term,
+                    category: category,
+                    status: 'skipped',
+                    reason: 'duplicate_term',
+                    details: `Term already exists in database with ID: ${generationResult.existing?.id}`,
+                    attempt_count: retryCount + 1
+                  });
+                  console.log(`⏭️  Skipped duplicate: ${term} (existing ID: ${generationResult.existing?.id})`);
+                  success = true; // Don't retry duplicates
+                } else if (errorMessage.includes('could not parse JSON')) {
+                  // JSON parsing error - these are worth retrying
+                  throw new Error(`JSON_PARSE_ERROR: ${errorMessage}`);
+                } else if (errorMessage.includes('quota') || errorMessage.includes('rate_limit')) {
+                  // API quota/rate limit errors - definitely retry
+                  throw new Error(`API_QUOTA_ERROR: ${errorMessage}`);
+                } else {
+                  // Other errors
+                  throw new Error(errorMessage);
+                }
               }
 
             } catch (error) {
               retryCount++;
-              const isRetryableError = error.message?.includes('429') || 
-                                       error.message?.includes('500') || 
-                                       error.message?.includes('502') || 
-                                       error.message?.includes('503') || 
-                                       error.message?.includes('504');
+              const errorMessage = error.message || 'Unknown error';
+              
+              // Enhanced error categorization
+              const isQuotaError = errorMessage.includes('API_QUOTA_ERROR') || 
+                                  errorMessage.includes('429') || 
+                                  errorMessage.includes('quota') ||
+                                  errorMessage.includes('rate_limit');
+              
+              const isJSONParseError = errorMessage.includes('JSON_PARSE_ERROR') ||
+                                      errorMessage.includes('could not parse JSON');
+              
+              const isServerError = errorMessage.includes('500') || 
+                                   errorMessage.includes('502') || 
+                                   errorMessage.includes('503') || 
+                                   errorMessage.includes('504');
+              
+              const isRetryableError = isQuotaError || isJSONParseError || isServerError;
               
               if (retryCount <= maxRetries && isRetryableError) {
-                // More aggressive backoff for 429 errors
-                const baseDelay = error.message?.includes('429') ? 8000 : 2000; // 8s for 429s, 2s for others
+                // Adaptive backoff based on error type
+                let baseDelay = 2000; // Default 2s
+                if (isQuotaError) baseDelay = 8000; // 8s for quota errors
+                if (isJSONParseError) baseDelay = 4000; // 4s for JSON errors
+                if (isServerError) baseDelay = 6000; // 6s for server errors
+                
                 const backoffTime = Math.min(baseDelay * Math.pow(2, retryCount - 1), 120000); // Max 2 minutes
-                console.log(`⚠️  Enhanced retry for ${term} in ${backoffTime/1000}s (attempt ${retryCount}/${maxRetries}) - ${error.message}`);
+                
+                let errorType = 'Unknown';
+                if (isQuotaError) errorType = 'Quota/Rate Limit';
+                if (isJSONParseError) errorType = 'JSON Parse Error';
+                if (isServerError) errorType = 'Server Error';
+                
+                console.log(`⚠️  Retrying ${term} in ${backoffTime/1000}s (attempt ${retryCount}/${maxRetries}) - ${errorType}: ${errorMessage}`);
                 await new Promise(resolve => setTimeout(resolve, backoffTime));
               } else {
                 totalErrors++;
                 const errorInfo = {
-                  message: error.message || 'Unknown error',
+                  message: errorMessage,
                   type: error.name || 'UnknownError',
+                  category: isQuotaError ? 'quota_error' : 
+                           isJSONParseError ? 'json_parse_error' : 
+                           isServerError ? 'server_error' : 'other_error',
                   retry_count: retryCount,
                   is_retryable: isRetryableError
                 };
@@ -245,6 +295,7 @@ serve(async (req) => {
                   category: category,
                   status: 'error',
                   error: errorInfo.message,
+                  error_category: errorInfo.category,
                   error_details: errorInfo,
                   final_attempt: retryCount
                 });
@@ -271,19 +322,37 @@ serve(async (req) => {
       await new Promise(resolve => setTimeout(resolve, 2000));
     }
 
-    console.log(`World Reference Seeding Complete! Generated: ${totalGenerated}, Errors: ${totalErrors}`);
+    console.log(`World Reference Seeding Complete!`);
+    console.log(`📊 Results Summary:`);
+    console.log(`   ✅ Generated: ${totalGenerated}`);
+    console.log(`   ⏭️  Skipped (duplicates): ${results.filter(r => r.status === 'skipped').length}`);
+    console.log(`   ❌ Errors: ${totalErrors}`);
+    
+    // Categorize errors for better reporting
+    const errorsByCategory = results.filter(r => r.status === 'error').reduce((acc, result) => {
+      const category = result.error_category || 'other_error';
+      acc[category] = (acc[category] || 0) + 1;
+      return acc;
+    }, {});
+    
+    if (Object.keys(errorsByCategory).length > 0) {
+      console.log(`   📋 Error breakdown:`, errorsByCategory);
+    }
 
     return new Response(JSON.stringify({
       success: true,
       message: `World Reference Seeding Complete!`,
       summary: {
         total_generated: totalGenerated,
+        total_skipped: results.filter(r => r.status === 'skipped').length,
         total_errors: totalErrors,
+        error_breakdown: errorsByCategory,
         categories_processed: categories.length,
         processing_time: new Date().toISOString()
       },
       results: results,
-      sample_terms: results.filter(r => r.status === 'success').slice(0, 5)
+      sample_terms: results.filter(r => r.status === 'success').slice(0, 5),
+      skipped_duplicates: results.filter(r => r.status === 'skipped').slice(0, 3)
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
