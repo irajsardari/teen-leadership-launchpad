@@ -136,6 +136,54 @@ export type Database = {
         }
         Relationships: []
       }
+      bulk_operations: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          created_by: string | null
+          error_count: number | null
+          error_log: Json | null
+          file_name: string | null
+          id: string
+          metadata: Json | null
+          operation_type: string
+          processed_records: number | null
+          status: string | null
+          success_count: number | null
+          total_records: number | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          error_count?: number | null
+          error_log?: Json | null
+          file_name?: string | null
+          id?: string
+          metadata?: Json | null
+          operation_type: string
+          processed_records?: number | null
+          status?: string | null
+          success_count?: number | null
+          total_records?: number | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          error_count?: number | null
+          error_log?: Json | null
+          file_name?: string | null
+          id?: string
+          metadata?: Json | null
+          operation_type?: string
+          processed_records?: number | null
+          status?: string | null
+          success_count?: number | null
+          total_records?: number | null
+        }
+        Relationships: []
+      }
       challengers: {
         Row: {
           age: number | null
@@ -438,6 +486,7 @@ export type Database = {
           age_appropriateness: string | null
           ai_generated: boolean | null
           ai_generated_metadata: Json | null
+          approved_translations: Json | null
           category: string | null
           complexity_level: string | null
           context: string | null
@@ -457,6 +506,7 @@ export type Database = {
           id: string
           last_ai_update: string | null
           long_def: string | null
+          pending_translations: Json | null
           phonetic_ar: string | null
           phonetic_ar_new: string | null
           phonetic_en: string | null
@@ -479,6 +529,7 @@ export type Database = {
           age_appropriateness?: string | null
           ai_generated?: boolean | null
           ai_generated_metadata?: Json | null
+          approved_translations?: Json | null
           category?: string | null
           complexity_level?: string | null
           context?: string | null
@@ -498,6 +549,7 @@ export type Database = {
           id?: string
           last_ai_update?: string | null
           long_def?: string | null
+          pending_translations?: Json | null
           phonetic_ar?: string | null
           phonetic_ar_new?: string | null
           phonetic_en?: string | null
@@ -520,6 +572,7 @@ export type Database = {
           age_appropriateness?: string | null
           ai_generated?: boolean | null
           ai_generated_metadata?: Json | null
+          approved_translations?: Json | null
           category?: string | null
           complexity_level?: string | null
           context?: string | null
@@ -539,6 +592,7 @@ export type Database = {
           id?: string
           last_ai_update?: string | null
           long_def?: string | null
+          pending_translations?: Json | null
           phonetic_ar?: string | null
           phonetic_ar_new?: string | null
           phonetic_en?: string | null
@@ -656,6 +710,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      lexicon_analytics: {
+        Row: {
+          created_at: string | null
+          event_type: string
+          id: string
+          ip_address: unknown | null
+          language: string | null
+          metadata: Json | null
+          search_query: string | null
+          term_id: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_type: string
+          id?: string
+          ip_address?: unknown | null
+          language?: string | null
+          metadata?: Json | null
+          search_query?: string | null
+          term_id?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_type?: string
+          id?: string
+          ip_address?: unknown | null
+          language?: string | null
+          metadata?: Json | null
+          search_query?: string | null
+          term_id?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
       }
       lexicon_categories: {
         Row: {
@@ -1603,6 +1696,45 @@ export type Database = {
           },
         ]
       }
+      term_feedback: {
+        Row: {
+          admin_notes: string | null
+          created_at: string | null
+          feedback_type: string
+          id: string
+          language: string | null
+          message: string
+          status: string | null
+          term_id: string
+          updated_at: string | null
+          user_email: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string | null
+          feedback_type: string
+          id?: string
+          language?: string | null
+          message: string
+          status?: string | null
+          term_id: string
+          updated_at?: string | null
+          user_email?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string | null
+          feedback_type?: string
+          id?: string
+          language?: string | null
+          message?: string
+          status?: string | null
+          term_id?: string
+          updated_at?: string | null
+          user_email?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -1871,6 +2003,10 @@ export type Database = {
         Args: { p_action?: string; p_file_path: string }
         Returns: undefined
       }
+      log_search_query: {
+        Args: { p_language?: string; p_query: string; p_results_count?: number }
+        Returns: undefined
+      }
       log_sensitive_operation: {
         Args: {
           p_action: string
@@ -1881,6 +2017,10 @@ export type Database = {
       }
       log_teacher_application_select_access: {
         Args: { application_ids: string[] }
+        Returns: undefined
+      }
+      log_term_view: {
+        Args: { p_language?: string; p_term_id: string }
         Returns: undefined
       }
       maximum_security_check: {
