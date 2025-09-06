@@ -34,6 +34,7 @@ import AdminSecurityPage from "./pages/AdminSecurityPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import DictionaryPage from "./pages/DictionaryPage";
 import PublicLexiconPage from "./pages/PublicLexiconPage";
+import LexiconNotFound from "./pages/LexiconNotFound";
 import AdminDictionaryPage from "./pages/AdminDictionaryPage";
 import ScrollManager from "./components/ScrollManager";
 import { SessionTimeoutProvider } from "./components/SessionTimeoutProvider";
@@ -83,8 +84,9 @@ const App = () => (
                 <Route path="/admin/security" element={<AdminSecurityPage />} />
                 <Route path="/dictionary" element={<DictionaryPage />} />
                 <Route path="/dictionary/:slug" element={<DictionaryPage />} />
-                <Route path="/lexicon" element={<PublicLexiconPage />} />
-                <Route path="/lexicon/:slug" element={<PublicLexiconPage />} />
+            <Route path="/lexicon" element={<PublicLexiconPage />} />
+            <Route path="/lexicon/:slug" element={<PublicLexiconPage />} />
+            <Route path="/lexicon-not-found/:slug" element={<LexiconNotFound />} />
                 <Route path="/admin/dictionary" element={<AdminDictionaryPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

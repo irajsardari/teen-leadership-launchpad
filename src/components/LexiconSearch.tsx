@@ -91,7 +91,7 @@ export const LexiconSearch: React.FC<LexiconSearchProps> = ({
   };
 
   const handleTermSelect = (term: LexiconTerm) => {
-    navigate(`/dictionary/${term.slug}`);
+    navigate(`/lexicon/${term.slug}`);
     setSearchQuery('');
     setShowAutocomplete(false);
     setAutocompleteOpen(false);

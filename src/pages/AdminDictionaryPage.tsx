@@ -15,6 +15,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 import LexiconBulkImport from '@/components/admin/LexiconBulkImport';
 import WorldReferenceLexiconManager from '@/components/admin/WorldReferenceLexiconManager';
 import BatchTranslationManager from '@/components/admin/BatchTranslationManager';
+import { TranslationApprovalManager } from '@/components/admin/TranslationApprovalManager';
 import { OpenAITestComponent } from '@/components/admin/OpenAITestComponent';
 import { AdminOpenAITestFix } from '@/components/admin/AdminOpenAITestFix';
 
