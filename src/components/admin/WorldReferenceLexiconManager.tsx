@@ -93,7 +93,12 @@ export default function WorldReferenceLexiconManager() {
   };
 
   const handleWorldReferenceSeeding = async () => {
+    console.log('🚀 Button clicked! Handler executing...');
+    console.log('Selected categories before check:', selectedCategories);
+    console.log('Selected categories length:', selectedCategories.length);
+    
     if (selectedCategories.length === 0) {
+      console.log('❌ No categories selected, showing error toast');
       toast({
         title: "Selection Required",
         description: "Please select at least one category to seed.",
@@ -102,14 +107,24 @@ export default function WorldReferenceLexiconManager() {
       return;
     }
 
+    console.log('✅ Categories selected, proceeding with seeding');
     setIsGenerating(true);
     setProgress(0);
     setGenerationLog([]);
 
     try {
-      console.log('Starting world reference seeding...');
+      console.log('🔄 Starting world reference seeding...');
       console.log('Selected categories:', selectedCategories);
       console.log('Max terms per category:', maxTermsPerCategory);
+      
+      // Test Supabase connection first
+      console.log('🔍 Testing Supabase connection...');
+      const { data: testData, error: testError } = await supabase.from('dictionary').select('count').limit(1);
+      console.log('Supabase test result:', { testData, testError });
+      
+      if (testError) {
+        throw new Error(`Supabase connection failed: ${testError.message}`);
+      }
       
       const response = await supabase.functions.invoke('world-reference-seeder', {
         body: {
@@ -354,10 +369,17 @@ export default function WorldReferenceLexiconManager() {
                         id={category}
                         checked={selectedCategories.includes(category)}
                         onChange={(e) => {
+                          console.log(`📋 Checkbox clicked for ${category}:`, e.target.checked);
+                          console.log('Current selectedCategories before change:', selectedCategories);
+                          
                           if (e.target.checked) {
-                            setSelectedCategories([...selectedCategories, category]);
+                            const newCategories = [...selectedCategories, category];
+                            console.log('Adding category, new array:', newCategories);
+                            setSelectedCategories(newCategories);
                           } else {
-                            setSelectedCategories(selectedCategories.filter(c => c !== category));
+                            const newCategories = selectedCategories.filter(c => c !== category);
+                            console.log('Removing category, new array:', newCategories);
+                            setSelectedCategories(newCategories);
                           }
                         }}
                         className="rounded border-gray-300"
@@ -414,7 +436,12 @@ export default function WorldReferenceLexiconManager() {
               )}
 
               <Button 
-                onClick={handleWorldReferenceSeeding}
+                onClick={() => {
+                  console.log('🔥 BUTTON CLICKED! About to call handleWorldReferenceSeeding');
+                  console.log('Current selectedCategories:', selectedCategories);
+                  console.log('Button disabled state:', isGenerating || selectedCategories.length === 0);
+                  handleWorldReferenceSeeding();
+                }}
                 disabled={isGenerating || selectedCategories.length === 0}
                 className="w-full"
                 size="lg"
