@@ -18,6 +18,9 @@ import BatchTranslationManager from '@/components/admin/BatchTranslationManager'
 import { TranslationApprovalManager } from '@/components/admin/TranslationApprovalManager';
 import { OpenAITestComponent } from '@/components/admin/OpenAITestComponent';
 import { AdminOpenAITestFix } from '@/components/admin/AdminOpenAITestFix';
+import LexiconAnalyticsDashboard from '@/components/admin/LexiconAnalyticsDashboard';
+import BulkOperationsManager from '@/components/admin/BulkOperationsManager';
+import FeedbackManager from '@/components/admin/FeedbackManager';
 
 interface DictionaryTerm {
   id: string;
@@ -207,7 +210,7 @@ const AdminDictionaryPage: React.FC = () => {
           </div>
 
           <Tabs defaultValue="ai-lexicon" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-6">
+            <TabsList className="grid w-full grid-cols-7">
               <TabsTrigger value="ai-lexicon" className="flex items-center gap-2">
                 <Brain className="w-4 h-4" />
                 AI Lexicon
@@ -217,7 +220,8 @@ const AdminDictionaryPage: React.FC = () => {
                 Needs Review ({terms.filter(t => t.status === 'needs_review').length})
               </TabsTrigger>
               <TabsTrigger value="translations">Translations</TabsTrigger>
-              <TabsTrigger value="bulk-import">Bulk Import</TabsTrigger>
+              <TabsTrigger value="bulk-operations">Bulk Ops</TabsTrigger>
+              <TabsTrigger value="feedback">Feedback</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
 
@@ -591,8 +595,16 @@ const AdminDictionaryPage: React.FC = () => {
               </Card>
             </TabsContent>
 
-            <TabsContent value="bulk-import" className="space-y-6">
-              <LexiconBulkImport />
+            <TabsContent value="bulk-operations" className="space-y-6">
+              <BulkOperationsManager />
+            </TabsContent>
+
+            <TabsContent value="feedback" className="space-y-6">
+              <FeedbackManager />
+            </TabsContent>
+
+            <TabsContent value="analytics" className="space-y-6">
+              <LexiconAnalyticsDashboard />
             </TabsContent>
           </Tabs>
 

@@ -15,10 +15,14 @@ import {
   Users,
   Lightbulb,
   Clock,
-  ExternalLink
+  ExternalLink,
+  MessageSquare
 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
-import { Lang, supportedLanguages, getTextDirection, getRTLClasses } from '@/utils/language';
+import { useLanguage } from '@/hooks/useLanguage';
+import { supportedLanguages } from '@/utils/language';
+import TermFeedbackForm from '@/components/TermFeedbackForm';
+import { Lang, supportedLanguages as langConfig, getTextDirection, getRTLClasses } from '@/utils/language';
 import LanguageSelector from '@/components/lexicon/LanguageSelector';
 import { SEOHead } from './SEOHead';
 
@@ -216,6 +220,15 @@ export const TermDetailView: React.FC<TermDetailViewProps> = ({
                     >
                       <Share2 className="w-4 h-4" />
                     </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setShowFeedbackForm(true)}
+                      className="h-8 w-8 p-0 hover:bg-primary/10"
+                      title="Suggest an edit"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                    </Button>
                   </div>
                   
                   <div className="flex flex-wrap gap-3">
@@ -373,6 +386,16 @@ export const TermDetailView: React.FC<TermDetailViewProps> = ({
           </Card>
         </div>
       </div>
+
+      {/* Feedback Form */}
+      {showFeedbackForm && (
+        <TermFeedbackForm
+          termId={term.id}
+          termName={displayTerm}
+          language={currentLang}
+          onClose={() => setShowFeedbackForm(false)}
+        />
+      )}
     </div>
   );
 };
