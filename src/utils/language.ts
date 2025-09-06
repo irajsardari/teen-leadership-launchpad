@@ -1,4 +1,4 @@
-export type Lang = 'en' | 'ar' | 'fa';
+export type Lang = 'en' | 'ar' | 'fa' | 'zh' | 'hi';
 
 export interface TranslationData {
   term: string;
@@ -36,6 +36,20 @@ export const supportedLanguages: Record<Lang, LanguageConfig> = {
     nativeName: 'فارسی',
     direction: 'rtl',
     flag: '🇮🇷'
+  },
+  zh: {
+    code: 'zh',
+    name: 'Chinese',
+    nativeName: '中文',
+    direction: 'ltr',
+    flag: '🇨🇳'
+  },
+  hi: {
+    code: 'hi',
+    name: 'Hindi',
+    nativeName: 'हिन्दी',
+    direction: 'ltr',
+    flag: '🇮🇳'
   }
 };
 
@@ -51,6 +65,8 @@ export function detectBrowserLanguage(): Lang {
   
   if (browserLang.startsWith('ar')) return 'ar';
   if (browserLang.startsWith('fa') || browserLang.startsWith('pe')) return 'fa';
+  if (browserLang.startsWith('zh')) return 'zh';
+  if (browserLang.startsWith('hi')) return 'hi';
   
   return 'en';
 }
@@ -120,7 +136,9 @@ export function getLanguageForTranslation(lang: Lang): string {
   const mapping = {
     en: 'English',
     ar: 'Arabic',
-    fa: 'Persian'
+    fa: 'Persian',
+    zh: 'Chinese',
+    hi: 'Hindi'
   };
   
   return mapping[lang] || 'English';
