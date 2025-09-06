@@ -108,6 +108,9 @@ export default function WorldReferenceLexiconManager() {
 
     try {
       console.log('Starting world reference seeding...');
+      console.log('Selected categories:', selectedCategories);
+      console.log('Max terms per category:', maxTermsPerCategory);
+      
       const response = await supabase.functions.invoke('world-reference-seeder', {
         body: {
           categories: selectedCategories,
@@ -117,6 +120,8 @@ export default function WorldReferenceLexiconManager() {
       });
 
       console.log('Seeder response:', response);
+      console.log('Response data:', response.data);
+      console.log('Response error:', response.error);
 
       if (response.error) {
         throw new Error(response.error.message || 'Edge function returned an error');
