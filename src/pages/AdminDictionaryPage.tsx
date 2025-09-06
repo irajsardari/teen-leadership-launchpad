@@ -14,6 +14,7 @@ import { AuthGuard } from '@/components/AuthGuard';
 import { useTranslation } from '@/hooks/useTranslation';
 import LexiconBulkImport from '@/components/admin/LexiconBulkImport';
 import WorldReferenceLexiconManager from '@/components/admin/WorldReferenceLexiconManager';
+import BatchTranslationManager from '@/components/admin/BatchTranslationManager';
 import { OpenAITestComponent } from '@/components/admin/OpenAITestComponent';
 import { AdminOpenAITestFix } from '@/components/admin/AdminOpenAITestFix';
 
@@ -422,6 +423,8 @@ const AdminDictionaryPage: React.FC = () => {
             </TabsContent>
 
             <TabsContent value="translations" className="space-y-6">
+              <BatchTranslationManager terms={terms} onRefresh={fetchTerms} />
+              
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -429,7 +432,7 @@ const AdminDictionaryPage: React.FC = () => {
                     Translation Management
                   </CardTitle>
                   <p className="text-muted-foreground">
-                    Automatically translate dictionary terms to Arabic, Persian, Spanish, French, German, Turkish, and Urdu.
+                    Automatically translate dictionary terms to Arabic, Persian, Chinese, and Hindi.
                   </p>
                 </CardHeader>
                 <CardContent className="space-y-6">

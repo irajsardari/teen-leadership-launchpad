@@ -153,11 +153,24 @@ const PublicLexiconPage: React.FC = () => {
 
     if (query) {
       const searchTerm = query.toLowerCase();
-      filtered = filtered.filter(term => 
-        term.term.toLowerCase().includes(searchTerm) ||
-        term.short_def?.toLowerCase().includes(searchTerm) ||
-        term.discipline_tags?.some(tag => tag.toLowerCase().includes(searchTerm))
-      );
+      filtered = filtered.filter(term => {
+        // Search in English term and definition
+        const englishMatch = term.term.toLowerCase().includes(searchTerm) ||
+                           term.short_def?.toLowerCase().includes(searchTerm) ||
+                           term.long_def?.toLowerCase().includes(searchTerm) ||
+                           term.discipline_tags?.some(tag => tag.toLowerCase().includes(searchTerm));
+        
+        // Search in translations if they exist
+        const translationMatch = term.translations && Object.values(term.translations).some((translation: any) => {
+          if (!translation) return false;
+          return (translation.term?.toLowerCase().includes(searchTerm) ||
+                  translation.shortDef?.toLowerCase().includes(searchTerm) ||
+                  translation.short_def?.toLowerCase().includes(searchTerm) ||
+                  translation.definition?.toLowerCase().includes(searchTerm));
+        });
+        
+        return englishMatch || translationMatch;
+      });
     }
 
     // Apply other filters
@@ -202,20 +215,15 @@ const PublicLexiconPage: React.FC = () => {
       return;
     }
     
-    // For supported translation languages, attempt translation
-    if (lang === 'ar' || lang === 'fa') {
-      try {
-        const result = await translate(term.slug, lang);
-        if (result) {
-          setLiveTranslation(result);
-        } else {
-          setShowTranslationNote(true);
-        }
-      } catch (error) {
+    // Attempt translation for all supported languages
+    try {
+      const result = await translate(term.slug, lang);
+      if (result) {
+        setLiveTranslation(result);
+      } else {
         setShowTranslationNote(true);
       }
-    } else {
-      // For Chinese and Hindi, show note that translation is not available yet
+    } catch (error) {
       setShowTranslationNote(true);
     }
   };
@@ -232,7 +240,7 @@ const PublicLexiconPage: React.FC = () => {
     }
 
     // Try live translation first
-    if (liveTranslation && (currentLang === 'ar' || currentLang === 'fa')) {
+    if (liveTranslation) {
       return { 
         term: liveTranslation.term, 
         definition: liveTranslation.shortDef,
@@ -241,7 +249,7 @@ const PublicLexiconPage: React.FC = () => {
     }
 
     // Try cached translations
-    if ((currentLang === 'ar' || currentLang === 'fa') && term.translations?.[currentLang]) {
+    if (term.translations?.[currentLang]) {
       const cached = term.translations[currentLang];
       return { 
         term: cached.term || cached.translated_term, 

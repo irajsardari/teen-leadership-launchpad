@@ -12,7 +12,7 @@ interface UseLanguageReturn {
   currentLang: Lang;
   setLang: (lang: Lang) => void;
   isRTL: boolean;
-  translate: (slug: string, lang: 'ar' | 'fa') => Promise<TranslationData | null>;
+  translate: (slug: string, lang: Lang) => Promise<TranslationData | null>;
   isTranslating: boolean;
 }
 
@@ -31,7 +31,9 @@ export const useLanguage = (): UseLanguageReturn => {
     setCurrentLang(lang);
   }, []);
 
-  const translate = useCallback(async (slug: string, lang: 'ar' | 'fa'): Promise<TranslationData | null> => {
+  const translate = useCallback(async (slug: string, lang: Lang): Promise<TranslationData | null> => {
+    if (lang === 'en') return null; // No translation needed for English
+    
     setIsTranslating(true);
     
     try {

@@ -1,6 +1,6 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.0.0';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.7.1';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -9,12 +9,14 @@ const corsHeaders = {
 
 interface TranslateRequest {
   slug: string;
-  lang: 'ar' | 'fa';
+  lang: 'ar' | 'fa' | 'zh' | 'hi';
 }
 
 const languageNames = {
   ar: 'Arabic',
-  fa: 'Persian (Farsi)'
+  fa: 'Persian (Farsi)',
+  zh: 'Chinese (Simplified)',
+  hi: 'Hindi'
 };
 
 const languagePrompts = {
@@ -22,6 +24,12 @@ const languagePrompts = {
 Use clear, educational language appropriate for 13-18 year olds.
 Focus on leadership, psychology, and personal development terminology.`,
   fa: `Translate to Persian/Farsi (فارسی) for teenagers and young adults.
+Use clear, educational language appropriate for 13-18 year olds.
+Focus on leadership, psychology, and personal development terminology.`,
+  zh: `Translate to Simplified Chinese (简体中文) for teenagers and young adults.
+Use clear, educational language appropriate for 13-18 year olds.
+Focus on leadership, psychology, and personal development terminology.`,
+  hi: `Translate to Hindi (हिन्दी) for teenagers and young adults.
 Use clear, educational language appropriate for 13-18 year olds.
 Focus on leadership, psychology, and personal development terminology.`
 };
@@ -48,210 +56,171 @@ serve(async (req) => {
 
     console.log(`Translation request: ${slug} -> ${lang}`);
 
-    // Get the term from database
-    const { data: term, error: termError } = await supabase
+    // First check if we already have a translation cached
+    const { data: existingTerm, error: fetchError } = await supabase
       .from('dictionary')
       .select('*')
       .eq('slug', slug)
       .eq('status', 'published')
       .single();
 
-    if (termError || !term) {
-      return new Response(JSON.stringify({ error: 'Term not found' }), {
+    if (fetchError) {
+      console.error('Error fetching term:', fetchError);
+      return new Response(JSON.stringify({ 
+        error: 'Term not found',
+        fallback: true 
+      }), {
         status: 404,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    // Check if translation already exists and is recent (less than 180 days old)
-    const existingTranslations = term.translations || {};
-    const existingTranslation = existingTranslations[lang];
-    
-    if (existingTranslation && existingTranslation.updatedAt) {
-      const translationAge = Date.now() - new Date(existingTranslation.updatedAt).getTime();
-      const maxAge = 180 * 24 * 60 * 60 * 1000; // 180 days in milliseconds
+    const term = existingTerm;
+
+    // Check if translation already exists
+    if (term.translations && term.translations[lang]) {
+      console.log(`Found cached translation for ${slug} -> ${lang}`);
+      const cached = term.translations[lang];
       
-      if (translationAge < maxAge) {
-        console.log(`Using cached translation for ${slug} -> ${lang}`);
-        return new Response(JSON.stringify({
-          term: existingTranslation.term,
-          shortDef: existingTranslation.shortDef,
-          source: existingTranslation.source || 'ai',
-          cached: true
-        }), {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        });
-      }
-    }
-
-    // Generate new translation
-    console.log(`Generating new translation for ${slug} -> ${lang}`);
-    
-    const text = `${term.term}\n---\n${term.short_def || term.long_def || 'Educational term in teenager management and leadership.'}`;
-    
-    const prompt = `${languagePrompts[lang]}
-
-Translate the following TERM and its SHORT DEFINITION for teenagers.
-Keep the definition clear, neutral, and 1–2 sentences maximum.
-Ensure the terminology is appropriate for educational contexts.
-
-Return ONLY valid JSON in this exact format:
-{"term":"translated term","shortDef":"translated definition"}
-
-Text to translate:
-${text}`;
-
-    // Retry logic for rate limiting
-    let response;
-    let retries = 3;
-    
-    while (retries > 0) {
-      try {
-        response = await fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${openaiApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: 'gpt-5-2025-08-07', // Use latest GPT-5 model for better translations
-            messages: [
-              {
-                role: 'system',
-                content: 'You are an expert educational translator specializing in teenager leadership and psychology terms. Always return valid JSON only.'
-              },
-              {
-                role: 'user',
-                content: prompt
-              }
-            ],
-            max_completion_tokens: 200,
-          }),
-        });
-
-        if (response.ok) {
-          break; // Success, exit retry loop
-        }
-        
-        if (response.status === 429) {
-          // Rate limit - wait and retry
-          retries--;
-          if (retries > 0) {
-            const waitTime = Math.pow(2, 3 - retries) * 1000; // Exponential backoff
-            console.log(`Rate limited, retrying in ${waitTime}ms. Retries left: ${retries}`);
-            await new Promise(resolve => setTimeout(resolve, waitTime));
-            continue;
-          }
-        }
-        
-        throw new Error(`OpenAI API error: ${response.status}`);
-      } catch (error) {
-        if (retries === 1) {
-          throw error; // Last retry failed
-        }
-        retries--;
-        const waitTime = Math.pow(2, 3 - retries) * 1000;
-        console.log(`Request failed, retrying in ${waitTime}ms. Retries left: ${retries}`);
-        await new Promise(resolve => setTimeout(resolve, waitTime));
-      }
-    }
-
-    const data = await response.json();
-    console.log('OpenAI API response:', JSON.stringify(data, null, 2));
-    
-    if (!data || !data.choices || !Array.isArray(data.choices) || data.choices.length === 0) {
-      console.error('Invalid OpenAI response structure:', data);
-      throw new Error('Invalid API response structure received');
-    }
-    
-    const content = data.choices[0]?.message?.content?.trim();
-    
-    if (!content) {
-      console.error('No content in OpenAI response:', data.choices[0]);
-      throw new Error('No translation content received');
-    }
-
-    let translation;
-    try {
-      translation = JSON.parse(content);
-      if (!translation.term || !translation.shortDef) {
-        throw new Error('Translation missing required fields');
-      }
-    } catch (parseError) {
-      console.error('Failed to parse translation response:', content);
-      throw new Error('Invalid translation format received');
-    }
-
-    // Update the term with new translation
-    const updatedTranslations = {
-      ...existingTranslations,
-      [lang]: {
-        term: translation.term,
-        shortDef: translation.shortDef,
-        updatedAt: new Date().toISOString(),
-        source: 'ai'
-      }
-    };
-
-    const { error: updateError } = await supabase
-      .from('dictionary')
-      .update({ 
-        translations: updatedTranslations,
-        translation_updated_at: new Date().toISOString()
-      })
-      .eq('id', term.id);
-
-    if (updateError) {
-      console.error('Failed to cache translation:', updateError);
-      // Still return the translation even if caching failed
-    }
-
-    // Log analytics
-    await supabase.from('dictionary_analytics').insert({
-      term_id: term.id,
-      event_type: 'translation_generated',
-      metadata: {
-        language: lang,
-        source: 'ai',
-        cached: false
-      }
-    });
-
-    console.log(`Translation complete: ${slug} -> ${lang}`);
-
-    return new Response(JSON.stringify({
-      term: translation.term,
-      shortDef: translation.shortDef,
-      source: 'ai',
-      cached: false
-    }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
-
-  } catch (error) {
-    console.error('Error in translate-term function:', error);
-    console.error('Error details:', JSON.stringify(error, null, 2));
-    
-    // For rate limiting, return specific error code
-    if (error.message?.includes('429') || error.message?.includes('rate limit')) {
-      console.log('Rate limit hit, returning 429');
-      return new Response(JSON.stringify({ 
-        error: 'Rate limit exceeded',
-        message: 'Translation service temporarily unavailable due to rate limits',
-        code: 'RATE_LIMIT'
+      return new Response(JSON.stringify({
+        term: cached.term || cached.translated_term,
+        shortDef: cached.shortDef || cached.short_def,
+        source: cached.source || 'ai',
+        updatedAt: cached.updatedAt || cached.updated_at
       }), {
-        status: 429,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
-    
-    // Return 502 for client fallback as specified
+
+    // Generate new translation using OpenAI
+    console.log(`Generating new translation for ${term.term} -> ${lang}`);
+
+    try {
+      const translationPrompt = `${languagePrompts[lang]}
+
+Term: "${term.term}"
+Definition: "${term.long_def || term.short_def}"
+
+Respond with JSON containing:
+- "term": the translated term
+- "shortDef": a concise translated definition (max 150 characters)
+
+Make sure the translation is academically accurate and appropriate for teenagers.`;
+
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'gpt-5-mini-2025-08-07',
+          messages: [
+            {
+              role: 'system',
+              content: `You are an expert translator specializing in educational content for teenagers and young adults. Always provide translations that are culturally appropriate and educationally sound. Always respond with valid JSON only.`
+            },
+            {
+              role: 'user',
+              content: translationPrompt
+            }
+          ],
+          response_format: { type: "json_object" },
+          max_completion_tokens: 600
+        }),
+      });
+
+      if (!response.ok) {
+        console.error(`OpenAI API error: ${response.status} ${response.statusText}`);
+        return new Response(JSON.stringify({ 
+          error: 'Translation service error',
+          fallback: true 
+        }), {
+          status: 503,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      const data = await response.json();
+      let translationResult;
+
+      try {
+        translationResult = JSON.parse(data.choices[0].message.content);
+      } catch (parseError) {
+        console.error('Failed to parse AI response:', data.choices[0].message.content);
+        return new Response(JSON.stringify({ 
+          error: 'Invalid translation format',
+          fallback: true 
+        }), {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      if (!translationResult.term || !translationResult.shortDef) {
+        console.error('Incomplete translation:', translationResult);
+        return new Response(JSON.stringify({ 
+          error: 'Incomplete translation',
+          fallback: true 
+        }), {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      // Save the translation to the database
+      const updatedTranslations = {
+        ...term.translations,
+        [lang]: {
+          term: translationResult.term,
+          shortDef: translationResult.shortDef,
+          source: 'ai',
+          updatedAt: new Date().toISOString()
+        }
+      };
+
+      const { error: updateError } = await supabase
+        .from('dictionary')
+        .update({
+          translations: updatedTranslations,
+          translation_updated_at: new Date().toISOString()
+        })
+        .eq('id', term.id);
+
+      if (updateError) {
+        console.error('Error saving translation:', updateError);
+        // Still return the translation even if we couldn't cache it
+      } else {
+        console.log(`Translation saved for ${term.term} -> ${lang}`);
+      }
+
+      return new Response(JSON.stringify({
+        term: translationResult.term,
+        shortDef: translationResult.shortDef,
+        source: 'ai',
+        updatedAt: new Date().toISOString()
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+
+    } catch (aiError) {
+      console.error('AI Translation error:', aiError);
+      return new Response(JSON.stringify({ 
+        error: 'Translation generation failed',
+        fallback: true 
+      }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+  } catch (error) {
+    console.error('Translate-term function error:', error);
     return new Response(JSON.stringify({ 
-      error: 'Translation failed',
-      message: error.message,
-      stack: error.stack 
+      error: error.message,
+      fallback: true 
     }), {
-      status: 502,
+      status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
