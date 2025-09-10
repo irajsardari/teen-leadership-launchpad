@@ -72,6 +72,7 @@ export const TermDetailView: React.FC<TermDetailViewProps> = ({
 }) => {
   const navigate = useNavigate();
   const [shareOpen, setShareOpen] = useState(false);
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
   const getCurrentTermDisplay = () => {
     if (currentLang === 'en') {
