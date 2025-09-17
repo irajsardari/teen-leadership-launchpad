@@ -226,9 +226,9 @@ const AboutPage = () => {
                   </div>
                   
                   <div className="pt-8 border-t border-border/30">
-                    <p className="text-base text-foreground/70 mb-2">With all my heart,</p>
-                    <p className="text-xl font-bold text-primary mb-1">Dr. Iraj Sardari Baf</p>
-                    <p className="text-base text-tma-coral italic mb-4">A servant of the next generation</p>
+                    <p className="text-base text-foreground/70 mb-2">With all our heart,</p>
+                    <p className="text-xl font-bold text-primary mb-1">The Foundation Team</p>
+                    <p className="text-base text-tma-coral italic mb-4">Servants of the next generation</p>
                     
                   </div>
                 </div>
