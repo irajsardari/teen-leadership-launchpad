@@ -248,7 +248,7 @@ const AboutPage = () => {
                 Trademark Information
               </h3>
               <p className="text-sm text-foreground/70 font-inter">
-                TMA® is a registered trademark in Oman – Reg. No. 185581.
+                TMA® is a registered trademark in Oman – Reg. No. 188581.
               </p>
             </div>
           </div>
