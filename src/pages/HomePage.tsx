@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Users, BookOpen, Target, Star, Award, Globe, GraduationCap, Play, ChevronRight, Sparkles, Trophy, Zap, Heart } from "lucide-react";
+import { ArrowRight, Users, BookOpen, Target, Star, Award, Globe, GraduationCap, Play, ChevronRight, Sparkles, Trophy, Zap, Heart, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import heroImage from "@/assets/hero-teenagers.jpg";
@@ -583,6 +583,44 @@ const HomePage = () => {
                 </Card>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TMA Plus Teaser */}
+      <section className="py-20 bg-gradient-to-br from-tma-cream to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-6">
+              <span className="inline-flex items-center gap-2 bg-tma-orange/10 text-tma-orange px-4 py-2 rounded-full text-sm font-bold border border-tma-orange/20">
+                <Sparkles className="h-4 w-4" />
+                Coming Soon
+              </span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-black text-tma-blue mb-4 font-inter">
+              TMA Plus
+            </h2>
+            
+            <h3 className="text-2xl md:text-3xl font-bold text-tma-dark-gray mb-6 font-inter">
+              Because management is for everyone, not just teenagers.
+            </h3>
+            
+            <p className="text-xl text-tma-dark-gray/80 mb-10 leading-relaxed max-w-2xl mx-auto">
+              TMA Plus will open new doors of learning for adults worldwide. Stay tuned.
+            </p>
+            
+            <Button 
+              size="lg" 
+              className="bg-tma-orange hover:bg-tma-orange/90 text-white px-10 py-6 text-lg font-bold rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300"
+              asChild
+            >
+              <Link to="/tma-plus" className="flex items-center gap-3">
+                <Mail className="h-5 w-5" />
+                Join the Waitlist
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
