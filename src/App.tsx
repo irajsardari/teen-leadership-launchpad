@@ -36,6 +36,7 @@ import DictionaryPage from "./pages/DictionaryPage";
 import PublicLexiconPage from "./pages/PublicLexiconPage";
 import LexiconNotFound from "./pages/LexiconNotFound";
 import AdminDictionaryPage from "./pages/AdminDictionaryPage";
+import TMAPlusPage from "./pages/TMAPlusPage";
 import ScrollManager from "./components/ScrollManager";
 import { SessionTimeoutProvider } from "./components/SessionTimeoutProvider";
 
@@ -64,6 +65,7 @@ const App = () => (
                 <Route path="/apply" element={<ApplyPage />} />
                 <Route path="/teachers" element={<TeachersPage />} />
                 <Route path="/teach-with-tma" element={<TeachWithTMAPage />} />
+                <Route path="/tma-plus" element={<TMAPlusPage />} />
                 <Route path="/insights" element={<BlogPage />} />
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
                 <Route path="/voices" element={<BlogPage />} />

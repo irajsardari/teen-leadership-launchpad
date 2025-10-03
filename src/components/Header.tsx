@@ -67,6 +67,7 @@ const Header = () => {
     { name: "Curriculum", href: "/curriculum" },
     { name: "TMA Lexicon", href: "/dictionary" },
     { name: "Voices", href: "/voices" },
+    { name: "TMA Plus", href: "/tma-plus", badge: "Coming Soon" },
     { name: "Parents", href: "/apply" },
     { name: "Teach with TMA", href: "/teach-with-tma" },
     { name: "Contact", href: "/contact" },
@@ -97,13 +98,18 @@ const Header = () => {
                 key={item.name}
                 to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : 
                     item.href === "/insights" ? "/insights#voices-top" : item.href}
-                className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group whitespace-nowrap ${
+                className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group whitespace-nowrap flex items-center gap-2 ${
                   isActive(item.href)
                     ? "text-tma-orange font-semibold"
                     : "text-tma-blue hover:text-tma-orange"
                 }`}
               >
                 {item.name}
+                {item.badge && (
+                  <span className="text-[10px] bg-tma-orange text-white px-2 py-0.5 rounded-full font-bold">
+                    {item.badge}
+                  </span>
+                )}
                 <span className={`absolute bottom-0 left-0 h-0.5 bg-tma-orange transition-all duration-400 ease-out ${
                   isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
                 }`} />
@@ -262,7 +268,7 @@ const Header = () => {
                   className={`
                     block px-4 py-3 rounded-lg text-base font-medium 
                     transition-all duration-200 font-inter min-h-[44px] 
-                    flex items-center
+                    flex items-center justify-between
                     ${isActive(item.href)
                       ? "text-white bg-tma-blue"
                       : "text-tma-blue hover:text-tma-orange hover:bg-gray-50"
@@ -270,7 +276,12 @@ const Header = () => {
                   `}
                   onClick={closeMenu}
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  {item.badge && (
+                    <span className="text-xs bg-tma-orange text-white px-2 py-1 rounded-full font-bold">
+                      {item.badge}
+                    </span>
+                  )}
                 </Link>
               ))}
               
