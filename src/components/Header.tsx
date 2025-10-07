@@ -65,7 +65,6 @@ const Header = () => {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Curriculum", href: "/curriculum" },
-    { name: "TMA Lexicon", href: "/dictionary" },
     { name: "Voices", href: "/voices" },
     { name: "TMA Plus", href: "/tma-plus", badge: "Coming Soon" },
     { name: "Parents", href: "/apply" },

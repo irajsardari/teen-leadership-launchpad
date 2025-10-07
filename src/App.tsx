@@ -84,11 +84,6 @@ const App = () => (
                 <Route path="/admin" element={<AdminDashboardPage />} />
                 <Route path="/admin/applications" element={<AdminApplicationsPage />} />
                 <Route path="/admin/security" element={<AdminSecurityPage />} />
-                <Route path="/dictionary" element={<DictionaryPage />} />
-                <Route path="/dictionary/:slug" element={<DictionaryPage />} />
-            <Route path="/lexicon" element={<PublicLexiconPage />} />
-            <Route path="/lexicon/:slug" element={<PublicLexiconPage />} />
-            <Route path="/lexicon-not-found/:slug" element={<LexiconNotFound />} />
                 <Route path="/admin/dictionary" element={<AdminDictionaryPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
