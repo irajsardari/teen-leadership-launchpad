@@ -93,42 +93,6 @@ const TeacherDashboardPage = () => {
     learning_objectives: ""
   });
 
-  useEffect(() => {
-    console.log("Teacher Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
-    if (!isLoading && !user) {
-      console.log("Teacher Dashboard: No user, navigating to /portal?target=teacher");
-      setLoading(false);
-      navigate("/portal?target=teacher", { replace: true });
-      return;
-    }
-
-    if (user) {
-      (async () => {
-        try {
-          const { data: prof, error: profError } = await supabase
-            .from("profiles")
-            .select("role")
-            .eq("id", user.id)
-            .maybeSingle();
-          if (profError) throw profError;
-          const role = (prof?.role as string) || null;
-          setProfileRole(role);
-          if (role !== "teacher" && role !== "admin") {
-            toast({ title: "Access denied", description: "Teacher role required", variant: "destructive" });
-            setLoading(false);
-            navigate("/portal", { replace: true });
-            return;
-          }
-          await fetchTeacherData();
-        } catch (e) {
-          console.error("Error checking profile role", e);
-          setLoading(false);
-          navigate("/portal", { replace: true });
-        }
-      })();
-    }
-  }, [user, isLoading, navigate]);
-
   const fetchTeacherData = async () => {
     try {
       // Fetch teacher's courses
@@ -224,6 +188,42 @@ const TeacherDashboardPage = () => {
       console.error("Error fetching students:", error);
     }
   };
+
+  useEffect(() => {
+    console.log("Teacher Dashboard useEffect - user:", user?.email, "isLoading:", isLoading);
+    if (!isLoading && !user) {
+      console.log("Teacher Dashboard: No user, navigating to /portal?target=teacher");
+      setLoading(false);
+      navigate("/portal?target=teacher", { replace: true });
+      return;
+    }
+
+    if (user) {
+      (async () => {
+        try {
+          const { data: prof, error: profError } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .maybeSingle();
+          if (profError) throw profError;
+          const role = (prof?.role as string) || null;
+          setProfileRole(role);
+          if (role !== "teacher" && role !== "admin") {
+            toast({ title: "Access denied", description: "Teacher role required", variant: "destructive" });
+            setLoading(false);
+            navigate("/portal", { replace: true });
+            return;
+          }
+          await fetchTeacherData();
+        } catch (e) {
+          console.error("Error checking profile role", e);
+          setLoading(false);
+          navigate("/portal", { replace: true });
+        }
+      })();
+    }
+  }, [user, isLoading, navigate]);
 
   const createCourse = async () => {
     try {
