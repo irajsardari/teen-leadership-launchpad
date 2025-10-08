@@ -91,13 +91,13 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-4">
+          <nav className="hidden lg:flex items-center space-x-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href === "/curriculum" ? "/curriculum#curriculum-top" : 
                     item.href === "/insights" ? "/insights#voices-top" : item.href}
-                className={`relative px-3 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group whitespace-nowrap flex items-center gap-2 ${
+                className={`relative px-2 py-2 text-sm font-medium transition-all duration-400 ease-in-out font-inter tracking-wide group whitespace-nowrap flex items-center gap-1.5 ${
                   isActive(item.href)
                     ? "text-tma-orange font-semibold"
                     : "text-tma-blue hover:text-tma-orange"
@@ -105,7 +105,7 @@ const Header = () => {
               >
                 {item.name}
                 {item.badge && (
-                  <span className="text-[10px] bg-tma-orange text-white px-2 py-0.5 rounded-full font-bold">
+                  <span className="text-[10px] bg-tma-orange text-white px-1.5 py-0.5 rounded-full font-bold">
                     {item.badge}
                   </span>
                 )}
@@ -115,9 +115,9 @@ const Header = () => {
               </Link>
             ))}
             
-            <div className="flex items-center space-x-4 ml-8 pl-6 border-l border-gray-200">
+            <div className="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-200">
               <Button 
-                className="bg-tma-blue hover:bg-tma-blue/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg rounded-lg px-5 py-2 min-h-[44px]" 
+                className="bg-tma-blue hover:bg-tma-blue/90 text-white font-inter font-medium transition-all duration-300 hover:shadow-lg rounded-lg px-4 py-2 min-h-[44px]" 
                 size="sm" 
                 asChild>
                 <Link to="/learning-portal">
@@ -145,10 +145,10 @@ const Header = () => {
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  ) : (
+                    ) : (
                       <Button 
                         variant="outline"
-                        className="border-tma-orange text-tma-orange hover:bg-tma-orange hover:text-white font-inter font-medium transition-all duration-300 rounded-lg px-5 py-2" 
+                        className="border-tma-orange text-tma-orange hover:bg-tma-orange hover:text-white font-inter font-medium transition-all duration-300 rounded-lg px-4 py-2" 
                         size="sm" 
                         onClick={() => setIsAuthModalOpen(true)}
                       >
