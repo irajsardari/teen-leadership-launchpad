@@ -12,6 +12,7 @@ import voicesBestGiftGraduation from "@/assets/voices-best-gift-graduation.jpg";
 import finishingChangesEverything from "@/assets/finishing-changes-everything.jpg";
 import concentrationFocusAchievement from "@/assets/concentration-focus-achievement.jpg";
 import patienceFastWorldTeenager from "@/assets/patience-fast-world-teenager.jpg";
+import fallingUpSuccessSpotlight from "@/assets/falling-up-success-spotlight.jpg";
 export interface BlogPost {
   id: string;
   title: string;
@@ -32,6 +33,65 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: 'falling-up-success-life-skills',
+    title: 'Falling Up: Why Success Without Life Skills Doesn\'t Last',
+    author: 'Dr. Iraj Sardari Baf',
+    authorId: 'dr-iraj-sardari-baf',
+    date: '2025-10-17',
+    featuredImage: fallingUpSuccessSpotlight,
+    excerpt: 'Success without life skills is fragile. Learn why emotional intelligence, balance, and self-management are the real foundations of lasting success.',
+    content: `# Falling Up: Why Success Without Life Skills Doesn't Last
+
+Sometimes success comes too early. A person becomes famous, rich, or admired — and then, slowly, things begin to fall apart. We have all seen it: a star who loses control, a business leader who makes one wrong move, a young influencer who burns out. Talent opens doors, but only good management keeps them open.
+
+These stories are everywhere. One actor earns millions and then ends up in debt. Another artist wins awards but struggles with their emotions and loses direction. A business owner builds an empire and then watches it collapse. Behind every story is the same truth: success without self-management is fragile.
+
+But this isn't only about famous people. Every year, millions of ordinary people fail for the same reason — not because they lack intelligence or opportunity, but because they were never taught the basic life skills that make success stable.
+
+## What really goes wrong
+
+In most cases, failure begins quietly. People spend more than they earn. They say yes to everything and forget to rest. They chase attention instead of purpose. Slowly, stress builds up, confidence breaks down, and they lose balance.
+
+These people are not bad — they are simply untrained. No one taught them how to plan, save, prioritize, or control emotions under pressure. Schools teach equations and history, but not how to manage feelings, relationships, and time.
+
+## The wasted years
+
+Many who fall eventually rebuild. They find mentors, learn to slow down, and try again. Some return stronger and wiser. Yet the cost is huge — lost years, wasted money, broken trust, and dreams delayed. All because the most important subject in life — self-management — was never taught early enough.
+
+Imagine how different their lives could have been if they had learned, as teenagers, how to manage emotions, handle money, and make clear decisions. The pain they faced later could have been prevented.
+
+## The hidden message for everyone
+
+The truth is, we all live under our own spotlight. It may not be on a big stage, but we face the same tests: pressure, temptation, comparison, and pride. The same soft-skill gaps that destroy celebrities can also damage marriages, businesses, or health.
+
+When people learn emotional intelligence, time control, and balance, everything changes. They start to lead their lives instead of reacting to them. They make choices that last.
+
+## What TMA believes
+
+At Teenagers Management Academy (TMA), we teach these skills before life gets complicated. Our goal is to prepare young people not only to reach success but to stay there with peace of mind. We believe that leadership begins with leading yourself — managing emotions, money, energy, and values.
+
+Every famous fall we see on the news is a mirror of what can happen to any of us. The difference is not fame; it's foundation.
+
+## Final thought
+
+Success is beautiful, but it's also heavy. To carry it well, you need balance. You need the inner tools that hold you steady when the world around you changes.
+
+At TMA, we want every teenager to have those tools — to build a life that doesn't just shine for a moment, but glows for a lifetime.
+
+---
+
+**Disclaimer:**  
+This essay uses general public examples to discuss educational ideas. It does not refer to or judge any specific individual. All observations are for learning and reflection only.`,
+    slug: 'falling-up-success-life-skills',
+    seo: {
+      metaTitle: 'Falling Up: Why Success Without Life Skills Doesn\'t Last | TMA Voices',
+      metaDescription: 'Success without life skills doesn\'t last. Dr. Iraj Sardari explains why emotional intelligence, balance, and self-management are the real foundations of lasting success.',
+      keywords: ['success', 'life skills', 'emotional intelligence', 'self-management', 'teenagers', 'personal development', 'balance', 'leadership']
+    },
+    category: 'Emotional Intelligence',
+    tags: ['Self-Management', 'TMA Voices', 'Personal Growth', 'Success']
+  },
   {
     id: 'concentration-the-hidden-power-behind-every-achievement',
     title: 'Concentration: The Hidden Power Behind Every Achievement',
