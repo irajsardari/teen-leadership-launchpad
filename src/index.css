@@ -13,6 +13,8 @@
     --tma-cream-hsl: 33 50% 96%;             
     --tma-text-hsl: 0 0% 11%;                
     --tma-muted-hsl: 0 0% 88%;
+    --tma-navy-hsl: 209 21% 21%;
+    --tma-red-hsl: 3 76% 48%;
 
     /* Semantic colors (use these in components) */
     --c-bg-page: var(--tma-cream-hsl);

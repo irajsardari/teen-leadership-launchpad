@@ -75,6 +75,8 @@ export default {
 					'cream': 'var(--tma-cream)',
 					'text': 'var(--tma-text)',
 					'muted': 'var(--tma-muted)',
+					'navy': 'var(--tma-navy)',
+					'red': 'var(--tma-red)',
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

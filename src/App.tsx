@@ -39,6 +39,8 @@ import AdminDictionaryPage from "./pages/AdminDictionaryPage";
 import TMAPlusPage from "./pages/TMAPlusPage";
 import ScrollManager from "./components/ScrollManager";
 import { SessionTimeoutProvider } from "./components/SessionTimeoutProvider";
+import EchoesPage from "./pages/EchoesPage";
+import PeterDruckerPage from "./pages/PeterDruckerPage";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +71,8 @@ const App = () => (
                 <Route path="/insights" element={<BlogPage />} />
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
                 <Route path="/voices" element={<BlogPage />} />
+                <Route path="/voices/echoes" element={<EchoesPage />} />
+                <Route path="/voices/echoes/:slug" element={<PeterDruckerPage />} />
                 <Route path="/voices/:slug" element={<BlogPostPage />} />
                 <Route path="/challenger" element={<ChallengerPage />} />
 <Route path="/learning-portal" element={<LearningPortalPage />} />

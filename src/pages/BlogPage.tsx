@@ -48,9 +48,57 @@ const BlogPage = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight">
               {pageTitle}
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white/90 max-w-3xl mx-auto font-inter font-medium leading-relaxed">
-              Insights, perspectives, and thought leadership from the world's first teenage leadership academy
+            <p className="text-lg md:text-xl lg:text-2xl mb-4 text-white/90 max-w-3xl mx-auto font-inter font-medium leading-relaxed">
+              TMA Voices & ECHOES – Insights, reflections, and the legacies of great minds from the world's first teenage leadership academy.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Sections */}
+      <section className="py-12 bg-gradient-to-b from-tma-teal/10 to-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* TMA Voices Block */}
+            <Link to="/voices" className="group">
+              <div className="bg-white rounded-2xl shadow-lg p-8 h-full border-2 border-transparent hover:border-tma-teal hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="flex items-center justify-center mb-6">
+                  <div className="bg-gradient-to-br from-tma-teal to-tma-blue text-white rounded-full p-4">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                    </svg>
+                  </div>
+                </div>
+                <h2 className="text-2xl font-bold text-center mb-3 text-foreground group-hover:text-tma-teal transition-colors">
+                  TMA Voices
+                </h2>
+                <p className="text-center text-muted-foreground leading-relaxed">
+                  Current insights, perspectives, and thought leadership on teenage development and management
+                </p>
+              </div>
+            </Link>
+
+            {/* ECHOES Block */}
+            <Link to="/voices/echoes" className="group">
+              <div className="bg-white rounded-2xl shadow-lg p-8 h-full border-2 border-transparent hover:border-tma-red hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="flex items-center justify-center mb-6">
+                  <div className="bg-gradient-to-br from-tma-navy to-tma-red text-white rounded-full p-4">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                </div>
+                <h2 className="text-2xl font-bold text-center mb-3 text-foreground group-hover:text-tma-red transition-colors">
+                  ECHOES
+                </h2>
+                <p className="text-center text-sm font-medium text-tma-red mb-2 italic">
+                  The Messengers of Management
+                </p>
+                <p className="text-center text-muted-foreground leading-relaxed">
+                  Biographies and legacies of the great minds who shaped modern management thinking
+                </p>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
