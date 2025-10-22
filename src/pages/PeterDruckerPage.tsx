@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Quote } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import peterDruckerPortrait from "@/assets/peter-drucker-portrait.jpg";
 
 const PeterDruckerPage = () => {
   const { slug } = useParams();
@@ -42,34 +43,36 @@ const PeterDruckerPage = () => {
             <Badge className="mb-6 bg-tma-red text-white hover:bg-tma-red/90">
               ECHOES – The Messengers of Management
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight text-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight text-foreground leading-tight">
               Peter F. Drucker: The Visionary Who Taught Us How to Think
             </h1>
-            <p className="text-xl text-muted-foreground italic">
+            <p className="text-lg md:text-xl text-muted-foreground italic font-light">
               The father of modern management who believed people, not profit, are the true measure of success
             </p>
           </div>
 
           {/* Portrait */}
-          <div className="mb-12 flex justify-center">
-            <div className="relative">
+          <div className="mb-16 flex justify-center">
+            <div className="relative inline-block">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Peter_Drucker_cropped.jpg/400px-Peter_Drucker_cropped.jpg"
-                alt="Peter F. Drucker"
-                className="rounded-lg shadow-2xl max-w-sm w-full"
+                src={peterDruckerPortrait}
+                alt="Peter F. Drucker - Portrait"
+                className="rounded-lg shadow-2xl max-w-md w-full mx-auto border border-border/20"
               />
-              <div className="absolute -bottom-6 -right-6 bg-tma-red text-white p-4 rounded-lg shadow-xl">
-                <Quote className="h-8 w-8" />
-              </div>
             </div>
           </div>
 
           {/* Famous Quote */}
-          <blockquote className="my-12 p-8 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg">
-            <p className="text-xl md:text-2xl font-medium italic text-foreground mb-4">
-              "The best way to predict the future is to create it."
-            </p>
-            <cite className="text-muted-foreground not-italic">— Peter F. Drucker</cite>
+          <blockquote className="my-16 p-8 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg">
+            <div className="flex items-start gap-4">
+              <Quote className="h-8 w-8 text-tma-red flex-shrink-0 mt-1" />
+              <div>
+                <p className="text-xl md:text-2xl font-medium italic text-foreground mb-4">
+                  "The best way to predict the future is to create it."
+                </p>
+                <cite className="text-muted-foreground not-italic">— Peter F. Drucker</cite>
+              </div>
+            </div>
           </blockquote>
 
           {/* Content */}
@@ -83,7 +86,7 @@ const PeterDruckerPage = () => {
 
               {/* Early Life & Influences */}
               <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-12 mb-6">🌱 Early Life & Influences</h2>
+                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🌱 Early Life & Influences</h2>
                 <p>
                   Peter Ferdinand Drucker was born in 1909 in Vienna, Austria, into a home filled with books, discussions, and ideas. His father, a senior government official, often hosted intellectual gatherings with economists, scientists, and philosophers — among them figures who later influenced Europe's political and cultural direction.
                 </p>
@@ -98,7 +101,7 @@ const PeterDruckerPage = () => {
 
               {/* Turning Point */}
               <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-12 mb-6">🔁 Turning Point</h2>
+                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🔁 Turning Point</h2>
                 <p>
                   In 1937, Drucker emigrated to the United States to escape Nazi Germany. There, he began teaching and consulting for major corporations. But what changed everything was his deep, human study of <strong>General Motors</strong> — one of the world's biggest companies at that time. Unlike others who only measured productivity, Drucker looked at the <em>people behind the machines.</em>
                 </p>
@@ -109,11 +112,11 @@ const PeterDruckerPage = () => {
 
               {/* Major Works & Ideas */}
               <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-12 mb-6">📚 Major Works & Ideas</h2>
+                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">📚 Major Works & Ideas</h2>
                 <p>
                   Peter Drucker wrote more than <strong>35 books</strong>, translated into over <strong>30 languages</strong>. His key ideas still guide universities, companies, and governments around the world.
                 </p>
-                <h3 className="text-2xl font-bold text-foreground mt-8 mb-4">Core Ideas</h3>
+                <h3 className="text-2xl font-bold text-foreground mt-10 mb-6">Core Ideas</h3>
                 <ul className="list-disc pl-6 space-y-3">
                   <li><strong>Management is a human art:</strong> it's about people, not numbers.</li>
                   <li><strong>Decentralization:</strong> give responsibility to those closest to the work.</li>
@@ -126,7 +129,7 @@ const PeterDruckerPage = () => {
 
               {/* Famous Quotes */}
               <section className="space-y-6">
-                <h2 className="text-3xl font-bold text-foreground mt-12 mb-6">💬 Famous Quotes by Peter Drucker</h2>
+                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">💬 Famous Quotes by Peter Drucker</h2>
                 <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic">
                   <p>"Management is doing things right; leadership is doing the right things."</p>
                 </blockquote>
@@ -146,7 +149,7 @@ const PeterDruckerPage = () => {
 
               {/* Legacy & Global Impact */}
               <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-12 mb-6">🌍 Legacy & Global Impact</h2>
+                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🌍 Legacy & Global Impact</h2>
                 <p>
                   Peter Drucker revolutionized how nations, businesses, and schools see <em>leadership and productivity.</em> He advised CEOs, nonprofits, hospitals, and governments — always reminding them that <em>management is about human beings.</em>
                 </p>
@@ -164,7 +167,7 @@ const PeterDruckerPage = () => {
 
               {/* TMA Connection */}
               <section className="space-y-6">
-                <h2 className="text-3xl font-bold text-foreground mt-12 mb-6">🧩 TMA Connection: How Drucker's Ideas Align with Our Pillars</h2>
+                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🧩 TMA Connection: How Drucker's Ideas Align with Our Pillars</h2>
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse">
                     <thead>
@@ -209,7 +212,7 @@ const PeterDruckerPage = () => {
 
               {/* If They Were Here Today */}
               <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-12 mb-6">🪶 If They Were Here Today: Reflections for the AI & Digital Generation</h2>
+                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🪶 If They Were Here Today: Reflections for the AI & Digital Generation</h2>
                 <p>
                   If Peter Drucker were alive in 2025, he would not fear Artificial Intelligence — he would ask what it teaches us about being <em>more human.</em>
                 </p>
@@ -231,8 +234,8 @@ const PeterDruckerPage = () => {
               </section>
 
               {/* Closing Reflection */}
-              <section className="space-y-4 mt-12 p-8 bg-gradient-to-r from-tma-teal/5 to-tma-blue/5 rounded-lg border border-tma-teal/20">
-                <h2 className="text-3xl font-bold text-foreground mb-6">✨ Closing Reflection</h2>
+              <section className="space-y-4 mt-16 p-8 bg-gradient-to-r from-tma-teal/5 to-tma-blue/5 rounded-lg border border-tma-teal/20">
+                <h2 className="text-3xl font-bold text-foreground mb-8">✨ Closing Reflection</h2>
                 <p className="text-lg">
                   Peter Drucker never aimed to create followers.<br />
                   He aimed to create <strong>thinkers</strong> — people who act with integrity, courage, and curiosity.<br />
