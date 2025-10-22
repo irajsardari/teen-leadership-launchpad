@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Quote } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import peterDruckerPortrait from "@/assets/peter-drucker-portrait.jpg";
+
 
 const PeterDruckerPage = () => {
   const { slug } = useParams();
@@ -51,16 +51,6 @@ const PeterDruckerPage = () => {
             </p>
           </div>
 
-          {/* Portrait */}
-          <div className="mb-16 flex justify-center">
-            <div className="relative inline-block">
-              <img 
-                src={peterDruckerPortrait}
-                alt="Peter F. Drucker - Portrait"
-                className="rounded-lg shadow-2xl max-w-md w-full mx-auto border border-border/20"
-              />
-            </div>
-          </div>
 
           {/* Famous Quote */}
           <blockquote className="my-16 p-8 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg">

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
-import peterDruckerPortrait from "@/assets/peter-drucker-portrait.jpg";
+
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -12,7 +12,7 @@ const EchoesPage = () => {
       id: 'peter-drucker',
       name: 'Peter F. Drucker',
       subtitle: 'The Visionary Who Taught Us How to Think',
-      image: peterDruckerPortrait,
+      image: "/placeholder.svg",
       excerpt: 'The father of modern management who believed that people, not profit, are the true measure of success.',
       slug: 'peter-drucker'
     }
