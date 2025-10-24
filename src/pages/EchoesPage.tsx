@@ -8,6 +8,7 @@ import druckerImage from "@/assets/echoes-symbolic-drucker.jpg";
 import maslowImage from "@/assets/echoes-symbolic-maslow.jpg";
 import taylorImage from "@/assets/echoes-symbolic-taylor.jpg";
 import mayoImage from "@/assets/echoes-symbolic-mayo.jpg";
+import follettImage from "@/assets/echoes-symbolic-follett.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -42,6 +43,14 @@ const EchoesPage = () => {
       image: mayoImage,
       excerpt: 'He proved that productivity depends not only on tools and systems — but on attention, connection, and care.',
       slug: 'elton-mayo'
+    },
+    {
+      id: 'mary-parker-follett',
+      name: 'Mary Parker Follett',
+      subtitle: 'The Prophet of Collaboration and Shared Power',
+      image: follettImage,
+      excerpt: 'She redefined leadership as partnership — showing that real power grows when shared.',
+      slug: 'mary-parker-follett'
     }
   ];
 
