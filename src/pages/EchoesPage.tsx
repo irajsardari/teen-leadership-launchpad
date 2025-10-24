@@ -17,6 +17,7 @@ import sengeImage from "@/assets/echoes-symbolic-senge.jpg";
 import porterImage from "@/assets/echoes-symbolic-porter.jpg";
 import collinsImage from "@/assets/echoes-symbolic-collins.jpg";
 import kotterImage from "@/assets/echoes-symbolic-kotter.jpg";
+import kahnemanImage from "@/assets/echoes-symbolic-kahneman.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -123,6 +124,14 @@ const EchoesPage = () => {
       image: kotterImage,
       excerpt: 'He showed that change is not a plan but a journey — one that succeeds only when hearts move before charts.',
       slug: 'john-kotter'
+    },
+    {
+      id: 'daniel-kahneman',
+      name: 'Daniel Kahneman',
+      subtitle: 'The Psychologist Who Measured How the Mind Decides',
+      image: kahnemanImage,
+      excerpt: 'He revealed that our greatest strength — thinking — is also full of shortcuts and illusions. His work taught leaders to slow down, question certainty, and decide wisely.',
+      slug: 'daniel-kahneman'
     }
   ];
 
