@@ -3,7 +3,7 @@ import taylorSymbolic from "@/assets/echoes-symbolic-taylor.jpg";
 
 const FrederickTaylorPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="echoes-article">
       <Helmet>
         <title>ECHOES – Frederick Winslow Taylor | Teenagers Management Academy</title>
         <meta 

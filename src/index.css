@@ -197,6 +197,129 @@
     outline: none;
   }
 
+  /* ECHOES Biography Pages - Unified Typography */
+  .echoes-article {
+    @apply min-h-screen bg-background;
+  }
+
+  .echoes-hero {
+    @apply text-white py-16 lg:py-24;
+    background: linear-gradient(135deg, hsl(var(--tma-navy-hsl)) 0%, hsl(var(--tma-blue-hsl)) 100%);
+  }
+
+  .echoes-hero-text {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center space-y-6;
+  }
+
+  .echoes-series-label {
+    @apply text-sm font-semibold tracking-widest uppercase;
+    color: hsl(var(--tma-red-hsl));
+  }
+
+  .echoes-series-subtitle {
+    @apply text-sm font-light tracking-wide;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .echoes-title {
+    @apply font-bold font-inter tracking-tight leading-tight;
+    font-size: 2.25rem;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+  }
+
+  @media (min-width: 768px) {
+    .echoes-title {
+      font-size: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .echoes-title {
+      font-size: 3.75rem;
+    }
+  }
+
+  .echoes-symbolic-figure {
+    @apply my-12 flex justify-center;
+  }
+
+  .echoes-symbolic-figure img {
+    @apply rounded-lg shadow-xl max-w-md w-full;
+  }
+
+  .echoes-quote {
+    @apply relative p-6 my-8 italic text-lg leading-relaxed;
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid hsl(var(--tma-red-hsl));
+  }
+
+  .echoes-quote-attrib {
+    @apply block mt-4 text-sm font-normal not-italic;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .echoes-section {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .echoes-heading {
+    @apply font-semibold mb-6;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #1B2A41;
+  }
+
+  .echoes-subheading {
+    @apply font-semibold mb-4 mt-6;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #1B2A41;
+  }
+
+  .echoes-paragraph {
+    @apply mb-4;
+    font-size: 1rem;
+    line-height: 1.7;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .echoes-list {
+    @apply ml-6 mb-4 space-y-2;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .echoes-list li {
+    @apply mb-2;
+  }
+
+  .echoes-inline-quote {
+    @apply block my-6 pl-6 py-4 italic text-base;
+    border-left: 4px solid hsl(var(--tma-red-hsl));
+    background-color: #F7F7F7;
+    line-height: 1.7;
+  }
+
+  .echoes-closing {
+    @apply border-t pt-8 mt-12;
+    border-color: hsl(var(--c-border));
+  }
+
+  .echoes-footer-nav {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl py-8 mt-12 border-t;
+    border-color: hsl(var(--c-border));
+  }
+
+  .echoes-next-link a {
+    @apply text-sm font-medium hover:underline;
+    color: hsl(var(--tma-teal-hsl));
+  }
+
   /* Accent/CTA button (orange bg / white text) */
   .btn-accent {
     background: var(--tma-orange);
