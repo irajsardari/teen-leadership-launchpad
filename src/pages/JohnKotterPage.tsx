@@ -1,5 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import kotterImage from "@/assets/echoes-symbolic-kotter.jpg";
 
@@ -54,9 +57,6 @@ const JohnKotterPage = () => {
                 className="w-full h-auto"
                 loading="eager"
               />
-              <p className="text-sm text-center text-muted-foreground italic mt-4 px-4">
-                Symbolic visual: a rising spiral of steps — symbol of movement, urgency, and shared purpose.
-              </p>
             </div>
 
             {/* Snapshot */}
@@ -224,6 +224,18 @@ const JohnKotterPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="py-8 border-t">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+          <Link to="/voices/echoes">
+            <Button variant="outline" className="gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Return to ECHOES Collection
+            </Button>
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 };

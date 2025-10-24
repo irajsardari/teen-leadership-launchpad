@@ -51,9 +51,6 @@ const MaryParkerFollettPage = () => {
               loading="lazy"
               decoding="async"
             />
-            <p className="echoes-image-caption">
-              Symbolic visual: overlapping circles or hands joined around a table — representing community, collaboration, and integration.
-            </p>
           </div>
 
           {/* Snapshot Section */}
@@ -185,6 +182,15 @@ const MaryParkerFollettPage = () => {
 
         </div>
       </div>
+
+      {/* Footer Navigation */}
+      <footer className="echoes-footer-nav">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="echoes-next-link">
+            <a href="/voices/echoes">← Return to ECHOES Collection</a>
+          </div>
+        </div>
+      </footer>
     </article>
   );
 };

@@ -182,7 +182,7 @@ const PeterDruckerPage = () => {
         {/* FOOTER NAVIGATION */}
         <footer className="echoes-footer-nav">
           <div className="echoes-next-link">
-            <Link to="/voices/echoes">← Back to ECHOES</Link>
+            <Link to="/voices/echoes">← Return to ECHOES Collection</Link>
           </div>
         </footer>
       </article>

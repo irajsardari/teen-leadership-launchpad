@@ -180,7 +180,7 @@ const FrederickTaylorPage = () => {
         {/* FOOTER NAVIGATION */}
         <footer className="echoes-footer-nav">
           <div className="echoes-next-link">
-            <a href="/voices/echoes">← Back to ECHOES</a>
+            <a href="/voices/echoes">← Return to ECHOES Collection</a>
           </div>
         </footer>
       </article>

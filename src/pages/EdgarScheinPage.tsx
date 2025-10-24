@@ -53,9 +53,6 @@ const EdgarScheinPage = () => {
             className="w-full h-auto"
             loading="eager"
           />
-          <figcaption className="text-sm text-muted-foreground text-center mt-4 italic">
-            Symbolic visual: three concentric layers representing the visible, spoken, and hidden levels of organizational life.
-          </figcaption>
         </figure>
 
         {/* Snapshot Section */}

@@ -53,9 +53,6 @@ const GeertHofstedePage = () => {
             className="w-full h-auto"
             loading="eager"
           />
-          <figcaption className="text-sm text-muted-foreground text-center mt-4 italic">
-            Symbolic visual: a world map formed by overlapping cultural symbols — textiles, letters, colors — signifying diversity within connection.
-          </figcaption>
         </figure>
 
         {/* Snapshot Section */}

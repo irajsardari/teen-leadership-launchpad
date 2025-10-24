@@ -64,9 +64,6 @@ const PeterSengePage = () => {
               loading="eager"
               className="w-full h-auto"
             />
-            <figcaption className="text-sm text-center text-muted-foreground mt-4 italic">
-              Expanding ripples or interlinked circles — the language of feedback and connection.
-            </figcaption>
           </figure>
 
           {/* Snapshot */}

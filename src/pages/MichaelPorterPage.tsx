@@ -64,9 +64,6 @@ const MichaelPorterPage = () => {
               loading="eager"
               className="w-full h-auto"
             />
-            <figcaption className="text-sm text-center text-muted-foreground mt-4 italic">
-              A pentagon of arrows — suppliers, buyers, rivals, substitutes, new entrants — encircling a core value chain.
-            </figcaption>
           </figure>
 
           {/* Snapshot */}

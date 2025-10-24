@@ -55,9 +55,6 @@ const DouglasMcGregorPage = () => {
               className="echoes-image"
               loading="eager"
             />
-            <figcaption className="echoes-caption">
-              Symbolic representation: two arrows — one rigid and dark, one open and bright — converging toward a shared horizon, representing trust over control.
-            </figcaption>
           </figure>
         </div>
       </section>
@@ -205,7 +202,7 @@ const DouglasMcGregorPage = () => {
           >
             <Link to="/voices/echoes" className="flex items-center">
               <ArrowLeft className="mr-2 h-4 w-4 group-hover/btn:-translate-x-1 transition-transform duration-200" />
-              Back to ECHOES
+              Return to ECHOES Collection
             </Link>
           </Button>
         </div>
