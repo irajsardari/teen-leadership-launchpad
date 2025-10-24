@@ -16,6 +16,7 @@ import scheinImage from "@/assets/echoes-symbolic-schein.jpg";
 import sengeImage from "@/assets/echoes-symbolic-senge.jpg";
 import porterImage from "@/assets/echoes-symbolic-porter.jpg";
 import collinsImage from "@/assets/echoes-symbolic-collins.jpg";
+import kotterImage from "@/assets/echoes-symbolic-kotter.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -114,6 +115,14 @@ const EchoesPage = () => {
       image: collinsImage,
       excerpt: 'He spent decades asking a single question — why do some companies and leaders last while others fade? His answers became a map for building greatness that endures.',
       slug: 'jim-collins'
+    },
+    {
+      id: 'john-kotter',
+      name: 'John P. Kotter',
+      subtitle: 'The Architect of Change Leadership',
+      image: kotterImage,
+      excerpt: 'He showed that change is not a plan but a journey — one that succeeds only when hearts move before charts.',
+      slug: 'john-kotter'
     }
   ];
 
