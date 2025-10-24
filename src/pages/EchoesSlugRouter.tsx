@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import PeterDruckerPage from "./PeterDruckerPage";
 import AbrahamMaslowPage from "./AbrahamMaslowPage";
 import FrederickTaylorPage from "./FrederickTaylorPage";
+import EltonMayoPage from "./EltonMayoPage";
 import NotFound from "./NotFound";
 
 const EchoesSlugRouter = () => {
@@ -14,6 +15,8 @@ const EchoesSlugRouter = () => {
       return <AbrahamMaslowPage />;
     case "frederick-taylor":
       return <FrederickTaylorPage />;
+    case "elton-mayo":
+      return <EltonMayoPage />;
     default:
       return <NotFound />;
   }

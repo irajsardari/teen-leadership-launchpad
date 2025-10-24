@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet-async";
 import druckerImage from "@/assets/echoes-symbolic-drucker.jpg";
 import maslowImage from "@/assets/echoes-symbolic-maslow.jpg";
 import taylorImage from "@/assets/echoes-symbolic-taylor.jpg";
+import mayoImage from "@/assets/echoes-symbolic-mayo.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -33,6 +34,14 @@ const EchoesPage = () => {
       image: taylorImage,
       excerpt: 'He transformed factories into systems of precision and performance — proving that efficiency, discipline, and method could build the modern world.',
       slug: 'frederick-taylor'
+    },
+    {
+      id: 'elton-mayo',
+      name: 'Elton Mayo',
+      subtitle: 'The Listener Who Brought Humanity to the Workplace',
+      image: mayoImage,
+      excerpt: 'He proved that productivity depends not only on tools and systems — but on attention, connection, and care.',
+      slug: 'elton-mayo'
     }
   ];
 
