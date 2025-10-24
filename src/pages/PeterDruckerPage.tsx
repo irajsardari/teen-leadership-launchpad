@@ -1,21 +1,17 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Quote } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-
+import symbolicImage from "@/assets/echoes-symbolic-drucker.jpg";
 
 const PeterDruckerPage = () => {
   const { slug } = useParams();
   
-  // In the future, you can load different profiles based on the slug
-  // For now, we only have Peter Drucker
-  
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
+    <div className="min-h-screen bg-background">
       <Helmet>
-        <title>ECHOES – Peter Drucker | Teenagers Management Academy</title>
-        <meta name="description" content="The story and legacy of Peter F. Drucker — the father of modern management — through TMA's ECHOES series, connecting timeless ideas with today's AI generation." />
+        <title>ECHOES – Peter F. Drucker | Teenagers Management Academy</title>
+        <meta name="description" content="Biography and legacy of Peter F. Drucker, presented in the ECHOES series: The Messengers of Management." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : undefined} />
       </Helmet>
 
@@ -35,201 +31,170 @@ const PeterDruckerPage = () => {
         </div>
       </section>
 
+      {/* Hero Section */}
+      <header className="bg-gradient-to-br from-tma-navy to-tma-navy/90 text-white py-16 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+          <div className="text-center space-y-6">
+            <div className="space-y-2">
+              <div className="text-sm font-semibold tracking-widest uppercase text-tma-red">
+                ECHOES
+              </div>
+              <div className="text-sm font-light tracking-wide text-white/80">
+                The Messengers of Management
+              </div>
+            </div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-inter tracking-tight leading-tight">
+              Peter F. Drucker — The Visionary Who Taught the World How to Think
+            </h1>
+
+            {/* Symbolic Image */}
+            <figure className="my-12">
+              <img 
+                src={symbolicImage}
+                alt="Symbolic visual representing Peter F. Drucker's body of work"
+                className="rounded-lg shadow-2xl max-w-2xl w-full mx-auto"
+              />
+            </figure>
+
+            {/* Signature Quote */}
+            <blockquote className="text-xl md:text-2xl font-light italic leading-relaxed pt-8">
+              <div className="mb-4">
+                "The best way to predict the future is to create it."
+              </div>
+              <cite className="text-base not-italic text-white/70">
+                — Peter F. Drucker (1909–2005)
+              </cite>
+            </blockquote>
+          </div>
+        </div>
+      </header>
+
       {/* Article Content */}
       <article className="py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          {/* Header */}
-          <div className="mb-12 text-center">
-            <Badge className="mb-6 bg-tma-red text-white hover:bg-tma-red/90">
-              ECHOES – The Messengers of Management
-            </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight text-foreground leading-tight">
-              Peter F. Drucker: The Visionary Who Taught Us How to Think
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground italic font-light">
-              The father of modern management who believed people, not profit, are the true measure of success
-            </p>
-          </div>
-
-
-          {/* Famous Quote */}
-          <blockquote className="my-16 p-8 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg">
-            <div className="flex items-start gap-4">
-              <Quote className="h-8 w-8 text-tma-red flex-shrink-0 mt-1" />
-              <div>
-                <p className="text-xl md:text-2xl font-medium italic text-foreground mb-4">
-                  "The best way to predict the future is to create it."
-                </p>
-                <cite className="text-muted-foreground not-italic">— Peter F. Drucker</cite>
-              </div>
-            </div>
-          </blockquote>
-
-          {/* Content */}
           <div className="prose prose-lg max-w-none">
             <div className="space-y-8 text-foreground leading-relaxed">
               
-              {/* Introduction */}
-              <p className="text-lg">
-                A quiet observer of people and organizations, Peter Drucker reshaped how the modern world understands work, leadership, and responsibility. He believed management was not about power — it was about purpose, people, and performance.
-              </p>
-
               {/* Early Life & Influences */}
-              <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🌱 Early Life & Influences</h2>
-                <p>
-                  Peter Ferdinand Drucker was born in 1909 in Vienna, Austria, into a home filled with books, discussions, and ideas. His father, a senior government official, often hosted intellectual gatherings with economists, scientists, and philosophers — among them figures who later influenced Europe's political and cultural direction.
+              <section className="echoes-section mt-8">
+                <h2 className="echoes-heading text-3xl font-bold text-foreground mb-8">Early Life & Influences</h2>
+                <p className="echoes-paragraph mb-6">
+                  Peter Ferdinand Drucker was born on 19 November 1909 in Vienna. He grew up in a household where conversation, books, and debate were part of daily life. His father, a senior government economist, regularly hosted gatherings where intellectuals, artists, and policymakers discussed the future of Europe.
                 </p>
-                <p>
-                  As a teenager, Drucker was deeply curious about how societies organize themselves. He studied law at the University of Frankfurt and later moved to London, where he worked as a journalist. His early years were shaped by the collapse of European stability and the rise of authoritarian systems — experiences that taught him how dangerous unexamined power could be.
+                <p className="echoes-paragraph mb-6">
+                  Drucker witnessed firsthand the collapse of the Austro-Hungarian Empire, the rise of totalitarianism, and the fragility of institutions. These experiences taught him that societies depend not just on systems, but on how people within those systems think and act.
                 </p>
-                <p className="font-medium">
-                  These early observations later inspired him to ask a question that would define his life's work:<br />
-                  <strong>"How can organizations serve humanity rather than control it?"</strong>
-                </p>
-              </section>
-
-              {/* Turning Point */}
-              <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🔁 Turning Point</h2>
-                <p>
-                  In 1937, Drucker emigrated to the United States to escape Nazi Germany. There, he began teaching and consulting for major corporations. But what changed everything was his deep, human study of <strong>General Motors</strong> — one of the world's biggest companies at that time. Unlike others who only measured productivity, Drucker looked at the <em>people behind the machines.</em>
-                </p>
-                <p>
-                  His 1946 book <em>The Concept of the Corporation</em> revealed that organizations could succeed only if they respected human beings as thinking, responsible individuals — not tools. This was the birth of <strong>modern management</strong> as we know it.
+                <p className="echoes-paragraph">
+                  He studied law at the University of Frankfurt and worked as a journalist in Germany and London during the 1930s. It was during this time that he observed how businesses and governments made decisions — often without understanding the human consequences.
                 </p>
               </section>
 
-              {/* Major Works & Ideas */}
-              <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">📚 Major Works & Ideas</h2>
-                <p>
-                  Peter Drucker wrote more than <strong>35 books</strong>, translated into over <strong>30 languages</strong>. His key ideas still guide universities, companies, and governments around the world.
+              {/* The Turning Point */}
+              <section className="echoes-section mt-16">
+                <h2 className="echoes-heading text-3xl font-bold text-foreground mb-8">The Turning Point</h2>
+                <p className="echoes-paragraph mb-6">
+                  Drucker's breakthrough came after his deep study of General Motors in the 1940s. Unlike other consultants who focused only on efficiency and production numbers, Drucker examined the organization as a living system of people, decisions, and responsibilities.
                 </p>
-                <h3 className="text-2xl font-bold text-foreground mt-10 mb-6">Core Ideas</h3>
-                <ul className="list-disc pl-6 space-y-3">
-                  <li><strong>Management is a human art:</strong> it's about people, not numbers.</li>
-                  <li><strong>Decentralization:</strong> give responsibility to those closest to the work.</li>
-                  <li><strong>Knowledge Worker:</strong> every person who uses their mind to create value is an asset, not a cost.</li>
-                  <li><strong>Purpose of Business:</strong> to create a customer — and to serve society.</li>
-                  <li><strong>Effectiveness over Efficiency:</strong> doing the <em>right</em> things matters more than doing things <em>right</em>.</li>
-                  <li><strong>Continuous Learning:</strong> in a fast-changing world, education never ends.</li>
+                <p className="echoes-paragraph mb-6">
+                  His 1946 book <em>The Concept of the Corporation</em> argued that businesses could only succeed if they respected workers as thinking individuals with dignity and purpose — not merely as tools for profit. This insight was revolutionary.
+                </p>
+                <p className="echoes-paragraph">
+                  For the first time, management was seen not as a mechanical process, but as a human discipline requiring judgment, ethics, and respect.
+                </p>
+              </section>
+
+              {/* Teacher and Thinker */}
+              <section className="echoes-section mt-16">
+                <h2 className="echoes-heading text-3xl font-bold text-foreground mb-8">Teacher and Thinker</h2>
+                <p className="echoes-paragraph mb-6">
+                  Over the following decades, Drucker taught at Bennington College, New York University, and eventually at Claremont Graduate University in California. His courses were not about formulas — they were about asking better questions.
+                </p>
+                <p className="echoes-paragraph mb-6">
+                  He consulted for multinational corporations, nonprofits, hospitals, and government agencies. Wherever he went, he insisted that the role of a manager is not to command, but to enable others to contribute their strengths.
+                </p>
+                <p className="echoes-paragraph">
+                  Drucker believed that management was a liberal art — it required knowledge of economics, psychology, history, and ethics all at once.
+                </p>
+              </section>
+
+              {/* Signature Ideas */}
+              <section className="echoes-section mt-16">
+                <h2 className="echoes-heading text-3xl font-bold text-foreground mb-8">Signature Ideas</h2>
+                <p className="echoes-paragraph mb-6">
+                  Drucker believed that management is a liberal art: it unites economics, psychology, ethics, and responsibility. He argued that the purpose of business is to create and keep a customer, and that profit is the result of doing that well — not the only goal.
+                </p>
+                <p className="echoes-paragraph mb-6">
+                  He introduced concepts that are now fundamental:
+                </p>
+                <ul className="list-disc pl-6 space-y-3 mb-6">
+                  <li><strong>Management by Objectives (MBO):</strong> aligning individual goals with organizational purpose.</li>
+                  <li><strong>The Knowledge Worker:</strong> recognizing that people who think are the most valuable assets.</li>
+                  <li><strong>Decentralization:</strong> pushing decision-making closer to where the work happens.</li>
+                  <li><strong>Effectiveness over Efficiency:</strong> doing the right things matters more than doing things fast.</li>
+                  <li><strong>The Importance of Questions:</strong> "What is our mission?" "What does the customer value?"</li>
                 </ul>
-              </section>
-
-              {/* Famous Quotes */}
-              <section className="space-y-6">
-                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">💬 Famous Quotes by Peter Drucker</h2>
-                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic">
-                  <p>"Management is doing things right; leadership is doing the right things."</p>
-                </blockquote>
-                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic">
-                  <p>"The most important thing in communication is hearing what isn't said."</p>
-                </blockquote>
-                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic">
-                  <p>"Knowledge has to be improved, challenged, and increased constantly, or it vanishes."</p>
-                </blockquote>
-                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic">
+                <blockquote className="echoes-inline-quote p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic mb-6">
                   <p>"There is nothing so useless as doing efficiently that which should not be done at all."</p>
                 </blockquote>
-                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic">
+                <p className="echoes-paragraph">
+                  His work reminded leaders that success is not measured by control, but by contribution.
+                </p>
+              </section>
+
+              {/* A Voice of Reflection (Quotes) */}
+              <section className="echoes-section mt-16">
+                <h2 className="echoes-heading text-3xl font-bold text-foreground mb-8">A Voice of Reflection</h2>
+                <p className="echoes-paragraph mb-8">
+                  Throughout his life, Drucker offered insights that remain as relevant today as when he first spoke them. Here are some of his most enduring reflections:
+                </p>
+                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic mb-6">
+                  <p>"Management is doing things right; leadership is doing the right things."</p>
+                </blockquote>
+                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic mb-6">
+                  <p>"The most important thing in communication is hearing what isn't said."</p>
+                </blockquote>
+                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic mb-6">
+                  <p>"Knowledge has to be improved, challenged, and increased constantly, or it vanishes."</p>
+                </blockquote>
+                <blockquote className="p-6 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg italic mb-6">
                   <p>"Follow effective action with quiet reflection. From the quiet reflection will come even more effective action."</p>
                 </blockquote>
               </section>
 
-              {/* Legacy & Global Impact */}
-              <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🌍 Legacy & Global Impact</h2>
-                <p>
-                  Peter Drucker revolutionized how nations, businesses, and schools see <em>leadership and productivity.</em> He advised CEOs, nonprofits, hospitals, and governments — always reminding them that <em>management is about human beings.</em>
+              {/* Honours and Recognition */}
+              <section className="echoes-section mt-16">
+                <h2 className="echoes-heading text-3xl font-bold text-foreground mb-8">Honours and Recognition</h2>
+                <p className="echoes-paragraph mb-6">
+                  In 2002, Peter Drucker received the Presidential Medal of Freedom, the highest civilian award in the United States. By the time of his passing in 2005 in Claremont, California, he was known worldwide as the father of modern management.
                 </p>
-                <p>His influence spread across disciplines:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>In <strong>business</strong>, he inspired ethical capitalism.</li>
-                  <li>In <strong>education</strong>, he pushed for self-management and lifelong learning.</li>
-                  <li>In <strong>public service</strong>, he urged accountability and citizen focus.</li>
-                  <li>In <strong>society</strong>, he gave us a new definition of success — not wealth, but contribution.</li>
-                </ul>
-                <p>
-                  Today, nearly every MBA program in the world still begins with Drucker's principles.
+                <p className="echoes-paragraph mb-6">
+                  Universities, business schools, and research centers around the world bear his name. His books have been translated into more than 30 languages. Leaders from every sector — business, education, government, and nonprofits — continue to study his work.
+                </p>
+                <p className="echoes-paragraph">
+                  More than awards, however, Drucker's true legacy is in the countless individuals he inspired to lead with integrity, ask meaningful questions, and treat people with dignity.
                 </p>
               </section>
 
-              {/* TMA Connection */}
-              <section className="space-y-6">
-                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🧩 TMA Connection: How Drucker's Ideas Align with Our Pillars</h2>
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="bg-tma-navy/10">
-                        <th className="border border-border p-4 text-left font-bold text-foreground">TMA Pillar</th>
-                        <th className="border border-border p-4 text-left font-bold text-foreground">Drucker's Alignment</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border border-border p-4 font-semibold">Critical Thinking</td>
-                        <td className="border border-border p-4">He taught that good questions are more valuable than quick answers.</td>
-                      </tr>
-                      <tr className="bg-muted/30">
-                        <td className="border border-border p-4 font-semibold">Compatibility</td>
-                        <td className="border border-border p-4">He believed effective organizations depend on understanding people and differences.</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-border p-4 font-semibold">Resilience</td>
-                        <td className="border border-border p-4">He reinvented himself across continents and decades — a model of lifelong adaptation.</td>
-                      </tr>
-                      <tr className="bg-muted/30">
-                        <td className="border border-border p-4 font-semibold">Emotional Intelligence</td>
-                        <td className="border border-border p-4">He saw management as "a liberal art" — rooted in empathy and respect.</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-border p-4 font-semibold">Financial & Return Literacy</td>
-                        <td className="border border-border p-4">He emphasized that profit is not a goal but a test of value creation.</td>
-                      </tr>
-                      <tr className="bg-muted/30">
-                        <td className="border border-border p-4 font-semibold">Leadership & Purpose</td>
-                        <td className="border border-border p-4">His central message: "The task of leadership is to create an alignment of strengths."</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <p className="text-lg font-medium">
-                  Through these values, Peter Drucker's life becomes a living example of what TMA teaches:<br />
-                  <strong>To manage the world, first learn to manage yourself.</strong>
+              {/* Legacy */}
+              <section className="echoes-section mt-16">
+                <h2 className="echoes-heading text-3xl font-bold text-foreground mb-8">Legacy</h2>
+                <p className="echoes-paragraph mb-6">
+                  Drucker taught that leadership is ultimately about people, purpose, and responsibility. His books and lectures continue to shape how organizations work, how leaders think, and how societies define progress.
                 </p>
-              </section>
-
-              {/* If They Were Here Today */}
-              <section className="space-y-4">
-                <h2 className="text-3xl font-bold text-foreground mt-16 mb-8">🪶 If They Were Here Today: Reflections for the AI & Digital Generation</h2>
-                <p>
-                  If Peter Drucker were alive in 2025, he would not fear Artificial Intelligence — he would ask what it teaches us about being <em>more human.</em>
+                <p className="echoes-paragraph mb-6">
+                  He showed that management is not just a profession — it is a way of thinking about how we organize ourselves to achieve something meaningful together.
                 </p>
-                <blockquote className="my-6 p-8 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 border-l-4 border-tma-red rounded-r-lg">
-                  <p className="text-xl font-medium italic text-foreground">
-                    "Technology should serve human judgment, not replace it."
-                  </p>
-                </blockquote>
-                <p>He would challenge teenagers and young leaders to:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Use data with <strong>purpose</strong>, not vanity.</li>
-                  <li>Lead with <strong>clarity</strong>, not noise.</li>
-                  <li>Remember that <strong>innovation without ethics</strong> is confusion, not progress.</li>
-                  <li>Manage their own attention as carefully as they manage their devices.</li>
-                </ul>
-                <p>
-                  He would remind this generation that <strong>every click, post, and choice is an act of management</strong> — of your time, your mind, and your impact.
+                <p className="echoes-paragraph">
+                  Nearly every MBA program in the world begins with his principles. His ideas remain foundational to understanding how organizations can serve humanity rather than control it.
                 </p>
               </section>
 
               {/* Closing Reflection */}
-              <section className="space-y-4 mt-16 p-8 bg-gradient-to-r from-tma-teal/5 to-tma-blue/5 rounded-lg border border-tma-teal/20">
-                <h2 className="text-3xl font-bold text-foreground mb-8">✨ Closing Reflection</h2>
-                <p className="text-lg">
-                  Peter Drucker never aimed to create followers.<br />
-                  He aimed to create <strong>thinkers</strong> — people who act with integrity, courage, and curiosity.<br />
-                  Through <strong>ECHOES</strong>, his voice continues to speak to the world's next generation of managers, dreamers, and leaders.
+              <section className="echoes-section echoes-closing mt-16 p-8 bg-gradient-to-r from-tma-navy/5 to-tma-blue/5 rounded-lg border border-tma-navy/20">
+                <h2 className="echoes-heading text-3xl font-bold text-foreground mb-8">Closing Reflection</h2>
+                <p className="echoes-paragraph text-lg">
+                  Peter Drucker never looked for fame. He looked for clarity. He believed that the future belongs to those who understand people, not just systems. His work still asks every young leader the same question: What kind of future will you create?
                 </p>
               </section>
 
