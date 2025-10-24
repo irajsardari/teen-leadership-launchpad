@@ -13,6 +13,7 @@ import mcgregorImage from "@/assets/echoes-symbolic-mcgregor.jpg";
 import hofstedeImage from "@/assets/echoes-symbolic-hofstede.jpg";
 import mintzbergImage from "@/assets/echoes-symbolic-mintzberg.jpg";
 import scheinImage from "@/assets/echoes-symbolic-schein.jpg";
+import sengeImage from "@/assets/echoes-symbolic-senge.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -87,6 +88,14 @@ const EchoesPage = () => {
       image: scheinImage,
       excerpt: 'He revealed that every organization has a soul — its shared beliefs, assumptions, and ways of seeing the world. Understanding that soul is the leader\'s first task.',
       slug: 'edgar-schein'
+    },
+    {
+      id: 'peter-senge',
+      name: 'Peter M. Senge',
+      subtitle: 'The Visionary Who Taught the World to Think in Systems',
+      image: sengeImage,
+      excerpt: 'He showed that every organization is a living system — and that the leaders of tomorrow are those who can see the whole, not just the parts.',
+      slug: 'peter-senge'
     }
   ];
 
