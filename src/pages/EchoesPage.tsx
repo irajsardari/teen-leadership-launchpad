@@ -11,6 +11,7 @@ import mayoImage from "@/assets/echoes-symbolic-mayo.jpg";
 import follettImage from "@/assets/echoes-symbolic-follett.jpg";
 import mcgregorImage from "@/assets/echoes-symbolic-mcgregor.jpg";
 import hofstedeImage from "@/assets/echoes-symbolic-hofstede.jpg";
+import mintzbergImage from "@/assets/echoes-symbolic-mintzberg.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -69,6 +70,14 @@ const EchoesPage = () => {
       image: hofstedeImage,
       excerpt: 'He taught the world that leadership, teamwork, and communication look different in every culture — and that understanding those differences is the first step toward unity.',
       slug: 'geert-hofstede'
+    },
+    {
+      id: 'henry-mintzberg',
+      name: 'Henry Mintzberg',
+      subtitle: 'The Strategist Who Redefined Management as Practice',
+      image: mintzbergImage,
+      excerpt: 'He stepped out of the classroom and into real offices — discovering that true management is less about theory and more about connection, judgment, and craft.',
+      slug: 'henry-mintzberg'
     }
   ];
 
