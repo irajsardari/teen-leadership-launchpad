@@ -9,6 +9,7 @@ import maslowImage from "@/assets/echoes-symbolic-maslow.jpg";
 import taylorImage from "@/assets/echoes-symbolic-taylor.jpg";
 import mayoImage from "@/assets/echoes-symbolic-mayo.jpg";
 import follettImage from "@/assets/echoes-symbolic-follett.jpg";
+import mcgregorImage from "@/assets/echoes-symbolic-mcgregor.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -51,6 +52,14 @@ const EchoesPage = () => {
       image: follettImage,
       excerpt: 'She redefined leadership as partnership — showing that real power grows when shared.',
       slug: 'mary-parker-follett'
+    },
+    {
+      id: 'douglas-mcgregor',
+      name: 'Douglas McGregor',
+      subtitle: 'The Voice Who Taught the World How to See People at Work',
+      image: mcgregorImage,
+      excerpt: 'He showed that the greatest decision every manager makes is not about strategy — but about what they believe human beings are capable of.',
+      slug: 'douglas-mcgregor'
     }
   ];
 
