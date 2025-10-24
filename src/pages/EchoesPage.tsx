@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
 import druckerImage from "@/assets/echoes-symbolic-drucker.jpg";
 import maslowImage from "@/assets/echoes-symbolic-maslow.jpg";
+import taylorImage from "@/assets/echoes-symbolic-taylor.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -24,6 +25,14 @@ const EchoesPage = () => {
       image: maslowImage,
       excerpt: 'The psychologist who taught the world that human potential, not just survival, drives our deepest motivations.',
       slug: 'abraham-maslow'
+    },
+    {
+      id: 'frederick-taylor',
+      name: 'Frederick Winslow Taylor',
+      subtitle: 'The Engineer Who Measured Work and Shaped Modern Management',
+      image: taylorImage,
+      excerpt: 'He transformed factories into systems of precision and performance — proving that efficiency, discipline, and method could build the modern world.',
+      slug: 'frederick-taylor'
     }
   ];
 
