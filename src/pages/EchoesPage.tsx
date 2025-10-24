@@ -10,6 +10,7 @@ import taylorImage from "@/assets/echoes-symbolic-taylor.jpg";
 import mayoImage from "@/assets/echoes-symbolic-mayo.jpg";
 import follettImage from "@/assets/echoes-symbolic-follett.jpg";
 import mcgregorImage from "@/assets/echoes-symbolic-mcgregor.jpg";
+import hofstedeImage from "@/assets/echoes-symbolic-hofstede.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -60,6 +61,14 @@ const EchoesPage = () => {
       image: mcgregorImage,
       excerpt: 'He showed that the greatest decision every manager makes is not about strategy — but about what they believe human beings are capable of.',
       slug: 'douglas-mcgregor'
+    },
+    {
+      id: 'geert-hofstede',
+      name: 'Geert Hofstede',
+      subtitle: 'The Cartographer of Culture',
+      image: hofstedeImage,
+      excerpt: 'He taught the world that leadership, teamwork, and communication look different in every culture — and that understanding those differences is the first step toward unity.',
+      slug: 'geert-hofstede'
     }
   ];
 
