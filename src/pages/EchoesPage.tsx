@@ -18,6 +18,7 @@ import porterImage from "@/assets/echoes-symbolic-porter.jpg";
 import collinsImage from "@/assets/echoes-symbolic-collins.jpg";
 import kotterImage from "@/assets/echoes-symbolic-kotter.jpg";
 import kahnemanImage from "@/assets/echoes-symbolic-kahneman.jpg";
+import golemanImage from "@/assets/echoes-symbolic-goleman.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -132,6 +133,14 @@ const EchoesPage = () => {
       image: kahnemanImage,
       excerpt: 'He revealed that our greatest strength — thinking — is also full of shortcuts and illusions. His work taught leaders to slow down, question certainty, and decide wisely.',
       slug: 'daniel-kahneman'
+    },
+    {
+      id: 'daniel-goleman',
+      name: 'Daniel Goleman',
+      subtitle: 'The Psychologist Who Made Emotions Intelligent',
+      image: golemanImage,
+      excerpt: 'He proved that success depends less on IQ and more on self-awareness, empathy, and mastery of emotion — the true language of leadership.',
+      slug: 'daniel-goleman'
     }
   ];
 
