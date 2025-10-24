@@ -15,6 +15,7 @@ import mintzbergImage from "@/assets/echoes-symbolic-mintzberg.jpg";
 import scheinImage from "@/assets/echoes-symbolic-schein.jpg";
 import sengeImage from "@/assets/echoes-symbolic-senge.jpg";
 import porterImage from "@/assets/echoes-symbolic-porter.jpg";
+import collinsImage from "@/assets/echoes-symbolic-collins.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -105,6 +106,14 @@ const EchoesPage = () => {
       image: porterImage,
       excerpt: 'He showed that competition, when understood clearly, is not destruction — it\'s design. It\'s how organizations learn to create real value for society.',
       slug: 'michael-porter'
+    },
+    {
+      id: 'jim-collins',
+      name: 'Jim Collins',
+      subtitle: 'The Researcher Who Turned Data into the DNA of Greatness',
+      image: collinsImage,
+      excerpt: 'He spent decades asking a single question — why do some companies and leaders last while others fade? His answers became a map for building greatness that endures.',
+      slug: 'jim-collins'
     }
   ];
 
