@@ -4,7 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
-import symbolicImage from "@/assets/echoes-symbolic-drucker.jpg";
+import druckerImage from "@/assets/echoes-symbolic-drucker.jpg";
+import maslowImage from "@/assets/echoes-symbolic-maslow.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -12,9 +13,17 @@ const EchoesPage = () => {
       id: 'peter-drucker',
       name: 'Peter F. Drucker',
       subtitle: 'The Visionary Who Taught the World How to Think',
-      image: symbolicImage,
+      image: druckerImage,
       excerpt: 'The father of modern management who believed that people, not profit, are the true measure of success.',
       slug: 'peter-drucker'
+    },
+    {
+      id: 'abraham-maslow',
+      name: 'Abraham H. Maslow',
+      subtitle: 'The Architect of Human Motivation',
+      image: maslowImage,
+      excerpt: 'The psychologist who taught the world that human potential, not just survival, drives our deepest motivations.',
+      slug: 'abraham-maslow'
     }
   ];
 

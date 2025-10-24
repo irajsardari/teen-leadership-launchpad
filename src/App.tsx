@@ -41,6 +41,8 @@ import ScrollManager from "./components/ScrollManager";
 import { SessionTimeoutProvider } from "./components/SessionTimeoutProvider";
 import EchoesPage from "./pages/EchoesPage";
 import PeterDruckerPage from "./pages/PeterDruckerPage";
+import AbrahamMaslowPage from "./pages/AbrahamMaslowPage";
+import EchoesSlugRouter from "./pages/EchoesSlugRouter";
 
 const queryClient = new QueryClient();
 
@@ -72,7 +74,7 @@ const App = () => (
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
                 <Route path="/voices" element={<BlogPage />} />
                 <Route path="/voices/echoes" element={<EchoesPage />} />
-                <Route path="/voices/echoes/:slug" element={<PeterDruckerPage />} />
+                <Route path="/voices/echoes/:slug" element={<EchoesSlugRouter />} />
                 <Route path="/voices/:slug" element={<BlogPostPage />} />
                 <Route path="/challenger" element={<ChallengerPage />} />
 <Route path="/learning-portal" element={<LearningPortalPage />} />
