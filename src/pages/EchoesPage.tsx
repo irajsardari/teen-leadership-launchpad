@@ -12,6 +12,7 @@ import follettImage from "@/assets/echoes-symbolic-follett.jpg";
 import mcgregorImage from "@/assets/echoes-symbolic-mcgregor.jpg";
 import hofstedeImage from "@/assets/echoes-symbolic-hofstede.jpg";
 import mintzbergImage from "@/assets/echoes-symbolic-mintzberg.jpg";
+import scheinImage from "@/assets/echoes-symbolic-schein.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -78,6 +79,14 @@ const EchoesPage = () => {
       image: mintzbergImage,
       excerpt: 'He stepped out of the classroom and into real offices — discovering that true management is less about theory and more about connection, judgment, and craft.',
       slug: 'henry-mintzberg'
+    },
+    {
+      id: 'edgar-schein',
+      name: 'Edgar H. Schein',
+      subtitle: 'The Architect of Organizational Culture',
+      image: scheinImage,
+      excerpt: 'He revealed that every organization has a soul — its shared beliefs, assumptions, and ways of seeing the world. Understanding that soul is the leader\'s first task.',
+      slug: 'edgar-schein'
     }
   ];
 
