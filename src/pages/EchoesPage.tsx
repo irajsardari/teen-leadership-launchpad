@@ -14,6 +14,7 @@ import hofstedeImage from "@/assets/echoes-symbolic-hofstede.jpg";
 import mintzbergImage from "@/assets/echoes-symbolic-mintzberg.jpg";
 import scheinImage from "@/assets/echoes-symbolic-schein.jpg";
 import sengeImage from "@/assets/echoes-symbolic-senge.jpg";
+import porterImage from "@/assets/echoes-symbolic-porter.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -96,6 +97,14 @@ const EchoesPage = () => {
       image: sengeImage,
       excerpt: 'He showed that every organization is a living system — and that the leaders of tomorrow are those who can see the whole, not just the parts.',
       slug: 'peter-senge'
+    },
+    {
+      id: 'michael-porter',
+      name: 'Michael E. Porter',
+      subtitle: 'The Strategist Who Taught the World How Competition Creates Value',
+      image: porterImage,
+      excerpt: 'He showed that competition, when understood clearly, is not destruction — it\'s design. It\'s how organizations learn to create real value for society.',
+      slug: 'michael-porter'
     }
   ];
 
