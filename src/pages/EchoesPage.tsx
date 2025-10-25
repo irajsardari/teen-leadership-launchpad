@@ -20,6 +20,7 @@ import kotterImage from "@/assets/echoes-symbolic-kotter.jpg";
 import kahnemanImage from "@/assets/echoes-symbolic-kahneman.jpg";
 import golemanImage from "@/assets/echoes-symbolic-goleman.jpg";
 import ulrichImage from "@/assets/echoes-symbolic-ulrich.jpg";
+import franklImage from "@/assets/echoes-symbolic-frankl.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -150,6 +151,14 @@ const EchoesPage = () => {
       image: ulrichImage,
       excerpt: 'The father of modern HR who transformed human resources from a support function into a strategic partner that builds leadership, culture, and capability.',
       slug: 'dave-ulrich'
+    },
+    {
+      id: 'viktor-frankl',
+      name: 'Viktor E. Frankl',
+      subtitle: 'The Psychiatrist Who Found Freedom in Meaning',
+      image: franklImage,
+      excerpt: 'Holocaust survivor and founder of Logotherapy who taught that meaning is the anchor of resilience, and our greatest freedom is to choose our response — even in suffering.',
+      slug: 'viktor-frankl'
     }
   ];
 
