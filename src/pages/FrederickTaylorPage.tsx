@@ -1,9 +1,10 @@
 import { Helmet } from "react-helmet-async";
+import { Badge } from "@/components/ui/badge";
 import taylorSymbolic from "@/assets/echoes-symbolic-taylor.jpg";
 
 const FrederickTaylorPage = () => {
   return (
-    <div className="echoes-article">
+    <article className="echoes-article">
       <Helmet>
         <title>ECHOES – Frederick Winslow Taylor | Teenagers Management Academy</title>
         <meta 
@@ -13,178 +14,175 @@ const FrederickTaylorPage = () => {
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : undefined} />
       </Helmet>
 
-      <article className="echoes-article">
-        {/* HERO SECTION */}
-        <header className="echoes-hero">
-          <div className="echoes-hero-text">
-            <div className="echoes-series-label">ECHOES</div>
-            <div className="echoes-series-subtitle">The Messengers of Management</div>
-
+      {/* Hero Section */}
+      <section className="echoes-hero">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="echoes-badge">
+              The Messengers of Management
+            </Badge>
             <h1 className="echoes-title">
-              Frederick Winslow Taylor — The Engineer Who Measured Work and Shaped Modern Management
+              ECHOES
             </h1>
+            <div className="echoes-subtitle">
+              Frederick Winslow Taylor — The Engineer Who Measured Work and Shaped Modern Management
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* SYMBOLIC IMAGE */}
-            <figure className="echoes-symbolic-figure">
-              <img 
-                src={taylorSymbolic} 
-                alt="Symbolic visual representing Frederick Winslow Taylor's scientific management and precision measurement"
-                loading="eager"
-              />
-            </figure>
-
-            {/* SIGNATURE QUOTE */}
+      {/* Main Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="max-w-4xl mx-auto">
+          
+          {/* Opening Quote */}
+          <div className="echoes-quote-block">
             <blockquote className="echoes-quote">
               "In the past, man has been first; in the future, the system must be first."
-              <span className="echoes-quote-attrib">— Frederick W. Taylor (1856–1915)</span>
             </blockquote>
+            <p className="echoes-quote-attribution">
+              — Frederick W. Taylor (1856–1915)
+            </p>
           </div>
-        </header>
 
-        {/* SNAPSHOT */}
-        <section className="echoes-section">
-          <h2 className="echoes-heading">Snapshot</h2>
-          <ul className="echoes-list">
-            <li><strong>Full Name:</strong> Frederick Winslow Taylor</li>
-            <li><strong>Born:</strong> 20 March 1856, Philadelphia, Pennsylvania, USA</li>
-            <li><strong>Died:</strong> 21 March 1915, Philadelphia, Pennsylvania (aged 59)</li>
-            <li><strong>Profession:</strong> Mechanical engineer, efficiency pioneer, management theorist</li>
-            <li><strong>Major Work:</strong> <em>The Principles of Scientific Management</em> (1911)</li>
-            <li><strong>Field:</strong> Industrial engineering, operations management, organizational efficiency</li>
-          </ul>
-          <p className="echoes-paragraph text-sm text-muted-foreground mt-4">
-            (Sources: Library of Congress archives; Britannica; Taylor Society Papers.)
-          </p>
-        </section>
+          {/* Symbolic Image */}
+          <div className="echoes-image-container">
+            <img 
+              src={taylorSymbolic} 
+              alt="Symbolic visual representing Frederick Winslow Taylor's scientific management and precision measurement"
+              className="echoes-image"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
 
-        {/* EARLY LIFE & INFLUENCES */}
-        <section className="echoes-section">
-          <h2 className="echoes-heading">Early Life & Influences</h2>
-          <p className="echoes-paragraph">
-            Taylor was born into a disciplined Quaker family in Philadelphia. His father was a lawyer; his mother an active social reformer. From childhood, he was fascinated by structure and order.
-          </p>
-          <p className="echoes-paragraph">
-            He began as an apprentice patternmaker in a small machine shop, learning the mechanics of industry firsthand. Later, while working full-time, he earned an engineering degree from the Stevens Institute of Technology.
-          </p>
-          <p className="echoes-paragraph">
-            Curious and analytical, Taylor asked a question that shaped his life:
-          </p>
-          <blockquote className="echoes-inline-quote">
-            "Why does so much human effort go to waste?"
-          </blockquote>
-        </section>
+          {/* Snapshot Section */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Snapshot</h2>
+            <ul className="echoes-list">
+              <li><strong>Full Name:</strong> Frederick Winslow Taylor</li>
+              <li><strong>Born:</strong> 20 March 1856, Philadelphia, Pennsylvania, USA</li>
+              <li><strong>Died:</strong> 21 March 1915, Philadelphia, Pennsylvania (aged 59)</li>
+              <li><strong>Profession:</strong> Mechanical engineer, efficiency expert, management consultant</li>
+              <li><strong>Major Works:</strong> <em>The Principles of Scientific Management</em> (1911), <em>Shop Management</em> (1903)</li>
+              <li><strong>Known For:</strong> Founder of <strong>Scientific Management</strong> (Taylorism), standardizing work processes, systematic efficiency studies.</li>
+            </ul>
+          </section>
 
-        {/* TURNING POINT */}
-        <section className="echoes-section">
-          <h2 className="echoes-heading">Turning Point</h2>
-          <p className="echoes-paragraph">
-            At the Midvale Steel Company in the 1880s, Taylor began timing workers with a stopwatch to discover the most efficient way to perform each task.
-          </p>
-          <p className="echoes-paragraph">
-            His approach shocked traditional managers but produced remarkable results. He argued that if work were measured and standardized scientifically, both productivity and wages could rise.
-          </p>
-          <p className="echoes-paragraph">
-            At Bethlehem Steel, he developed specialized tools and task sequences that doubled output. In 1911 he published <em>The Principles of Scientific Management</em>, a small book that transformed industry by proposing that every job can be studied, measured, and improved scientifically rather than by habit.
-          </p>
-        </section>
+          {/* Early Life & Influences */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Early Life & Influences</h2>
+            <p className="echoes-paragraph">
+              Born into a wealthy Philadelphia family, Taylor showed an early fascination with systems and precision. He studied patterns in play, measured results, and questioned inefficiencies from childhood.
+            </p>
+            <p className="echoes-paragraph">
+              Although he passed Harvard's entrance exams, failing eyesight led him instead to an apprenticeship as a machinist. This turned out to be his turning point — he joined the working world not as an observer, but as a participant who saw waste everywhere.
+            </p>
+            <p className="echoes-paragraph">
+              Curious and analytical, Taylor asked a question that shaped his life:
+            </p>
+            <blockquote className="echoes-inline-quote">
+              "Why does so much human effort go to waste?"
+            </blockquote>
+          </section>
 
-        {/* MAJOR WORKS & SIGNATURE IDEAS */}
-        <section className="echoes-section">
-          <h2 className="echoes-heading">Major Works & Signature Ideas</h2>
-          
-          <h3 className="echoes-subheading">Key Works</h3>
-          <ul className="echoes-list">
-            <li><em>Shop Management</em> (1903)</li>
-            <li><em>The Principles of Scientific Management</em> (1911)</li>
-          </ul>
+          {/* Turning Point */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Turning Point</h2>
+            <p className="echoes-paragraph">
+              At the Midvale Steel Company in the 1880s, Taylor began timing workers with a stopwatch to discover the most efficient way to perform each task.
+            </p>
+            <p className="echoes-paragraph">
+              His approach shocked traditional managers but produced remarkable results. He argued that if work were measured and standardized scientifically, both productivity and wages could rise.
+            </p>
+            <p className="echoes-paragraph">
+              At Bethlehem Steel, he developed specialized tools and task sequences that doubled output. In 1911 he published <em>The Principles of Scientific Management</em>, a small book that transformed industry by proposing that every job can be studied, measured, and improved scientifically rather than by habit.
+            </p>
+          </section>
 
-          <h3 className="echoes-subheading">Core Ideas</h3>
-          <ol className="echoes-list list-decimal">
-            <li><strong>Science, Not Rule of Thumb</strong> – Base decisions on measurement and study.</li>
-            <li><strong>Harmony, Not Discord</strong> – Promote cooperation between management and labor.</li>
-            <li><strong>Maximum Output</strong> – Efficiency should increase both productivity and wages.</li>
-            <li><strong>Division of Labor and Planning</strong> – Managers plan; workers execute.</li>
-            <li><strong>Training and Standardization</strong> – Teach best methods through training, not trial and error.</li>
-          </ol>
+          {/* Major Works & Signature Ideas */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Major Works & Signature Ideas</h2>
+            
+            <h3 className="echoes-subheading">Key Publications:</h3>
+            <ul className="echoes-list">
+              <li><strong>Shop Management</strong> (1903) – Early practical studies in factory efficiency.</li>
+              <li><strong>The Principles of Scientific Management</strong> (1911) – The manifesto of systematic work design.</li>
+            </ul>
 
-          <p className="echoes-paragraph">
-            His system became known as <strong>Taylorism</strong>, the foundation of later methods such as Lean, Total Quality Management, and Six Sigma.
-          </p>
-        </section>
+            <h3 className="echoes-subheading">Core Ideas:</h3>
+            <ol className="echoes-list list-decimal">
+              <li><strong>Science, Not Rule of Thumb</strong> — Replace guesswork with measurement.</li>
+              <li><strong>Standardization</strong> — Identify the "one best way" and train everyone to follow it.</li>
+              <li><strong>Selection and Training</strong> — Match workers to tasks scientifically and develop their skills systematically.</li>
+              <li><strong>Cooperation, Not Conflict</strong> — Taylor believed that fair systems create trust between workers and managers.</li>
+            </ol>
+          </section>
 
-        {/* SELECTED QUOTES */}
-        <section className="echoes-section">
-          <h2 className="echoes-heading">Selected Quotes</h2>
-          <blockquote className="echoes-inline-quote">
-            "In the past, man has been first; in the future, the system must be first."
-          </blockquote>
-          <blockquote className="echoes-inline-quote">
-            "The principal object of management should be to secure the maximum prosperity for the employer, coupled with the maximum prosperity for each employee."
-          </blockquote>
-          <blockquote className="echoes-inline-quote">
-            "The best management is a true science, resting upon clearly defined laws, rules, and principles."
-          </blockquote>
-          <blockquote className="echoes-inline-quote">
-            "The real enemy of the worker is the inefficiency of the system."
-          </blockquote>
-        </section>
+          {/* Selected Quotes */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Selected Quotes</h2>
+            <div className="echoes-quote-list">
+              <blockquote className="echoes-inline-quote">
+                "There is no question that the cost of production is lowered by separating the work of planning and the brain work as much as possible from the manual labor."
+              </blockquote>
+              <blockquote className="echoes-inline-quote">
+                "In the past the man has been first; in the future the system must be first."
+              </blockquote>
+              <blockquote className="echoes-inline-quote">
+                "The principal object of management should be to secure the maximum prosperity for the employer, coupled with the maximum prosperity for each employee."
+              </blockquote>
+            </div>
+          </section>
 
-        {/* HONOURS & RECOGNITION */}
-        <section className="echoes-section">
-          <h2 className="echoes-heading">Honours & Recognition</h2>
-          <p className="echoes-paragraph">
-            Though many labor leaders criticized his methods, Taylor's influence grew rapidly.
-          </p>
-          <p className="echoes-paragraph">
-            He became President of the American Society of Mechanical Engineers (ASME) in 1906 and received global recognition for redefining industrial efficiency.
-          </p>
-          <p className="echoes-paragraph">
-            By the 1910s, factories from the U.S. to Europe and Japan had adopted scientific management as the new model of progress.
-          </p>
-        </section>
+          {/* Honours & Recognition */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Honours & Recognition</h2>
+            <ul className="echoes-list">
+              <li>President of the American Society of Mechanical Engineers (ASME), 1906.</li>
+              <li>Called to testify before the U.S. Congress on his management methods in 1912.</li>
+              <li>Awarded honorary doctorates from the University of Pennsylvania (1906).</li>
+              <li>His principles spread globally, influencing manufacturing from Detroit to Tokyo.</li>
+            </ul>
+          </section>
 
-        {/* LEGACY */}
-        <section className="echoes-section">
-          <h2 className="echoes-heading">Legacy</h2>
-          <p className="echoes-paragraph">
-            Taylor laid the foundation for modern management science.
-          </p>
-          <p className="echoes-paragraph">
-            Every efficiency model, workflow analysis, and productivity metric stems from his original stopwatch studies.
-          </p>
-          <p className="echoes-paragraph">
-            Later thinkers such as Elton Mayo and Peter Drucker built on his systems, bringing empathy and human values to the mechanical precision he pioneered.
-          </p>
-          <p className="echoes-paragraph">
-            Taylor's life's question — "Can work itself be perfected?" — still echoes in every modern effort to balance efficiency with humanity.
-          </p>
-        </section>
+          {/* Legacy */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Legacy</h2>
+            <p className="echoes-paragraph">
+              Frederick Winslow Taylor changed the world by proving that work could be designed, not just endured. His methods fueled the productivity explosion of the 20th century — from Ford's assembly lines to lean manufacturing.
+            </p>
+            <p className="echoes-paragraph">
+              Yet his legacy is complex. Critics accused his system of treating workers like machines. Supporters argue he gave labor the evidence needed to demand better wages.
+            </p>
+            <p className="echoes-paragraph">
+              What remains clear is this: Taylor showed that management is not luck or tradition — it is a discipline that can be learned, tested, and improved.
+            </p>
+          </section>
 
-        {/* CLOSING REFLECTION */}
-        <section className="echoes-section echoes-closing">
-          <h2 className="echoes-heading">Closing Reflection</h2>
-          <p className="echoes-paragraph">
-            Frederick Winslow Taylor died in 1915, just as the industrial age he had shaped was taking flight.
-          </p>
-          <p className="echoes-paragraph">
-            He never saw the global influence of his ideas, yet his pursuit of precision changed how the world works.
-          </p>
-          <p className="echoes-paragraph">
-            He believed progress begins with observation, discipline, and a better method.
-          </p>
-          <p className="echoes-paragraph">
-            More than a century later, his stopwatch stands as a symbol — not of control, but of continual improvement.
-          </p>
-        </section>
+          {/* Closing Reflection */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Closing Reflection</h2>
+            <p className="echoes-paragraph">
+              Frederick Taylor passed away in 1915, but his voice echoes through every process chart, every efficiency study, every system designed to respect the value of time and effort.
+            </p>
+            <p className="echoes-paragraph">
+              Through ECHOES, his message remains: <em>the work we do matters — and doing it right matters even more</em>.
+            </p>
+          </section>
 
-        {/* FOOTER NAVIGATION */}
-        <footer className="echoes-footer-nav">
+        </div>
+      </div>
+
+      {/* Footer Navigation */}
+      <footer className="echoes-footer-nav">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="echoes-next-link">
             <a href="/voices/echoes">← Back to ECHOES Collection</a>
           </div>
-        </footer>
-      </article>
-    </div>
+        </div>
+      </footer>
+    </article>
   );
 };
 

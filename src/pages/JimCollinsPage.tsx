@@ -1,222 +1,189 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { Badge } from "@/components/ui/badge";
 import collinsImage from "@/assets/echoes-symbolic-collins.jpg";
 
 const JimCollinsPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
+    <article className="echoes-article">
       <Helmet>
         <title>Jim Collins – The Researcher Who Turned Data into the DNA of Greatness | ECHOES | TMA</title>
-        <meta name="description" content="The biography and legacy of Jim Collins, researcher and author of Good to Great, who revealed the disciplines and principles that separate enduring excellence from mediocrity." />
+        <meta name="description" content="The biography and legacy of Jim Collins, researcher and author of Good to Great, who revealed the disciplines that separate enduring excellence from mediocrity." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : undefined} />
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-12 lg:py-16 bg-gradient-to-r from-tma-navy to-tma-blue">
+      <section className="echoes-hero">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <Link to="/voices/echoes">
-            <Button variant="ghost" className="mb-6 text-white hover:bg-white/10">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to ECHOES
-            </Button>
-          </Link>
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <Badge className="mb-4 bg-tma-red text-white hover:bg-tma-red/90">
-              ECHOES
-            </Badge>
-            <p className="text-lg md:text-xl mb-2 text-white/90">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="echoes-badge">
               The Messengers of Management
-            </p>
+            </Badge>
+            <h1 className="echoes-title">
+              ECHOES
+            </h1>
+            <div className="echoes-subtitle">
+              Jim Collins — The Researcher Who Turned Data into the DNA of Greatness
+            </div>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <article className="py-12 lg:py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="max-w-4xl mx-auto">
           
-          {/* Title */}
-          <header className="mb-12 text-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
-              Jim Collins
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground italic">
-              The Researcher Who Turned Data into the DNA of Greatness
-            </p>
-          </header>
-
           {/* Opening Quote */}
-          <blockquote className="border-l-4 border-tma-blue pl-6 mb-12 italic text-lg text-muted-foreground">
-            "Greatness is not a function of circumstance. Greatness, it turns out, is largely a matter of conscious choice and discipline."
-            <footer className="mt-2 text-sm not-italic">
-              — Jim Collins (b. 1958)
-            </footer>
-          </blockquote>
+          <div className="echoes-quote-block">
+            <blockquote className="echoes-quote">
+              "Greatness is not a function of circumstance. Greatness, it turns out, is largely a matter of conscious choice."
+            </blockquote>
+            <p className="echoes-quote-attribution">
+              — Jim Collins
+            </p>
+          </div>
 
           {/* Symbolic Image */}
-          <figure className="mb-12 rounded-xl overflow-hidden shadow-lg">
+          <div className="echoes-image-container">
             <img 
               src={collinsImage} 
-              alt="Symbolic representation of sustained greatness with mountain summit representing disciplined ascent"
-              loading="eager"
-              className="w-full h-auto"
+              alt="Symbolic representation of Jim Collins' research methodology"
+              className="echoes-image"
+              loading="lazy"
+              decoding="async"
             />
-            <figcaption className="text-sm text-center text-muted-foreground mt-4 italic">
-              A mountain summit under a clear sky — the ascent of discipline and purpose.
-            </figcaption>
-          </figure>
+            <p className="text-center text-sm text-muted-foreground mt-4 italic">
+              A symbolic representation of rigorous research turning data into timeless principles of greatness.
+            </p>
+          </div>
 
-          {/* Snapshot */}
-          <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">Snapshot</h2>
-            <ul className="space-y-2 text-base leading-relaxed text-muted-foreground">
-              <li><strong className="text-foreground">Full Name:</strong> James C. Collins III</li>
-              <li><strong className="text-foreground">Born:</strong> 25 January 1958, Boulder, Colorado, USA</li>
-              <li><strong className="text-foreground">Profession:</strong> Researcher, author, teacher, business consultant</li>
-              <li><strong className="text-foreground">Affiliation:</strong> Stanford Graduate School of Business (former faculty); now operates from Boulder Research Lab</li>
-              <li><strong className="text-foreground">Major Works:</strong> <em>Built to Last</em> (1994), <em>Good to Great</em> (2001), <em>How the Mighty Fall</em> (2009), <em>Great by Choice</em> (2011)</li>
-              <li><strong className="text-foreground">Known For:</strong> Evidence-based research on enduring organizations and leadership disciplines</li>
-            </ul>
-            <p className="text-sm text-muted-foreground mt-4 italic">
-              (Sources: Stanford University archives; Harvard Business Review interviews; Jim Collins Research Lab.)
+          {/* Snapshot Section */}
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Snapshot</h2>
+            <p className="echoes-paragraph">
+              <strong>Jim Collins</strong> is an American researcher and author whose rigorous studies revealed what separates good companies from truly great ones. Through decades of data-driven research, he identified the disciplines, leadership qualities, and cultural patterns that enable organizations to achieve sustained excellence.
+            </p>
+            <p className="echoes-paragraph">
+              His work transformed management thinking by proving that greatness is not about luck, charisma, or circumstance — it's about disciplined people, disciplined thought, and disciplined action.
             </p>
           </section>
 
           {/* Early Life & Influences */}
-          <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">Early Life & Influences</h2>
-            <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
-              <p>
-                Collins earned degrees in mathematical sciences and business administration from Stanford University, where he later taught as a lecturer.
-                Before turning to research, he worked at McKinsey & Co. and Hewlett-Packard — experiences that taught him how companies succeed or stall.
-              </p>
-              <p>
-                In his thirties he left the academic path to create his own independent research laboratory in Boulder, Colorado, to study organizational endurance over decades.
-                Outside the office he is an avid rock climber, seeing in each ascent the discipline, focus, and humility required to reach greatness.
-              </p>
-            </div>
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Early Life & Influences</h2>
+            <p className="echoes-paragraph">
+              Born in Boulder, Colorado, Collins studied mathematical sciences at Stanford University before earning his MBA from Stanford Graduate School of Business. He began his career teaching at Stanford's business school, where he developed his passion for understanding what makes organizations endure and excel.
+            </p>
+            <p className="echoes-paragraph">
+              Early in his academic career, Collins became fascinated by a simple question: <em>Why do some companies make the leap from good to great while others don't?</em> This question would drive his research for decades.
+            </p>
           </section>
 
           {/* Turning Point */}
-          <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">Turning Point</h2>
-            <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
-              <p>
-                In 1994, with Jerry Porras, he published <em>Built to Last</em>, a six-year study of companies that remained successful for decades.
-                The book showed that lasting firms were guided by core values and purpose beyond profit.
-              </p>
-              <p>
-                His follow-up, <em>Good to Great</em> (2001), became a global phenomenon.
-                Collins and his team analyzed 1,435 companies to find 11 that leaped from mediocrity to sustained excellence — then asked why.
-                Their answers gave the world a new language of leadership: Level 5 Leaders, the Hedgehog Concept, and the Flywheel Effect.
-              </p>
-            </div>
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Turning Point</h2>
+            <p className="echoes-paragraph">
+              In the mid-1990s, Collins assembled a research team to conduct a five-year study examining companies that had made the transition from good performance to great performance — and sustained it for at least fifteen years.
+            </p>
+            <p className="echoes-paragraph">
+              The team analyzed 1,435 companies, identifying just 11 that met their strict criteria. What they discovered challenged conventional wisdom about leadership, strategy, and organizational success.
+            </p>
+            <p className="echoes-paragraph">
+              This research became <strong>Good to Great</strong> (2001), one of the most influential business books ever written, selling over 4 million copies and fundamentally changing how leaders think about building enduring organizations.
+            </p>
           </section>
 
           {/* Major Works & Signature Ideas */}
-          <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">Major Works & Signature Ideas</h2>
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Major Works & Signature Ideas</h2>
             
-            <h3 className="text-xl font-semibold mb-4 text-foreground">Key Publications:</h3>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-muted-foreground">
-              <li><em>Built to Last</em> (1994, with Jerry Porras)</li>
-              <li><em>Good to Great</em> (2001)</li>
-              <li><em>How the Mighty Fall</em> (2009)</li>
-              <li><em>Great by Choice</em> (2011, with Morten Hansen)</li>
+            <h3 className="echoes-subheading">Key Publications:</h3>
+            <ul className="echoes-list">
+              <li><strong>Built to Last</strong> (1994, with Jerry Porras) — Examined visionary companies that thrived for generations.</li>
+              <li><strong>Good to Great</strong> (2001) — Revealed the disciplines that transform good companies into great ones.</li>
+              <li><strong>How the Mighty Fall</strong> (2009) — Analyzed the stages of organizational decline.</li>
+              <li><strong>Great by Choice</strong> (2011, with Morten Hansen) — Studied how companies thrive in chaos and uncertainty.</li>
+              <li><strong>Beyond Entrepreneurship 2.0</strong> (2020) — A practical guide for building an enduring great company.</li>
             </ul>
 
-            <h3 className="text-xl font-semibold mb-4 text-foreground">Core Ideas:</h3>
-            <ol className="list-decimal list-inside space-y-3 text-base leading-relaxed text-muted-foreground">
-              <li><strong className="text-foreground">Level 5 Leadership</strong> – True leaders blend personal humility with professional will.</li>
-              <li><strong className="text-foreground">The Hedgehog Concept</strong> – Greatness comes from focusing on what you can be best at, what you love, and what drives your economic engine.</li>
-              <li><strong className="text-foreground">The Flywheel</strong> – Big results come from small, consistent efforts over time.</li>
-              <li><strong className="text-foreground">Preserve the Core / Stimulate Progress</strong> – Enduring companies stay true to values while constantly adapting.</li>
-              <li><strong className="text-foreground">Return on Luck</strong> – Success depends less on luck than on how you use it.</li>
-            </ol>
+            <h3 className="echoes-subheading">Core Concepts:</h3>
+            <ul className="echoes-list">
+              <li><strong>Level 5 Leadership</strong> — Great leaders combine personal humility with professional will.</li>
+              <li><strong>First Who, Then What</strong> — Get the right people on the bus before deciding where to drive it.</li>
+              <li><strong>The Hedgehog Concept</strong> — Focus on what you can be best at, what drives your economic engine, and what you're deeply passionate about.</li>
+              <li><strong>Culture of Discipline</strong> — Freedom and responsibility within a framework of disciplined action.</li>
+              <li><strong>The Flywheel Effect</strong> — Sustained success comes from consistent effort in a coherent direction, not dramatic breakthroughs.</li>
+              <li><strong>Confronting the Brutal Facts</strong> — Face reality while maintaining unwavering faith that you will prevail.</li>
+            </ul>
           </section>
 
           {/* Selected Quotes */}
-          <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">Selected Quotes</h2>
-            <div className="space-y-6">
-              <blockquote className="border-l-4 border-tma-blue pl-6 italic text-lg text-muted-foreground">
-                "Good is the enemy of great."
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Selected Quotes</h2>
+            <div className="echoes-quote-list">
+              <blockquote className="echoes-inline-quote">
+                "Good is the enemy of great. And that is one of the key reasons why we have so little that becomes great."
               </blockquote>
-              <blockquote className="border-l-4 border-tma-blue pl-6 italic text-lg text-muted-foreground">
-                "Great vision without great people is irrelevant."
+              <blockquote className="echoes-inline-quote">
+                "Level 5 leaders channel their ego needs away from themselves and into the larger goal of building a great company."
               </blockquote>
-              <blockquote className="border-l-4 border-tma-blue pl-6 italic text-lg text-muted-foreground">
-                "By facing the brutal facts, we can build faith in our ability to prevail."
+              <blockquote className="echoes-inline-quote">
+                "The signature of mediocrity is not an unwillingness to change. The signature of mediocrity is chronic inconsistency."
               </blockquote>
-              <blockquote className="border-l-4 border-tma-blue pl-6 italic text-lg text-muted-foreground">
-                "The signature of mediocrity is chronic inconsistency."
+              <blockquote className="echoes-inline-quote">
+                "Greatness is not primarily a matter of circumstance; greatness is first and foremost a matter of conscious choice and discipline."
               </blockquote>
             </div>
           </section>
 
           {/* Honours & Recognition */}
-          <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">Honours & Recognition</h2>
-            <ul className="list-disc list-inside space-y-2 text-base leading-relaxed text-muted-foreground">
-              <li>Distinguished Teaching Award, Stanford Graduate School of Business</li>
-              <li>Named among Top 25 Most Influential Business Thinkers by Thinkers50</li>
-              <li>Advisor to Fortune 500 CEOs, nonprofits, and the U.S. military academy at West Point</li>
-              <li>Honorary doctorates from multiple universities</li>
-              <li>Over 10 million books sold worldwide</li>
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Honours & Recognition</h2>
+            <ul className="echoes-list">
+              <li>Author of six books that have sold over 10 million copies worldwide.</li>
+              <li><em>Good to Great</em> named one of the best business books of all time by multiple publications.</li>
+              <li>Distinguished Teaching Award from Stanford Graduate School of Business.</li>
+              <li>Founder of a management research laboratory in Boulder, Colorado, where he continues his research.</li>
+              <li>Advisor to leaders in business, education, healthcare, government, and social sectors.</li>
             </ul>
           </section>
 
           {/* Legacy */}
-          <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">Legacy</h2>
-            <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
-              <p>
-                Jim Collins transformed leadership research into a discipline of clarity and evidence.
-                He proved that greatness is not charisma or luck — it's character and consistency.
-                His frameworks have guided leaders from start-ups to governments and social enterprises.
-              </p>
-              <p>
-                Even today, his team in Boulder continues to study organizations that endure beyond their founders, asking new questions about resilience and purpose.
-              </p>
-              <p>
-                Every time a leader pauses to ask, "What's our flywheel?" or "Are we disciplined enough to be great?" — his influence lives on.
-              </p>
-            </div>
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Legacy</h2>
+            <p className="echoes-paragraph">
+              Jim Collins transformed management thinking by proving that excellence is not about genius, luck, or dramatic transformation — it's about disciplined consistency over time.
+            </p>
+            <p className="echoes-paragraph">
+              His research methodology set a new standard for business scholarship, combining rigorous data analysis with accessible storytelling. He showed that the principles of greatness apply not just to corporations, but to schools, hospitals, nonprofits, and even individual lives.
+            </p>
+            <p className="echoes-paragraph">
+              For young leaders, Collins offers a powerful message: <em>greatness is a choice available to anyone willing to embrace discipline, confront reality, and persist with unwavering faith</em>.
+            </p>
           </section>
 
           {/* Closing Reflection */}
-          <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">Closing Reflection</h2>
-            <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
-              <p>
-                Jim Collins still teaches, writes, and climbs the mountains around Boulder, seeing in each ascent the symbol of steady discipline and quiet excellence.
-                He reminds leaders that greatness is not a moment of luck, but a lifetime of choices.
-              </p>
-              <blockquote className="border-l-4 border-tma-blue pl-6 my-6 italic text-lg">
-                "The great companies of this world were not built in a single stroke of genius — they were built turn by turn, push by push, on the flywheel of discipline."
-              </blockquote>
-              <p>
-                Through <strong>ECHOES</strong>, his voice inspires future leaders to climb with focus, endurance, and faith in the power of steady progress.
-              </p>
-            </div>
+          <section className="echoes-section">
+            <h2 className="echoes-heading">Closing Reflection</h2>
+            <p className="echoes-paragraph">
+              Jim Collins continues to research and write, driven by the same question that launched his career: <em>What does it take to build something that lasts?</em>
+            </p>
+            <p className="echoes-paragraph">
+              Through ECHOES, his voice reminds every future leader that greatness is not reserved for the lucky few — it's available to anyone willing to do the disciplined work of turning good into great, one decision at a time.
+            </p>
           </section>
 
-          {/* Back Button */}
-          <div className="mt-16 text-center">
-            <Link to="/voices/echoes">
-              <Button variant="outline" size="lg">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to ECHOES Collection
-              </Button>
-            </Link>
-          </div>
-
         </div>
-      </article>
-    </div>
+      </div>
+
+      {/* Footer Navigation */}
+      <footer className="echoes-footer-nav">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="echoes-next-link">
+            <a href="/voices/echoes">← Back to ECHOES Collection</a>
+          </div>
+        </div>
+      </footer>
+    </article>
   );
 };
 
