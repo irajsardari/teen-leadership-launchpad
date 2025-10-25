@@ -18,7 +18,7 @@ const VoicesPage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-inter tracking-tight bg-gradient-to-r from-tma-teal to-tma-red bg-clip-text text-transparent">
-              TMA Voices
+              TMA Voices & Echoes
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Insights from today, wisdom from yesterday
@@ -51,7 +51,7 @@ const VoicesPage = () => {
                 </CardHeader>
                 <CardContent className="text-center pb-12 px-6 relative z-10">
                   <CardDescription className="text-base leading-relaxed text-foreground/70">
-                    Current insights, perspectives, and thought leadership on teenage development and management
+                    Contemporary insights, reflections, and thought leadership on teenage development and management
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -76,7 +76,7 @@ const VoicesPage = () => {
                 </CardHeader>
                 <CardContent className="text-center pb-12 px-6 relative z-10">
                   <CardDescription className="text-base leading-relaxed text-foreground/70">
-                    Biographies and legacies of the great minds who shaped modern management thinking
+                    Timeless biographies and legacies of the great minds who shaped modern management and leadership
                   </CardDescription>
                 </CardContent>
               </Card>
