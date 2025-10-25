@@ -30,7 +30,7 @@ const VoicesPage = () => {
             
             {/* TMA Voices Card */}
             <Link to="/insights" className="block group">
-              <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white border-2 hover:border-tma-teal">
+              <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 rounded-lg shadow-md" style={{ backgroundColor: '#F9F9FB' }}>
                 <CardHeader className="text-center space-y-6 pt-12">
                   <div className="mx-auto w-20 h-20 rounded-full bg-tma-teal/10 flex items-center justify-center group-hover:bg-tma-teal/20 transition-colors duration-300">
                     <Megaphone className="w-10 h-10 text-tma-teal" />
@@ -49,7 +49,7 @@ const VoicesPage = () => {
 
             {/* ECHOES Card */}
             <Link to="/voices/echoes" className="block group">
-              <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white border-2 hover:border-tma-red">
+              <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 rounded-lg shadow-md" style={{ backgroundColor: '#F9F9FB' }}>
                 <CardHeader className="text-center space-y-6 pt-12">
                   <div className="mx-auto w-20 h-20 rounded-full bg-tma-red/10 flex items-center justify-center group-hover:bg-tma-red/20 transition-colors duration-300">
                     <BookOpen className="w-10 h-10 text-tma-red" />
