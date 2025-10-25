@@ -175,19 +175,6 @@ const DaveUlrichPage = () => {
             </p>
           </section>
 
-          {/* References */}
-          <section className="echoes-section">
-            <h2 className="echoes-heading">References</h2>
-            <ol className="echoes-list list-decimal text-sm">
-              <li>Ulrich, D. (1997). <em>Human Resource Champions</em>. Harvard Business School Press.</li>
-              <li>Ulrich & Smallwood (1999). <em>Results-Based Leadership</em>. Harvard Business Review Press.</li>
-              <li>Ulrich, D. (2010). <em>The Why of Work</em>. McGraw-Hill.</li>
-              <li>Ulrich et al. (2017). <em>Victory Through Organization</em>. McGraw-Hill.</li>
-              <li>Thinkers 50 profile (2023).</li>
-              <li>HR Magazine Lifetime Achievement citation.</li>
-            </ol>
-          </section>
-
         </div>
       </div>
 
