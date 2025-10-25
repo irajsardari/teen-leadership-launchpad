@@ -15,49 +15,38 @@ const ViktorFranklPage = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="echoes-hero">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="echoes-badge">
-              The Messengers of Management
-            </Badge>
-            <h1 className="echoes-title">
-              ECHOES
-            </h1>
-            <div className="echoes-subtitle">
-              Viktor E. Frankl — The Psychiatrist Who Found Freedom in Meaning
-            </div>
-          </div>
+      <header className="echoes-hero">
+        <div className="echoes-hero-text">
+          <div className="echoes-series-label">ECHOES</div>
+          <div className="echoes-series-subtitle">The Messengers of Management</div>
+
+          <h1 className="echoes-title">
+            Viktor E. Frankl — The Psychiatrist Who Found Freedom in Meaning
+          </h1>
+
+          {/* SYMBOLIC IMAGE */}
+          <figure className="echoes-symbolic-figure">
+            <img 
+              src={franklImage} 
+              alt="Symbolic representation of Viktor Frankl's philosophy - a small flame glowing within darkness"
+              loading="eager"
+            />
+            <figcaption className="text-center text-sm text-muted-foreground mt-4 italic">
+              A small flame glowing within darkness — representing the light of purpose that survives every storm.
+            </figcaption>
+          </figure>
+
+          {/* SIGNATURE QUOTE */}
+          <blockquote className="echoes-quote">
+            "Everything can be taken from a man but one thing: the last of the human freedoms — to choose one's attitude in any given set of circumstances."
+            <span className="echoes-quote-attrib">— Viktor E. Frankl (1905 – 1997)</span>
+          </blockquote>
         </div>
-      </section>
+      </header>
 
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="max-w-4xl mx-auto">
-          
-          {/* Opening Quote */}
-          <div className="echoes-quote-block">
-            <blockquote className="echoes-quote">
-              "Everything can be taken from a man but one thing: the last of the human freedoms — to choose one's attitude in any given set of circumstances."
-            </blockquote>
-            <p className="echoes-quote-attribution">
-              — Viktor E. Frankl (1905 – 1997)
-            </p>
-          </div>
-
-          {/* Symbolic Image */}
-          <div className="echoes-image-container">
-            <img 
-              src={franklImage} 
-              alt="Symbolic representation of Viktor Frankl's philosophy - a small flame glowing within darkness"
-              className="echoes-image"
-              loading="lazy"
-              decoding="async"
-            />
-            <p className="text-center text-sm text-muted-foreground mt-4 italic">
-              A small flame glowing within darkness — representing the light of purpose that survives every storm.
-            </p>
-          </div>
 
           {/* Snapshot Section */}
           <section className="echoes-section">
