@@ -153,35 +153,38 @@ const EchoesPage = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-r from-tma-navy to-tma-blue overflow-hidden">
+      <section className="relative py-24 lg:py-40 bg-gradient-to-br from-[#1a2332] via-[#1e2937] to-[#243447] overflow-hidden">
         {/* Background Wordmark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ paddingTop: '20px' }}>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div 
-            className="text-[12rem] md:text-[16rem] lg:text-[20rem] font-bold tracking-wider select-none uppercase"
+            className="text-[14rem] md:text-[18rem] lg:text-[24rem] font-black tracking-[0.15em] select-none uppercase"
             style={{ 
-              color: '#1E2530',
-              opacity: 0.25,
+              color: '#2a3947',
+              opacity: 0.6,
               fontFamily: 'Inter, sans-serif',
-              letterSpacing: '1px',
-              filter: 'blur(1px)'
+              fontWeight: 900,
+              letterSpacing: '0.15em',
+              textShadow: '0 0 40px rgba(255,255,255,0.03)'
             }}
           >
             ECHOES
           </div>
         </div>
         
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <Badge className="mb-6 bg-tma-red text-white hover:bg-tma-red/90">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="mb-8 bg-tma-red text-white hover:bg-tma-red/90 px-6 py-2 text-sm font-semibold shadow-lg">
               The Messengers of Management
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 font-inter tracking-tight text-[#4a9eba]" style={{
+              textShadow: '0 2px 20px rgba(74, 158, 186, 0.3)'
+            }}>
               ECHOES
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl mb-3 text-white/90 max-w-3xl mx-auto font-inter font-medium leading-relaxed">
+            <p className="text-xl md:text-2xl lg:text-3xl mb-6 text-white/95 max-w-3xl mx-auto font-inter font-normal leading-relaxed">
               Biographies and legacies of the great minds who shaped modern management and leadership
             </p>
-            <p className="text-base md:text-lg lg:text-xl text-white/70 italic font-medium mt-3">
+            <p className="text-lg md:text-xl lg:text-2xl text-white/60 italic font-light">
               Curated by Dr. Iraj Sardari Baf
             </p>
           </div>
