@@ -43,6 +43,7 @@ import EchoesPage from "./pages/EchoesPage";
 import PeterDruckerPage from "./pages/PeterDruckerPage";
 import AbrahamMaslowPage from "./pages/AbrahamMaslowPage";
 import EchoesSlugRouter from "./pages/EchoesSlugRouter";
+import VoicesPage from "./pages/VoicesPage";
 
 const queryClient = new QueryClient();
 
@@ -72,7 +73,7 @@ const App = () => (
                 <Route path="/tma-plus" element={<TMAPlusPage />} />
                 <Route path="/insights" element={<BlogPage />} />
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
-                <Route path="/voices" element={<BlogPage />} />
+                <Route path="/voices" element={<VoicesPage />} />
                 <Route path="/voices/echoes" element={<EchoesPage />} />
                 <Route path="/voices/echoes/:slug" element={<EchoesSlugRouter />} />
                 <Route path="/voices/:slug" element={<BlogPostPage />} />
