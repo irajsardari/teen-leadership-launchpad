@@ -19,6 +19,7 @@ import collinsImage from "@/assets/echoes-symbolic-collins.jpg";
 import kotterImage from "@/assets/echoes-symbolic-kotter.jpg";
 import kahnemanImage from "@/assets/echoes-symbolic-kahneman.jpg";
 import golemanImage from "@/assets/echoes-symbolic-goleman.jpg";
+import ulrichImage from "@/assets/echoes-symbolic-ulrich.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -141,6 +142,14 @@ const EchoesPage = () => {
       image: golemanImage,
       excerpt: 'He proved that success depends less on IQ and more on self-awareness, empathy, and mastery of emotion — the true language of leadership.',
       slug: 'daniel-goleman'
+    },
+    {
+      id: 'dave-ulrich',
+      name: 'Dave Ulrich',
+      subtitle: 'The Architect of Human Value in Organizations',
+      image: ulrichImage,
+      excerpt: 'The father of modern HR who transformed human resources from a support function into a strategic partner that builds leadership, culture, and capability.',
+      slug: 'dave-ulrich'
     }
   ];
 
