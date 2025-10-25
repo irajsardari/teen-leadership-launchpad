@@ -153,7 +153,22 @@ const EchoesPage = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-r from-tma-navy to-tma-blue">
+      <section className="relative py-20 lg:py-32 bg-gradient-to-r from-tma-navy to-tma-blue overflow-hidden">
+        {/* Background Wordmark */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ paddingTop: '20px' }}>
+          <div 
+            className="text-[12rem] md:text-[16rem] lg:text-[20rem] font-bold tracking-wider select-none"
+            style={{ 
+              color: '#2B3442',
+              opacity: 0.25,
+              fontFamily: 'Inter, sans-serif',
+              letterSpacing: '1px'
+            }}
+          >
+            ECHOES
+          </div>
+        </div>
+        
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center text-white">
             <Badge className="mb-6 bg-tma-red text-white hover:bg-tma-red/90">
