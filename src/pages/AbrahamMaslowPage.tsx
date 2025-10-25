@@ -36,7 +36,7 @@ const AbrahamMaslowPage = () => {
 
             {/* SIGNATURE QUOTE */}
             <blockquote className="echoes-quote">
-              "What a man <em>can</em> be, he <em>must</em> be. This need we may call self-actualization."
+              "What a man can be, he must be. This need we may call self-actualization."
               <span className="echoes-quote-attrib">— Abraham Maslow (1908–1970)</span>
             </blockquote>
           </div>
