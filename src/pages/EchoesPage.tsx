@@ -162,8 +162,11 @@ const EchoesPage = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight">
               ECHOES
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white/90 max-w-3xl mx-auto font-inter font-medium leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl mb-3 text-white/90 max-w-3xl mx-auto font-inter font-medium leading-relaxed">
               Biographies and legacies of the great minds who shaped modern management and leadership
+            </p>
+            <p className="text-base md:text-lg lg:text-xl text-white/70 italic font-medium mt-3">
+              Curated by Dr. Iraj Sardari Baf
             </p>
           </div>
         </div>

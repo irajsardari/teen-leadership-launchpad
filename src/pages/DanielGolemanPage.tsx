@@ -238,7 +238,7 @@ const DanielGolemanPage = () => {
           <Link to="/voices/echoes">
             <Button variant="outline" className="gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Return to ECHOES Collection
+              Back to ECHOES Collection
             </Button>
           </Link>
         </div>

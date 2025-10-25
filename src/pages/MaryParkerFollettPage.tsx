@@ -187,7 +187,7 @@ const MaryParkerFollettPage = () => {
       <footer className="echoes-footer-nav">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="echoes-next-link">
-            <a href="/voices/echoes">← Return to ECHOES Collection</a>
+            <a href="/voices/echoes">← Back to ECHOES Collection</a>
           </div>
         </div>
       </footer>

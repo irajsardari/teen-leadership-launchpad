@@ -169,7 +169,7 @@ const EltonMayoPage = () => {
         {/* FOOTER NAVIGATION */}
         <footer className="echoes-footer-nav">
           <div className="echoes-next-link">
-            <Link to="/voices/echoes">← Return to ECHOES Collection</Link>
+            <Link to="/voices/echoes">← Back to ECHOES Collection</Link>
           </div>
         </footer>
       </article>

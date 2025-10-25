@@ -202,7 +202,7 @@ const DouglasMcGregorPage = () => {
           >
             <Link to="/voices/echoes" className="flex items-center">
               <ArrowLeft className="mr-2 h-4 w-4 group-hover/btn:-translate-x-1 transition-transform duration-200" />
-              Return to ECHOES Collection
+              Back to ECHOES Collection
             </Link>
           </Button>
         </div>

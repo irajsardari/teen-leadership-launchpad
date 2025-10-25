@@ -211,7 +211,7 @@ const MichaelPorterPage = () => {
             <Link to="/voices/echoes">
               <Button variant="outline" size="lg">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Return to ECHOES Collection
+                Back to ECHOES Collection
               </Button>
             </Link>
           </div>
