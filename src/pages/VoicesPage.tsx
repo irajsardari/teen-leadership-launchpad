@@ -13,34 +13,44 @@ const VoicesPage = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-r from-tma-teal to-tma-green">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-inter tracking-tight">
+      <section className="relative py-20 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-tma-teal/5 via-background to-tma-red/5" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-inter tracking-tight bg-gradient-to-r from-tma-teal to-tma-red bg-clip-text text-transparent">
               TMA Voices
             </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Insights from today, wisdom from yesterday
+            </p>
           </div>
         </div>
       </section>
 
       {/* Cards Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             
             {/* TMA Voices Card */}
             <Link to="/insights" className="block group">
-              <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 rounded-lg shadow-md" style={{ backgroundColor: '#F9F9FB' }}>
-                <CardHeader className="text-center space-y-6 pt-12">
-                  <div className="mx-auto w-20 h-20 rounded-full bg-tma-teal/10 flex items-center justify-center group-hover:bg-tma-teal/20 transition-colors duration-300">
-                    <Megaphone className="w-10 h-10 text-tma-teal" />
+              <Card className="relative h-full overflow-hidden border-2 border-tma-teal/20 bg-white/50 backdrop-blur-sm hover:border-tma-teal/40 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(0,150,136,0.3)] hover:-translate-y-1">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-tma-teal/10 to-transparent rounded-bl-full" />
+                <CardHeader className="text-center space-y-6 pt-12 pb-6 relative z-10">
+                  <div className="mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-tma-teal to-tma-teal/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Megaphone className="w-10 h-10 text-white" />
                   </div>
-                  <CardTitle className="text-3xl font-bold text-foreground">
-                    TMA Voices
-                  </CardTitle>
+                  <div>
+                    <CardTitle className="text-3xl font-bold text-tma-teal mb-2">
+                      TMA Voices
+                    </CardTitle>
+                    <p className="text-sm font-medium text-tma-teal/70 uppercase tracking-wider">
+                      Current Perspectives
+                    </p>
+                  </div>
                 </CardHeader>
-                <CardContent className="text-center pb-12">
-                  <CardDescription className="text-lg leading-relaxed text-muted-foreground">
+                <CardContent className="text-center pb-12 px-6 relative z-10">
+                  <CardDescription className="text-base leading-relaxed text-foreground/70">
                     Current insights, perspectives, and thought leadership on teenage development and management
                   </CardDescription>
                 </CardContent>
@@ -49,20 +59,23 @@ const VoicesPage = () => {
 
             {/* ECHOES Card */}
             <Link to="/voices/echoes" className="block group">
-              <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 rounded-lg shadow-md" style={{ backgroundColor: '#F9F9FB' }}>
-                <CardHeader className="text-center space-y-6 pt-12">
-                  <div className="mx-auto w-20 h-20 rounded-full bg-tma-red/10 flex items-center justify-center group-hover:bg-tma-red/20 transition-colors duration-300">
-                    <BookOpen className="w-10 h-10 text-tma-red" />
+              <Card className="relative h-full overflow-hidden border-2 border-tma-red/20 bg-white/50 backdrop-blur-sm hover:border-tma-red/40 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(220,38,38,0.3)] hover:-translate-y-1">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-tma-red/10 to-transparent rounded-bl-full" />
+                <CardHeader className="text-center space-y-6 pt-12 pb-6 relative z-10">
+                  <div className="mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-tma-red to-tma-red/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <BookOpen className="w-10 h-10 text-white" />
                   </div>
-                  <CardTitle className="text-3xl font-bold text-tma-red">
-                    ECHOES
-                  </CardTitle>
-                  <p className="text-lg font-medium text-tma-red italic">
-                    The Messengers of Management
-                  </p>
+                  <div>
+                    <CardTitle className="text-3xl font-bold text-tma-red mb-2">
+                      ECHOES
+                    </CardTitle>
+                    <p className="text-sm font-medium text-tma-red/70 uppercase tracking-wider">
+                      The Messengers of Management
+                    </p>
+                  </div>
                 </CardHeader>
-                <CardContent className="text-center pb-12">
-                  <CardDescription className="text-lg leading-relaxed text-muted-foreground">
+                <CardContent className="text-center pb-12 px-6 relative z-10">
+                  <CardDescription className="text-base leading-relaxed text-foreground/70">
                     Biographies and legacies of the great minds who shaped modern management thinking
                   </CardDescription>
                 </CardContent>
