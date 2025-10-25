@@ -159,8 +159,8 @@ const EchoesPage = () => {
           <div 
             className="text-[12rem] md:text-[16rem] lg:text-[20rem] font-bold tracking-wider select-none uppercase"
             style={{ 
-              color: '#1E2530',
-              opacity: 0.25,
+              color: '#FFFFFF',
+              opacity: 0.12,
               fontFamily: 'Inter, sans-serif',
               letterSpacing: '1px'
             }}
