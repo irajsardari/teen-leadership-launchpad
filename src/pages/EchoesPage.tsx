@@ -22,6 +22,7 @@ import golemanImage from "@/assets/echoes-symbolic-goleman.jpg";
 import ulrichImage from "@/assets/echoes-symbolic-ulrich.jpg";
 import franklImage from "@/assets/echoes-symbolic-frankl.jpg";
 import jobsImage from "@/assets/echoes-symbolic-jobs.jpg";
+import yunusImage from "@/assets/echoes-symbolic-yunus.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -168,6 +169,14 @@ const EchoesPage = () => {
       image: jobsImage,
       excerpt: 'Visionary entrepreneur who revolutionized technology by merging art, science, and humanity — proving that innovation starts with empathy and design serves purpose.',
       slug: 'steve-jobs'
+    },
+    {
+      id: 'muhammad-yunus',
+      name: 'Muhammad Yunus',
+      subtitle: 'The Banker of Hope and Human Capital',
+      image: yunusImage,
+      excerpt: 'Nobel laureate and founder of Grameen Bank who redefined finance as a tool for human empowerment — proving that even the smallest loan can transform lives when paired with dignity and trust.',
+      slug: 'muhammad-yunus'
     }
   ];
 
