@@ -24,6 +24,7 @@ import franklImage from "@/assets/echoes-symbolic-frankl.jpg";
 import jobsImage from "@/assets/echoes-symbolic-jobs.jpg";
 import yunusImage from "@/assets/echoes-symbolic-yunus.jpg";
 import kiyosakiImage from "@/assets/echoes-symbolic-kiyosaki.jpg";
+import buffettImage from "@/assets/echoes-symbolic-buffett.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -186,6 +187,14 @@ const EchoesPage = () => {
       image: kiyosakiImage,
       excerpt: 'Author of Rich Dad Poor Dad who transformed financial education worldwide — teaching millions that true wealth begins with understanding how money works.',
       slug: 'robert-kiyosaki'
+    },
+    {
+      id: 'warren-buffett',
+      name: 'Warren Buffett',
+      subtitle: 'The Philosopher of Value and Patience',
+      image: buffettImage,
+      excerpt: 'The Oracle of Omaha who taught the world that value investing is built on patience, discipline, and ethical wealth creation — proving that true success is measured by the legacy you leave.',
+      slug: 'warren-buffett'
     }
   ];
 
