@@ -21,6 +21,7 @@ import kahnemanImage from "@/assets/echoes-symbolic-kahneman.jpg";
 import golemanImage from "@/assets/echoes-symbolic-goleman.jpg";
 import ulrichImage from "@/assets/echoes-symbolic-ulrich.jpg";
 import franklImage from "@/assets/echoes-symbolic-frankl.jpg";
+import jobsImage from "@/assets/echoes-symbolic-jobs.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -159,6 +160,14 @@ const EchoesPage = () => {
       image: franklImage,
       excerpt: 'Holocaust survivor and founder of Logotherapy who taught that meaning is the anchor of resilience, and our greatest freedom is to choose our response — even in suffering.',
       slug: 'viktor-frankl'
+    },
+    {
+      id: 'steve-jobs',
+      name: 'Steve Jobs',
+      subtitle: 'The Architect of Human-Centered Innovation',
+      image: jobsImage,
+      excerpt: 'Visionary entrepreneur who revolutionized technology by merging art, science, and humanity — proving that innovation starts with empathy and design serves purpose.',
+      slug: 'steve-jobs'
     }
   ];
 
