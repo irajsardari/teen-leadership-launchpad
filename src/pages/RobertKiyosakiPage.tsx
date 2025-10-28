@@ -1,40 +1,48 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import kiyosakiImage from "@/assets/echoes-symbolic-kiyosaki.jpg";
 
 const RobertKiyosakiPage = () => {
   return (
-    <div className="echoes-page">
+    <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Robert Kiyosaki — The Teacher Who Made Money a Language for Everyone | ECHOES | TMA</title>
+        <title>ECHOES – Robert Kiyosaki | Teenagers Management Academy</title>
         <meta name="description" content="Biography of Robert Kiyosaki, entrepreneur and author of Rich Dad Poor Dad, who transformed financial education and taught millions how to build wealth through financial literacy." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : undefined} />
       </Helmet>
 
-      {/* Hero Section */}
-      <section className="echoes-hero">
-        <div className="echoes-hero-content">
-          <p className="echoes-label">ECHOES — The Messengers of Management</p>
-          <p className="echoes-subtitle">Robert Kiyosaki — The Teacher Who Made Money a Language for Everyone</p>
-          <h1>"It's not how much money you make. It's how much money you keep, how hard it works for you, and how many generations you keep it for."</h1>
-          <p className="echoes-attribution">— Robert Kiyosaki (b. 1947)</p>
-        </div>
-      </section>
+      <article className="echoes-article">
+        {/* HERO SECTION */}
+        <header className="echoes-hero">
+          <div className="echoes-hero-text">
+            <div className="echoes-series-label">ECHOES</div>
+            <div className="echoes-series-subtitle">The Messengers of Management</div>
 
-      {/* Visual Section */}
-      <section className="echoes-visual">
-        <img 
-          src={kiyosakiImage} 
-          alt="Two open notebooks titled Assets and Liabilities symbolizing financial clarity and understanding"
-          className="echoes-image"
-          loading="eager"
-        />
-        <p className="echoes-caption">
-          Two open notebooks—one titled "Assets", the other "Liabilities"—resting on a desk beneath warm light, symbolizing how clarity brings control over money.
-        </p>
-      </section>
+            <h1 className="echoes-title">
+              Robert Kiyosaki — The Teacher Who Made Money a Language for Everyone
+            </h1>
 
-      {/* Main Content */}
-      <main className="echoes-main">
+            {/* SYMBOLIC IMAGE */}
+            <figure className="echoes-symbolic-figure">
+              <img 
+                src={kiyosakiImage} 
+                alt="Two open notebooks titled Assets and Liabilities symbolizing financial clarity and understanding"
+                loading="eager"
+              />
+              <figcaption className="text-sm text-muted-foreground mt-3 italic">
+                Two open notebooks—one titled "Assets", the other "Liabilities"—resting on a desk beneath warm light, symbolizing how clarity brings control over money.
+              </figcaption>
+            </figure>
+
+            {/* SIGNATURE QUOTE */}
+            <blockquote className="echoes-quote">
+              "It's not how much money you make. It's how much money you keep, how hard it works for you, and how many generations you keep it for."
+              <span className="echoes-quote-attrib">— Robert Kiyosaki (b. 1947)</span>
+            </blockquote>
+          </div>
+        </header>
+
+        {/* SNAPSHOT */}
         <section className="echoes-section">
           <h2 className="echoes-heading">Snapshot</h2>
           <p className="echoes-paragraph">
@@ -50,6 +58,7 @@ const RobertKiyosakiPage = () => {
           </p>
         </section>
 
+        {/* MAJOR WORKS & SIGNATURE IDEAS */}
         <section className="echoes-section">
           <h2 className="echoes-heading">Major Works & Signature Ideas</h2>
           <ul className="echoes-list">
@@ -61,24 +70,26 @@ const RobertKiyosakiPage = () => {
           </ul>
         </section>
 
+        {/* SELECTED QUOTES */}
         <section className="echoes-section">
-          <h2 className="echoes-heading">Selected Quotes</h2>
-          <blockquote className="echoes-quote">
+          <h2 className="echoes-heading">A Voice of Reflection</h2>
+          <blockquote className="echoes-inline-quote">
             "The most successful people are the ones who ask questions. They're always learning."
           </blockquote>
-          <blockquote className="echoes-quote">
+          <blockquote className="echoes-inline-quote">
             "Don't let the fear of losing be greater than the excitement of winning."
           </blockquote>
-          <blockquote className="echoes-quote">
+          <blockquote className="echoes-inline-quote">
             "It's not the money you earn that makes you rich—it's the knowledge you gain."
           </blockquote>
-          <blockquote className="echoes-quote">
+          <blockquote className="echoes-inline-quote">
             "Your mind is your greatest asset. Invest in it before anything else."
           </blockquote>
         </section>
 
+        {/* HONOURS & RECOGNITION */}
         <section className="echoes-section">
-          <h2 className="echoes-heading">Honors & Recognition</h2>
+          <h2 className="echoes-heading">Honours and Recognition</h2>
           <ul className="echoes-list">
             <li>Author of <em>Rich Dad Poor Dad</em>, translated into more than 50 languages, with 40 million + copies sold worldwide.</li>
             <li>Creator of the CASHFLOW Board Game used in schools and training programs to teach financial literacy.</li>
@@ -86,7 +97,8 @@ const RobertKiyosakiPage = () => {
           </ul>
         </section>
 
-        <section className="echoes-section">
+        {/* CLOSING REFLECTION */}
+        <section className="echoes-section echoes-closing">
           <h2 className="echoes-heading">Closing Reflection</h2>
           <p className="echoes-paragraph">
             Robert Kiyosaki reminds every young learner that understanding money is not greed—it's responsibility.
@@ -94,12 +106,14 @@ const RobertKiyosakiPage = () => {
             He teaches that leadership starts when you take ownership of your own financial future—and then help others do the same.
           </p>
         </section>
-      </main>
 
-      {/* Footer */}
-      <footer className="echoes-footer">
-        <p className="echoes-curator">Curated by Dr. Iraj Sardari Baf</p>
-      </footer>
+        {/* FOOTER NAVIGATION */}
+        <footer className="echoes-footer-nav">
+          <div className="echoes-next-link">
+            <Link to="/voices/echoes">← Back to ECHOES Collection</Link>
+          </div>
+        </footer>
+      </article>
     </div>
   );
 };

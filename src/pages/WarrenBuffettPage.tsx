@@ -1,40 +1,48 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import buffettImage from "@/assets/echoes-symbolic-buffett.jpg";
 
 const WarrenBuffettPage = () => {
   return (
-    <div className="echoes-page">
+    <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Warren Buffett — The Philosopher of Value and Patience | ECHOES | TMA</title>
+        <title>ECHOES – Warren Buffett | Teenagers Management Academy</title>
         <meta name="description" content="Biography of Warren Buffett, the Oracle of Omaha, who taught the world about value investing, patience, and ethical wealth creation through decades of discipline and wisdom." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : undefined} />
       </Helmet>
 
-      {/* Hero Section */}
-      <section className="echoes-hero">
-        <div className="echoes-hero-content">
-          <p className="echoes-label">ECHOES — The Messengers of Management</p>
-          <p className="echoes-subtitle">Warren Buffett — The Philosopher of Value and Patience</p>
-          <h1>"Price is what you pay. Value is what you get."</h1>
-          <p className="echoes-attribution">— Warren Edward Buffett (b. 1930)</p>
-        </div>
-      </section>
+      <article className="echoes-article">
+        {/* HERO SECTION */}
+        <header className="echoes-hero">
+          <div className="echoes-hero-text">
+            <div className="echoes-series-label">ECHOES</div>
+            <div className="echoes-series-subtitle">The Messengers of Management</div>
 
-      {/* Visual Section */}
-      <section className="echoes-visual">
-        <img 
-          src={buffettImage} 
-          alt="An oak tree rising from a planted coin symbolizing growth of value through time and wisdom"
-          className="echoes-image"
-          loading="eager"
-        />
-        <p className="echoes-caption">
-          An oak tree rising from a single planted coin, sunlight passing through its branches — symbolizing the growth of value through time and wisdom.
-        </p>
-      </section>
+            <h1 className="echoes-title">
+              Warren Buffett — The Philosopher of Value and Patience
+            </h1>
 
-      {/* Main Content */}
-      <main className="echoes-main">
+            {/* SYMBOLIC IMAGE */}
+            <figure className="echoes-symbolic-figure">
+              <img 
+                src={buffettImage} 
+                alt="An oak tree rising from a planted coin symbolizing growth of value through time and wisdom"
+                loading="eager"
+              />
+              <figcaption className="text-sm text-muted-foreground mt-3 italic">
+                An oak tree rising from a single planted coin, sunlight passing through its branches — symbolizing the growth of value through time and wisdom.
+              </figcaption>
+            </figure>
+
+            {/* SIGNATURE QUOTE */}
+            <blockquote className="echoes-quote">
+              "Price is what you pay. Value is what you get."
+              <span className="echoes-quote-attrib">— Warren Edward Buffett (b. 1930)</span>
+            </blockquote>
+          </div>
+        </header>
+
+        {/* SNAPSHOT */}
         <section className="echoes-section">
           <h2 className="echoes-heading">Snapshot</h2>
           <p className="echoes-paragraph">
@@ -53,6 +61,7 @@ const WarrenBuffettPage = () => {
           </p>
         </section>
 
+        {/* MAJOR WORKS & SIGNATURE IDEAS */}
         <section className="echoes-section">
           <h2 className="echoes-heading">Major Works & Signature Ideas</h2>
           <ul className="echoes-list">
@@ -65,27 +74,29 @@ const WarrenBuffettPage = () => {
           </ul>
         </section>
 
+        {/* SELECTED QUOTES */}
         <section className="echoes-section">
-          <h2 className="echoes-heading">Selected Quotes</h2>
-          <blockquote className="echoes-quote">
+          <h2 className="echoes-heading">A Voice of Reflection</h2>
+          <blockquote className="echoes-inline-quote">
             "Someone is sitting in the shade today because someone planted a tree a long time ago."
           </blockquote>
-          <blockquote className="echoes-quote">
+          <blockquote className="echoes-inline-quote">
             "The stock market is designed to transfer money from the active to the patient."
           </blockquote>
-          <blockquote className="echoes-quote">
+          <blockquote className="echoes-inline-quote">
             "Risk comes from not knowing what you are doing."
           </blockquote>
-          <blockquote className="echoes-quote">
+          <blockquote className="echoes-inline-quote">
             "It's better to hang out with people better than you. Pick associates whose behavior is better than yours and you'll drift in that direction."
           </blockquote>
-          <blockquote className="echoes-quote">
+          <blockquote className="echoes-inline-quote">
             "The more you learn, the more you earn."
           </blockquote>
         </section>
 
+        {/* HONOURS & RECOGNITION */}
         <section className="echoes-section">
-          <h2 className="echoes-heading">Honors & Recognition</h2>
+          <h2 className="echoes-heading">Honours and Recognition</h2>
           <ul className="echoes-list">
             <li>CEO of Berkshire Hathaway, consistently among the world's most respected companies.</li>
             <li>Named among Time Magazine's 100 Most Influential People multiple times.</li>
@@ -94,7 +105,8 @@ const WarrenBuffettPage = () => {
           </ul>
         </section>
 
-        <section className="echoes-section">
+        {/* CLOSING REFLECTION */}
+        <section className="echoes-section echoes-closing">
           <h2 className="echoes-heading">Closing Reflection</h2>
           <p className="echoes-paragraph">
             Warren Buffett teaches that financial wisdom is built on patience, honesty, and long-term thinking.
@@ -103,12 +115,14 @@ const WarrenBuffettPage = () => {
             For TMA students, he embodies the calm power of delayed gratification — the strength to wait, observe, and grow.
           </p>
         </section>
-      </main>
 
-      {/* Footer */}
-      <footer className="echoes-footer">
-        <p className="echoes-curator">Curated by Dr. Iraj Sardari Baf</p>
-      </footer>
+        {/* FOOTER NAVIGATION */}
+        <footer className="echoes-footer-nav">
+          <div className="echoes-next-link">
+            <Link to="/voices/echoes">← Back to ECHOES Collection</Link>
+          </div>
+        </footer>
+      </article>
     </div>
   );
 };
