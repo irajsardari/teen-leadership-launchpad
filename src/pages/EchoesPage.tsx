@@ -23,6 +23,7 @@ import ulrichImage from "@/assets/echoes-symbolic-ulrich.jpg";
 import franklImage from "@/assets/echoes-symbolic-frankl.jpg";
 import jobsImage from "@/assets/echoes-symbolic-jobs.jpg";
 import yunusImage from "@/assets/echoes-symbolic-yunus.jpg";
+import kiyosakiImage from "@/assets/echoes-symbolic-kiyosaki.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -177,6 +178,14 @@ const EchoesPage = () => {
       image: yunusImage,
       excerpt: 'Nobel laureate and founder of Grameen Bank who redefined finance as a tool for human empowerment — proving that even the smallest loan can transform lives when paired with dignity and trust.',
       slug: 'muhammad-yunus'
+    },
+    {
+      id: 'robert-kiyosaki',
+      name: 'Robert Kiyosaki',
+      subtitle: 'The Teacher Who Made Money a Language for Everyone',
+      image: kiyosakiImage,
+      excerpt: 'Author of Rich Dad Poor Dad who transformed financial education worldwide — teaching millions that true wealth begins with understanding how money works.',
+      slug: 'robert-kiyosaki'
     }
   ];
 
