@@ -25,6 +25,7 @@ import jobsImage from "@/assets/echoes-symbolic-jobs.jpg";
 import yunusImage from "@/assets/echoes-symbolic-yunus.jpg";
 import kiyosakiImage from "@/assets/echoes-symbolic-kiyosaki.jpg";
 import buffettImage from "@/assets/echoes-symbolic-buffett.jpg";
+import deBonoImage from "@/assets/echoes-symbolic-debono.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -195,6 +196,14 @@ const EchoesPage = () => {
       image: buffettImage,
       excerpt: 'The Oracle of Omaha who taught the world that value investing is built on patience, discipline, and ethical wealth creation — proving that true success is measured by the legacy you leave.',
       slug: 'warren-buffett'
+    },
+    {
+      id: 'edward-de-bono',
+      name: 'Edward de Bono',
+      subtitle: 'The Mind That Taught the World to Think Sideways',
+      image: deBonoImage,
+      excerpt: 'Psychologist and philosopher who gave the world practical tools for lateral thinking — proving that creativity is not a gift for the few, but a skill for everyone.',
+      slug: 'edward-de-bono'
     }
   ];
 
