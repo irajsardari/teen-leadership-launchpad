@@ -241,11 +241,15 @@
   }
 
   .echoes-symbolic-figure {
-    @apply my-12 flex justify-center;
+    @apply my-12 flex flex-col items-center justify-center;
   }
 
   .echoes-symbolic-figure img {
     @apply rounded-lg shadow-xl max-w-md w-full;
+  }
+
+  .echoes-symbolic-figure figcaption {
+    @apply mt-3 text-center max-w-md;
   }
 
   .echoes-quote {
