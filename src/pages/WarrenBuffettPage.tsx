@@ -29,9 +29,6 @@ const WarrenBuffettPage = () => {
                 alt="An oak tree rising from a planted coin symbolizing growth of value through time and wisdom"
                 loading="eager"
               />
-              <figcaption className="text-sm text-muted-foreground mt-3 italic">
-                An oak tree rising from a single planted coin, sunlight passing through its branches — symbolizing the growth of value through time and wisdom.
-              </figcaption>
             </figure>
 
             {/* SIGNATURE QUOTE */}

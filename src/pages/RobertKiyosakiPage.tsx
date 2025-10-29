@@ -29,9 +29,6 @@ const RobertKiyosakiPage = () => {
                 alt="Two open notebooks titled Assets and Liabilities symbolizing financial clarity and understanding"
                 loading="eager"
               />
-              <figcaption className="text-sm text-muted-foreground mt-3 italic">
-                Two open notebooks—one titled "Assets", the other "Liabilities"—resting on a desk beneath warm light, symbolizing how clarity brings control over money.
-              </figcaption>
             </figure>
 
             {/* SIGNATURE QUOTE */}
