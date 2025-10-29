@@ -26,6 +26,7 @@ import yunusImage from "@/assets/echoes-symbolic-yunus.jpg";
 import kiyosakiImage from "@/assets/echoes-symbolic-kiyosaki.jpg";
 import buffettImage from "@/assets/echoes-symbolic-buffett.jpg";
 import deBonoImage from "@/assets/echoes-symbolic-debono.jpg";
+import duckworthImage from "@/assets/echoes-symbolic-duckworth.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -204,6 +205,14 @@ const EchoesPage = () => {
       image: deBonoImage,
       excerpt: 'Psychologist and philosopher who gave the world practical tools for lateral thinking — proving that creativity is not a gift for the few, but a skill for everyone.',
       slug: 'edward-de-bono'
+    },
+    {
+      id: 'angela-duckworth',
+      name: 'Angela Duckworth',
+      subtitle: 'The Psychologist Who Proved That Grit Outlasts Talent',
+      image: duckworthImage,
+      excerpt: 'Psychologist and professor who introduced the concept of grit — demonstrating that sustained effort and passion for long-term goals often outperform raw ability.',
+      slug: 'angela-duckworth'
     }
   ];
 
