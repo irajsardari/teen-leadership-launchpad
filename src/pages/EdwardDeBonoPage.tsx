@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import deBonoImage from "@/assets/echoes-symbolic-debono.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const EdwardDeBonoPage = () => {
   return (
@@ -103,6 +104,17 @@ const EdwardDeBonoPage = () => {
             don't only look for answers — create better questions.
             He reminds every young leader that progress begins when courage meets imagination, and when thought becomes a tool for possibility.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Edward de Bono — The Mind That Taught the World to Think Sideways"
+              description="Biography of Edward de Bono, the mind that taught the world to think sideways through lateral thinking and Six Thinking Hats."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

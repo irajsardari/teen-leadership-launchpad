@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import kiyosakiImage from "@/assets/echoes-symbolic-kiyosaki.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const RobertKiyosakiPage = () => {
   return (
@@ -102,6 +103,17 @@ const RobertKiyosakiPage = () => {
             Through ECHOES, his voice encourages TMA students to manage their finances with awareness, courage, and creativity.
             He teaches that leadership starts when you take ownership of your own financial future—and then help others do the same.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Robert Kiyosaki — The Teacher Who Made Money a Language for Everyone"
+              description="Biography of Robert Kiyosaki, entrepreneur and author of Rich Dad Poor Dad, who transformed financial education and taught millions how to build wealth through financial literacy."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

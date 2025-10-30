@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import duckworthImage from "@/assets/echoes-symbolic-duckworth.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const AngelaDuckworthPage = () => {
   return (
@@ -77,6 +78,17 @@ const AngelaDuckworthPage = () => {
           <p className="echoes-paragraph text-center italic mt-8">
             Curated by Dr. Iraj Sardari Baf
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Angela Duckworth — The Psychologist Who Proved That Grit Outlasts Talent"
+              description="Biography of Angela Duckworth, psychologist and author who introduced the concept of grit as the combination of passion and perseverance toward long-term goals."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import yunusImage from "@/assets/echoes-symbolic-yunus.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const MuhammadYunusPage = () => {
   return (
@@ -107,6 +108,17 @@ const MuhammadYunusPage = () => {
           <p className="echoes-paragraph text-center italic mt-8">
             Curated by Dr. Iraj Sardari Baf
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Muhammad Yunus — The Banker of Hope and Human Capital"
+              description="Biography of Muhammad Yunus, founder of Grameen Bank and pioneer of microfinance as a tool for human empowerment and dignity."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}
