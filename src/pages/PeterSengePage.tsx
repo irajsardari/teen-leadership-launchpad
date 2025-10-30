@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import sengeImage from "@/assets/echoes-symbolic-senge.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const PeterSengePage = () => {
   return (
@@ -164,6 +165,17 @@ const PeterSengePage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, his voice guides future leaders to look beyond symptoms, trace connections, and act with wisdom.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Peter M. Senge — The Visionary Who Taught the World to Think in Systems"
+              description="The biography and legacy of Peter M. Senge, systems scientist and author of The Fifth Discipline, who introduced the world to learning organizations and systems thinking."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

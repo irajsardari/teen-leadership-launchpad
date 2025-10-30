@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import hofstedeImage from "@/assets/echoes-symbolic-hofstede.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const GeertHofstedePage = () => {
   return (
@@ -146,7 +147,7 @@ const GeertHofstedePage = () => {
         <section className="echoes-section echoes-closing">
           <h2 className="echoes-heading">Closing Reflection</h2>
           <p className="echoes-paragraph">
-            Geert Hofstede passed away in 2020, but his model continues to evolve through new generations of scholars. He once said that cultures are "the collective software of the mind" — but unlike machines, minds can update. Through understanding, respect, and curiosity, humanity can keep rewriting its shared code.
+            Geert Hofstede passed away in 2020, but his work continues to guide cross-cultural management, global education, and international diplomacy. He believed that understanding differences is the foundation of respect.
           </p>
           <blockquote className="echoes-inline-quote">
             "We are all different — yet all human."
@@ -154,6 +155,17 @@ const GeertHofstedePage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, his voice continues to remind young leaders that the world is not divided by borders, but by assumptions — and both can be crossed.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Geert Hofstede — The Cartographer of Culture"
+              description="Biography of Geert Hofstede, the social psychologist who mapped cultural dimensions and transformed cross-cultural management understanding worldwide."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

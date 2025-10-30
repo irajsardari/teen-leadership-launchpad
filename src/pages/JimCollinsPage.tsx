@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import collinsImage from "@/assets/echoes-symbolic-collins.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const JimCollinsPage = () => {
   return (
@@ -154,6 +155,17 @@ const JimCollinsPage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, his voice reminds every future leader that greatness is not reserved for the lucky few — it's available to anyone willing to do the disciplined work of turning good into great, one decision at a time.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Jim Collins — The Researcher Who Turned Data into the DNA of Greatness"
+              description="The biography and legacy of Jim Collins, researcher and author of Good to Great, who revealed the disciplines that separate enduring excellence from mediocrity."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

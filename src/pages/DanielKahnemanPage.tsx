@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import kahnemanImage from "@/assets/echoes-symbolic-kahneman.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const DanielKahnemanPage = () => {
   return (
@@ -158,6 +159,17 @@ const DanielKahnemanPage = () => {
           <p className="echoes-paragraph">
             Through <strong>ECHOES</strong>, his voice reminds young leaders that self-awareness is not only emotional — it is cognitive: the art of thinking about how we think.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Daniel Kahneman — The Psychologist Who Measured How the Mind Decides"
+              description="Biography of Daniel Kahneman, Nobel Prize-winning psychologist who revealed how cognitive biases shape decision-making and founded behavioral economics."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import mintzbergImage from "@/assets/echoes-symbolic-mintzberg.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const HenryMintzbergPage = () => {
   return (
@@ -150,7 +151,7 @@ const HenryMintzbergPage = () => {
         <section className="echoes-section echoes-closing">
           <h2 className="echoes-heading">Closing Reflection</h2>
           <p className="echoes-paragraph">
-            Henry Mintzberg continues to write and teach from Montreal, urging managers to rediscover the art of practice. He reminds us that leadership is not a science to be mastered but a craft to be lived.
+            Henry Mintzberg continues to teach, write, and challenge leaders worldwide from his base in Montreal. He believes that the future of management depends not on better theories, but on wiser practitioners.
           </p>
           <blockquote className="echoes-inline-quote">
             "The best managers are not those who know the answers, but those who ask the right questions."
@@ -158,6 +159,17 @@ const HenryMintzbergPage = () => {
           <p className="echoes-paragraph">
             Through <strong>ECHOES</strong>, his voice reminds young leaders that management is not a profession — it's a calling to serve, to learn, and to build communities of purpose.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Henry Mintzberg — The Strategist Who Redefined Management as Practice"
+              description="Biography of Henry Mintzberg, the management scientist who observed real managers and redefined strategy as an emergent, lived process rather than rigid planning."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import porterImage from "@/assets/echoes-symbolic-porter.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const MichaelPorterPage = () => {
   return (
@@ -164,6 +165,17 @@ const MichaelPorterPage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, his voice reminds young leaders that competition is not about defeating others but about designing better ways to create value for all.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Michael E. Porter — The Strategist Who Taught the World How Competition Creates Value"
+              description="The biography and legacy of Michael E. Porter, Harvard economist and strategist who introduced the Five Forces Model and taught the world about competitive strategy and shared value."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

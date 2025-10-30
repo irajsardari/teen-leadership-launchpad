@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import follettImage from "@/assets/echoes-symbolic-follett.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const MaryParkerFollettPage = () => {
   return (
@@ -162,6 +163,17 @@ const MaryParkerFollettPage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, her message endures — that every leader's true power is born not from control, but from connection.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Mary Parker Follett — The Prophet of Collaboration and Shared Power"
+              description="The life and legacy of Mary Parker Follett (1868–1933), the prophet of collaboration and shared power, presented in the ECHOES series, The Messengers of Management."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

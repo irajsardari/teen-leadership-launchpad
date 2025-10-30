@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import golemanImage from "@/assets/echoes-symbolic-goleman.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const DanielGolemanPage = () => {
   return (
@@ -162,6 +163,17 @@ const DanielGolemanPage = () => {
           <p className="echoes-paragraph">
             Through <strong>ECHOES</strong>, his voice reminds future leaders that emotional intelligence is not a soft skill — it's a core competence for a human world.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Daniel Goleman — The Psychologist Who Made Emotions Intelligent"
+              description="Biography of Daniel Goleman, psychologist who popularized Emotional Intelligence (EQ) and showed that success depends on self-awareness, empathy, and emotional mastery."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

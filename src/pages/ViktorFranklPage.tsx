@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import franklImage from "@/assets/echoes-symbolic-frankl.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const ViktorFranklPage = () => {
   return (
@@ -148,6 +149,17 @@ const ViktorFranklPage = () => {
           <p className="echoes-paragraph">
             Viktor Frankl's life reminds us that even in darkness, the human spirit can shine. His voice in ECHOES — The Academy's Hall of Thinkers represents the pillar of <strong>Resilience</strong> — the power to endure through purpose, faith, and choice.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Viktor E. Frankl — The Psychiatrist Who Found Freedom in Meaning"
+              description="Biography of Viktor E. Frankl, the Austrian psychiatrist and Holocaust survivor who taught that meaning is the anchor of resilience."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

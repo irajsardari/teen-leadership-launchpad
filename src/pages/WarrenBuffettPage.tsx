@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import buffettImage from "@/assets/echoes-symbolic-buffett.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const WarrenBuffettPage = () => {
   return (
@@ -111,6 +112,17 @@ const WarrenBuffettPage = () => {
             True return is measured not by the money you earn, but by the trust you build and the legacy you leave.
             For TMA students, he embodies the calm power of delayed gratification — the strength to wait, observe, and grow.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Warren Buffett — The Philosopher of Value and Patience"
+              description="Biography of Warren Buffett, the Oracle of Omaha, who taught the world about value investing, patience, and ethical wealth creation through decades of discipline and wisdom."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

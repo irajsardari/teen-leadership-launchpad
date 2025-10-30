@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import symbolicImage from "@/assets/echoes-symbolic-drucker.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const PeterDruckerPage = () => {
   return (
@@ -177,6 +178,17 @@ const PeterDruckerPage = () => {
           <p className="echoes-paragraph">
             His work still asks every young leader the same question: What kind of future will you create?
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Peter F. Drucker — The Visionary Who Taught the World How to Think"
+              description="Biography and legacy of Peter F. Drucker, presented in the ECHOES series: The Messengers of Management."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

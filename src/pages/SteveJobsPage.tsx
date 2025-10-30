@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import jobsImage from "@/assets/echoes-symbolic-jobs.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const SteveJobsPage = () => {
   return (
@@ -104,6 +105,17 @@ const SteveJobsPage = () => {
           <p className="echoes-paragraph text-center italic mt-8">
             Curated by Dr. Iraj Sardari Baf
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Steve Jobs — The Architect of Human-Centered Innovation"
+              description="Biography of Steve Jobs, the visionary who revolutionized technology by merging art, science, and humanity."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

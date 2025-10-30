@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import taylorSymbolic from "@/assets/echoes-symbolic-taylor.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const FrederickTaylorPage = () => {
   return (
@@ -153,6 +154,17 @@ const FrederickTaylorPage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, his message remains: <em>the work we do matters — and doing it right matters even more</em>.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Frederick Winslow Taylor — The Engineer Who Measured Work and Shaped Modern Management"
+              description="Biography and legacy of Frederick Winslow Taylor, founder of Scientific Management who proved that work could be designed, not just endured."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

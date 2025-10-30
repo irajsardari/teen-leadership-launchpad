@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import mcgregorImage from "@/assets/echoes-symbolic-mcgregor.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const DouglasMcGregorPage = () => {
   return (
@@ -151,6 +152,17 @@ const DouglasMcGregorPage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, his voice continues to teach a new generation that leadership begins with trust.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Douglas McGregor — The Voice Who Taught the World How to See People at Work"
+              description="Biography and legacy of Douglas McGregor, creator of Theory X and Theory Y, who transformed management by teaching leaders to see people as capable partners in achievement."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

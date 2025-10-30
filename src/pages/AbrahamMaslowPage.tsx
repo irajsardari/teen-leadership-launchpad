@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import maslowSymbolic from "@/assets/echoes-symbolic-maslow.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const AbrahamMaslowPage = () => {
   return (
@@ -164,6 +165,17 @@ const AbrahamMaslowPage = () => {
           <p className="echoes-paragraph">
             His voice still echoes through classrooms and boardrooms alike, reminding us that progress begins when we ask not what people can do for us, but what we can do to help people become who they are meant to be.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Abraham H. Maslow — The Architect of Human Motivation"
+              description="The life and legacy of Abraham H. Maslow (1908–1970) – the architect of human motivation – presented in the ECHOES series, The Messengers of Management."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

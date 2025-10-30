@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import mayoSymbolic from "@/assets/echoes-symbolic-mayo.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const EltonMayoPage = () => {
   return (
@@ -147,6 +148,17 @@ const EltonMayoPage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, his lesson remains: <em>to lead is to listen — because understanding is the beginning of respect</em>.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Elton Mayo — The Listener Who Brought Humanity to the Workplace"
+              description="Biography and legacy of Elton Mayo, the psychologist who proved that workers respond to attention, respect, and connection through the Hawthorne Studies."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import kotterImage from "@/assets/echoes-symbolic-kotter.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const JohnKotterPage = () => {
   return (
@@ -160,6 +161,17 @@ const JohnKotterPage = () => {
           <p className="echoes-paragraph">
             Through <strong>ECHOES</strong>, his voice reminds future leaders that change is not a threat, but a chance to build a better world.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="John P. Kotter — The Architect of Change Leadership"
+              description="Biography of John P. Kotter, leadership scholar and author of Leading Change, who showed that change is not a plan but a journey."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

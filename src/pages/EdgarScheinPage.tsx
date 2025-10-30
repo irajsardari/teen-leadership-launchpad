@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import scheinImage from "@/assets/echoes-symbolic-schein.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const EdgarScheinPage = () => {
   return (
@@ -150,7 +151,7 @@ const EdgarScheinPage = () => {
         <section className="echoes-section echoes-closing">
           <h2 className="echoes-heading">Closing Reflection</h2>
           <p className="echoes-paragraph">
-            Edgar Schein passed away in 2023, leaving behind a philosophy of leadership based on curiosity and respect. He believed that organizations grow only when people feel safe enough to learn.
+            Edgar Schein passed away in 2023, but his voice continues to echo in every conversation where curiosity defeats certainty. He reminded leaders that the most important questions are not those they ask themselves, but those they ask others.
           </p>
           <blockquote className="echoes-inline-quote">
             "To lead is to learn, and to learn is to listen."
@@ -158,6 +159,17 @@ const EdgarScheinPage = () => {
           <p className="echoes-paragraph">
             Through ECHOES, his voice continues to remind young leaders that culture is not what you declare — it's what you practice every day.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Edgar H. Schein — The Architect of Organizational Culture"
+              description="Biography of Edgar H. Schein, the psychologist who revealed the three levels of organizational culture and pioneered the concept of humble inquiry in leadership."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import ulrichImage from "@/assets/echoes-symbolic-ulrich.jpg";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 
 const DaveUlrichPage = () => {
   return (
@@ -144,6 +145,17 @@ const DaveUlrichPage = () => {
           <p className="echoes-paragraph">
             Dave Ulrich reminds every future leader that <strong>"human resources"</strong> are not a department — they are the source of every achievement. Through ECHOES, his voice continues to inspire a generation to see management not as control, but as connection — turning human potential into organizational greatness.
           </p>
+        </section>
+
+        {/* SOCIAL SHARE */}
+        <section className="echoes-section">
+          <div className="py-6 border-t border-border/50">
+            <h3 className="text-sm font-medium text-center text-muted-foreground mb-4">Share this profile</h3>
+            <SocialShareButtons 
+              title="Dave Ulrich — The Architect of Human Value in Organizations"
+              description="Biography of Dave Ulrich, the father of modern HR who transformed human resources into a strategic partner for organizational success."
+            />
+          </div>
         </section>
 
         {/* FOOTER NAVIGATION */}
