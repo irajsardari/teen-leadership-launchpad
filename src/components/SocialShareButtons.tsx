@@ -25,7 +25,7 @@ export const SocialShareButtons = ({ title, description, className = "" }: Socia
   const shareToWhatsApp = () => {
     const url = encodeURIComponent(window.location.href);
     const text = encodeURIComponent(description ? `${title} - ${description}` : title);
-    window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?text=${text} ${url}`, '_blank');
   };
 
   const copyLink = () => {
