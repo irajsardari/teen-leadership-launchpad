@@ -29,9 +29,6 @@ const MuhammadYunusPage = () => {
                 alt="A single growing seed emerging from a human palm made of coins — symbolizing finance as a force for human growth and social return"
                 loading="eager"
               />
-              <figcaption className="text-sm text-muted-foreground mt-3 italic text-center">
-                A single growing seed emerging from a human palm made of coins — symbolizing finance as a force for human growth and social return.
-              </figcaption>
             </figure>
 
             {/* SIGNATURE QUOTE */}

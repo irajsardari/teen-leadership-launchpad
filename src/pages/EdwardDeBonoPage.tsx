@@ -29,9 +29,6 @@ const EdwardDeBonoPage = () => {
                 alt="A prism splitting one beam of light into many colors symbolizing perspective expansion"
                 loading="eager"
               />
-              <figcaption className="text-sm text-muted-foreground mt-3 italic text-center">
-                A prism splitting one beam of light into many colors — symbolizing how lateral thinking expands perspectives and creates new possibilities from a single starting point.
-              </figcaption>
             </figure>
 
             {/* SIGNATURE QUOTE */}

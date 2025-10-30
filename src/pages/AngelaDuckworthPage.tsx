@@ -29,9 +29,6 @@ const AngelaDuckworthPage = () => {
                 alt="A small green sprout breaking through dry earth symbolizing perseverance and determination"
                 loading="eager"
               />
-              <figcaption className="text-sm text-muted-foreground mt-3 italic text-center">
-                A small green sprout breaking through dry earth — symbolizing the quiet strength of perseverance that pushes life forward even when conditions seem impossible.
-              </figcaption>
             </figure>
 
             {/* SIGNATURE QUOTE */}
