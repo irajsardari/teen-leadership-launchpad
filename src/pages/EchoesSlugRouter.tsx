@@ -22,6 +22,7 @@ import RobertKiyosakiPage from "./RobertKiyosakiPage";
 import WarrenBuffettPage from "./WarrenBuffettPage";
 import EdwardDeBonoPage from "./EdwardDeBonoPage";
 import AngelaDuckworthPage from "./AngelaDuckworthPage";
+import HowardGardnerPage from "./HowardGardnerPage";
 import NotFound from "./NotFound";
 
 const EchoesSlugRouter = () => {
@@ -74,6 +75,8 @@ const EchoesSlugRouter = () => {
       return <EdwardDeBonoPage />;
     case "angela-duckworth":
       return <AngelaDuckworthPage />;
+    case "howard-gardner":
+      return <HowardGardnerPage />;
     default:
       return <NotFound />;
   }

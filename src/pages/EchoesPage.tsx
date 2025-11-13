@@ -27,6 +27,7 @@ import kiyosakiImage from "@/assets/echoes-symbolic-kiyosaki.jpg";
 import buffettImage from "@/assets/echoes-symbolic-buffett.jpg";
 import deBonoImage from "@/assets/echoes-symbolic-debono.jpg";
 import duckworthImage from "@/assets/echoes-symbolic-duckworth.jpg";
+import gardnerImage from "@/assets/echoes-symbolic-gardner.jpg";
 
 const EchoesPage = () => {
   const echoesProfiles = [
@@ -213,6 +214,14 @@ const EchoesPage = () => {
       image: duckworthImage,
       excerpt: 'Psychologist and professor who introduced the concept of grit — demonstrating that sustained effort and passion for long-term goals often outperform raw ability.',
       slug: 'angela-duckworth'
+    },
+    {
+      id: 'howard-gardner',
+      name: 'Howard Gardner',
+      subtitle: 'The Psychologist Who Proved Intelligence Has Many Faces',
+      image: gardnerImage,
+      excerpt: 'Psychologist who revolutionized education with his Theory of Multiple Intelligences — proving that being smart is not one thing, but many ways of understanding the world.',
+      slug: 'howard-gardner'
     }
   ];
 
