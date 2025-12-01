@@ -21,7 +21,7 @@ export type Database = {
           created_at: string | null
           details: Json | null
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           resource_id: string | null
           resource_type: string
           user_agent: string | null
@@ -32,7 +32,7 @@ export type Database = {
           created_at?: string | null
           details?: Json | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type: string
           user_agent?: string | null
@@ -43,7 +43,7 @@ export type Database = {
           created_at?: string | null
           details?: Json | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type?: string
           user_agent?: string | null
@@ -716,7 +716,7 @@ export type Database = {
           created_at: string | null
           event_type: string
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           language: string | null
           metadata: Json | null
           search_query: string | null
@@ -728,7 +728,7 @@ export type Database = {
           created_at?: string | null
           event_type: string
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           language?: string | null
           metadata?: Json | null
           search_query?: string | null
@@ -740,7 +740,7 @@ export type Database = {
           created_at?: string | null
           event_type?: string
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           language?: string | null
           metadata?: Json | null
           search_query?: string | null
@@ -1240,7 +1240,7 @@ export type Database = {
           created_at: string | null
           expires_at: string | null
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           requested_at: string | null
           requesting_admin_id: string
           status: string | null
@@ -1252,7 +1252,7 @@ export type Database = {
           created_at?: string | null
           expires_at?: string | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           requested_at?: string | null
           requesting_admin_id: string
           status?: string | null
@@ -1264,7 +1264,7 @@ export type Database = {
           created_at?: string | null
           expires_at?: string | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           requested_at?: string | null
           requesting_admin_id?: string
           status?: string | null
@@ -1366,7 +1366,7 @@ export type Database = {
           action: string
           created_at: string | null
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           resource_id: string | null
           resource_type: string
           user_agent: string | null
@@ -1376,7 +1376,7 @@ export type Database = {
           action: string
           created_at?: string | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type: string
           user_agent?: string | null
@@ -1386,7 +1386,7 @@ export type Database = {
           action?: string
           created_at?: string | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type?: string
           user_agent?: string | null
@@ -1398,7 +1398,7 @@ export type Database = {
         Row: {
           created_at: string | null
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           new_values: Json | null
           old_values: Json | null
           operation: string
@@ -1410,7 +1410,7 @@ export type Database = {
         Insert: {
           created_at?: string | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           new_values?: Json | null
           old_values?: Json | null
           operation: string
@@ -1422,7 +1422,7 @@ export type Database = {
         Update: {
           created_at?: string | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           new_values?: Json | null
           old_values?: Json | null
           operation?: string
@@ -1781,10 +1781,7 @@ export type Database = {
         Args: { p_description?: string; p_ip_address: string }
         Returns: string
       }
-      archive_old_safeguarding_reports: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
+      archive_old_safeguarding_reports: { Args: never; Returns: number }
       block_unauthorized_access: {
         Args: { table_name: string }
         Returns: boolean
@@ -1812,10 +1809,7 @@ export type Database = {
         }
         Returns: boolean
       }
-      check_sensitive_access_rate_limit: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      check_sensitive_access_rate_limit: { Args: never; Returns: boolean }
       child_consent_status: {
         Args: { p_child_user_id: string }
         Returns: {
@@ -1827,22 +1821,10 @@ export type Database = {
           relationship: string
         }[]
       }
-      cleanup_old_audit_logs: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
-      cleanup_sensitive_data: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
-      confidential_access_control: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      confidential_access_guardian: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      cleanup_old_audit_logs: { Args: never; Returns: number }
+      cleanup_sensitive_data: { Args: never; Returns: undefined }
+      confidential_access_control: { Args: never; Returns: boolean }
+      confidential_access_guardian: { Args: never; Returns: boolean }
       create_safeguarding_session: {
         Args: { access_reason: string }
         Returns: string
@@ -1863,18 +1845,9 @@ export type Database = {
         Args: { lockdown_reason: string }
         Returns: undefined
       }
-      final_security_validation: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      flag_parental_consent_required: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
-      generate_csrf_token: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
+      final_security_validation: { Args: never; Returns: boolean }
+      flag_parental_consent_required: { Args: never; Returns: undefined }
+      generate_csrf_token: { Args: never; Returns: string }
       generate_secure_file_url: {
         Args: {
           p_bucket_name: string
@@ -1884,7 +1857,7 @@ export type Database = {
         Returns: string
       }
       get_authenticated_user_role: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: Database["public"]["Enums"]["user_role"]
       }
       get_challenger_secure: {
@@ -1907,7 +1880,7 @@ export type Database = {
         }[]
       }
       get_challengers_secure: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           age: number
           city: string
@@ -1936,34 +1909,46 @@ export type Database = {
           updated_at: string
         }[]
       }
-      get_current_user_role: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
-      get_security_status: {
-        Args: Record<PropertyKey, never>
-        Returns: Json
-      }
-      get_teacher_application_secure: {
-        Args:
-          | { application_id: string }
-          | { application_id: string; include_sensitive?: boolean }
-        Returns: {
-          cover_letter: string
-          created_at: string
-          cv_url: string
-          education: string
-          email: string
-          experience_years: number
-          full_name: string
-          id: string
-          phone_number: string
-          specialization: string
-          status: string
-          updated_at: string
-          user_id: string
-        }[]
-      }
+      get_current_user_role: { Args: never; Returns: string }
+      get_security_status: { Args: never; Returns: Json }
+      get_teacher_application_secure:
+        | {
+            Args: { application_id: string; include_sensitive?: boolean }
+            Returns: {
+              confidential_info: string
+              cover_letter: string
+              created_at: string
+              cv_url: string
+              education: string
+              email: string
+              experience_years: number
+              full_name: string
+              id: string
+              phone_number: string
+              specialization: string
+              status: string
+              updated_at: string
+              user_id: string
+            }[]
+          }
+        | {
+            Args: { application_id: string }
+            Returns: {
+              cover_letter: string
+              created_at: string
+              cv_url: string
+              education: string
+              email: string
+              experience_years: number
+              full_name: string
+              id: string
+              phone_number: string
+              specialization: string
+              status: string
+              updated_at: string
+              user_id: string
+            }[]
+          }
       grant_safeguarding_access: {
         Args: {
           access_role: Database["public"]["Enums"]["safeguarding_role"]
@@ -1990,14 +1975,8 @@ export type Database = {
         Args: { target_user_id: string }
         Returns: undefined
       }
-      is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      is_admin_user: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      is_admin: { Args: never; Returns: boolean }
+      is_admin_user: { Args: never; Returns: boolean }
       is_resource_owned_by_user: {
         Args: { res_id: string; user_id: string }
         Returns: boolean
@@ -2006,10 +1985,7 @@ export type Database = {
         Args: { res_id: string; user_id: string }
         Returns: boolean
       }
-      is_safeguarding: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      is_safeguarding: { Args: never; Returns: boolean }
       is_teacher_of_course: {
         Args: { course_id_param: string }
         Returns: boolean
@@ -2047,14 +2023,8 @@ export type Database = {
         Args: { p_language?: string; p_term_id: string }
         Returns: undefined
       }
-      maximum_security_check: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      secure_confidential_access_check: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      maximum_security_check: { Args: never; Returns: boolean }
+      secure_confidential_access_check: { Args: never; Returns: boolean }
       secure_form_submission: {
         Args: {
           p_form_type: string
@@ -2082,10 +2052,7 @@ export type Database = {
         Args: { _email: string; _role: string }
         Returns: undefined
       }
-      simple_is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      simple_is_admin: { Args: never; Returns: boolean }
       submit_parental_consent: {
         Args: {
           p_child_user_id: string
@@ -2105,18 +2072,9 @@ export type Database = {
         }
         Returns: string
       }
-      test_safeguarding_security: {
-        Args: Record<PropertyKey, never>
-        Returns: Json
-      }
-      ultimate_security_check: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      ultra_secure_confidential_check: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      test_safeguarding_security: { Args: never; Returns: Json }
+      ultimate_security_check: { Args: never; Returns: boolean }
+      ultra_secure_confidential_check: { Args: never; Returns: boolean }
       user_owns_challenger_record: {
         Args: { record_user_id: string }
         Returns: boolean
@@ -2125,30 +2083,18 @@ export type Database = {
         Args: { p_input: string; p_max_length?: number; p_type?: string }
         Returns: Json
       }
-      validate_password_strength: {
-        Args: { password: string }
-        Returns: Json
-      }
-      validate_table_security: {
-        Args: { table_name: string }
-        Returns: Json
-      }
+      validate_password_strength: { Args: { password: string }; Returns: Json }
+      validate_table_security: { Args: { table_name: string }; Returns: Json }
       validate_user_data_access: {
         Args: { record_user_id: string; table_name: string }
         Returns: boolean
       }
-      verify_admin_access: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      verify_admin_access: { Args: never; Returns: boolean }
       verify_admin_for_confidential_access: {
         Args: { verification_code: string }
         Returns: string
       }
-      verify_admin_with_mfa: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      verify_admin_with_mfa: { Args: never; Returns: boolean }
       verify_confidential_access: {
         Args: { record_id?: string }
         Returns: boolean
@@ -2165,26 +2111,17 @@ export type Database = {
         Args: { p_child_user_id: string }
         Returns: boolean
       }
-      verify_safeguarding_access_critical: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      verify_safeguarding_access_critical: { Args: never; Returns: boolean }
       verify_safeguarding_access_maximum_security: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: boolean
       }
       verify_safeguarding_admin_access: {
         Args: { verification_reason: string }
         Returns: boolean
       }
-      verify_safeguarding_session_security: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      verify_student_data_access_rate_limit: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      verify_safeguarding_session_security: { Args: never; Returns: boolean }
+      verify_student_data_access_rate_limit: { Args: never; Returns: boolean }
     }
     Enums: {
       approval_status: "pending" | "approved" | "rejected"
