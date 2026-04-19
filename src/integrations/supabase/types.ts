@@ -1913,9 +1913,8 @@ export type Database = {
       get_security_status: { Args: never; Returns: Json }
       get_teacher_application_secure:
         | {
-            Args: { application_id: string; include_sensitive?: boolean }
+            Args: { application_id: string }
             Returns: {
-              confidential_info: string
               cover_letter: string
               created_at: string
               cv_url: string
@@ -1932,8 +1931,9 @@ export type Database = {
             }[]
           }
         | {
-            Args: { application_id: string }
+            Args: { application_id: string; include_sensitive?: boolean }
             Returns: {
+              confidential_info: string
               cover_letter: string
               created_at: string
               cv_url: string
