@@ -228,12 +228,17 @@ export const DictionaryTerm: React.FC<DictionaryTermProps> = ({
   );
 };
 
+import DOMPurify from 'dompurify';
+
 // Hook for processing HTML content with dictionary terms
 export const useDictionaryTerms = () => {
   const processHtmlContent = (htmlContent: string): JSX.Element => {
-    // This would be enhanced to work with your dictionary data
-    // For now, it returns the raw HTML
-    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+    const sanitized = DOMPurify.sanitize(htmlContent, {
+      ALLOWED_TAGS: ['p', 'b', 'i', 'em', 'strong', 'a', 'span', 'br', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote'],
+      ALLOWED_ATTR: ['href', 'class', 'target', 'rel'],
+      ALLOW_DATA_ATTR: false,
+    });
+    return <div dangerouslySetInnerHTML={{ __html: sanitized }} />;
   };
 
   return { processHtmlContent };
