@@ -44,7 +44,7 @@ import PeterDruckerPage from "./pages/PeterDruckerPage";
 import AbrahamMaslowPage from "./pages/AbrahamMaslowPage";
 import EchoesSlugRouter from "./pages/EchoesSlugRouter";
 import VoicesPage from "./pages/VoicesPage";
-import MaintenanceGate from "./components/MaintenanceGate";
+
 
 const queryClient = new QueryClient();
 
@@ -58,7 +58,6 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollManager />
-          <MaintenanceGate>
           <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-1">
@@ -80,12 +79,12 @@ const App = () => (
                 <Route path="/voices/echoes/:slug" element={<EchoesSlugRouter />} />
                 <Route path="/voices/:slug" element={<BlogPostPage />} />
                 <Route path="/challenger" element={<ChallengerPage />} />
-<Route path="/learning-portal" element={<LearningPortalPage />} />
-<Route path="/portal-info" element={<PortalPage />} />
-<Route path="/portal" element={<PortalPage />} />
-<Route path="/portal-login" element={<TeacherPortalPage />} />
-<Route path="/portal/dashboard" element={<PortalDashboardPage />} />
-<Route path="/portal/teacher" element={<TeacherDashboardPage />} />
+                <Route path="/learning-portal" element={<LearningPortalPage />} />
+                <Route path="/portal-info" element={<PortalPage />} />
+                <Route path="/portal" element={<PortalPage />} />
+                <Route path="/portal-login" element={<TeacherPortalPage />} />
+                <Route path="/portal/dashboard" element={<PortalDashboardPage />} />
+                <Route path="/portal/teacher" element={<TeacherDashboardPage />} />
                 <Route path="/portal/course/:courseId" element={<CourseStructurePage />} />
                 <Route path="/portal/course/:courseId/session/:sessionId" element={<CourseStructurePage />} />
                 <Route path="/auth" element={<AuthPage />} />
@@ -100,7 +99,6 @@ const App = () => (
             </main>
             <Footer />
           </div>
-          </MaintenanceGate>
           </BrowserRouter>
         </TooltipProvider>
         </HelmetProvider>
