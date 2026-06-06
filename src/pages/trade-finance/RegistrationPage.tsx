@@ -52,11 +52,11 @@ const TradeFinanceRegistrationPage = () => {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase.from("program_registrations").insert({
+    const { error } = await supabase.from("program_registrations").insert([{
       program_id: programId,
       status: "pending",
       ...parsed.data,
-    });
+    }]);
     setSubmitting(false);
     if (error) {
       toast({ title: "Could not submit", description: error.message, variant: "destructive" });
