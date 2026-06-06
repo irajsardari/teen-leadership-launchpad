@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { AuthGuard } from "@/components/AuthGuard";
 import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/hooks/useAuth";
@@ -46,8 +47,7 @@ const ProgramRegistrationsPage = () => {
   };
 
   useEffect(() => {
-    if (isLoading) return;
-    if (!user) { navigate("/auth"); return; }
+    if (isLoading || !user) return;
     (async () => {
       const { data: prog } = await supabase.from("programs").select("id,name").eq("slug", slug).maybeSingle();
       if (!prog) { setLoading(false); return; }
@@ -146,7 +146,7 @@ const ProgramRegistrationsPage = () => {
   );
 
   return (
-    <>
+    <AuthGuard requiredRole="admin">
       <Helmet><title>Registrations · {programName}</title></Helmet>
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <h1 className="text-3xl font-bold mb-2">Registrations</h1>
@@ -168,7 +168,7 @@ const ProgramRegistrationsPage = () => {
           executive_student role, and enroll them in this program's course automatically.
         </p>
       </div>
-    </>
+    </AuthGuard>
   );
 };
 

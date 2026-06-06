@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { AuthGuard } from "@/components/AuthGuard";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/hooks/useAuth";
@@ -16,8 +17,7 @@ const ProgramsAdminPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isLoading) return;
-    if (!user) { navigate("/auth"); return; }
+    if (isLoading || !user) return;
     (async () => {
       const { data } = await supabase.from("programs").select("*").order("created_at", { ascending: false });
       setPrograms((data || []) as Program[]);
@@ -26,7 +26,7 @@ const ProgramsAdminPage = () => {
   }, [user, isLoading, navigate]);
 
   return (
-    <>
+    <AuthGuard requiredRole="admin">
       <Helmet><title>Programs · Admin</title></Helmet>
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         <h1 className="text-3xl font-bold mb-6">LMS Programs</h1>
@@ -55,7 +55,7 @@ const ProgramsAdminPage = () => {
           </div>
         )}
       </div>
-    </>
+    </AuthGuard>
   );
 };
 

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { AuthGuard } from "@/components/AuthGuard";
 import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/hooks/useAuth";
@@ -47,8 +48,7 @@ const QuizBuilderPage = () => {
   };
 
   useEffect(() => {
-    if (isLoading) return;
-    if (!user) { navigate("/auth"); return; }
+    if (isLoading || !user) return;
     (async () => {
       const { data: prog } = await supabase.from("programs").select("id").eq("slug", slug).maybeSingle();
       if (!prog) return;
@@ -145,7 +145,7 @@ const QuizBuilderPage = () => {
   };
 
   return (
-    <>
+    <AuthGuard requiredRole="admin">
       <Helmet><title>Quiz builder</title></Helmet>
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         <h1 className="text-3xl font-bold mb-6">Quiz Builder</h1>
@@ -244,7 +244,7 @@ const QuizBuilderPage = () => {
           </Card>
         )}
       </div>
-    </>
+    </AuthGuard>
   );
 };
 
