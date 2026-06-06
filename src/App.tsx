@@ -44,6 +44,7 @@ import PeterDruckerPage from "./pages/PeterDruckerPage";
 import AbrahamMaslowPage from "./pages/AbrahamMaslowPage";
 import EchoesSlugRouter from "./pages/EchoesSlugRouter";
 import VoicesPage from "./pages/VoicesPage";
+import MaintenanceGate from "./components/MaintenanceGate";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollManager />
+          <MaintenanceGate>
           <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-1">
@@ -98,6 +100,7 @@ const App = () => (
             </main>
             <Footer />
           </div>
+          </MaintenanceGate>
           </BrowserRouter>
         </TooltipProvider>
         </HelmetProvider>
