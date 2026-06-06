@@ -146,7 +146,7 @@ const ProgramRegistrationsPage = () => {
   );
 
   return (
-    <>
+    <AuthGuard requiredRole="admin">
       <Helmet><title>Registrations · {programName}</title></Helmet>
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <h1 className="text-3xl font-bold mb-2">Registrations</h1>
@@ -168,7 +168,7 @@ const ProgramRegistrationsPage = () => {
           executive_student role, and enroll them in this program's course automatically.
         </p>
       </div>
-    </>
+    </AuthGuard>
   );
 };
 
