@@ -20,7 +20,7 @@ const MaintenanceGate = ({ children }: { children: ReactNode }) => {
         setIsAdmin(false);
         return;
       }
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("user_roles")
         .select("role")
         .eq("user_id", user.id);
