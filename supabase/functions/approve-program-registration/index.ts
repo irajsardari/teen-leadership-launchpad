@@ -35,10 +35,39 @@ Deno.serve(async (req) => {
     }
 
     const body = await req.json().catch(() => ({}));
-    const action = body.action as "approve" | "reject";
+    const action = body.action as "approve" | "reject" | "resend" | "statuses";
+    if (!["approve", "reject", "resend", "statuses"].includes(action)) {
+      return json({ error: "action must be approve|reject|resend|statuses" }, 400);
+    }
+
+    // STATUSES path — return activation info for a batch of approved regs
+    if (action === "statuses") {
+      const ids: string[] = Array.isArray(body.registration_ids) ? body.registration_ids : [];
+      if (ids.length === 0) return json({ statuses: {} });
+      const { data: regs } = await admin
+        .from("program_registrations")
+        .select("id, user_id, email, status")
+        .in("id", ids);
+      const result: Record<string, { activated: boolean; last_sign_in_at: string | null }> = {};
+      // Fetch a single page of users (cap 200) — enough for pilot
+      const { data: usersPage } = await admin.auth.admin.listUsers({ page: 1, perPage: 200 });
+      const byId = new Map(usersPage?.users?.map((u) => [u.id, u]) ?? []);
+      const byEmail = new Map(
+        usersPage?.users?.map((u) => [u.email?.toLowerCase() ?? "", u]) ?? []
+      );
+      for (const r of regs ?? []) {
+        const u = (r.user_id && byId.get(r.user_id)) || byEmail.get(r.email.toLowerCase());
+        result[r.id] = {
+          activated: !!u?.last_sign_in_at,
+          last_sign_in_at: u?.last_sign_in_at ?? null,
+        };
+      }
+      return json({ statuses: result });
+    }
+
     const registrationId = body.registration_id as string;
-    if (!registrationId || !["approve", "reject"].includes(action)) {
-      return json({ error: "registration_id and action (approve|reject) required" }, 400);
+    if (!registrationId) {
+      return json({ error: "registration_id required" }, 400);
     }
 
     // 2. Fetch registration + program
@@ -48,6 +77,26 @@ Deno.serve(async (req) => {
       .eq("id", registrationId)
       .maybeSingle();
     if (regErr || !reg) return json({ error: "Registration not found" }, 404);
+
+    // RESEND path — re-trigger invite/password email for an approved user
+    if (action === "resend") {
+      if (reg.status !== "approved") {
+        return json({ error: "Can only resend for approved registrations" }, 400);
+      }
+      const siteOrigin =
+        req.headers.get("origin") ||
+        `https://${SUPABASE_URL.split("//")[1].split(".")[0]}.lovable.app`;
+      const redirectTo = `${siteOrigin}/auth`;
+      // Use anon client to trigger the password-reset email Supabase sends
+      // (works whether or not the user has activated yet).
+      const anonClient = createClient(SUPABASE_URL, ANON);
+      const { error: resetErr } = await anonClient.auth.resetPasswordForEmail(reg.email, {
+        redirectTo,
+      });
+      if (resetErr) return json({ error: `Resend failed: ${resetErr.message}` }, 500);
+      return json({ ok: true, status: "resent" });
+    }
+
     if (reg.status !== "pending") {
       return json({ error: `Registration already ${reg.status}` }, 400);
     }
