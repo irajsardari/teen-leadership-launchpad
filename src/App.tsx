@@ -44,6 +44,15 @@ import PeterDruckerPage from "./pages/PeterDruckerPage";
 import AbrahamMaslowPage from "./pages/AbrahamMaslowPage";
 import EchoesSlugRouter from "./pages/EchoesSlugRouter";
 import VoicesPage from "./pages/VoicesPage";
+import TradeFinanceLandingPage from "./pages/trade-finance/LandingPage";
+import TradeFinanceRegistrationPage from "./pages/trade-finance/RegistrationPage";
+import TradeFinanceThankYouPage from "./pages/trade-finance/ThankYouPage";
+import ProgramPortalPage from "./pages/portal/ProgramPortalPage";
+import QuizPlayerPage from "./pages/portal/QuizPlayerPage";
+import QuizResultsPage from "./pages/portal/QuizResultsPage";
+import ProgramsAdminPage from "./pages/admin/ProgramsAdminPage";
+import ProgramRegistrationsPage from "./pages/admin/ProgramRegistrationsPage";
+import QuizBuilderPage from "./pages/admin/QuizBuilderPage";
 
 
 const queryClient = new QueryClient();
@@ -93,6 +102,16 @@ const App = () => (
                 <Route path="/admin/applications" element={<AdminApplicationsPage />} />
                 <Route path="/admin/security" element={<AdminSecurityPage />} />
                 <Route path="/admin/dictionary" element={<AdminDictionaryPage />} />
+                {/* LMS — Trade Finance Academy pilot */}
+                <Route path="/trade-finance" element={<TradeFinanceLandingPage />} />
+                <Route path="/trade-finance/register" element={<TradeFinanceRegistrationPage />} />
+                <Route path="/trade-finance/thank-you" element={<TradeFinanceThankYouPage />} />
+                <Route path="/portal/programs/:slug" element={<ProgramPortalPage />} />
+                <Route path="/portal/quiz/:quizId" element={<QuizPlayerPage />} />
+                <Route path="/portal/quiz/:quizId/results/:attemptId" element={<QuizResultsPage />} />
+                <Route path="/admin/programs" element={<ProgramsAdminPage />} />
+                <Route path="/admin/programs/:slug/registrations" element={<ProgramRegistrationsPage />} />
+                <Route path="/admin/programs/:slug/quizzes" element={<QuizBuilderPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
