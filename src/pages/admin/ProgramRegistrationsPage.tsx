@@ -13,8 +13,10 @@ interface Registration {
   id: string; full_name: string; email: string; mobile: string | null;
   country: string | null; occupation: string | null; organization: string | null;
   educational_background: string | null; motivation: string | null;
-  status: string; created_at: string; admin_notes: string | null;
+  status: string; created_at: string; admin_notes: string | null; user_id: string | null;
 }
+
+type ActivationMap = Record<string, { activated: boolean; last_sign_in_at: string | null }>;
 
 const ProgramRegistrationsPage = () => {
   const { slug } = useParams();
@@ -25,10 +27,22 @@ const ProgramRegistrationsPage = () => {
   const [programName, setProgramName] = useState("");
   const [regs, setRegs] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activation, setActivation] = useState<ActivationMap>({});
+  const [busyId, setBusyId] = useState<string | null>(null);
 
   const load = async (pid: string) => {
     const { data } = await supabase.from("program_registrations").select("*").eq("program_id", pid).order("created_at", { ascending: false });
-    setRegs((data || []) as Registration[]);
+    const list = (data || []) as Registration[];
+    setRegs(list);
+    const approvedIds = list.filter((r) => r.status === "approved").map((r) => r.id);
+    if (approvedIds.length) {
+      const { data: res } = await supabase.functions.invoke("approve-program-registration", {
+        body: { action: "statuses", registration_ids: approvedIds },
+      });
+      if (res && (res as any).statuses) setActivation((res as any).statuses as ActivationMap);
+    } else {
+      setActivation({});
+    }
   };
 
   useEffect(() => {
@@ -44,10 +58,12 @@ const ProgramRegistrationsPage = () => {
   }, [slug, user, isLoading, navigate]);
 
   const setStatus = async (id: string, status: "approved" | "rejected") => {
+    setBusyId(id);
     const action = status === "approved" ? "approve" : "reject";
     const { data, error } = await supabase.functions.invoke("approve-program-registration", {
       body: { registration_id: id, action },
     });
+    setBusyId(null);
     if (error || (data && (data as any).error)) {
       const msg = (data as any)?.error || error?.message || "Failed";
       toast({ title: "Failed", description: msg, variant: "destructive" });
@@ -60,6 +76,28 @@ const ProgramRegistrationsPage = () => {
         : undefined,
     });
     if (programId) await load(programId);
+  };
+
+  const resend = async (id: string) => {
+    setBusyId(id);
+    const { data, error } = await supabase.functions.invoke("approve-program-registration", {
+      body: { registration_id: id, action: "resend" },
+    });
+    setBusyId(null);
+    if (error || (data && (data as any).error)) {
+      const msg = (data as any)?.error || error?.message || "Failed";
+      toast({ title: "Resend failed", description: msg, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Invite resent", description: "Password setup email sent again." });
+  };
+
+  const statusBadge = (r: Registration) => {
+    if (r.status === "pending") return <Badge variant="secondary">Pending approval</Badge>;
+    if (r.status === "rejected") return <Badge variant="destructive">Rejected</Badge>;
+    const act = activation[r.id];
+    if (act?.activated) return <Badge>Approved · Account activated</Badge>;
+    return <Badge variant="outline">Approved · Invite sent</Badge>;
   };
 
   const filter = (s: string) => regs.filter(r => r.status === s);
@@ -75,7 +113,7 @@ const ProgramRegistrationsPage = () => {
                 <CardTitle className="text-base">{r.full_name}</CardTitle>
                 <p className="text-xs text-muted-foreground">{r.email} · {r.mobile} · {r.country}</p>
               </div>
-              <Badge variant={r.status === "approved" ? "default" : r.status === "rejected" ? "destructive" : "secondary"}>{r.status}</Badge>
+              {statusBadge(r)}
             </div>
           </CardHeader>
           <CardContent className="text-sm space-y-2">
@@ -85,9 +123,21 @@ const ProgramRegistrationsPage = () => {
             <p className="text-xs text-muted-foreground">Submitted {new Date(r.created_at).toLocaleString()}</p>
             {r.status === "pending" && (
               <div className="flex gap-2 pt-2">
-                <Button size="sm" onClick={() => setStatus(r.id, "approved")}>Approve</Button>
-                <Button size="sm" variant="outline" onClick={() => setStatus(r.id, "rejected")}>Reject</Button>
+                <Button size="sm" disabled={busyId === r.id} onClick={() => setStatus(r.id, "approved")}>Approve</Button>
+                <Button size="sm" variant="outline" disabled={busyId === r.id} onClick={() => setStatus(r.id, "rejected")}>Reject</Button>
               </div>
+            )}
+            {r.status === "approved" && !activation[r.id]?.activated && (
+              <div className="flex gap-2 pt-2">
+                <Button size="sm" variant="outline" disabled={busyId === r.id} onClick={() => resend(r.id)}>
+                  {busyId === r.id ? "Sending…" : "Resend invite"}
+                </Button>
+              </div>
+            )}
+            {r.status === "approved" && activation[r.id]?.last_sign_in_at && (
+              <p className="text-xs text-muted-foreground">
+                Last sign-in: {new Date(activation[r.id].last_sign_in_at!).toLocaleString()}
+              </p>
             )}
           </CardContent>
         </Card>
