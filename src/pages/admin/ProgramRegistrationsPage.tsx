@@ -47,8 +47,7 @@ const ProgramRegistrationsPage = () => {
   };
 
   useEffect(() => {
-    if (isLoading) return;
-    if (!user) { navigate("/auth"); return; }
+    if (isLoading || !user) return;
     (async () => {
       const { data: prog } = await supabase.from("programs").select("id,name").eq("slug", slug).maybeSingle();
       if (!prog) { setLoading(false); return; }

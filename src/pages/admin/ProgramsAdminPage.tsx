@@ -17,8 +17,7 @@ const ProgramsAdminPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isLoading) return;
-    if (!user) { navigate("/auth"); return; }
+    if (isLoading || !user) return;
     (async () => {
       const { data } = await supabase.from("programs").select("*").order("created_at", { ascending: false });
       setPrograms((data || []) as Program[]);

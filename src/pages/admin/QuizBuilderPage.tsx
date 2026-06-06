@@ -48,8 +48,7 @@ const QuizBuilderPage = () => {
   };
 
   useEffect(() => {
-    if (isLoading) return;
-    if (!user) { navigate("/auth"); return; }
+    if (isLoading || !user) return;
     (async () => {
       const { data: prog } = await supabase.from("programs").select("id").eq("slug", slug).maybeSingle();
       if (!prog) return;
