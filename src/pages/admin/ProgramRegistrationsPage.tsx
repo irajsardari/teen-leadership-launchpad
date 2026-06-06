@@ -44,11 +44,21 @@ const ProgramRegistrationsPage = () => {
   }, [slug, user, isLoading, navigate]);
 
   const setStatus = async (id: string, status: "approved" | "rejected") => {
-    const { error } = await supabase.from("program_registrations")
-      .update({ status, reviewed_by: user?.id, reviewed_at: new Date().toISOString() })
-      .eq("id", id);
-    if (error) { toast({ title: "Failed", description: error.message, variant: "destructive" }); return; }
-    toast({ title: `Registration ${status}` });
+    const action = status === "approved" ? "approve" : "reject";
+    const { data, error } = await supabase.functions.invoke("approve-program-registration", {
+      body: { registration_id: id, action },
+    });
+    if (error || (data && (data as any).error)) {
+      const msg = (data as any)?.error || error?.message || "Failed";
+      toast({ title: "Failed", description: msg, variant: "destructive" });
+      return;
+    }
+    toast({
+      title: `Registration ${status}`,
+      description: status === "approved"
+        ? "Invitation email sent and enrollment created."
+        : undefined,
+    });
     if (programId) await load(programId);
   };
 
@@ -104,7 +114,8 @@ const ProgramRegistrationsPage = () => {
           </Tabs>
         )}
         <p className="mt-6 text-xs text-muted-foreground">
-          Note: Approving marks the application as approved. To complete enrollment, invite the user from Supabase Auth and create their enrollment record. Auto-invitation flow will be added in a follow-up.
+          Approving will invite the applicant by email, create their student profile with the
+          executive_student role, and enroll them in this program's course automatically.
         </p>
       </div>
     </>
