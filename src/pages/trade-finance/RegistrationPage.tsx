@@ -52,10 +52,18 @@ const TradeFinanceRegistrationPage = () => {
       return;
     }
     setSubmitting(true);
+    const d = parsed.data;
     const { error } = await supabase.from("program_registrations").insert([{
       program_id: programId,
       status: "pending",
-      ...parsed.data,
+      full_name: d.full_name,
+      email: d.email,
+      mobile: d.mobile,
+      country: d.country,
+      occupation: d.occupation,
+      organization: d.organization,
+      educational_background: d.educational_background,
+      motivation: d.motivation ?? null,
     }]);
     setSubmitting(false);
     if (error) {
