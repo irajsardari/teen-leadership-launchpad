@@ -155,15 +155,23 @@ Deno.serve(async (req) => {
       userId = invited.user.id;
     }
 
-    // 5. Upsert profile with executive_student role
-    await admin.from("profiles").upsert(
-      {
+    // 5. Ensure profile exists; only set executive_student lms_role for brand-new
+    // profiles so we never demote an existing admin / teacher.
+    const { data: existingProfile } = await admin
+      .from("profiles")
+      .select("id, lms_role")
+      .eq("id", userId!)
+      .maybeSingle();
+    if (!existingProfile) {
+      const { error: profErr } = await admin.from("profiles").insert({
         id: userId!,
         full_name: reg.full_name,
         lms_role: "executive_student",
-      },
-      { onConflict: "id" }
-    );
+      });
+      if (profErr) {
+        return json({ error: `Profile create failed: ${profErr.message}` }, 500);
+      }
+    }
 
     // 6. Create enrollment if missing
     const { data: existingEnroll } = await admin

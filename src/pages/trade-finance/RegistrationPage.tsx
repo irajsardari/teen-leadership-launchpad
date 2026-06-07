@@ -53,6 +53,24 @@ const TradeFinanceRegistrationPage = () => {
     }
     setSubmitting(true);
     const d = parsed.data;
+    // Friendly duplicate check before insert
+    const { data: existing } = await supabase
+      .from("program_registrations")
+      .select("id,status")
+      .eq("program_id", programId)
+      .ilike("email", d.email)
+      .neq("status", "rejected")
+      .maybeSingle();
+    if (existing) {
+      setSubmitting(false);
+      toast({
+        title: "You have already applied",
+        description:
+          "We already have an application for this email. Please wait for review or contact us if you need help.",
+      });
+      navigate("/trade-finance/thank-you?already=1");
+      return;
+    }
     const { error } = await supabase.from("program_registrations").insert([{
       program_id: programId,
       status: "pending",
@@ -67,6 +85,16 @@ const TradeFinanceRegistrationPage = () => {
     }]);
     setSubmitting(false);
     if (error) {
+      // Catch race condition where unique index rejects the insert
+      if ((error as any).code === "23505" || /duplicate|unique/i.test(error.message)) {
+        toast({
+          title: "You have already applied",
+          description:
+            "We already have an application for this email. Please wait for review or contact us if you need help.",
+        });
+        navigate("/trade-finance/thank-you?already=1");
+        return;
+      }
       toast({ title: "Could not submit", description: error.message, variant: "destructive" });
       return;
     }
