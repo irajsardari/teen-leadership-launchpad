@@ -77,6 +77,12 @@ const BlogPostPage = () => {
   const isVoices = location.pathname.startsWith('/voices');
   const basePath = isVoices ? '/voices' : '/insights';
   const canonical = typeof window !== 'undefined' ? window.location.href : undefined;
+  const SITE_ORIGIN = 'https://www.teenmanagement.com';
+  const absoluteUrl = canonical ?? `${SITE_ORIGIN}${basePath}/${post.slug}`;
+  const absoluteImage = post.featuredImage?.startsWith('http')
+    ? post.featuredImage
+    : `${SITE_ORIGIN}${post.featuredImage?.startsWith('/') ? '' : '/'}${post.featuredImage || 'og-teen-management.jpg'}`;
+  const fallbackImage = `${SITE_ORIGIN}/og-teen-management.jpg`;
   const handleTagClick = (tag: string) => {
     toast({
       title: "Tag Search",
@@ -144,13 +150,17 @@ const BlogPostPage = () => {
         <meta name="keywords" content={post.seo.keywords.join(', ')} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
-        <meta property="og:image" content={post.featuredImage} />
+        <meta property="og:image" content={absoluteImage || fallbackImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
+        <meta property="og:url" content={absoluteUrl} />
+        <meta property="og:site_name" content="Teen Management" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
-        <meta name="twitter:image" content={post.featuredImage} />
-        {canonical && <link rel="canonical" href={canonical} />}
+        <meta name="twitter:image" content={absoluteImage || fallbackImage} />
+        <link rel="canonical" href={absoluteUrl} />
       </Helmet>
 
       <div className="min-h-screen bg-background">
